@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+import { MainView } from './pages/MainView';
 import { Copyright } from './widgets/Copyright';
 import './App.css';
 
@@ -12,18 +13,8 @@ export class App extends Component {
       <div className={"app__container "}>
         <main>
           <Routes>
-            {/* <Route exact path="/"
-                  render={() => <Overview styleHandler={this.updateStyle} style={this.state.style}/>}/>
-                <Route exact path="/notes/:id" component={NoteDetails}/>
-                <Route exact path="/new-note" component={NoteDetails}/> */}
-            <Route
-              path="*"
-              element={
-                <main style={{ padding: "1rem" }}>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
+            <Route path="/" element={<MainView />} />
+            <Route path="*" element={<p>There's nothing here!</p>} />
           </Routes>
         </main>
         <Copyright />
