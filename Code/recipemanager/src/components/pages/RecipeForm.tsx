@@ -36,10 +36,12 @@ export class RecipeForm extends Component {
         } else {
             return (
                 <div className="recipeForm__container">
-                    <textarea value={recipe.id} />
-                    <textarea value={recipe.name} />
-                    <textarea value={error} />
-                    <button onClick={() => this.save()}>Save</button>
+                    <p className="recipeForm__mainTitle">Neues Rezept erstellen</p>
+                    <textarea className="recipeForm__id" value={recipe.id} />
+                    <p className="recipeForm__titleLabel">Rezeptname</p>
+                    <textarea className="recipeForm__name" value={recipe.name} />
+                    <textarea className="recipeForm__error" value={error} />
+                    <button className="recipeForm__saveButton" onClick={() => this.save()}>Save</button>
                 </div>
 
             )

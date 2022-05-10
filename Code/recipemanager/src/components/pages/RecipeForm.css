@@ -1,0 +1,37 @@
+.recipeForm__container {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    grid-template-areas:
+                ". mainTitle"
+                ". id"
+                "titleLabel name"
+                ". error"
+                ". save";
+    grid-row-gap: 10px;
+}
+
+.recipeForm__mainTitle {
+    grid-area: mainTitle;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.recipeForm__container .recipeForm__id {
+    grid-area: id;
+}
+
+.recipeForm__container .recipeForm__titleLabel {
+    grid-area: titleLabel;
+}
+
+.recipeForm__container .recipeForm__name {
+    grid-area: name;
+}
+
+.recipeForm__container .recipeForm__error {
+    grid-area: error;
+}
+
+.recipeForm__container .recipeForm__saveButton {
+    grid-area: save;
+}
