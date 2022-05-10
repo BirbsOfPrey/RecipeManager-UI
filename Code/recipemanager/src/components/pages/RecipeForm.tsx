@@ -10,6 +10,13 @@ export class RecipeForm extends Component {
         error: ''
     }
 
+    update = (property: string) => (value: string) => {
+        const updatedRecipe = Object.assign(this.state.recipe, {
+            [property]: value
+        })
+        this.setState({recipe: updatedRecipe})
+    }
+
     save = async () => {
         const response = await fetch(`${RecipesUrl}`, {
             method: 'post',
