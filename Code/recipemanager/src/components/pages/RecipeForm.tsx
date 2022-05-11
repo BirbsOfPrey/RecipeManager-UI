@@ -1,12 +1,19 @@
 import { Component } from "react";
 import { Navigate } from 'react-router-dom'
-import { createNewRecipe, RecipesUrl } from "../../models/Recipe";
+import { Recipe, RecipesUrl } from "../../models/Recipe";
 import './RecipeForm.css'
 
+interface IState {
+    redirect: boolean;
+    recipe: any;
+    error: string;
+ }
+
 export class RecipeForm extends Component {
-    state = {
+    
+    state: IState = {
         redirect: false,
-        recipe: createNewRecipe(),
+        recipe: new Recipe(),
         error: ''
     }
 
@@ -27,7 +34,7 @@ export class RecipeForm extends Component {
         })
 
         if (response.status >= 300) {
-            this.setState({ error: 'Error occurred!', loading: false })
+            this.setState({ error: 'Error ocurred!', loading: false })
         } else {
             const update = await response.json()
             const recipe = Object.assign(this.state.recipe, update)
@@ -37,6 +44,8 @@ export class RecipeForm extends Component {
 
     render() {
         const { redirect, recipe, error } = this.state
+
+        recipe.name = 'Test'
 
         if (redirect) {
             return <Navigate to='/' />
