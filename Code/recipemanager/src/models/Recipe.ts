@@ -1,4 +1,4 @@
-export const RecipesUrl = "/api/recipes"
+export const RecipesUrl = "/recipe"
 
 export class Recipe{
     id?: number

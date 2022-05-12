@@ -1,1 +1,1 @@
-export const RecipeManagerAPIEndpoint = 'http://localhost/api/recipemanager'
+export const RecipeManagerAPIEndpoint = 'https://localhost:49153/'
