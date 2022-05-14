@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Navigate } from 'react-router-dom'
-import { Recipe, RecipesUrl } from "../../models/Recipe";
+import { Recipe } from "../../models/Recipe";
 import './RecipeForm.css'
 
 interface IState {
@@ -17,7 +17,7 @@ export class RecipeForm extends Component {
         error: ''
     }
 
-    update = (property: string) => (value: string) => {
+    update = (property: string, value: string) => {
         const updatedRecipe = Object.assign(this.state.recipe, {
             [property]: value
         })
@@ -43,20 +43,17 @@ export class RecipeForm extends Component {
     }
 
     render() {
-        const { redirect, recipe, error } = this.state
-
-        recipe.name = 'Test'
+        const { redirect, error } = this.state
 
         if (redirect) {
-            return <Navigate to='/' />
+            return <Navigate to='/recipemanagement' />
         } else {
             return (
                 <div className="recipeForm__container">
                     <p className="recipeForm__mainTitle">Neues Rezept erstellen</p>
-                    <textarea className="recipeForm__id" value={recipe.id} />
-                    <p className="recipeForm__titleLabel">Rezeptname</p>
-                    <textarea className="recipeForm__name" value={recipe.name} />
-                    <textarea className="recipeForm__error" value={error} />
+                    <p className="recipeForm__nameTitle">Rezeptname</p>
+                    <input className="recipeForm__nameField" type="text" onChange={e => this.update('name', e.target.value)}/>
+                    <p className="recipeForm__errorField" >{error}</p>
                     <button className="recipeForm__saveButton" onClick={() => this.save()}>Save</button>
                 </div>
 

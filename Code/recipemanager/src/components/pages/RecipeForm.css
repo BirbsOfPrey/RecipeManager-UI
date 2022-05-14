@@ -3,9 +3,8 @@
     grid-template-columns: 160px 1fr;
     grid-template-areas:
                 ". mainTitle"
-                ". id"
-                "titleLabel name"
-                ". error"
+                "nameTitle nameField"
+                ". errorField"
                 ". save";
     grid-row-gap: 10px;
 }
@@ -20,16 +19,16 @@
     grid-area: id;
 }
 
-.recipeForm__container .recipeForm__titleLabel {
-    grid-area: titleLabel;
+.recipeForm__container .recipeForm__nameTitle {
+    grid-area: nameTitle;
 }
 
-.recipeForm__container .recipeForm__name {
-    grid-area: name;
+.recipeForm__container .recipeForm__nameField {
+    grid-area: nameField;
 }
 
-.recipeForm__container .recipeForm__error {
-    grid-area: error;
+.recipeForm__container .recipeForm__errorField {
+    grid-area: errorField;
 }
 
 .recipeForm__container .recipeForm__saveButton {
