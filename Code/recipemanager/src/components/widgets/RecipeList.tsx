@@ -14,7 +14,7 @@ export class RecipeList extends Component {
     }
 
     async componentDidMount() {
-        const response = await fetch(`https://localhost:49153/recipe`)
+        const response = await fetch(`https://localhost:49153/api/Recipe`)
         const recipes = await response.json()
         this.setState({recipes})
     }
