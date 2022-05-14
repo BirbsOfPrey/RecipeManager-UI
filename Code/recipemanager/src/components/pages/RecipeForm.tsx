@@ -24,16 +24,6 @@ export class RecipeForm extends Component {
         this.setState({recipe: updatedRecipe})
     }
 
-    load = async () => {
-        const response = await fetch(`${"https://localhost:49153/recipe"}`, {
-            method: 'get',
-            headers: new Headers({
-                'Content-Type': 'application/json'
-            }),
-        })
-        console.log(response.body)
-    }
-
     save = async () => {
         const response = await fetch(`${RecipesUrl}`, {
             method: 'post',
@@ -55,7 +45,6 @@ export class RecipeForm extends Component {
     render() {
         const { redirect, recipe, error } = this.state
 
-        this.load()
         recipe.name = 'Test'
 
         if (redirect) {
