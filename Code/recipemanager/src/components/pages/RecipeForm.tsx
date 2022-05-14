@@ -5,7 +5,7 @@ import './RecipeForm.css'
 
 interface IState {
     redirect: boolean;
-    recipe: any;
+    recipe: Recipe;
     error: string;
  }
 
