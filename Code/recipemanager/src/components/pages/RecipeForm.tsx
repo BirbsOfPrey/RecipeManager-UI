@@ -25,7 +25,7 @@ export class RecipeForm extends Component {
     }
 
     save = async () => {
-        const response = await fetch(`${RecipesUrl}`, {
+        const response = await fetch(`https://localhost:49153/recipe`, {
             method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json'
