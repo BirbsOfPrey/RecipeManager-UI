@@ -1,7 +1,6 @@
 import { Component } from 'react'
-import { RecipeManagerAPIEndpoint } from '../../api'
 import { RecipeEntry } from './RecipeEntry'
-import { Recipe } from '../../models/Recipe'
+import { Recipe, RecipesUrl } from '../../models/Recipe'
 import './RecipeList.css'
 
 interface IState {
@@ -15,7 +14,7 @@ export class RecipeList extends Component<{}, IState> {
     }
 
     async componentDidMount() {
-        const response = await fetch(`${RecipeManagerAPIEndpoint}/Recipe`)
+        const response = await fetch(`${RecipesUrl}`)
         const recipes = await response.json()
         this.setState({recipes})
     }
