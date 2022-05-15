@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { RecipeManagerAPIEndpoint } from '../../api';
 import { RecipeEntry } from './RecipeEntry'
 import { Recipe } from '../../models/Recipe';
 import './RecipeList.css'
@@ -14,7 +15,7 @@ export class RecipeList extends Component {
     }
 
     async componentDidMount() {
-        const response = await fetch(`https://localhost:49153/api/Recipe`)
+        const response = await fetch(`${RecipeManagerAPIEndpoint}/Recipe`)
         const recipes = await response.json()
         this.setState({recipes})
     }

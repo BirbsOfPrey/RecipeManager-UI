@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Navigate } from 'react-router-dom'
+import { RecipeManagerAPIEndpoint } from '../../api';
 import { Recipe } from "../../models/Recipe";
 import './RecipeForm.css'
 
@@ -25,7 +26,7 @@ export class RecipeForm extends Component {
     }
 
     save = async () => {
-        const response = await fetch(`https://localhost:49153/api/Recipe`, {
+        const response = await fetch(`${RecipeManagerAPIEndpoint}/Recipe`, {
             method: 'post',
             headers: new Headers({
                 'Content-Type': 'application/json'
