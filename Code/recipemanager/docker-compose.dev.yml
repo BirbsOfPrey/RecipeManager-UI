@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  recipemanager:
+    image: recipemanager
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 13512:3000
+      - 9229:9229
+    command: ["npm", "start", "--inspect=0.0.0.0:9229"]
+  recipemanager.api:
+    image: ${DOCKER_REGISTRY-}recipemanagerapi
+    build:
+      context: ../../../RecipeManager_Backend/Code/RecipeManagerAPI/
+      dockerfile: Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - 13513:80
+      - 13514:443
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

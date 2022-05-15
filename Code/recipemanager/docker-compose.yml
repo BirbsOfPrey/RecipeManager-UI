@@ -2,6 +2,8 @@ version: '3.4'
 
 services:
   recipemanager:
+    depends_on:
+      - rerecipemanager.api
     image: recipemanager
     build:
       context: .
@@ -9,4 +11,9 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 3000:3000
+      - 13512:3000
+  recipemanager.api:
+    image: ${DOCKER_REGISTRY-}recipemanagerapi
+    build:
+      context: ../../../RecipeManager_Backend/Code/RecipeManagerAPI/
+      dockerfile: Api/Dockerfile
