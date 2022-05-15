@@ -1,10 +1,10 @@
-import { Component } from 'react';
+import { Component } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { MainView } from './pages/MainView';
-import { RecipeManagement } from './pages/RecipeManagement';
-import { RecipeForm } from './pages/RecipeForm';
-import { Copyright } from './widgets/Copyright';
-import './App.css';
+import { MainView } from './pages/MainView'
+import { RecipeManagement } from './pages/RecipeManagement'
+import { RecipeForm } from './pages/RecipeForm'
+import { Copyright } from './widgets/Copyright'
+import './App.css'
 
 export class App extends Component {
 
@@ -27,4 +27,4 @@ export class App extends Component {
   }
 }
 
-export default App;
+export default App

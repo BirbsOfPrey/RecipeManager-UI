@@ -1,14 +1,14 @@
-import { Component } from 'react';
-import { RecipeManagerAPIEndpoint } from '../../api';
+import { Component } from 'react'
+import { RecipeManagerAPIEndpoint } from '../../api'
 import { RecipeEntry } from './RecipeEntry'
-import { Recipe } from '../../models/Recipe';
+import { Recipe } from '../../models/Recipe'
 import './RecipeList.css'
 
 interface IState {
-    recipes: Recipe[];
+    recipes: Recipe[]
  }
 
-export class RecipeList extends Component {
+export class RecipeList extends Component<{}, IState> {
     
     state: IState = {
         recipes: []

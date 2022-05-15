@@ -1,20 +1,22 @@
 import { Component } from "react";
 import { Navigate } from 'react-router-dom'
-import { RecipeManagerAPIEndpoint } from '../../api';
-import { Recipe } from "../../models/Recipe";
+import { RecipeManagerAPIEndpoint } from '../../api'
+import { Recipe } from "../../models/Recipe"
 import './RecipeForm.css'
 
 interface IState {
-    redirect: boolean;
-    recipe: Recipe;
-    error: string;
+    redirect: boolean
+    recipe: Recipe
+    loading: boolean
+    error: string
  }
 
-export class RecipeForm extends Component {
+export class RecipeForm extends Component<{}, IState> {
     
     state: IState = {
         redirect: false,
         recipe: new Recipe(),
+        loading: false,
         error: ''
     }
 
