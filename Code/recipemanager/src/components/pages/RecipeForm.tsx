@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component } from "react"
 import { Navigate } from 'react-router-dom'
 import { Recipe, RecipesUrl } from "../../models/Recipe"
 import './RecipeForm.css'
