@@ -11,10 +11,10 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     defaults:
        run:
-         working-directory: ./code/
+         working-directory: './Code/'
 
     strategy:
       matrix:
@@ -30,7 +30,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-        cache-dependency-path: './code/package-lock.json'
+        cache-dependency-path: './Code/package-lock.json'
         
     - name: Install dependencies
       run: npm install
