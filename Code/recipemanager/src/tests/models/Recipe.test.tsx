@@ -1,11 +1,7 @@
-import { Recipe, RecipesUrl } from '../../models/Recipe'
+import { Recipe } from '../../models/Recipe'
 
 const recipeId: number = 99
 const recipeName: string = "Testrezept"
-
-test('RecipesUrl is set correct', () => {
-    expect(RecipesUrl).toEqual(`https://localhost:13514/api/recipe`)
-})
 
 test('Recipe id is undefined by default', () => {
     const recipe: Recipe = new Recipe()
