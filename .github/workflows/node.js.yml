@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
        run:
-         working-directory: '../Code/'
+         working-directory: ./Code/recipemanager
 
     strategy:
       matrix:
@@ -29,8 +29,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-        cache-dependency-path: '../Code/package-lock.json'
         
     - name: Install dependencies
       run: npm install
