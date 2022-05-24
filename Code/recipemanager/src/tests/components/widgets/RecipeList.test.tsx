@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
+import { RecipesUrl } from '../../../api'
 import { RecipeList } from '../../../components/widgets/RecipeList'
-import { RecipesUrl } from '../../../models/Recipe'
 
 let handlers = [
 	rest.get(RecipesUrl, (req: any, res: (arg0: any) => any, ctx: { json: (arg0: { id: number; name: string; }[]) => any }) => {
