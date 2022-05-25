@@ -1,7 +1,7 @@
 import { Recipe } from '../../models/Recipe'
 
 const recipeId: number = 99
-const recipeName: string = "Testrezept"
+const recipeName: string = 'Testrezept'
 
 test('Recipe id is undefined by default', () => {
     const recipe: Recipe = new Recipe()

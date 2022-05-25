@@ -4,12 +4,17 @@ import { setupServer } from 'msw/node'
 import { RecipesUrl } from '../../../api'
 import { RecipeList } from '../../../components/widgets/RecipeList'
 
+const testRecipe1Id: number = 54
+const testRecipe1Name: string = 'Testrezept'
+const testRecipe2Id: number = 68
+const testRecipe2Name: string = 'Super gutes Rezept'
+
 let handlers = [
 	rest.get(RecipesUrl, (req: any, res: (arg0: any) => any, ctx: { json: (arg0: { id: number; name: string; }[]) => any }) => {
 		return res(
 			ctx.json([
-				{id: 54, name: 'Testrezept'},
-				{id: 68, name: 'Super gutes Rezept'}
+				{id: testRecipe1Id, name: testRecipe1Name},
+				{id: testRecipe2Id, name: testRecipe2Name}
 			])
 		)
 	})
@@ -26,8 +31,8 @@ afterAll(() => server.close())
 test('fetches and renders all recipe names and id\'s', async () => {
     const { findByText } = render(<RecipeList />)
 
-    expect(await findByText(/54/)).toBeInTheDocument
-    expect(await findByText(/Testrezept/)).toBeInTheDocument
-    expect(await findByText(/68/)).toBeInTheDocument
-    expect(await findByText(/Super gutes Rezept/)).toBeInTheDocument
+    expect(await findByText(testRecipe1Id)).toBeInTheDocument
+    expect(await findByText(testRecipe1Name)).toBeInTheDocument
+    expect(await findByText(testRecipe2Id)).toBeInTheDocument
+    expect(await findByText(testRecipe2Name)).toBeInTheDocument
 })
