@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { Navigate } from 'react-router-dom'
-import { RecipesUrl } from "../../ressources/Api"
+import { RecipesUrl } from "../../resources/Api"
 import { Recipe } from "../../models/Recipe"
 import './RecipeForm.css'
 

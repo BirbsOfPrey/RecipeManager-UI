@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { RecipeEntry } from './RecipeEntry'
 import { Recipe } from '../../models/Recipe'
-import { RecipesUrl } from '../../ressources/Api'
+import { RecipesUrl } from '../../resources/Api'
 import './RecipeList.css'
 
 interface IState {
