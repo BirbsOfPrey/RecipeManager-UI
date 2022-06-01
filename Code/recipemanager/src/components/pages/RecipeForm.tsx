@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { Navigate } from 'react-router-dom'
-import { RecipesUrl } from "../../api"
+import { RecipesUrl } from "../../ressources/Api"
 import { Recipe } from "../../models/Recipe"
 import './RecipeForm.css'
 
@@ -57,7 +57,7 @@ export class RecipeForm extends Component<{}, IState> {
                     <p className="recipeForm__nameTitle">Rezeptname</p>
                     <input className="recipeForm__nameField" type="text" onChange={e => this.update('name', e.target.value)}/>
                     <p className="recipeForm__errorField" >{error}</p>
-                    <button className="recipeForm__saveButton" onClick={() => this.save()}>Save</button>
+                    <button className="recipeForm__saveButton" onClick={() => this.save()}>Speichern</button>
                 </div>
 
             )

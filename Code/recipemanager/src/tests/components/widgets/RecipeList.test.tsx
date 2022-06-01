@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import { RecipesUrl } from '../../../api'
+import { RecipesUrl } from '../../../ressources/Api'
 import { RecipeList } from '../../../components/widgets/RecipeList'
 
 const testRecipe1Id: number = 54
