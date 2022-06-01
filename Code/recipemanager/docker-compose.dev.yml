@@ -13,18 +13,3 @@ services:
       - 13512:3000
       - 9229:9229
     command: ["npm", "start", "--inspect=0.0.0.0:9229"]
-  recipemanager.api:
-    image: ${DOCKER_REGISTRY-}recipemanagerapi
-    container_name: recipemanagerapi
-    build:
-      context: ../../../RecipeManager_Backend/Code/RecipeManagerAPI/
-      dockerfile: Api/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-    ports:
-      - 13513:80
-      - 13514:443
-    volumes:
-      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
-      - ~/.aspnet/https:/root/.aspnet/https:ro
