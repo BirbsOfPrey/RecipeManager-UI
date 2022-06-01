@@ -1,11 +1,11 @@
 import { Recipe } from '../../models/Recipe'
 import './RecipeEntry.css'
 
-type RecipeEntryProps = {
+interface IProps {
     recipe: Recipe
 }
 
-export const RecipeEntry = ({recipe}: RecipeEntryProps) => {
+export const RecipeEntry = ({recipe}: IProps) => {
     return (
         <div className="recipeEntry__container">
             <p className="recipeEntry__idTitle">Rezept-Id</p>
