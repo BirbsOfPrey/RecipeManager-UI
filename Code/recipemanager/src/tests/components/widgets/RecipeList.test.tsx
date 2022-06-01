@@ -29,8 +29,12 @@ afterAll(() => server.close())
 
 
 test('fetches and renders all recipe names and id\'s', async () => {
-    const { findByText } = render(<RecipeList />)
+    // Arrange
+	
+	// Act
+	const { findByText } = render(<RecipeList />)
 
+	// Assert
     expect(await findByText(testRecipe1Id)).toBeInTheDocument
     expect(await findByText(testRecipe1Name)).toBeInTheDocument
     expect(await findByText(testRecipe2Id)).toBeInTheDocument
