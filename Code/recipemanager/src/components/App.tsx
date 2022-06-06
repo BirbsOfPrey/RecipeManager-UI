@@ -5,6 +5,7 @@ import { RecipeManagement } from './pages/RecipeManagement'
 import { RecipeForm } from './pages/RecipeForm'
 import { Copyright } from './widgets/Copyright'
 import './App.css'
+import StringResource from '../resources/StringResource'
 
 export class App extends Component {
 
@@ -18,7 +19,7 @@ export class App extends Component {
             <Route path="/" element={<MainView />} />
             <Route path="/recipemanagement" element={<RecipeManagement />} />
             <Route path="/new-recipe" element={<RecipeForm />} />
-            <Route path="*" element={<p>There's nothing here!</p>} />
+            <Route path="*" element={<p>{StringResource.NoContent}</p>} />
           </Routes>
         </main>
         <Copyright />

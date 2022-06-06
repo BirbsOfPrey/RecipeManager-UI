@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { RecipeEntry } from '../../../components/widgets/RecipeEntry'
 import { Recipe } from '../../../models/Recipe'
+import StringResource from '../../../resources/StringResource'
 
 const testRecipeId: number = 5
 const testRecipeName: string = 'Testrezept'
@@ -37,7 +38,7 @@ test('renders recipe name title', () => {
     render(<RecipeEntry recipe={testRecipe} />)
 
     // Assert
-    const linkElement = screen.getByText('Rezept-Name')
+    const linkElement = screen.getByText(StringResource.RecipeName)
     expect(linkElement).toBeInTheDocument()
 })
 
@@ -49,7 +50,7 @@ test('renders recipe id title', () => {
     render(<RecipeEntry recipe={testRecipe} />)
 
     // Assert
-    const linkElement = screen.getByText('Rezept-Id')
+    const linkElement = screen.getByText(StringResource.RecipeId)
     expect(linkElement).toBeInTheDocument()
 })
 

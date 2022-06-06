@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom'
 import { RecipesUrl } from "../../resources/Api"
 import { Recipe } from "../../models/Recipe"
 import './RecipeForm.css'
+import StringResource from "../../resources/StringResource"
 
 interface IState {
     redirect: boolean
@@ -37,7 +38,7 @@ export class RecipeForm extends Component<{}, IState> {
         })
 
         if (response.status >= 300) {
-            this.setState({ error: 'Error ocurred!', loading: false })
+            this.setState({ error: StringResource.GeneralError, loading: false })
         } else {
             const update = await response.json()
             const recipe = Object.assign(this.state.recipe, update)
@@ -49,15 +50,15 @@ export class RecipeForm extends Component<{}, IState> {
         const { redirect, error } = this.state
 
         if (redirect) {
-            return <Navigate to='/recipemanagement' />
+            return <Navigate to={StringResource.RecipeManagementRoute} />
         } else {
             return (
                 <div className="recipeForm__container">
-                    <p className="recipeForm__mainTitle">Neues Rezept erstellen</p>
-                    <p className="recipeForm__nameTitle">Rezeptname</p>
+                    <p className="recipeForm__mainTitle">{StringResource.CreateNewRecipe}</p>
+                    <p className="recipeForm__nameTitle">{StringResource.RecipeName}</p>
                     <input className="recipeForm__nameField" type="text" onChange={e => this.update('name', e.target.value)}/>
                     <p className="recipeForm__errorField" >{error}</p>
-                    <button className="recipeForm__saveButton" onClick={() => this.save()}>Speichern</button>
+                    <button className="recipeForm__saveButton" onClick={() => this.save()}>{StringResource.Save}</button>
                 </div>
 
             )

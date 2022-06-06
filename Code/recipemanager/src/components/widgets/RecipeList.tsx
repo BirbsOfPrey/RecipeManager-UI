@@ -3,6 +3,7 @@ import { RecipeEntry } from './RecipeEntry'
 import { Recipe } from '../../models/Recipe'
 import { RecipesUrl } from '../../resources/Api'
 import './RecipeList.css'
+import StringResource from '../../resources/StringResource'
 
 interface IState {
     recipes: Recipe[]
@@ -27,7 +28,7 @@ export class RecipeList extends Component<{}, IState> {
 
             return (
                 <div className="recipeListContent__container">
-                    <p className="recipeListContent__title">Rezepte-Liste</p>
+                    <p className="recipeListContent__title">{StringResource.RecipeList}</p>
                     {recipes.map(recipe => (
                         <RecipeEntry
                             key={recipe.id}
@@ -37,7 +38,7 @@ export class RecipeList extends Component<{}, IState> {
             )
         } else {
             return (
-                <p className="recipeListContent__message">No recipes found to display!</p>
+                <p className="recipeListContent__message">{StringResource.NoRecipesToDisplay}</p>
             )
         }
     }
