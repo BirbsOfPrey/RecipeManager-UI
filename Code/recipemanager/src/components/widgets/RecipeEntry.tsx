@@ -9,9 +9,9 @@ interface IProps {
 export const RecipeEntry = ({recipe}: IProps) => {
     return (
         <div className="recipeEntry__container">
-            <p className="recipeEntry__idTitle">{StringResource.RecipeId}</p>
+            <p className="recipeEntry__idTitle">{StringResource.General.RecipeId}</p>
             <p className="recipeForm__idField" >{recipe.id}</p>
-            <p className="recipeEntry__nameTitle">{StringResource.RecipeName}</p>
+            <p className="recipeEntry__nameTitle">{StringResource.General.RecipeName}</p>
             <p className="recipeForm__nameField" >{recipe.name}</p>
         </div>
     )

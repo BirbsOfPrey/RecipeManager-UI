@@ -8,18 +8,16 @@ import './App.css'
 import StringResource from '../resources/StringResource'
 
 export class App extends Component {
-
-
-
+  
   render() {
     return (
       <div className={"app__container "}>
         <main>
           <Routes>
-            <Route path="/" element={<MainView />} />
-            <Route path="/recipemanagement" element={<RecipeManagement />} />
-            <Route path="/new-recipe" element={<RecipeForm />} />
-            <Route path="*" element={<p>{StringResource.NoContent}</p>} />
+            <Route path={StringResource.Routes.Root} element={<MainView />} />
+            <Route path={StringResource.Routes.RecipeManagement} element={<RecipeManagement />} />
+            <Route path={StringResource.Routes.NewRecipe} element={<RecipeForm />} />
+            <Route path={StringResource.Routes.Any} element={<p>{StringResource.Messages.NoContent}</p>} />
           </Routes>
         </main>
         <Copyright />

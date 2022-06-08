@@ -28,7 +28,7 @@ export class RecipeList extends Component<{}, IState> {
 
             return (
                 <div className="recipeListContent__container">
-                    <p className="recipeListContent__title">{StringResource.RecipeList}</p>
+                    <p className="recipeListContent__title">{StringResource.General.RecipeList}</p>
                     {recipes.map(recipe => (
                         <RecipeEntry
                             key={recipe.id}
@@ -38,7 +38,7 @@ export class RecipeList extends Component<{}, IState> {
             )
         } else {
             return (
-                <p className="recipeListContent__message">{StringResource.NoRecipesToDisplay}</p>
+                <p className="recipeListContent__message">{StringResource.Messages.NoRecipesToDisplay}</p>
             )
         }
     }

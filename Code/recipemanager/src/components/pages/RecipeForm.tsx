@@ -38,7 +38,7 @@ export class RecipeForm extends Component<{}, IState> {
         })
 
         if (response.status >= 300) {
-            this.setState({ error: StringResource.GeneralError, loading: false })
+            this.setState({ error: StringResource.Messages.GeneralError, loading: false })
         } else {
             const update = await response.json()
             const recipe = Object.assign(this.state.recipe, update)
@@ -50,15 +50,15 @@ export class RecipeForm extends Component<{}, IState> {
         const { redirect, error } = this.state
 
         if (redirect) {
-            return <Navigate to={StringResource.RecipeManagementRoute} />
+            return <Navigate to={StringResource.Routes.RecipeManagement} />
         } else {
             return (
                 <div className="recipeForm__container">
-                    <p className="recipeForm__mainTitle">{StringResource.CreateNewRecipe}</p>
-                    <p className="recipeForm__nameTitle">{StringResource.RecipeName}</p>
+                    <p className="recipeForm__mainTitle">{StringResource.General.CreateNewRecipe}</p>
+                    <p className="recipeForm__nameTitle">{StringResource.General.RecipeName}</p>
                     <input className="recipeForm__nameField" type="text" onChange={e => this.update('name', e.target.value)}/>
                     <p className="recipeForm__errorField" >{error}</p>
-                    <button className="recipeForm__saveButton" onClick={() => this.save()}>{StringResource.Save}</button>
+                    <button className="recipeForm__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</button>
                 </div>
 
             )

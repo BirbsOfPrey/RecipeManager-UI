@@ -38,7 +38,7 @@ test('renders recipe name title', () => {
     render(<RecipeEntry recipe={testRecipe} />)
 
     // Assert
-    const linkElement = screen.getByText(StringResource.RecipeName)
+    const linkElement = screen.getByText(StringResource.General.RecipeName)
     expect(linkElement).toBeInTheDocument()
 })
 
@@ -50,7 +50,7 @@ test('renders recipe id title', () => {
     render(<RecipeEntry recipe={testRecipe} />)
 
     // Assert
-    const linkElement = screen.getByText(StringResource.RecipeId)
+    const linkElement = screen.getByText(StringResource.General.RecipeId)
     expect(linkElement).toBeInTheDocument()
 })
 
