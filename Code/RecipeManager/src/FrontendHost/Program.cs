@@ -1,61 +1,97 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Duende.Bff.Yarp;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddBff()
-    .AddRemoteApis();
-
-builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthorization();
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
-    options.DefaultScheme = "cookie";
+  options.ForwardedHeaders =
+    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
+
+builder.Services
+  .AddBff()
+  .AddRemoteApis();
+
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+builder.Services
+  .AddAuthentication(options =>
+  {
+    options.DefaultScheme = "Cookies";
     options.DefaultChallengeScheme = "oidc";
     options.DefaultSignOutScheme = "oidc";
-}).AddCookie("cookie", options =>
-{
-    options.Cookie.Name = "__Host-bff";
-    options.Cookie.SameSite = SameSiteMode.Strict;
-}).AddOpenIdConnect("oidc", options =>
-{
-    options.Authority = "https://demo.duendesoftware.com";
-    options.ClientId = "interactive.confidential";
+  })
+  .AddCookie("Cookies")
+  .AddOpenIdConnect("oidc", options =>
+  {
+    //options.Authority = builder.Configuration.GetValue<string>("IdentityServer:Authority");
+    options.Authority = "http://sinv-56060.rj.ost.ch:40000";
+
+    options.RequireHttpsMetadata = false;
+
+    options.ClientId = "bff";
     options.ClientSecret = "secret";
     options.ResponseType = "code";
-    options.ResponseMode = "query";
 
-    options.GetClaimsFromUserInfoEndpoint = true;
-    options.MapInboundClaims = false;
+    //options.Scope.Clear(); //This causes Exception on IdentityServer!
+    options.Scope.Add("api1");
+    //options.Scope.Add("openid");
+    //options.Scope.Add("profile");
+    //options.Scope.Add("offline_access");
+
     options.SaveTokens = true;
+    options.GetClaimsFromUserInfoEndpoint = true;
 
-    options.Scope.Clear();
-    options.Scope.Add("openid");
-    options.Scope.Add("profile");
-    options.Scope.Add("api");
-    options.Scope.Add("offline_access");
+  });
 
-    options.TokenValidationParameters = new()
-    {
-        NameClaimType = "name",
-        RoleClaimType = "role"
-    };
-});
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
+app.UseForwardedHeaders();
+
+if (app.Environment.IsDevelopment())
+{
+  app.UseDeveloperExceptionPage();
+}
+
+app.UseDefaultFiles();
 app.UseStaticFiles();
+
 app.UseRouting();
+
 app.UseAuthentication();
 app.UseBff();
 app.UseAuthorization();
-app.MapBffManagementEndpoints();
 
-app.MapControllers()
+app.UseEndpoints(endpoints =>
+{
+  endpoints.MapBffManagementEndpoints();
+
+  endpoints.MapGet("/local/identity", LocalIdentityHandler)
+    .AsBffApiEndpoint();
+
+  endpoints.MapControllers()
     .RequireAuthorization()
     .AsBffApiEndpoint();
 
-// app.MapRemoteBffApiEndpoint("/todos", "https://localhost:5020/todos")
-//     .RequireAccessToken(Duende.Bff.TokenType.User);
+  endpoints.MapRemoteBffApiEndpoint("/remote", "http://recipemanagerapi:80")
+    .RequireAccessToken(Duende.Bff.TokenType.User);
 
-app.MapFallbackToFile("index.html"); ;
+});
+
+app.MapFallbackToFile("index.html");
 
 app.Run();
+
+
+[Authorize]
+static IResult LocalIdentityHandler(ClaimsPrincipal user)
+{
+  var name = user.FindFirst("name")?.Value ?? user.FindFirst("sub")?.Value;
+  return Results.Json(new { message = "Local API Success!", user = name });
+}
