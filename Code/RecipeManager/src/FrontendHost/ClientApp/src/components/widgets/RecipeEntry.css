@@ -1,0 +1,26 @@
+.recipeEntry__container {
+    display: grid;
+    grid-template-columns: 130px 500px;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+                "idTitle nameTitle"
+                "idField nameField";
+}
+
+.recipeEntry__container .recipeEntry__idTitle {
+    grid-area: idTitle;
+    font-weight: bold;
+}
+
+.recipeEntry__container .recipeForm__idField {
+    grid-area: idField;
+}
+
+.recipeEntry__container .recipeEntry__nameTitle {
+    grid-area: nameTitle;
+    font-weight: bold;
+}
+
+.recipeEntry__container .recipeForm__nameField {
+    grid-area: nameField;
+}
