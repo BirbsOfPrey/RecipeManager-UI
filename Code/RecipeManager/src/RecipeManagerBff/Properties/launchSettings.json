@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "FrontendHost": {
+    "RecipeManagerBff": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:5267",
