@@ -32,6 +32,7 @@ export class RecipeForm extends Component<{}, IState> {
         const response = await fetch(`${RecipesUrl}`, {
             method: 'post',
             headers: new Headers({
+                'X-CSRF': '1',
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify(this.state.recipe)

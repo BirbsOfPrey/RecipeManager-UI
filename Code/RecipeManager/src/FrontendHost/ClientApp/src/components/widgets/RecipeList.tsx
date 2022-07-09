@@ -16,7 +16,11 @@ export class RecipeList extends Component<{}, IState> {
     }
 
     async componentDidMount() {
-        const response = await fetch(`${RecipesUrl}`)
+        const response = await fetch(`${RecipesUrl}`, {
+            headers: new Headers({
+                'X-CSRF': '1'
+            })
+        })
         const recipes = await response.json()
         this.setState({recipes})
     }
