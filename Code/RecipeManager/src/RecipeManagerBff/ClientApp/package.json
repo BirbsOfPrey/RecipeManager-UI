@@ -1,5 +1,5 @@
 {
-  "name": "cra_latest",
+  "name": "recipe_manager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -51,7 +51,7 @@
     "typescript": "^4.2.4"
   },
   "scripts": {
-"prestart": "node aspnetcore-https && node aspnetcore-react",
+    "prestart": "node aspnetcore-https && node aspnetcore-react",
     "start": "rimraf ./build && react-scripts start",
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",

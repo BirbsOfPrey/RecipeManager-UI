@@ -1,6 +1,6 @@
 {
-  "short_name": "cra_latest",
-  "name": "cra_latest",
+  "short_name": "recipe_manager",
+  "name": "recipe_manager",
   "icons": [
     {
       "src": "favicon.ico",

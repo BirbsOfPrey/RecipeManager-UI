@@ -1,97 +1,33 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Duende.Bff.Yarp;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.HttpOverrides;
+using RecipeManagerBff.Extensions;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+  .WriteTo.Console()
+  .CreateBootstrapLogger();
 
-builder.Services.AddAuthorization();
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
+Log.Information("Starting up");
+
+try
 {
-  options.ForwardedHeaders =
-    ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-});
+  var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-  .AddBff()
-  .AddRemoteApis();
+  builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+    .Enrich.FromLogContext()
+    .ReadFrom.Configuration(ctx.Configuration));
 
-JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
-builder.Services
-  .AddAuthentication(options =>
-  {
-    options.DefaultScheme = "Cookies";
-    options.DefaultChallengeScheme = "oidc";
-    options.DefaultSignOutScheme = "oidc";
-  })
-  .AddCookie("Cookies")
-  .AddOpenIdConnect("oidc", options =>
-  {
-    //options.Authority = builder.Configuration.GetValue<string>("IdentityServer:Authority");
-    options.Authority = "http://sinv-56060.rj.ost.ch:40000";
+  var app = builder
+    .ConfigureServices()
+    .ConfigurePipeline();
 
-    options.RequireHttpsMetadata = false;
-
-    options.ClientId = "bff";
-    options.ClientSecret = "secret";
-    options.ResponseType = "code";
-
-    //options.Scope.Clear(); //This causes Exception on IdentityServer!
-    options.Scope.Add("api1");
-    //options.Scope.Add("openid");
-    //options.Scope.Add("profile");
-    //options.Scope.Add("offline_access");
-
-    options.SaveTokens = true;
-    options.GetClaimsFromUserInfoEndpoint = true;
-
-  });
-
-builder.Services.AddControllers();
-
-var app = builder.Build();
-
-app.UseForwardedHeaders();
-
-if (app.Environment.IsDevelopment())
-{
-  app.UseDeveloperExceptionPage();
+  app.Run();
 }
-
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthentication();
-app.UseBff();
-app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
+catch (Exception ex)
 {
-  endpoints.MapBffManagementEndpoints();
-
-  endpoints.MapGet("/local/identity", LocalIdentityHandler)
-    .AsBffApiEndpoint();
-
-  endpoints.MapControllers()
-    .RequireAuthorization()
-    .AsBffApiEndpoint();
-
-  endpoints.MapRemoteBffApiEndpoint("/remote", "http://recipemanagerapi:80")
-    .RequireAccessToken(Duende.Bff.TokenType.User);
-
-});
-
-app.MapFallbackToFile("index.html");
-
-app.Run();
-
-
-[Authorize]
-static IResult LocalIdentityHandler(ClaimsPrincipal user)
+  Log.Fatal(ex, "Unhandled exception");
+}
+finally
 {
-  var name = user.FindFirst("name")?.Value ?? user.FindFirst("sub")?.Value;
-  return Results.Json(new { message = "Local API Success!", user = name });
+  Log.Information("Shut down complete");
+  Log.CloseAndFlush();
 }
