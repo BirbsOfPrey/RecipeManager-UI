@@ -20,5 +20,5 @@ export const Layout = (props: IProps) => {
             </main>
             <Copyright />
         </div>
-    );
+    )
 }
