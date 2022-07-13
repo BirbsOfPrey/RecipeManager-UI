@@ -2,6 +2,7 @@ import { Component } from "react"
 import { Navigate } from 'react-router-dom'
 import { RecipesUrl } from "../../resources/Api"
 import { Recipe } from "../../models/Recipe"
+import { EditableInputText } from "../controls/EditableTextInput"
 import './RecipeForm.css'
 import StringResource from "../../resources/StringResource"
 
@@ -56,8 +57,7 @@ export class RecipeForm extends Component<{}, IState> {
             return (
                 <div className="recipeForm__container">
                     <p className="recipeForm__mainTitle">{StringResource.General.CreateNewRecipe}</p>
-                    <p className="recipeForm__nameTitle">{StringResource.General.RecipeName}</p>
-                    <input className="recipeForm__nameField" type="text" onChange={e => this.update('name', e.target.value)}/>
+                    <EditableInputText className="recipeForm__nameField" setValue={value => this.update('name', value)} placeholder={"Rezeptname"} value={this.state.recipe.name}/>
                     <p className="recipeForm__errorField" >{error}</p>
                     <button className="recipeForm__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</button>
                 </div>
