@@ -1,18 +1,26 @@
-import React, { Component } from "react";
+import { Component } from "react";
+import { Claim } from "../../models/security/Claim";
 
-export class UserSession extends Component {
+interface IState {
+  userSessionInfo: [Claim]
+  loading: boolean
+}
+
+interface IProps { }
+
+export class UserSession extends Component<IProps, IState> {
   static displayName = UserSession.name;
 
-  constructor(props) {
+  constructor(props: IProps) {
     super(props);
-    this.state = { userSessionInfo: {}, loading: true };
+    this.state = { userSessionInfo: [{}], loading: true };
   }
 
   componentDidMount() {
     this.fetchUserSessionInfo();
   }
 
-  static renderUserSessionTable(userSession) {
+  static renderUserSessionTable(userSession: [Claim]) {
     return (
       <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
@@ -54,7 +62,7 @@ export class UserSession extends Component {
   async fetchUserSessionInfo() {
     const response = await fetch("bff/user", {
       headers: {
-        "X-CSRF": 1,
+        "X-CSRF": "1",
       },
     });
     const data = await response.json();

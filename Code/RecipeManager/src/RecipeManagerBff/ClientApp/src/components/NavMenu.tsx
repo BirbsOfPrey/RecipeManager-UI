@@ -1,29 +1,30 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Collapse,
-  Container,
-  Navbar,
-  NavbarBrand,
-  NavbarToggler,
-  NavItem,
-  NavLink,
-} from "reactstrap";
+import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
+import { Claim } from "../models/security/Claim";
 import "./NavMenu.css";
 
-export class NavMenu extends Component {
+interface IState {
+  collapsed: boolean
+  loggedIn: boolean
+  logoutUrl: string
+}
+
+interface IProps { }
+
+export class NavMenu extends Component<IProps, IState> {
   static displayName = NavMenu.name;
 
-  constructor(props) {
+  constructor(props: IProps) {
     super(props);
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true,
       loggedIn: false,
-      logoutUrl: "/bff/logout",
-    };
+      logoutUrl: "/bff/logout"
+    }
 
+    this.toggleNavbar = this.toggleNavbar.bind(this);
     this.fetchIsUserLoggedIn = this.fetchIsUserLoggedIn.bind(this);
   }
 
@@ -41,14 +42,14 @@ export class NavMenu extends Component {
     try {
       const response = await fetch("/bff/user", {
         headers: {
-          "X-CSRF": 1,
+          "X-CSRF": "1",
         },
       });
 
       if (response.ok && response.status === 200) {
         const data = await response.json();
         const logoutUrl =
-          data.find((claim) => claim.type === "bff:logout_url")?.value ??
+          data.find((claim: Claim) => claim.type === "bff:logout_url")?.value ??
           this.state.logoutUrl;
         this.setState({ loggedIn: true, logoutUrl });
       }
@@ -67,7 +68,7 @@ export class NavMenu extends Component {
         >
           <Container>
             <NavbarBrand tag={Link} to="/">
-              React Bff Sample
+              Recipe Manager
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse
@@ -76,11 +77,6 @@ export class NavMenu extends Component {
               navbar
             >
               <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">
-                    Home
-                  </NavLink>
-                </NavItem>
                 {this.state.loggedIn && (
                   <NavItem>
                     <NavLink
@@ -88,7 +84,7 @@ export class NavMenu extends Component {
                       className="text-dark"
                       to="/user-session"
                     >
-                      Show User Session
+                      User Session
                     </NavLink>
                   </NavItem>
                 )}
