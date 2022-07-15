@@ -44,17 +44,19 @@ export class EditableInputText extends Component<IProps, IState> {
     const classNames: string = `${this.props.className} editable ${this.state.valid ? "" : "invalid"}`
 
     return (
-      <input
-        className={classNames}
-        type="text"
-        aria-label={this.props.name}
-        placeholder={this.props.placeholder}
-        value={this.state.editingValue}
-        readOnly={this.state.readonly}
-        onChange={this.onChange}
-        onKeyDown={this.onKeyDown}
-        onBlur={this.onBlur}
-      />
+      <div className={classNames}>
+        <label>{this.props.name}</label>
+        <input
+          type="text"
+          aria-label={this.props.name}
+          placeholder={this.props.placeholder}
+          value={this.state.editingValue}
+          readOnly={this.state.readonly}
+          onChange={this.onChange}
+          onKeyDown={this.onKeyDown}
+          onBlur={this.onBlur}
+        />
+      </div>
     )
   }
 

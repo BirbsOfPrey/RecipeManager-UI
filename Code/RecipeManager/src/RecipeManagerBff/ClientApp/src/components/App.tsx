@@ -4,7 +4,7 @@ import { MainView } from './pages/MainView'
 import { UserSession } from "./pages/UserSession"
 import { Layout } from './Layout'
 import { RecipeManagement } from './pages/RecipeManagement'
-import { RecipeForm } from './pages/RecipeForm'
+import { RecipeCreateAssistant } from './pages/RecipeCreateAssistant'
 import StringResource from '../resources/StringResource'
 import './App.css'
 
@@ -17,7 +17,7 @@ export class App extends Component {
                     <Routes>
                         <Route path={StringResource.Routes.Root} element={<MainView />} />
                         <Route path={StringResource.Routes.RecipeManagement} element={<RecipeManagement />} />
-                        <Route path={StringResource.Routes.NewRecipe} element={<RecipeForm />} />
+                        <Route path={StringResource.Routes.NewRecipe} element={<RecipeCreateAssistant />} />
                         <Route path="/user-session" element={<UserSession />} />
                         <Route path={StringResource.Routes.Any} element={<p>{StringResource.Messages.NoContent}</p>} />
                     </Routes>

@@ -1,25 +1,36 @@
-import { Component } from "react"
+import { Component, ReactNode } from "react"
 import { Navigate } from 'react-router-dom'
 import { RecipesUrl } from "../../resources/Api"
 import { Recipe } from "../../models/Recipe"
 import { EditableInputText } from "../controls/EditableTextInput"
-import './RecipeForm.css'
+import './RecipeCreateAssistant.css'
 import StringResource from "../../resources/StringResource"
+import { RecipeEditHead } from "../widgets/RecipeEditHead"
 
 interface IState {
     redirect: boolean
     recipe: Recipe
     loading: boolean
     error: string
+    contentNr: number
  }
 
-export class RecipeForm extends Component<{}, IState> {
+export class RecipeCreateAssistant extends Component<{}, IState> {
     
     state: IState = {
         redirect: false,
         recipe: new Recipe(),
         loading: false,
-        error: ''
+        error: '',
+        contentNr: 0
+    }
+
+    forward = () => {
+        this.setState({ contentNr: this.state.contentNr++ })
+    }
+
+    backward = () => {
+        this.setState({ contentNr: this.state.contentNr-- })
     }
 
     update = (property: string, value: string) => {
@@ -49,17 +60,24 @@ export class RecipeForm extends Component<{}, IState> {
     }
 
     render() {
-        const { redirect, error } = this.state
+        const contents: ReactNode[] = [
+            <RecipeEditHead
+                recipe={this.state.recipe}
+                setValue={this.update}/>
+        ]
 
+        const { redirect, error } = this.state
+        const content = contents[this.state.contentNr]
+        
         if (redirect) {
             return <Navigate to={StringResource.Routes.RecipeManagement} />
         } else {
             return (
-                <div className="recipeForm__container">
-                    <p className="recipeForm__mainTitle">{StringResource.General.CreateNewRecipe}</p>
-                    <EditableInputText className="recipeForm__nameField" setValue={value => this.update('name', value)} placeholder={"Rezeptname"} value={this.state.recipe.name}/>
-                    <p className="recipeForm__errorField" >{error}</p>
-                    <button className="recipeForm__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</button>
+                <div className="recipeCreateAssistant__container">
+                    <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
+                    {content}
+                    <p className="recipeCreateAssistant__errorField" >{error}</p>
+                    <button className="recipeCreateAssistant__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</button>
                 </div>
 
             )

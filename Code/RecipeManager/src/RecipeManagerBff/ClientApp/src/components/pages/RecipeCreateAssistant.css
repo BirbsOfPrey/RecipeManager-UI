@@ -1,11 +1,11 @@
 .recipeForm__container {
     display: grid;
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-                ". mainTitle"
-                "nameTitle nameField"
-                ". errorField"
-                ". save";
+                "mainTitle"
+                "nameField"
+                "errorField"
+                "save";
     grid-row-gap: 10px;
 }
 

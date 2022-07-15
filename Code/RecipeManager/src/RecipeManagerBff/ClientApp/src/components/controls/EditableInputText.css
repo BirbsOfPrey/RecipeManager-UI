@@ -14,7 +14,7 @@ input::placeholder {
     font-style: italic;
 }
 
-input.invalid {
+.invalid > input {
     color: red
 }
 
