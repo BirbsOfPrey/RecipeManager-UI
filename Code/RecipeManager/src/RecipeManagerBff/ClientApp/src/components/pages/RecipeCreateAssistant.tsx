@@ -2,7 +2,6 @@ import { Component, ReactNode } from "react"
 import { Navigate } from 'react-router-dom'
 import { RecipesUrl } from "../../resources/Api"
 import { Recipe } from "../../models/Recipe"
-import { EditableInputText } from "../controls/EditableTextInput"
 import './RecipeCreateAssistant.css'
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
@@ -26,11 +25,11 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
     }
 
     forward = () => {
-        this.setState({ contentNr: this.state.contentNr++ })
+        this.setState({ contentNr: this.state.contentNr + 1 })
     }
 
     backward = () => {
-        this.setState({ contentNr: this.state.contentNr-- })
+        this.setState({ contentNr: this.state.contentNr - 1 })
     }
 
     update = (property: string, value: string) => {

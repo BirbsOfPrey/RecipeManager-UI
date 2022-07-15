@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { Recipe } from "../../models/Recipe";
 import StringResource from "../../resources/StringResource";
-import { EditableInputText } from "../controls/EditableTextInput";
 import { TextField } from "@mui/material";
 
 interface IProps {
@@ -34,11 +33,6 @@ export class RecipeEditHead extends Component<IProps, {}> {
                 error={!this.validateName()}
                 helperText={this.validateName() ? " " : "Ein Rezeptname ist erforderlich"}
                 />
-                {/* <EditableInputText 
-                    setValue={value => this.props.setValue('name', value)}
-                    name={StringResource.General.RecipeName}
-                    placeholder={StringResource.General.RecipeName}
-                    value={this.props.recipe.name}/> */}
             </div>
         )
     }
