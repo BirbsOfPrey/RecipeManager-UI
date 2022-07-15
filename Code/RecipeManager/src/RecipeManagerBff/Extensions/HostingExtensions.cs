@@ -69,6 +69,10 @@ namespace RecipeManagerBff.Extensions
 
       app.UseDefaultFiles();
       app.UseStaticFiles();
+      // app.UseCookiePolicy(new CookiePolicyOptions
+      // {
+      //     MinimumSameSitePolicy = SameSiteMode.Lax
+      // });
 
       app.UseRouting();
 
@@ -87,7 +91,7 @@ namespace RecipeManagerBff.Extensions
           .RequireAuthorization()
           .AsBffApiEndpoint();
 
-        endpoints.MapRemoteBffApiEndpoint("/remote", "http://recipemanagerapi:80")
+        endpoints.MapRemoteBffApiEndpoint("/remote", "http://localhost:13513")
           .RequireAccessToken(Duende.Bff.TokenType.User);
 
       });
