@@ -5,6 +5,9 @@ import { Recipe } from "../../models/Recipe"
 import './RecipeCreateAssistant.css'
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
+import { Button, Pagination } from "@mui/material"
+import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
+import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
 
 interface IState {
     redirect: boolean
@@ -21,7 +24,11 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
         recipe: new Recipe(),
         loading: false,
         error: '',
-        contentNr: 0
+        contentNr: 1
+    }
+
+    setContentNr = (event: React.ChangeEvent<unknown>, value: number) => {
+        this.setState({ contentNr: value })
     }
 
     forward = () => {
@@ -62,11 +69,20 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
         const contents: ReactNode[] = [
             <RecipeEditHead
                 recipe={this.state.recipe}
-                setValue={this.update}/>
+                setValue={this.update}
+            />,
+            <RecipeEditIngredients
+                recipe={this.state.recipe}
+                setValue={this.update}
+            />,
+            <RecipeEditSteps
+                recipe={this.state.recipe}
+                setValue={this.update}
+            />,
         ]
 
         const { redirect, error } = this.state
-        const content = contents[this.state.contentNr]
+        const content = contents[this.state.contentNr - 1]
         
         if (redirect) {
             return <Navigate to={StringResource.Routes.RecipeManagement} />
@@ -76,7 +92,13 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
                     <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
                     {content}
                     <p className="recipeCreateAssistant__errorField" >{error}</p>
-                    <button className="recipeCreateAssistant__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</button>
+                    <Pagination
+                        variant="outlined"
+                        count={contents.length}
+                        page={this.state.contentNr}
+                        onChange={this.setContentNr}
+                    />
+                    <Button className="recipeCreateAssistant__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</Button>
                 </div>
 
             )

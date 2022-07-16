@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Recipe } from "../../models/Recipe";
 import StringResource from "../../resources/StringResource";
 import { TextField } from "@mui/material";
+import { RecipeValidators } from "../../models/RecipeValidators";
 
 interface IProps {
     recipe: Recipe
@@ -10,28 +11,21 @@ interface IProps {
 
 export class RecipeEditHead extends Component<IProps, {}> {
 
-    validateName = () => {
-        if (this.props.recipe.name) {
-            return this.props.recipe.name.length > 3
-        }
-        return false
-    }
-
     render() {
-        return ( //TODO: I suggest to wrap the library components to reduce some style based selections
+        return (
             <div className="recipeEditHead__container">
                 <TextField 
-                id="filled-basic"
-                variant="filled"
-                className="recipeEditHead__nameField"
-                required
-                fullWidth
-                label={StringResource.General.RecipeName}
-                value={this.props.recipe.name}
-                placeholder={StringResource.General.RecipeName}
-                onChange={event => this.props.setValue('name', event.target.value)}
-                error={!this.validateName()}
-                helperText={this.validateName() ? " " : "Ein Rezeptname ist erforderlich"}
+                    id="filled-basic"
+                    variant="filled"
+                    className="recipeEditHead__nameField"
+                    required
+                    fullWidth
+                    label={StringResource.General.RecipeName}
+                    value={this.props.recipe.name}
+                    placeholder={StringResource.General.RecipeName}
+                    onChange={event => this.props.setValue('name', event.target.value)}
+                    error={!RecipeValidators.validateName(this.props.recipe.name)}
+                    helperText={RecipeValidators.validateName(this.props.recipe.name) ? " " : "Ein Rezeptname ist erforderlich"}
                 />
             </div>
         )
