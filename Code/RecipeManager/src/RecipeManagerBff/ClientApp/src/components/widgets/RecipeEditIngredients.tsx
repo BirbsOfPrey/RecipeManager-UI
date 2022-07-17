@@ -3,6 +3,7 @@ import React, { Component } from "react"
 import { Recipe } from "../../models/Recipe"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
 import { IngredientComponent } from "../../models/IngredientComponent"
+import { EmptyListItem } from "./EmptyIngredientComponentListItem"
 
 interface IProps {
     recipe: Recipe
@@ -17,7 +18,9 @@ export class RecipeEditIngredients extends Component<IProps, {}> {
 
     generate(element: React.ReactElement) {
         if (!this.props.recipe.ingredientComponents) {
-            return []
+            return React.cloneElement(<EmptyListItem/>, {
+                key: 0
+            })
         } else {
             return this.props.recipe.ingredientComponents.map((ic) => 
                 React.cloneElement(element, {
