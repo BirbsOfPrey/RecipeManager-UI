@@ -1,16 +1,18 @@
 import { Component, ReactNode } from "react"
-import { Navigate } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import { RecipesUrl } from "../../resources/Api"
 import { Recipe } from "../../models/Recipe"
-import './RecipeCreateAssistant.css'
+import "./RecipeCreateAssistant.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
-import { Button, Pagination } from "@mui/material"
+import { Button, IconButton, Pagination } from "@mui/material"
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
 
 interface IState {
     redirect: boolean
+    saved: boolean
     recipe: Recipe
     loading: boolean
     error: string
@@ -21,6 +23,7 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
     
     state: IState = {
         redirect: false,
+        saved: true,
         recipe: new Recipe(),
         loading: false,
         error: '',
@@ -31,24 +34,23 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
         this.setState({ contentNr: value })
     }
 
-    forward = () => {
-        this.setState({ contentNr: this.state.contentNr + 1 })
-    }
-
-    backward = () => {
-        this.setState({ contentNr: this.state.contentNr - 1 })
-    }
-
     update = (property: string, value: string) => {
         const updatedRecipe = Object.assign(this.state.recipe, {
             [property]: value
         })
-        this.setState({recipe: updatedRecipe})
+        this.setState({recipe: updatedRecipe, saved: false})
     }
 
     save = async () => {
+        let method: string
+        if(this.state.recipe.id === undefined) {
+            method = 'post'
+        } else {
+            method = 'put'
+        }
+
         const response = await fetch(`${RecipesUrl}`, {
-            method: 'post',
+            method: method,
             headers: new Headers({
                 'X-CSRF': '1',
                 'Content-Type': 'application/json'
@@ -61,7 +63,7 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
         } else {
             const update = await response.json()
             const recipe = Object.assign(this.state.recipe, update)
-            this.setState({ redirect: true, recipe })
+            this.setState({ redirect: true, recipe, saved: true })
         }
     }
 
@@ -81,27 +83,24 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
             />,
         ]
 
-        const { redirect, error } = this.state
         const content = contents[this.state.contentNr - 1]
         
-        if (redirect) {
-            return <Navigate to={StringResource.Routes.RecipeManagement} />
-        } else {
-            return (
-                <div className="recipeCreateAssistant__container">
-                    <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
-                    {content}
-                    <p className="recipeCreateAssistant__errorField" >{error}</p>
-                    <Pagination
-                        variant="outlined"
-                        count={contents.length}
-                        page={this.state.contentNr}
-                        onChange={this.setContentNr}
-                    />
-                    <Button className="recipeCreateAssistant__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</Button>
-                </div>
-
-            )
-        }
+        return (
+            <div className="recipeCreateAssistant__container">
+                <IconButton component={Link} to={StringResource.Routes.RecipeManagement}>
+                    <ArrowBackIcon></ArrowBackIcon>
+                </IconButton>
+                <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
+                {content}
+                <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
+                <Pagination
+                    variant="outlined"
+                    count={contents.length}
+                    page={this.state.contentNr}
+                    onChange={this.setContentNr}
+                />
+                <Button className="recipeCreateAssistant__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</Button>
+            </div>
+        )
     }
 }
