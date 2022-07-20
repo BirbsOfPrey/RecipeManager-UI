@@ -90,16 +90,16 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
                 <IconButton component={Link} to={StringResource.Routes.RecipeManagement}>
                     <ArrowBackIcon></ArrowBackIcon>
                 </IconButton>
-                <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
-                {content}
-                <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
                 <Pagination
                     variant="outlined"
                     count={contents.length}
                     page={this.state.contentNr}
                     onChange={this.setContentNr}
                 />
-                <Button className="recipeCreateAssistant__saveButton" onClick={() => this.save()}>{StringResource.General.Save}</Button>
+                <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
+                {content}
+                <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
+                <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button>
             </div>
         )
     }
