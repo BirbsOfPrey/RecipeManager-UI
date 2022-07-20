@@ -15,7 +15,6 @@ export class RecipeEditHead extends Component<IProps, {}> {
         return (
             <div className="recipeEditHead__container">
                 <TextField 
-                    id="filled-basic"
                     variant="filled"
                     className="recipeEditHead__nameField"
                     required
@@ -25,7 +24,20 @@ export class RecipeEditHead extends Component<IProps, {}> {
                     placeholder={StringResource.General.RecipeName}
                     onChange={event => this.props.setValue('name', event.target.value)}
                     error={!RecipeValidators.validateName(this.props.recipe.name)}
-                    helperText={RecipeValidators.validateName(this.props.recipe.name) ? " " : "Ein Rezeptname ist erforderlich"}
+                    helperText={RecipeValidators.validateName(this.props.recipe.name) ? " " : StringResource.Messages.RequiredRecipeName}
+                />
+                <TextField 
+                    variant="filled"
+                    className="recipeEditHead__personRefAmountField"
+                    type="number"
+                    required
+                    fullWidth
+                    InputProps={{ inputProps: {min: RecipeValidators.minPersonRefAmount, max: RecipeValidators.maxPersonRefAmount}}}
+                    label={StringResource.General.RecipePerson}
+                    value={this.props.recipe.personRefAmount}
+                    onChange={event => this.props.setValue('personRefAmount', event.target.value)}
+                    error={!RecipeValidators.validatePersonRefAmount(this.props.recipe.personRefAmount)}
+                    helperText={RecipeValidators.validatePersonRefAmount(this.props.recipe.personRefAmount) ? " " : StringResource.Messages.InvalidPersonAmount}
                 />
             </div>
         )

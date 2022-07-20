@@ -44,18 +44,6 @@ export class RecipeEditIngredients extends Component<IProps, {}> {
                         </ListItemButton>
                     </List>
                 </this.background>
-                {/* <TextField 
-                    id="filled-basic"
-                    variant="filled"
-                    required
-                    fullWidth
-                    label={StringResource.General.RecipeName}
-                    value={this.props.recipe.name}
-                    placeholder={StringResource.General.RecipeName}
-                    onChange={event => this.props.setValue('name', event.target.value)}
-                    error={!RecipeValidators.validateName(this.props.recipe.name)}
-                    helperText={RecipeValidators.validateName(this.props.recipe.name) ? " " : "Ein Rezeptname ist erforderlich"}
-                /> */}
             </div>
         )
     }
