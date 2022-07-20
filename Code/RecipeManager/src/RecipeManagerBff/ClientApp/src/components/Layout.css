@@ -1,0 +1,21 @@
+.layout__container {
+    display: grid;
+    grid-template-columns: 70px 1fr 70px;
+    grid-template-rows: 100px auto 50px auto;
+    grid-template-areas:
+        "nav nav nav"
+        ". app ."
+        ". copyright .";
+}
+
+nav {
+    grid-area: nav;
+}
+
+main {
+  grid-area: app;
+}
+
+.copyright__container {
+  grid-area: copyright;
+}
