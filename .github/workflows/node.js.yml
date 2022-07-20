@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
        run:
-         working-directory: ./Code/recipemanager/src/RecipeManagerBff/ClientApp
+         working-directory: ./Code/RecipeManager/src/RecipeManagerBff/ClientApp
 
     strategy:
       matrix:
