@@ -5,7 +5,7 @@ namespace StringResource {
         export const Root: string = '/'
         export const RecipeManagement: string = 'recipemanagement'
         export const Recipe: string = 'recipe'
-        export const RecipeId: string = 'recipe/:recipeId'
+        export const RecipeId: string = ':recipeId'
         export const Any: string = '*'
     }
     export namespace Messages {

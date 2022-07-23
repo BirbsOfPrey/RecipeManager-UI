@@ -5,9 +5,9 @@ import { UserSession } from "./pages/UserSession"
 import { Layout } from './Layout'
 import { RecipeManagement } from './pages/RecipeManagement'
 import { RecipeView } from './pages/RecipeView'
+import { RecipeListView } from './pages/RecipeListView'
 import StringResource from '../resources/StringResource'
 import './App.css'
-import { RecipeListView } from './pages/RecipeListView'
 
 export class App extends Component {
 
@@ -25,7 +25,9 @@ export class App extends Component {
                                 index
                                 element={<RecipeListView />}
                             />
-                            <Route path={StringResource.Routes.RecipeId} element={<RecipeView />} />
+                            <Route path={StringResource.Routes.Recipe} element={<RecipeView />}>
+                                <Route path={StringResource.Routes.RecipeId} element={<RecipeView />} />
+                            </Route>
                         </Route>
                         <Route path="user-session" element={<UserSession />} />
                     </Route>
