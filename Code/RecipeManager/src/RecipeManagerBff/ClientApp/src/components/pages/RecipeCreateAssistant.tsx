@@ -17,14 +17,14 @@ interface IState {
     loading: boolean
     error: string
     contentNr: number
- }
+}
 
- interface IProps {
+interface IProps {
     recipeId?: string
- }
+}
 
 export class RecipeCreateAssistant extends Component<IProps, IState> {
-    
+
     state: IState = {
         redirect: false,
         saved: true,
@@ -35,8 +35,7 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
     }
 
     async componentDidMount() {
-        if (this.props.recipeId)
-        {
+        if (this.props.recipeId) {
             await this.fetchRecipe(this.props.recipeId)
         }
     }
@@ -49,11 +48,11 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
         const updatedRecipe = Object.assign(this.state.recipe, {
             [property]: value
         })
-        this.setState({recipe: updatedRecipe, saved: false})
+        this.setState({ recipe: updatedRecipe, saved: false })
     }
 
     fetchRecipe = async (id: string) => {
-        this.setState({loading: true})
+        this.setState({ loading: true })
         const response = await fetch(`${RecipesUrl}/${id}`, {
             headers: getDefaultHeader()
         })
@@ -61,7 +60,7 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
             this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
         } else {
             const recipe = await response.json()
-            this.setState({loading: false, recipe: recipe})
+            this.setState({ loading: false, recipe: recipe })
         }
     }
 
@@ -98,13 +97,13 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
         ]
 
         const content = contents[this.state.contentNr - 1]
-        
+
         if (this.state.loading) {
             return <p>Loading...</p>
         } else {
             return (
                 <div className="recipeCreateAssistant__container">
-                    <IconButton component={Link} to={StringResource.Routes.RecipeManagement} replace={true}>
+                    <IconButton component={Link} to='-1'>
                         <ArrowBackIcon></ArrowBackIcon>
                     </IconButton>
                     <Pagination
