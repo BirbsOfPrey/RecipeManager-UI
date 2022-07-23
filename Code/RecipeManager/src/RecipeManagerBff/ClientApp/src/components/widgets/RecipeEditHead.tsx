@@ -7,6 +7,7 @@ import { RecipeValidators } from "../../models/RecipeValidators";
 interface IProps {
     recipe: Recipe
     setValue: (property: string, value: string) => void
+    editable?: boolean
 }
 
 export class RecipeEditHead extends Component<IProps, {}> {
@@ -19,6 +20,7 @@ export class RecipeEditHead extends Component<IProps, {}> {
                     className="recipeEditHead__nameField"
                     required
                     fullWidth
+                    inputProps={{readOnly: !this.props.editable, disabled: !this.props.editable}}
                     label={StringResource.General.RecipeName}
                     value={this.props.recipe.name}
                     placeholder={StringResource.General.RecipeName}
@@ -32,7 +34,7 @@ export class RecipeEditHead extends Component<IProps, {}> {
                     type="number"
                     required
                     fullWidth
-                    InputProps={{ inputProps: {min: RecipeValidators.minPersonRefAmount, max: RecipeValidators.maxPersonRefAmount}}}
+                    inputProps={{min: RecipeValidators.minPersonRefAmount, max: RecipeValidators.maxPersonRefAmount, readOnly: !this.props.editable, disabled: !this.props.editable}}
                     label={StringResource.General.RecipePerson}
                     value={this.props.recipe.personRefAmount}
                     onChange={event => this.props.setValue('personRefAmount', event.target.value)}

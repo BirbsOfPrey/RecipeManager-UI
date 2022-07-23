@@ -23,17 +23,19 @@ export class RecipeListItem extends Component<IProps, {}> {
             secondary = "Keine Beschreibung"
         }
 
+        const recipeRoute = `${StringResource.Routes.Recipe}/${recipe.id}`
+
         return (
             <ListItemButton
-                alignItems="flex-start">
+                alignItems="flex-start"
+                component={Link} to={recipeRoute}>
                 <ListItemSecondaryAction>
-                    <Link to={`${StringResource.Routes.Recipe}/${recipe.id}`}>
-                        <IconButton
-                            edge="end"
-                            aria-label="edit">
-                            <Edit />
-                        </IconButton>
-                    </Link>
+                    <IconButton
+                        edge="end"
+                        aria-label="edit"
+                        component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
+                        <Edit />
+                    </IconButton>
                 </ListItemSecondaryAction>
                 <ListItemAvatar>
                     <DinnerDining />

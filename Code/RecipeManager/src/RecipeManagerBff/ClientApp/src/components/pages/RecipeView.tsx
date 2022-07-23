@@ -1,11 +1,13 @@
 import { RecipeCreateAssistant } from "./RecipeCreateAssistant"
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
+import StringResource from "../../resources/StringResource";
 
 export const RecipeView = () => {
     let params = useParams()
+    let [searchParams] = useSearchParams()
     return (
         <div className="recipeview__container">
-            <RecipeCreateAssistant recipeId={params.recipeId}/>
+            <RecipeCreateAssistant recipeId={params.recipeId} editable={searchParams.get(StringResource.Queries.Edit) === StringResource.Queries.EditOnValue || params.recipeId === undefined ? true : false}/>
         </div>
     )
 }

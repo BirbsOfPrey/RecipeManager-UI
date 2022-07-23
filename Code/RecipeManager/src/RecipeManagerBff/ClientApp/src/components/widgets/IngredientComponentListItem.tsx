@@ -6,6 +6,7 @@ import { IngredientComponent } from "../../models/IngredientComponent";
 
 interface IProps {
     ic: IngredientComponent
+    editable?: boolean
 }
 
 export class IngredientComponentListItem extends Component<IProps, {}> {
@@ -13,10 +14,10 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
     render() {
         return (
                 <ListItem
-                    secondaryAction={
-                        <IconButton edge="end" aria-label="delete">
+                    secondaryAction={this.props.editable ? 
+                        (<IconButton edge="end" aria-label="delete">
                             <DeleteIcon />
-                        </IconButton>
+                        </IconButton>) : <></>
                     }
                 >
                 <ListItemAvatar>

@@ -8,6 +8,11 @@ namespace StringResource {
         export const RecipeId: string = ':recipeId'
         export const Any: string = '*'
     }
+    export namespace Queries {
+        export const Edit: string = 'edit'
+        export const EditOnValue: string = '1'
+        export const EditOn: string = `${Edit}=${EditOnValue}`
+    }
     export namespace Messages {
         export const GeneralError: string = 'Es ist ein Fehler aufgetreten!'
         export const NoRecipesToDisplay: string = 'Es wurden keine Rezepte zur Darstellung gefunden!'

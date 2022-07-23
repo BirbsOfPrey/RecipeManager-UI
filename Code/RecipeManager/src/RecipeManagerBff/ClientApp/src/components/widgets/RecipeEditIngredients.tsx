@@ -8,6 +8,7 @@ import { EmptyListItem } from "./EmptyIngredientComponentListItem"
 interface IProps {
     recipe: Recipe
     setValue: (property: string, value: string) => void
+    editable?: boolean
 }
 
 export class RecipeEditIngredients extends Component<IProps, {}> {
@@ -31,14 +32,11 @@ export class RecipeEditIngredients extends Component<IProps, {}> {
     }
 
     render() {
-
-
-        
         return (
             <div className="recipeEditIngredients__container">
                 <this.background>
                     <List className="recipeEditIngredients__ingredientList">
-                        {this.generate(<IngredientComponentListItem ic={new IngredientComponent()}/>)}
+                        {this.generate(<IngredientComponentListItem ic={new IngredientComponent()} editable={this.props.editable}/>)}
                         <ListItemButton component="a" href="#simple-list">
                             <ListItemText primary="Weitere Zutat hinzufügen" />
                         </ListItemButton>

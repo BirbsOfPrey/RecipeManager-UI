@@ -21,6 +21,7 @@ interface IState {
 
 interface IProps {
     recipeId?: string
+    editable?: boolean
 }
 
 export class RecipeCreateAssistant extends Component<IProps, IState> {
@@ -85,18 +86,23 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
             <RecipeEditHead
                 recipe={this.state.recipe}
                 setValue={this.update}
+                editable={this.props.editable}
             />,
             <RecipeEditIngredients
                 recipe={this.state.recipe}
                 setValue={this.update}
+                editable={this.props.editable}
             />,
             <RecipeEditSteps
                 recipe={this.state.recipe}
                 setValue={this.update}
+                editable={this.props.editable}
             />,
         ]
 
         const content = contents[this.state.contentNr - 1]
+
+        const saveContent = this.props.editable ? <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button> : <></>
 
         if (this.state.loading) {
             return <p>Loading...</p>
@@ -111,12 +117,11 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
                         count={contents.length}
                         page={this.state.contentNr}
                         onChange={this.setContentNr}
-                        disabled={this.state.loading}
                     />
                     <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
                     {content}
                     <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
-                    <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button>
+                    {saveContent}
                 </div>
             )
         }
