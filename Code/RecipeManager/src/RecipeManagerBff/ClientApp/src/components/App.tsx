@@ -18,9 +18,7 @@ export class App extends Component {
                             index
                             element={<MainView />}
                         />
-                        <Route path={StringResource.Routes.RecipeManagement} element={<RecipeManagement />}>
-                            
-                        </Route>
+                        <Route path={`${StringResource.Routes.RecipeManagement}/*`} element={<RecipeManagement />} />
                         <Route path="user-session" element={<UserSession />} />
                     </Route>
                     <Route path={StringResource.Routes.Any} element={<p>{StringResource.Messages.NoContent}</p>} />
