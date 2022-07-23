@@ -103,7 +103,7 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
         } else {
             return (
                 <div className="recipeCreateAssistant__container">
-                    <IconButton component={Link} to='-1'>
+                    <IconButton component={Link} to={-1 as any}>
                         <ArrowBackIcon></ArrowBackIcon>
                     </IconButton>
                     <Pagination
