@@ -1,6 +1,6 @@
 import { Component, ReactNode } from "react"
 import { Link } from "react-router-dom"
-import { RecipesUrl } from "../../resources/Api"
+import { getDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { Recipe } from "../../models/Recipe"
 import "./RecipeCreateAssistant.css"
 import StringResource from "../../resources/StringResource"
@@ -19,7 +19,11 @@ interface IState {
     contentNr: number
  }
 
-export class RecipeCreateAssistant extends Component<{}, IState> {
+ interface IProps {
+    recipeId?: string
+ }
+
+export class RecipeCreateAssistant extends Component<IProps, IState> {
     
     state: IState = {
         redirect: false,
@@ -28,6 +32,13 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
         loading: false,
         error: '',
         contentNr: 1
+    }
+
+    async componentDidMount() {
+        if (this.props.recipeId)
+        {
+            await this.fetchRecipe(this.props.recipeId)
+        }
     }
 
     setContentNr = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -41,20 +52,23 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
         this.setState({recipe: updatedRecipe, saved: false})
     }
 
-    save = async () => {
-        let method: string
-        if(this.state.recipe.id === undefined) {
-            method = 'post'
+    fetchRecipe = async (id: string) => {
+        this.setState({loading: true})
+        const response = await fetch(`${RecipesUrl}/${id}`, {
+            headers: getDefaultHeader()
+        })
+        if (response.status >= 300) {
+            this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
         } else {
-            method = 'put'
+            const recipe = await response.json()
+            this.setState({loading: false, recipe: recipe})
         }
+    }
 
+    save = async () => {
         const response = await fetch(`${RecipesUrl}`, {
-            method: method,
-            headers: new Headers({
-                'X-CSRF': '1',
-                'Content-Type': 'application/json'
-            }),
+            method: this.state.recipe.id ? 'put' : 'post',
+            headers: getDefaultHeader(),
             body: JSON.stringify(this.state.recipe)
         })
 
@@ -85,22 +99,27 @@ export class RecipeCreateAssistant extends Component<{}, IState> {
 
         const content = contents[this.state.contentNr - 1]
         
-        return (
-            <div className="recipeCreateAssistant__container">
-                <IconButton component={Link} to={StringResource.Routes.RecipeManagement}>
-                    <ArrowBackIcon></ArrowBackIcon>
-                </IconButton>
-                <Pagination
-                    variant="outlined"
-                    count={contents.length}
-                    page={this.state.contentNr}
-                    onChange={this.setContentNr}
-                />
-                <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
-                {content}
-                <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
-                <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button>
-            </div>
-        )
+        if (this.state.loading) {
+            return <p>Loading...</p>
+        } else {
+            return (
+                <div className="recipeCreateAssistant__container">
+                    <IconButton component={Link} to={StringResource.Routes.RecipeManagement} replace={true}>
+                        <ArrowBackIcon></ArrowBackIcon>
+                    </IconButton>
+                    <Pagination
+                        variant="outlined"
+                        count={contents.length}
+                        page={this.state.contentNr}
+                        onChange={this.setContentNr}
+                        disabled={this.state.loading}
+                    />
+                    <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
+                    {content}
+                    <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
+                    <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button>
+                </div>
+            )
+        }
     }
 }

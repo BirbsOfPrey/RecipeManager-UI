@@ -7,7 +7,7 @@ export class RecipeValidators {
             return name.length > 3
         }
         return false
-    }    
+    }
 
     static validatePersonRefAmount(value?: number): boolean {
         if (value) {

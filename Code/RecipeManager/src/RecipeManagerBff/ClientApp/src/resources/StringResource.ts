@@ -2,14 +2,16 @@ import { RecipeValidators } from "../models/RecipeValidators"
 
 namespace StringResource {
     export namespace Routes {
-        export const Root: string = "/"
-        export const RecipeManagement: string = '/recipemanagement'
-        export const NewRecipe: string = `/new-recipe`
-        export const Any: string = "*"
+        export const Root: string = '/'
+        export const RecipeManagement: string = 'recipemanagement'
+        export const Recipe: string = 'recipe'
+        export const RecipeId: string = 'recipe/:recipeId'
+        export const Any: string = '*'
     }
     export namespace Messages {
         export const GeneralError: string = 'Es ist ein Fehler aufgetreten!'
         export const NoRecipesToDisplay: string = 'Es wurden keine Rezepte zur Darstellung gefunden!'
+        export const RecipeNotFound: string = 'Rezept nicht gefunden. Berechtigung fehlt oder Rezept existiert nicht.'
         export const NoContent: string = 'Hier ist nichts vorhanden!'
         export const RequiredRecipeName: string = 'Ein Rezeptname ist erforderlich'
         export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidators.minPersonRefAmount} - ${RecipeValidators.maxPersonRefAmount} liegen`
