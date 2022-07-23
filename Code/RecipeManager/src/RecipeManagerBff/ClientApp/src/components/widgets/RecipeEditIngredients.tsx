@@ -1,5 +1,6 @@
-import { List, ListItemButton, ListItemText, styled } from "@mui/material"
-import React, { Component } from "react"
+import { List, ListItemAvatar, ListItemButton, ListItemText, styled } from "@mui/material"
+import Add from '@mui/icons-material/Add'
+import React, { Component, ReactNode } from "react"
 import { Recipe } from "../../models/Recipe"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
 import { IngredientComponent } from "../../models/IngredientComponent"
@@ -32,14 +33,20 @@ export class RecipeEditIngredients extends Component<IProps, {}> {
     }
 
     render() {
+        const addComponent: ReactNode = this.props.editable ? (
+        <ListItemButton component="a" href="#simple-list">
+            <ListItemAvatar>
+                <Add />
+            </ListItemAvatar>
+            <ListItemText primary="Weitere Zutat hinzufügen" />
+        </ListItemButton>) : <></>
+        
         return (
             <div className="recipeEditIngredients__container">
                 <this.background>
                     <List className="recipeEditIngredients__ingredientList">
                         {this.generate(<IngredientComponentListItem ic={new IngredientComponent()} editable={this.props.editable}/>)}
-                        <ListItemButton component="a" href="#simple-list">
-                            <ListItemText primary="Weitere Zutat hinzufügen" />
-                        </ListItemButton>
+                        {addComponent}
                     </List>
                 </this.background>
             </div>

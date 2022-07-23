@@ -5,6 +5,7 @@ import { Recipe } from "../../models/Recipe";
 import { Component } from "react";
 import { Link } from 'react-router-dom';
 import StringResource from "../../resources/StringResource";
+import './RecipeListItem.css'
 
 interface IProps {
     recipe: Recipe
@@ -13,7 +14,7 @@ interface IProps {
 export class RecipeListItem extends Component<IProps, {}> {
 
     render() {
-        const recipe = this.props.recipe
+        const recipe: Recipe = this.props.recipe
 
         let primary: string = recipe.name ? recipe.name : "Kein Name"
         let secondary: string
@@ -23,11 +24,12 @@ export class RecipeListItem extends Component<IProps, {}> {
             secondary = "Keine Beschreibung"
         }
 
-        const recipeRoute = `${StringResource.Routes.Recipe}/${recipe.id}`
+        const recipeRoute: string = `${StringResource.Routes.Recipe}/${recipe.id}`
 
         return (
             <ListItemButton
                 alignItems="flex-start"
+                className="recipeListItem__container"
                 component={Link} to={recipeRoute}>
                 <ListItemSecondaryAction>
                     <IconButton
@@ -41,6 +43,7 @@ export class RecipeListItem extends Component<IProps, {}> {
                     <DinnerDining />
                 </ListItemAvatar>
                 <ListItemText
+                    className="recipeListItem__text"
                     primary={primary}
                     secondary={secondary}
                 />

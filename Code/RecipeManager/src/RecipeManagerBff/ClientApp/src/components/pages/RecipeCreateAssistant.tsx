@@ -100,9 +100,9 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
             />,
         ]
 
-        const content = contents[this.state.contentNr - 1]
+        const content: ReactNode = contents[this.state.contentNr - 1]
 
-        const saveContent = this.props.editable ? <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button> : <></>
+        const saveContent: ReactNode = this.props.editable ? <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button> : <></>
 
         if (this.state.loading) {
             return <p>Loading...</p>
@@ -112,14 +112,14 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
                     <IconButton component={Link} to={-1 as any}>
                         <ArrowBackIcon></ArrowBackIcon>
                     </IconButton>
+                    <span  className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
+                    {content}
                     <Pagination
                         variant="outlined"
                         count={contents.length}
                         page={this.state.contentNr}
                         onChange={this.setContentNr}
                     />
-                    <p className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</p>
-                    {content}
                     <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
                     {saveContent}
                 </div>
