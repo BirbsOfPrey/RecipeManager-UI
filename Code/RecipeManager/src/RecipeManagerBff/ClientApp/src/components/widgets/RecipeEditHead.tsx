@@ -28,19 +28,6 @@ export class RecipeEditHead extends Component<IProps, {}> {
                     error={!RecipeValidators.validateName(this.props.recipe.name)}
                     helperText={RecipeValidators.validateName(this.props.recipe.name) ? " " : StringResource.Messages.RequiredRecipeName}
                 />
-                <TextField 
-                    variant="filled"
-                    className="recipeEditHead__personRefAmountField"
-                    type="number"
-                    required
-                    fullWidth
-                    inputProps={{min: RecipeValidators.minPersonRefAmount, max: RecipeValidators.maxPersonRefAmount, readOnly: !this.props.editable, disabled: !this.props.editable}}
-                    label={StringResource.General.RecipePerson}
-                    value={this.props.recipe.personRefAmount}
-                    onChange={event => this.props.setValue('personRefAmount', event.target.value)}
-                    error={!RecipeValidators.validatePersonRefAmount(this.props.recipe.personRefAmount)}
-                    helperText={RecipeValidators.validatePersonRefAmount(this.props.recipe.personRefAmount) ? " " : StringResource.Messages.InvalidPersonAmount}
-                />
             </div>
         )
     }

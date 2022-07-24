@@ -2,10 +2,10 @@ import { Component, ReactNode } from "react"
 import { Link } from "react-router-dom"
 import { getDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { Recipe } from "../../models/Recipe"
-import "./RecipeCreateAssistant.css"
+import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
-import { Button, IconButton, Pagination } from "@mui/material"
+import { Button, IconButton } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
@@ -16,7 +16,6 @@ interface IState {
     recipe: Recipe
     loading: boolean
     error: string
-    contentNr: number
 }
 
 interface IProps {
@@ -24,25 +23,20 @@ interface IProps {
     editable?: boolean
 }
 
-export class RecipeCreateAssistant extends Component<IProps, IState> {
+export class RecipeCookingView extends Component<IProps, IState> {
 
     state: IState = {
         redirect: false,
         saved: true,
         recipe: new Recipe(),
         loading: false,
-        error: '',
-        contentNr: 1
+        error: ''
     }
 
     async componentDidMount() {
         if (this.props.recipeId) {
             await this.fetchRecipe(this.props.recipeId)
         }
-    }
-
-    setContentNr = (event: React.ChangeEvent<unknown>, value: number) => {
-        this.setState({ contentNr: value })
     }
 
     update = (property: string, value: string) => {
@@ -82,26 +76,6 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
     }
 
     render() {
-        const contents: ReactNode[] = [
-            <RecipeEditHead
-                recipe={this.state.recipe}
-                setValue={this.update}
-                editable={this.props.editable}
-            />,
-            <RecipeEditIngredients
-                recipe={this.state.recipe}
-                setValue={this.update}
-                editable={this.props.editable}
-            />,
-            <RecipeEditSteps
-                recipe={this.state.recipe}
-                setValue={this.update}
-                editable={this.props.editable}
-            />,
-        ]
-
-        const content: ReactNode = contents[this.state.contentNr - 1]
-
         const saveContent: ReactNode = this.props.editable ? <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button> : <></>
 
         if (this.state.loading) {
@@ -109,16 +83,24 @@ export class RecipeCreateAssistant extends Component<IProps, IState> {
         } else {
             return (
                 <div className="recipeCreateAssistant__container">
-                    <IconButton component={Link} to={-1 as any}>
+                    <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
                         <ArrowBackIcon></ArrowBackIcon>
                     </IconButton>
                     <span  className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
-                    {content}
-                    <Pagination
-                        variant="outlined"
-                        count={contents.length}
-                        page={this.state.contentNr}
-                        onChange={this.setContentNr}
+                    <RecipeEditHead
+                    recipe={this.state.recipe}
+                    setValue={this.update}
+                    editable={this.props.editable}
+                    />
+                    <RecipeEditSteps
+                        recipe={this.state.recipe}
+                        setValue={this.update}
+                        editable={this.props.editable}
+                    />
+                    <RecipeEditIngredients
+                        recipe={this.state.recipe}
+                        setValue={this.update}
+                        editable={this.props.editable}
                     />
                     <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
                     {saveContent}
