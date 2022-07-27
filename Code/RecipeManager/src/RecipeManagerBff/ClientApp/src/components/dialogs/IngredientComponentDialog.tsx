@@ -1,6 +1,6 @@
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Autocomplete } from '@mui/material';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { Component } from 'react';
-import { createIngredient, Ingredient } from '../../models/Ingredient';
+import { createIngredient } from '../../models/Ingredient';
 import { createIngredientComponent, IngredientComponent } from '../../models/IngredientComponent';
 import { IngredientSelectCreate } from '../controls/IngredientSelectCreate';
 import './IngredientComponentDialog.css'
@@ -31,10 +31,8 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
 
     updateIngredient = (ingredientName: string) => {
         var updatedIngrComp = {...this.state.ingredientComp}
-        var updatedIngr = {...updatedIngrComp.ingredient}
-        updatedIngr = updatedIngr || createIngredient()
-        updatedIngr.name = ingredientName
-        updatedIngrComp.ingredient = updatedIngr
+        updatedIngrComp.ingredient = updatedIngrComp.ingredient || createIngredient()
+        updatedIngrComp.ingredient.name = ingredientName
         this.setState({ ingredientComp: updatedIngrComp })
     }
 
