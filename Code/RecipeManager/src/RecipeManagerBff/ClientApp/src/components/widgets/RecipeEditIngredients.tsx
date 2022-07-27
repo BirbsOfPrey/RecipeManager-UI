@@ -1,9 +1,9 @@
-import { List, ListItemAvatar, ListItemButton, ListItemText, TextField } from "@mui/material"
+import { List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material"
 import Add from '@mui/icons-material/Add'
 import React, { Component, ReactNode } from "react"
 import { Recipe } from "../../models/Recipe"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
-import { createIngredientComponent, IngredientComponent } from "../../models/IngredientComponent"
+import { createIngredientComponent } from "../../models/IngredientComponent"
 import { EmptyListItem } from "./EmptyIngredientComponentListItem"
 import { IngredientComponentDialog } from "../dialogs/IngredientComponentDialog"
 import { PersonAmountField } from "../controls/PersonAmountField"
