@@ -7,6 +7,7 @@ import { IngredientComponent } from "../../models/IngredientComponent";
 interface IProps {
     ic: IngredientComponent
     editable?: boolean
+    personAmount: number
 }
 
 export class IngredientComponentListItem extends Component<IProps, {}> {

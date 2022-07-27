@@ -9,6 +9,7 @@ import { Button, IconButton } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
+import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
 
 interface IState {
     redirect: boolean
@@ -44,6 +45,20 @@ export class RecipeCookingView extends Component<IProps, IState> {
             [property]: value
         })
         this.setState({ recipe: updatedRecipe, saved: false })
+    }
+
+    updateIngredientComponents = (ingredientComponent: IngredientComponent) => {
+        var updatedRecipe = {...this.state.recipe}
+        var existingIngrComp = updatedRecipe.ingredientComponents?.find(item => item.id === ingredientComponent.id)
+        if (existingIngrComp) {
+            existingIngrComp = ingredientComponent
+        } else {
+            if (!updatedRecipe.ingredientComponents) {
+                updatedRecipe.ingredientComponents = createIngredientComponents()
+            }
+            updatedRecipe.ingredientComponents.push(ingredientComponent)
+        }
+        this.setState({ recipe: updatedRecipe })
     }
 
     fetchRecipe = async (id: string) => {
@@ -100,6 +115,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     <RecipeEditIngredients
                         recipe={this.state.recipe}
                         setValue={this.update}
+                        setIngredientComponent={this.updateIngredientComponents}
                         editable={this.props.editable}
                     />
                     <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>

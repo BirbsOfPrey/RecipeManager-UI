@@ -7,6 +7,10 @@ export class IngredientComponent {
     ingredient?: Ingredient
 }
 
+export function createIngredientComponents() {
+    return <IngredientComponent[]>[]
+}
+
 export function createIngredientComponent() {
     return new IngredientComponent()
 }

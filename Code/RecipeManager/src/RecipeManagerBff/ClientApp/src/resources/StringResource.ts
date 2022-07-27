@@ -20,6 +20,7 @@ namespace StringResource {
         export const NoContent: string = 'Hier ist nichts vorhanden!'
         export const RequiredRecipeName: string = 'Ein Rezeptname ist erforderlich'
         export const RequiredIngredientName: string = 'Ein Zutatenname ist erforderlich'
+        export const RequiredIngredientComponentAmount: string = 'Eine Menge ist erforderlich'
         export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidators.minPersonRefAmount} - ${RecipeValidators.maxPersonRefAmount} liegen`
     }
     export namespace General {
