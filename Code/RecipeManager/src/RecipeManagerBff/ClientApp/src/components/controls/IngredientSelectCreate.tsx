@@ -30,6 +30,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                     variant="filled"
                     className="ingredientSelectCreate__ingredient"
                     required
+                    fullWidth
                     label={StringResource.General.Ingredient}
                     value={this.props.ingredient ? this.props.ingredient.name : ""}
                     onChange={event => this.props.setValue(event.target.value)}
@@ -42,7 +43,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                     disablePortal
                     className="ingredientSelectCreate__ingredient"
                     options={["Hoi", "Hallo", "Velo"]}
-                    renderInput={(params) => { return (<TextField {...params} label={StringResource.General.Ingredient} variant="filled" />) }}
+                    renderInput={(params) => { return (<TextField {...params} fullWidth label={StringResource.General.Ingredient} variant="filled" />) }}
                 />)
         }
 
