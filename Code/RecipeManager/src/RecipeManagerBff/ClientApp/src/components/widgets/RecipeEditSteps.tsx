@@ -1,13 +1,13 @@
 import { Pagination } from "@mui/material";
 import { Component, ReactNode } from "react";
-import { Recipe } from "../../models/Recipe";
+import { Step } from "../../models/Step";
 
 interface IState {
     contentNr: number
 }
 
 interface IProps {
-    recipe: Recipe
+    steps?: Step[]
     setValue: (property: string, value: string) => void
     editable?: boolean
 }

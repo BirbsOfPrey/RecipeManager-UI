@@ -93,7 +93,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                         editable={this.props.editable}
                     />
                     <RecipeEditSteps
-                        recipe={this.state.recipe}
+                        steps={this.state.recipe.steps}
                         setValue={this.update}
                         editable={this.props.editable}
                     />
