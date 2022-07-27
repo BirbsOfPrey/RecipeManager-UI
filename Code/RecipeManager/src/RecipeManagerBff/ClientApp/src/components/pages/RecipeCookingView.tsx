@@ -84,7 +84,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
             return (
                 <div className="recipeCreateAssistant__container">
                     <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
-                        <ArrowBackIcon></ArrowBackIcon>
+                        <ArrowBackIcon />
                     </IconButton>
                     <span className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
                     <RecipeEditHead

@@ -16,12 +16,12 @@ export class RecipeListItem extends Component<IProps, {}> {
     render() {
         const recipe: Recipe = this.props.recipe
 
-        let primary: string = recipe.name ? recipe.name : "Kein Name"
-        let secondary: string
+        let name: string = recipe.name ? recipe.name : "Kein Name"
+        let description: string
         if (recipe.steps && recipe.steps[0] && recipe.steps[0].instruction && recipe.steps[0].instruction.length > 0) {
-            secondary = recipe.steps[0].instruction
+            description = recipe.steps[0].instruction
         } else {
-            secondary = "Keine Beschreibung"
+            description = "Keine Beschreibung"
         }
 
         const recipeRoute: string = `${StringResource.Routes.Recipe}/${recipe.id}`
@@ -44,8 +44,8 @@ export class RecipeListItem extends Component<IProps, {}> {
                 </ListItemAvatar>
                 <ListItemText
                     className="recipeListItem__text"
-                    primary={primary}
-                    secondary={secondary}
+                    primary={name}
+                    secondary={description}
                 />
             </ListItemButton>
         )
