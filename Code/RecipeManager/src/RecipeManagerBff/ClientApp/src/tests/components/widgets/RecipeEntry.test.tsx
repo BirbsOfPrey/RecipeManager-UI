@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { RecipeEntry } from '../../../components/widgets/RecipeEntry'
-import { Recipe } from '../../../models/Recipe'
+import { createRecipe } from '../../../models/Recipe'
 import StringResource from '../../../resources/StringResource'
 
 const testRecipeId: number = 5
@@ -55,7 +55,7 @@ test('renders recipe id title', () => {
 })
 
 function getTestRecipe() {
-    const testRecipe = new Recipe()
+    const testRecipe = createRecipe()
 
     testRecipe.id = testRecipeId
     testRecipe.name = testRecipeName

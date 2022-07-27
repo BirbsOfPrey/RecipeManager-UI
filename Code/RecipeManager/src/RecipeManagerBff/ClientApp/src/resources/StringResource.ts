@@ -19,6 +19,7 @@ namespace StringResource {
         export const RecipeNotFound: string = 'Rezept nicht gefunden. Berechtigung fehlt oder Rezept existiert nicht.'
         export const NoContent: string = 'Hier ist nichts vorhanden!'
         export const RequiredRecipeName: string = 'Ein Rezeptname ist erforderlich'
+        export const RequiredIngredientName: string = 'Ein Zutatenname ist erforderlich'
         export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidators.minPersonRefAmount} - ${RecipeValidators.maxPersonRefAmount} liegen`
     }
     export namespace General {
@@ -29,6 +30,7 @@ namespace StringResource {
         export const RecipePerson: string = 'Personen'
         export const RecipeSteps: string = 'Schritte'
         export const Ingredients: string = 'Zutaten'
+        export const Ingredient: string = 'Zutat'
         export const Save: string = 'Speichern'
         export const CreateNewRecipe: string = 'Neues Rezept erstellen'
         export const CreateRecipe: string = 'Rezept erstellen'

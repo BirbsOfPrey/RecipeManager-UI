@@ -5,9 +5,8 @@ import { Recipe } from "../../models/Recipe"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
 import { IngredientComponent } from "../../models/IngredientComponent"
 import { EmptyListItem } from "./EmptyIngredientComponentListItem"
-import { RecipeValidators } from "../../models/RecipeValidators"
-import StringResource from "../../resources/StringResource"
-import { IngredientComponentAddDialog } from "../dialogs/IngredientComponentAddDialog"
+import { IngredientComponentDialog } from "../dialogs/IngredientComponentDialog"
+import { PersonAmountField } from "../controls/PersonAmountField"
 
 interface IProps {
     recipe: Recipe
@@ -17,12 +16,14 @@ interface IProps {
 
 interface IState {
     openDialog: boolean
+    personAmount: number
 }
 
 export class RecipeEditIngredients extends Component<IProps, IState> {
 
     state: IState = {
-        openDialog: false
+        openDialog: false,
+        personAmount: this.props.recipe.personRefAmount
     }
 
     generate(element: React.ReactElement) {
@@ -63,24 +64,15 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
 
         return (
             <div className="recipeEditIngredients__container">
-                <TextField
-                    variant="filled"
-                    className="recipeEditHead__personRefAmountField"
-                    type="number"
-                    required
-                    fullWidth
-                    inputProps={{ min: RecipeValidators.minPersonRefAmount, max: RecipeValidators.maxPersonRefAmount, readOnly: !this.props.editable, disabled: !this.props.editable }}
-                    label={StringResource.General.RecipePerson}
-                    value={this.props.recipe.personRefAmount}
-                    onChange={event => this.props.setValue('personRefAmount', event.target.value)}
-                    error={!RecipeValidators.validatePersonRefAmount(this.props.recipe.personRefAmount)}
-                    helperText={RecipeValidators.validatePersonRefAmount(this.props.recipe.personRefAmount) ? " " : StringResource.Messages.InvalidPersonAmount}
+                <PersonAmountField
+                    personAmount={this.props.editable ? this.props.recipe.personRefAmount : this.state.personAmount}
+                    setValue={this.props.setValue}
                 />
                 <List className="recipeEditIngredients__ingredientList">
                     {this.generate(<IngredientComponentListItem ic={new IngredientComponent()} editable={this.props.editable} />)}
                     {addComponent}
                 </List>
-                <IngredientComponentAddDialog open={this.state.openDialog} handleOk={() => this.handleDialogClose(false)} handleCancel={() => this.handleDialogClose(true)}/>
+                <IngredientComponentDialog open={this.state.openDialog} handleOk={() => this.handleDialogClose(false)} handleCancel={() => this.handleDialogClose(true)}/>
             </div>
         )
     }

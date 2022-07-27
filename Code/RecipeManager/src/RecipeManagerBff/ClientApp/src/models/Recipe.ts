@@ -12,3 +12,7 @@ export class Recipe{
         this.personRefAmount = 4
     }
 }
+
+export function createRecipe() {
+    return new Recipe()
+}

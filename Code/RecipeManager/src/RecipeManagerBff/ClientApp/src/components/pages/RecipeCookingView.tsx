@@ -1,7 +1,7 @@
 import { Component, ReactNode } from "react"
 import { Link } from "react-router-dom"
-import { getDefaultHeader, RecipesUrl } from "../../resources/Api"
-import { Recipe } from "../../models/Recipe"
+import { getDefaultHeader as createDefaultHeader, RecipesUrl } from "../../resources/Api"
+import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
@@ -28,7 +28,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
     state: IState = {
         redirect: false,
         saved: true,
-        recipe: new Recipe(),
+        recipe: createRecipe(),
         loading: false,
         error: ''
     }
@@ -49,7 +49,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
     fetchRecipe = async (id: string) => {
         this.setState({ loading: true })
         const response = await fetch(`${RecipesUrl}/${id}`, {
-            headers: getDefaultHeader()
+            headers: createDefaultHeader()
         })
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
@@ -62,7 +62,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
     save = async () => {
         const response = await fetch(`${RecipesUrl}`, {
             method: this.state.recipe.id ? 'put' : 'post',
-            headers: getDefaultHeader(),
+            headers: createDefaultHeader(),
             body: JSON.stringify(this.state.recipe)
         })
 
@@ -86,11 +86,11 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
                         <ArrowBackIcon></ArrowBackIcon>
                     </IconButton>
-                    <span  className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
+                    <span className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
                     <RecipeEditHead
-                    recipe={this.state.recipe}
-                    setValue={this.update}
-                    editable={this.props.editable}
+                        recipe={this.state.recipe}
+                        setValue={this.update}
+                        editable={this.props.editable}
                     />
                     <RecipeEditSteps
                         recipe={this.state.recipe}

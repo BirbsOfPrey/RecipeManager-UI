@@ -6,3 +6,7 @@ export class IngredientComponent {
     physicalQuantity?: string
     ingredient?: Ingredient
 }
+
+export function createIngredientComponent() {
+    return new IngredientComponent()
+}
