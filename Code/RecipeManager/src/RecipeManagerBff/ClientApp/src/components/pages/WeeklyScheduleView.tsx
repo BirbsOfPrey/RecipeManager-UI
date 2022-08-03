@@ -1,7 +1,8 @@
-import { IconButton } from "@mui/material"
+import { IconButton, List } from "@mui/material"
 import { ArrowCircleLeft, ArrowCircleRight } from '@mui/icons-material';
 import { Component } from "react"
 import { createRecipe, Recipe } from "../../models/Recipe"
+import { DailyScheduleItem } from "../widgets/DailyScheduleItem";
 
 interface IState {
     dateToShow: Date
@@ -12,11 +13,7 @@ interface IState {
     error: string // TODO: necessary?
 }
 
-interface IProps {
-    // TODO: necessary?
-}
-
-export class WeeklyScheduleView extends Component<IProps, IState> {
+export class WeeklyScheduleView extends Component<{}, IState> {
 
     state: IState = {
         dateToShow: new Date(),
@@ -49,6 +46,8 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
     }
 
     render() {
+        const dayOfWeek = [1, 2, 3, 4, 5, 6, 6]
+
         return (
             <div className="weeklyScheduleView__container">
                 <p>Woche vom {this.getDayOfWeekToShow(1).toLocaleDateString()} - {this.getDayOfWeekToShow(6).toLocaleDateString()}</p>
@@ -58,6 +57,13 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
                 <IconButton onClick={this.setNextWeek}>
                         <ArrowCircleRight />
                 </IconButton>
+
+                <List className="dailySchedule__list">
+                        {dayOfWeek.map(number => (
+                            <DailyScheduleItem
+                                date={this.getDayOfWeekToShow(number)}/>
+                        ))}
+                </List>
 
                 <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
             </div>
