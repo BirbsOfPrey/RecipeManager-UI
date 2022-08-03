@@ -8,6 +8,9 @@ export const MainView = () => {
             <Link className="mainview__RecipeManagement" to={StringResource.Routes.RecipeManagement}>
                 <button>{StringResource.General.RecipeManagement}</button>
             </Link>
+            <Link className="mainview__WeeklySchedule" to={StringResource.Routes.WeeklySchedule}>
+                <button>{StringResource.General.WeeklySchedule}</button>
+            </Link>
         </div>
     )
 }
