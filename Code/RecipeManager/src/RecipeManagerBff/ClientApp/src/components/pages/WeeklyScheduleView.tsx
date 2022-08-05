@@ -24,37 +24,35 @@ export class WeeklyScheduleView extends Component<{}, IState> {
         error: ''
     }
 
-    // TODO: Parameter 7 does not work.....? I don't know why
-    getDayOfWeekToShow = (dayOfWeek: number) => {
-        
-        const dateToShow = this.state.dateToShow
+    getDayOfWeekToShow = (dayOfWeek: number): Date => {
+        const dateToShow = new Date(this.state.dateToShow)
         const dayOfWeekToShow = dateToShow.getDate() - dateToShow.getDay() + dayOfWeek
         const dateOfWeek = new Date(dateToShow.setDate(dayOfWeekToShow))
         return dateOfWeek
     }
 
-    setPreviousWeek = () => {
-        const dateToShow = this.state.dateToShow
-        const dayOfPreviousWeek = dateToShow.getDate() - 7;
-        this.setState({ dateToShow: new Date(dateToShow.setDate(dayOfPreviousWeek)) })
-    }
-
-    setNextWeek = () => {
-        const dateToShow = this.state.dateToShow
-        const dayOfNextWeek = dateToShow.getDate() + 7;
-        this.setState({ dateToShow: new Date(dateToShow.setDate(dayOfNextWeek)) })
+    changeWeek = (direction: string) => {
+        let changeDays = 0
+        if (direction === 'previous') {
+            changeDays = -7
+        } else if (direction === 'next') {
+            changeDays = 7
+        }
+        const dateToShow = new Date(this.state.dateToShow)
+        const dayOfChangedWeek = dateToShow.getDate() + changeDays;
+        this.setState({ dateToShow: new Date(dateToShow.setDate(dayOfChangedWeek)) })
     }
 
     render() {
-        const dayOfWeek = [1, 2, 3, 4, 5, 6, 6]
+        const dayOfWeek = [1, 2, 3, 4, 5, 6, 7]
 
         return (
             <div className="weeklyScheduleView__container">
-                <p>Woche vom {this.getDayOfWeekToShow(1).toLocaleDateString()} - {this.getDayOfWeekToShow(6).toLocaleDateString()}</p>
-                <IconButton onClick={this.setPreviousWeek}>
+                <p>Woche vom {this.getDayOfWeekToShow(1).toLocaleDateString()} - {this.getDayOfWeekToShow(7).toLocaleDateString()}</p>
+                <IconButton onClick={() => this.changeWeek('previous')}>
                         <ArrowCircleLeft />
                 </IconButton>
-                <IconButton onClick={this.setNextWeek}>
+                <IconButton onClick={() => this.changeWeek('next')}>
                         <ArrowCircleRight />
                 </IconButton>
 

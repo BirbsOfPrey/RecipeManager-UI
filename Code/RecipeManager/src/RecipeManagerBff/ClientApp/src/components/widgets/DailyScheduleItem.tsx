@@ -2,6 +2,8 @@ import { Component } from "react";
 import StringResource from "../../resources/StringResource";
 import { getDefaultHeader as createDefaultHeader, RecipesUrl } from "../../resources/Api";
 import { ScheduledRecipe } from "../../models/ScheduledRecipe";
+import { Add } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
 
 interface IProps {
     date: Date
@@ -59,12 +61,19 @@ export class DailyScheduleItem extends Component<IProps, IState> {
         }
     }
 
+    // TODO: Liste der ScheduledRecipes anzeigen mit Möglichkeit zum Löschen und ev. mit Klick das RecipeCookingView öffnen
+    // TODO: Funktion mit Dialog dem Add-Button hinzufügen
     render() {
         const date: Date = this.props.date
 
         return (
             <div>
                 <p>{this.getNameOfCurrentDay()}, {date.toLocaleDateString()}</p>
+                <IconButton >
+                        <Add />
+                </IconButton>
+                
+                <p>Hier werden die terminierten Rezepte aufgeführt.</p>
                 {/* <p>{this.state.scheduledRecipe[0].id}</p> */}
             </div>
         )
