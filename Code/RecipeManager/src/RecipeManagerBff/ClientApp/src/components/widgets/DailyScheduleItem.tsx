@@ -4,27 +4,41 @@ import { getDefaultHeader as createDefaultHeader, RecipesUrl } from "../../resou
 import { ScheduledRecipe } from "../../models/ScheduledRecipe";
 import { Add } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import { Recipe } from "../../models/Recipe";
 
 interface IProps {
     date: Date
 }
 
 interface IState {
+    date: Date
     scheduledRecipe: ScheduledRecipe[]
     loading: boolean
     error: string
- }
+    // TODO: Remove when changed to correct API Call
+    recipe: Recipe
+}
 
 export class DailyScheduleItem extends Component<IProps, IState> {
 
     state: IState = {
+        date: this.props.date,
         scheduledRecipe: [],
         loading: false,
-        error: ''
+        error: '',
+        recipe: new Recipe()
     }
 
     async componentDidMount() {
+        // TODO: Change to correct API Call
         await this.fetchRecipe('1')
+    }
+
+    componentDidUpdate(prevProps: IProps) {
+        if (prevProps.date !== this.props.date) {
+            // TODO: Change to correct API Call
+            this.fetchRecipe('2')
+        }
     }
 
     getNameOfCurrentDay = () => {
@@ -57,11 +71,11 @@ export class DailyScheduleItem extends Component<IProps, IState> {
             this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
         } else {
             const recipe = await response.json()
-            // this.setState({ loading: false, recipe: recipe })
+            this.setState({ loading: false, recipe: recipe })
         }
     }
 
-    // TODO: Liste der ScheduledRecipes anzeigen mit Möglichkeit zum Löschen und ev. mit Klick das RecipeCookingView öffnen
+    // TODO: Liste der ScheduledRecipes anzeigen mit Möglichkeit zum Löschen und ev. mit Klick das RecipeCookingView öffnen (analog Zutaten-Liste wenn diese fertig ist)
     // TODO: Funktion mit Dialog dem Add-Button hinzufügen
     render() {
         const date: Date = this.props.date
@@ -70,11 +84,11 @@ export class DailyScheduleItem extends Component<IProps, IState> {
             <div>
                 <p>{this.getNameOfCurrentDay()}, {date.toLocaleDateString()}</p>
                 <IconButton >
-                        <Add />
+                    <Add />
                 </IconButton>
-                
+
                 <p>Hier werden die terminierten Rezepte aufgeführt.</p>
-                {/* <p>{this.state.scheduledRecipe[0].id}</p> */}
+                <p>{this.state.recipe.name}</p>
             </div>
         )
     }
