@@ -1,24 +1,22 @@
-import { Recipe } from "../../models/Recipe";
 import { Component } from "react";
 import StringResource from "../../resources/StringResource";
 import { getDefaultHeader as createDefaultHeader, RecipesUrl } from "../../resources/Api";
+import { ScheduledRecipe } from "../../models/ScheduledRecipe";
 
 interface IProps {
     date: Date
 }
 
-// TODO: Replace Recipe through ScheduledRecipe
 interface IState {
-    recipe: Recipe
+    scheduledRecipe: ScheduledRecipe[]
     loading: boolean
     error: string
  }
 
-
 export class DailyScheduleItem extends Component<IProps, IState> {
 
     state: IState = {
-        recipe: new Recipe,
+        scheduledRecipe: [],
         loading: false,
         error: ''
     }
@@ -57,7 +55,7 @@ export class DailyScheduleItem extends Component<IProps, IState> {
             this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
         } else {
             const recipe = await response.json()
-            this.setState({ loading: false, recipe: recipe })
+            // this.setState({ loading: false, recipe: recipe })
         }
     }
 
@@ -67,7 +65,7 @@ export class DailyScheduleItem extends Component<IProps, IState> {
         return (
             <div>
                 <p>{this.getNameOfCurrentDay()}, {date.toLocaleDateString()}</p>
-                <p>{this.state.recipe.name}</p>
+                {/* <p>{this.state.scheduledRecipe[0].id}</p> */}
             </div>
         )
     }
