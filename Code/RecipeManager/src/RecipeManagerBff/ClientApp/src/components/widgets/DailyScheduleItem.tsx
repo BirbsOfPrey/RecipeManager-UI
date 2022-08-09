@@ -5,6 +5,7 @@ import { ScheduledRecipe } from "../../models/ScheduledRecipe";
 import { Add } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { Recipe } from "../../models/Recipe";
+import { ScheduledRecipeDialog } from "../dialogs/ScheduledRecipeDialog";
 
 interface IProps {
     date: Date
@@ -13,6 +14,7 @@ interface IProps {
 interface IState {
     date: Date
     scheduledRecipe: ScheduledRecipe[]
+    openDialog: boolean
     loading: boolean
     error: string
     // TODO: Remove when changed to correct API Call
@@ -24,6 +26,7 @@ export class DailyScheduleItem extends Component<IProps, IState> {
     state: IState = {
         date: this.props.date,
         scheduledRecipe: [],
+        openDialog: false,
         loading: false,
         error: '',
         recipe: new Recipe()
@@ -62,6 +65,15 @@ export class DailyScheduleItem extends Component<IProps, IState> {
         }
     }
 
+    newScheduledRecipe = () => {
+        this.setState({ openDialog: true })
+    }
+
+    handleDialogClose = () => {
+        this.setState({ openDialog: false })
+        // TODO: Möglicherweise hier nochmals alle ScheduledRecipe von der DB abfragen
+    }
+
     fetchRecipe = async (id: string) => {
         this.setState({ loading: true })
         const response = await fetch(`${RecipesUrl}/${id}`, {
@@ -83,12 +95,14 @@ export class DailyScheduleItem extends Component<IProps, IState> {
         return (
             <div>
                 <p>{this.getNameOfCurrentDay()}, {date.toLocaleDateString()}</p>
-                <IconButton >
+                <IconButton onClick={this.newScheduledRecipe}>
                     <Add />
                 </IconButton>
 
                 <p>Hier werden die terminierten Rezepte aufgeführt.</p>
                 <p>{this.state.recipe.name}</p>
+
+                <ScheduledRecipeDialog open={this.state.openDialog} date={this.state.date} handleOk={() => this.handleDialogClose()} handleCancel={() => this.handleDialogClose()} />
             </div>
         )
     }

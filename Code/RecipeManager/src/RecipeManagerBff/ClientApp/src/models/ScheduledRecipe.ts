@@ -9,6 +9,6 @@ export class ScheduledRecipe{
     }
 }
 
-export function createScheduledRecipe(date: Date, recipeId: number) {
-    return new ScheduledRecipe(date, recipeId)
+export function createScheduledRecipe(date: Date) {
+    return new ScheduledRecipe(date, 0)
 }
