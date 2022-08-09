@@ -88,7 +88,6 @@ export class DailyScheduleItem extends Component<IProps, IState> {
     }
 
     // TODO: Liste der ScheduledRecipes anzeigen mit Möglichkeit zum Löschen und ev. mit Klick das RecipeCookingView öffnen (analog Zutaten-Liste wenn diese fertig ist)
-    // TODO: Funktion mit Dialog dem Add-Button hinzufügen
     render() {
         const date: Date = this.props.date
 
