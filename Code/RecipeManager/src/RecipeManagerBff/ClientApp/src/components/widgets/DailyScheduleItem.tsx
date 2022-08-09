@@ -44,21 +44,21 @@ export class DailyScheduleItem extends Component<IProps, IState> {
     getNameOfCurrentDay = () => {
         switch (this.props.date.getDay()) {
             case 0:
-                return "Sonntag"
+                return StringResource.General.Sunday
             case 1:
-                return "Montag"
+                return StringResource.General.Monday
             case 2:
-                return "Dienstag"
+                return StringResource.General.Tuesday
             case 3:
-                return "Mittwoch"
+                return StringResource.General.Wednesday
             case 4:
-                return "Donnerstag"
+                return StringResource.General.Thursday
             case 5:
-                return "Freitag"
+                return StringResource.General.Friday
             case 6:
-                return "Samstag"
+                return StringResource.General.Saturday
             default:
-                return "Unknown"
+                return StringResource.General.Unknown
         }
     }
 

@@ -37,6 +37,14 @@ namespace StringResource {
         export const CreateNewRecipe: string = 'Neues Rezept erstellen'
         export const CreateRecipe: string = 'Rezept erstellen'
         export const WeeklySchedule: string = 'Wochenplan'
+        export const Monday: string = 'Montag'
+        export const Tuesday: string = 'Dienstag'
+        export const Wednesday: string = 'Mittwoch'
+        export const Thursday: string = 'Donnerstag'
+        export const Friday: string = 'Freitag'
+        export const Saturday: string = 'Samstag'
+        export const Sunday: string = 'Sonntag'
+        export const Unknown: string = 'Unbekannt'
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
