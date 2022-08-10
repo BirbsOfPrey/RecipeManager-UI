@@ -89,7 +89,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
     }
 
     render() {
-        const saveContent: ReactNode = this.props.editable ? <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button> : <></>
+        const saveContent: ReactNode = this.props.editable ? <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={this.save}>{StringResource.General.Save}</Button> : <></>
 
         if (this.state.loading) {
             return <p>Loading...</p>
