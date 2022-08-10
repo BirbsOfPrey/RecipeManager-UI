@@ -25,6 +25,18 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
     }
 
     updateIngredientComp = (property: string, value: string) => {
+        // TODO: Spread-Operator vs. Object.assign. Which one should we take?
+        // var updatedIngrComp = {...this.state.ingredientComp}
+        // switch (property) {
+        //     case 'physicalQuantity':
+        //         updatedIngrComp.physicalQuantity = value
+        //         break
+        //     case 'amount':
+        //         updatedIngrComp.amount = value as unknown as number
+        //         break
+        //     default:
+        //         break
+        // }
         const updatedIngrComp = Object.assign(this.state.ingredientComp, {
             [property]: value
         })

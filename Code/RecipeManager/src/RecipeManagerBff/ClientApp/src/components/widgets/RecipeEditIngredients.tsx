@@ -7,6 +7,7 @@ import { createIngredientComponent, IngredientComponent } from "../../models/Ing
 import { EmptyListItem } from "./EmptyIngredientComponentListItem"
 import { IngredientComponentDialog } from "../dialogs/IngredientComponentDialog"
 import { PersonAmountField } from "../controls/PersonAmountField"
+import StringResource from "../../resources/StringResource"
 
 interface IProps {
     recipe: Recipe
@@ -43,6 +44,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
         this.setState({ openDialog: true })
     }
 
+    //TODO: Replace Dialog with own "dialog" component? Or hand in ingrComp with state?
     handleDialogClose = (ingredientComp?: IngredientComponent) => {
         if (ingredientComp) {
             this.props.setIngredientComponent(ingredientComp)
@@ -58,7 +60,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                 <ListItemAvatar>
                     <Add />
                 </ListItemAvatar>
-                <ListItemText primary="Weitere Zutat hinzufügen" />
+                <ListItemText primary={StringResource.General.AddIngredient} />
             </ListItemButton>) : <></>
 
         const personAmount = this.props.editable ? this.props.recipe.personRefAmount : this.state.personAmount

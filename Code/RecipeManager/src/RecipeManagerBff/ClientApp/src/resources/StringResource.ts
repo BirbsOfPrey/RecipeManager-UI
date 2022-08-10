@@ -35,6 +35,7 @@ namespace StringResource {
         export const Save: string = 'Speichern'
         export const CreateNewRecipe: string = 'Neues Rezept erstellen'
         export const CreateRecipe: string = 'Rezept erstellen'
+        export const AddIngredient: string = 'Weitere Zutat hinzufügen'
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
