@@ -58,7 +58,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
             }
             updatedRecipe.ingredientComponents.push(ingredientComponent)
         }
-        this.setState({ recipe: updatedRecipe })
+        this.setState({ recipe: updatedRecipe, saved: false })
     }
 
     fetchRecipe = async (id: string) => {

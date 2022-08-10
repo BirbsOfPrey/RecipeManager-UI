@@ -18,6 +18,7 @@ interface IProps {
 
 interface IState {
     openDialog: boolean
+    ingrCompForDialog: IngredientComponent
     personAmount: number
 }
 
@@ -25,7 +26,8 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
 
     state: IState = {
         openDialog: false,
-        personAmount: this.props.recipe.personRefAmount
+        personAmount: this.props.recipe.personRefAmount,
+        ingrCompForDialog: createIngredientComponent()
     }
 
     generate(element: React.ReactElement) {
@@ -40,8 +42,12 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
         }
     }
 
-    newIngredient = () => {
-        this.setState({ openDialog: true })
+    newIngredientComponent = () => {
+        this.setState({ openDialog: true,  ingrCompForDialog: createIngredientComponent()})
+    }
+
+    openIngredientComponent = (ingrComp: IngredientComponent) => {
+        this.setState({ openDialog: true,  ingrCompForDialog: ingrComp})
     }
 
     //TODO: Replace Dialog with own "dialog" component? Or hand in ingrComp with state?
@@ -56,7 +62,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
 
     render() {
         const addComponent: ReactNode = this.props.editable ? (
-            <ListItemButton onClick={this.newIngredient}>
+            <ListItemButton onClick={this.newIngredientComponent}>
                 <ListItemAvatar>
                     <Add />
                 </ListItemAvatar>
@@ -72,10 +78,10 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                     setValue={this.props.setValue}
                 />
                 <List className="recipeEditIngredients__ingredientList">
-                    {this.generate(<IngredientComponentListItem ic={createIngredientComponent()} editable={this.props.editable} personAmount={personAmount}/>)}
+                    {this.generate(<IngredientComponentListItem ic={createIngredientComponent()} editable={this.props.editable} personAmount={personAmount} ingrCompSelected={this.openIngredientComponent} />)}
                     {addComponent}
                 </List>
-                <IngredientComponentDialog open={this.state.openDialog} handleOk={(ingredientComp: IngredientComponent) => this.handleDialogClose(ingredientComp)} handleCancel={() => this.handleDialogClose()} />
+                <IngredientComponentDialog open={this.state.openDialog} handleOk={(ingredientComp: IngredientComponent) => this.handleDialogClose(ingredientComp)} handleCancel={() => this.handleDialogClose()} ingredientComp={this.state.ingrCompForDialog} />
             </div>
         )
     }
