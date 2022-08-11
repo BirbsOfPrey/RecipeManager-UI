@@ -1,6 +1,6 @@
 import { Component } from "react";
 import StringResource from "../../resources/StringResource";
-import { getDefaultHeader as createDefaultHeader, RecipesUrl } from "../../resources/Api";
+import { createDefaultHeader, RecipesUrl } from "../../resources/Api";
 import { ScheduledRecipe } from "../../models/ScheduledRecipe";
 import { Add } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
