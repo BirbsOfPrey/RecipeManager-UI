@@ -1,9 +1,10 @@
 import { Component } from 'react'
-import { RecipeEntry } from './RecipeEntry'
 import { Recipe } from '../../models/Recipe'
-import { RecipesUrl } from '../../resources/Api'
+import { createDefaultHeader, RecipesUrl } from '../../resources/Api'
 import './RecipeList.css'
 import StringResource from '../../resources/StringResource'
+import { List } from '@mui/material'
+import { RecipeListItem } from './RecipeListItem'
 
 interface IState {
     recipes: Recipe[]
@@ -17,9 +18,7 @@ export class RecipeList extends Component<{}, IState> {
 
     async componentDidMount() {
         const response = await fetch(`${RecipesUrl}`, {
-            headers: new Headers({
-                'X-CSRF': '1'
-            })
+            headers: createDefaultHeader()
         })
         const recipes = await response.json()
         this.setState({recipes})
@@ -29,15 +28,16 @@ export class RecipeList extends Component<{}, IState> {
         const { recipes } = this.state
 
         if (recipes.length !== 0) {
-
             return (
                 <div className="recipeListContent__container">
                     <p className="recipeListContent__title">{StringResource.General.RecipeList}</p>
-                    {recipes.map(recipe => (
-                        <RecipeEntry
-                            key={recipe.id}
-                            recipe={recipe}/>
-                    ))}
+                    <List className="recipeListContent__list">
+                        {recipes.map(recipe => (
+                            <RecipeListItem
+                                key={recipe.id}
+                                recipe={recipe}/>
+                        ))}
+                    </List>
                 </div>
             )
         } else {

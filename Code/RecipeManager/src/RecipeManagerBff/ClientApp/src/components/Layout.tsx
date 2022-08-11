@@ -2,12 +2,9 @@ import { Container } from 'reactstrap'
 import { NavMenu } from './NavMenu'
 import { Copyright } from './widgets/Copyright'
 import './Layout.css'
+import { Outlet } from 'react-router-dom'
 
-interface IProps {
-    children: React.ReactNode;
-}
-
-export const Layout = (props: IProps) => {
+export const Layout = () => {
     return (
         <div className={"layout__container "}>
             <nav>
@@ -15,10 +12,10 @@ export const Layout = (props: IProps) => {
             </nav>
             <main>
                 <Container>
-                    {props.children}
+                    <Outlet/>
                 </Container>
             </main>
             <Copyright />
         </div>
-    );
+    )
 }

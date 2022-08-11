@@ -1,15 +1,21 @@
-import {Link} from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 import StringResource from '../../resources/StringResource'
-import { RecipeList } from '../widgets/RecipeList'
+import { RecipeListView } from './RecipeListView'
+import { RecipeView } from './RecipeView'
 import './RecipeManagement.css'
 
 export const RecipeManagement = () => {
     return (
         <div className="RecipeManagement__container">
-            <Link className="RecipeManagement__createRecipe" to={StringResource.Routes.NewRecipe}>
-                <button>{StringResource.General.CreateRecipe}</button>
-            </Link>
-            <RecipeList/>
+            <Routes>
+                <Route
+                    index
+                    element={<RecipeListView />}
+                />
+                <Route path={StringResource.Routes.Recipe} element={<RecipeView />}>
+                    <Route path={StringResource.Routes.RecipeId} element={<RecipeView />} />
+                </Route>
+            </Routes>
         </div>
     )
 }

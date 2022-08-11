@@ -4,7 +4,6 @@ import { MainView } from './pages/MainView'
 import { UserSession } from "./pages/UserSession"
 import { Layout } from './Layout'
 import { RecipeManagement } from './pages/RecipeManagement'
-import { RecipeForm } from './pages/RecipeForm'
 import StringResource from '../resources/StringResource'
 import './App.css'
 
@@ -13,15 +12,17 @@ export class App extends Component {
     render() {
         return (
             <div className={"app__container "}>
-                <Layout>
-                    <Routes>
-                        <Route path={StringResource.Routes.Root} element={<MainView />} />
-                        <Route path={StringResource.Routes.RecipeManagement} element={<RecipeManagement />} />
-                        <Route path={StringResource.Routes.NewRecipe} element={<RecipeForm />} />
-                        <Route path="/user-session" element={<UserSession />} />
-                        <Route path={StringResource.Routes.Any} element={<p>{StringResource.Messages.NoContent}</p>} />
-                    </Routes>
-                </Layout>
+                <Routes>
+                    <Route path={StringResource.Routes.Root} element={<Layout />}>
+                        <Route
+                            index
+                            element={<MainView />}
+                        />
+                        <Route path={`${StringResource.Routes.RecipeManagement}/*`} element={<RecipeManagement />} />
+                        <Route path="user-session" element={<UserSession />} />
+                    </Route>
+                    <Route path={StringResource.Routes.Any} element={<p>{StringResource.Messages.NoContent}</p>} />
+                </Routes>
             </div>
         )
     }
