@@ -1,6 +1,6 @@
 import { Component, ReactNode } from "react"
 import { Link } from "react-router-dom"
-import { getDefaultHeader as createDefaultHeader, RecipesUrl } from "../../resources/Api"
+import { createDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
@@ -58,7 +58,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
             }
             updatedRecipe.ingredientComponents.push(ingredientComponent)
         }
-        this.setState({ recipe: updatedRecipe })
+        this.setState({ recipe: updatedRecipe, saved: false })
     }
 
     fetchRecipe = async (id: string) => {
@@ -81,17 +81,15 @@ export class RecipeCookingView extends Component<IProps, IState> {
             body: JSON.stringify(this.state.recipe)
         })
 
-        if (response.status >= 300) {
-            this.setState({ error: StringResource.Messages.GeneralError, loading: false })
+        if (response.status !== 204) {
+            this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            const update = await response.json()
-            const recipe = Object.assign(this.state.recipe, update)
-            this.setState({ redirect: true, recipe, saved: true })
+            this.setState({ redirect: true, saved: true })
         }
     }
 
     render() {
-        const saveContent: ReactNode = this.props.editable ? <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={() => this.save()}>{StringResource.General.Save}</Button> : <></>
+        const saveContent: ReactNode = this.props.editable ? <Button className="recipeCreateAssistant__saveButton" disabled={this.state.saved} onClick={this.save}>{StringResource.General.Save}</Button> : <></>
 
         if (this.state.loading) {
             return <p>Loading...</p>

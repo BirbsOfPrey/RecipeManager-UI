@@ -36,6 +36,7 @@ namespace StringResource {
         export const Save: string = 'Speichern'
         export const CreateNewRecipe: string = 'Neues Rezept erstellen'
         export const CreateRecipe: string = 'Rezept erstellen'
+        export const AddIngredient: string = 'Weitere Zutat hinzufügen'
         export const WeeklySchedule: string = 'Wochenplan'
         export const Monday: string = 'Montag'
         export const Tuesday: string = 'Dienstag'

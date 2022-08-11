@@ -9,12 +9,15 @@ on:
   pull_request:
     branches: [ main ]
 
+env: 
+  CI: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
        run:
-         working-directory: ./Code/recipemanager
+         working-directory: ./Code/RecipeManager/src/RecipeManagerBff/ClientApp
 
     strategy:
       matrix:

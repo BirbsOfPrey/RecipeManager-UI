@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { Recipe } from '../../models/Recipe'
-import { getDefaultHeader, RecipesUrl } from '../../resources/Api'
+import { createDefaultHeader, RecipesUrl } from '../../resources/Api'
 import './RecipeList.css'
 import StringResource from '../../resources/StringResource'
 import { List } from '@mui/material'
@@ -18,7 +18,7 @@ export class RecipeList extends Component<{}, IState> {
 
     async componentDidMount() {
         const response = await fetch(`${RecipesUrl}`, {
-            headers: getDefaultHeader()
+            headers: createDefaultHeader()
         })
         const recipes = await response.json()
         this.setState({recipes})
