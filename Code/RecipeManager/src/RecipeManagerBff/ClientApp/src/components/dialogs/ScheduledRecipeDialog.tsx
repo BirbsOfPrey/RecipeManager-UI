@@ -21,9 +21,7 @@ export class ScheduledRecipeDialog extends Component<IProps, IState> {
     }
 
     updateScheduledRecipe = (property: string, value: string) => {
-        const updatedScheduledRecipe = Object.assign(this.state.scheduledRecipe, {
-            [property]: value
-        })
+        const updatedScheduledRecipe = {...this.state.scheduledRecipe, [property]: value}
         this.setState({ scheduledRecipe: updatedScheduledRecipe })
     }
 
