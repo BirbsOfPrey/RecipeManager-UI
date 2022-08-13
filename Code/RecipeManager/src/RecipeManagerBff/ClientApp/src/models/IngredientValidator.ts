@@ -1,4 +1,4 @@
-export class IngredientValidators {
+export class IngredientValidator {
 
     static validateName(name?: string): boolean {
         if (name) {

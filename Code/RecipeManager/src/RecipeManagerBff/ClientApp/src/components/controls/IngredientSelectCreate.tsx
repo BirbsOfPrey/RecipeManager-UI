@@ -1,7 +1,7 @@
 import { TextField, Autocomplete, Switch } from "@mui/material"
 import { Component, ReactNode } from "react"
 import { Ingredient } from "../../models/Ingredient"
-import { IngredientValidators } from "../../models/IngredientValidators"
+import { IngredientValidator } from "../../models/IngredientValidator"
 import { createDefaultHeader, IngredientsUrl } from "../../resources/Api"
 import StringResource from "../../resources/StringResource"
 
@@ -54,8 +54,8 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                     label={StringResource.General.Ingredient}
                     value={this.props.ingredient ? this.props.ingredient.name : ""}
                     onChange={event => this.props.setValue(event.target.value)}
-                    error={!IngredientValidators.validateName(this.props.ingredient?.name)}
-                    helperText={IngredientValidators.validateName(this.props.ingredient?.name) ? " " : StringResource.Messages.RequiredIngredientName}
+                    error={!IngredientValidator.validateName(this.props.ingredient?.name)}
+                    helperText={IngredientValidator.validateName(this.props.ingredient?.name) ? " " : StringResource.Messages.RequiredIngredientName}
                 />)
         } else {
             field = (

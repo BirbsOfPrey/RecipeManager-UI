@@ -5,10 +5,10 @@ import { Component } from "react";
 import { IngredientComponent } from "../../models/IngredientComponent";
 
 interface IProps {
-    ic: IngredientComponent
+    ingredientComponent: IngredientComponent
     editable?: boolean
     personAmount: number
-    ingrCompSelected: (ingrComp: IngredientComponent) => void
+    ingredientComponentSelected: (ingrComp: IngredientComponent) => void
 }
 
 export class IngredientComponentListItem extends Component<IProps, {}> {
@@ -20,7 +20,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                     className="recipeListItem__container"
                     onClick={(_) => {
                         if (this.props.editable) {
-                            this.props.ingrCompSelected(this.props.ic)
+                            this.props.ingredientComponentSelected(this.props.ingredientComponent)
                         }
                     }}>
                 <ListItemSecondaryAction>
@@ -33,8 +33,8 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                     <EggIcon />
                 </ListItemAvatar>
                 <ListItemText
-                    primary={this.props.ic.ingredient ? this.props.ic.ingredient.name : ""}
-                    secondary={this.props.ic.amount + " " + this.props.ic.physicalQuantity}
+                    primary={this.props.ingredientComponent.ingredient ? this.props.ingredientComponent.ingredient.name : ""}
+                    secondary={this.props.ingredientComponent.amount + " " + this.props.ingredientComponent.physicalQuantity}
                 />
                 </ListItemButton>
                 )

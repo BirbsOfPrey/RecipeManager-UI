@@ -1,8 +1,8 @@
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { Component } from 'react';
 import { createIngredient } from '../../models/Ingredient';
-import { createIngredientComponent, IngredientComponent } from '../../models/IngredientComponent';
-import { IngredientComponentValidators } from '../../models/IngredientComponentValidators';
+import { IngredientComponent } from '../../models/IngredientComponent';
+import { IngredientComponentValidator } from '../../models/IngredientComponentValidator';
 import StringResource from '../../resources/StringResource';
 import { IngredientSelectCreate } from '../controls/IngredientSelectCreate';
 import './IngredientComponentDialog.css'
@@ -31,21 +31,7 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
     }
 
     updateIngredientComp = (property: string, value: string) => {
-        // TODO: Spread-Operator vs. Object.assign. Which one should we take?
-        // var updatedIngrComp = {...this.state.ingredientComp}
-        // switch (property) {
-        //     case 'physicalQuantity':
-        //         updatedIngrComp.physicalQuantity = value
-        //         break
-        //     case 'amount':
-        //         updatedIngrComp.amount = value as unknown as number
-        //         break
-        //     default:
-        //         break
-        // }
-        const updatedIngrComp = Object.assign(this.state.ingredientComp, {
-            [property]: value
-        })
+        const updatedIngrComp = {...this.state.ingredientComp, [property]: value}
         this.setState({ ingredientComp: updatedIngrComp })
     }
 
@@ -75,11 +61,11 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                             id="amount"
                             label="Menge"
                             type="number"
-                            defaultValue={this.state.ingredientComp.amount || IngredientComponentValidators.minAmount}
-                            inputProps={{ min: IngredientComponentValidators.minAmount }}
+                            defaultValue={this.state.ingredientComp.amount || IngredientComponentValidator.minAmount}
+                            inputProps={{ min: IngredientComponentValidator.minAmount }}
                             onChange={event => this.updateIngredientComp('amount', event.target.value)}
-                            error={!IngredientComponentValidators.validateAmount(this.state.ingredientComp.amount)}
-                            helperText={IngredientComponentValidators.validateAmount(this.state.ingredientComp.amount) ? " " : StringResource.Messages.RequiredIngredientComponentAmount}
+                            error={!IngredientComponentValidator.validateAmount(this.state.ingredientComp.amount)}
+                            helperText={IngredientComponentValidator.validateAmount(this.state.ingredientComp.amount) ? " " : StringResource.Messages.RequiredIngredientComponentAmount}
                         />
                         <TextField
                             variant="filled"

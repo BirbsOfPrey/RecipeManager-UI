@@ -1,4 +1,4 @@
-export class RecipeValidators {
+export class RecipeValidator {
     static minPersonRefAmount: number = 1
     static maxPersonRefAmount: number = 1000
 
@@ -11,7 +11,7 @@ export class RecipeValidators {
 
     static validatePersonRefAmount(value?: number): boolean {
         if (value) {
-            return value >= RecipeValidators.minPersonRefAmount && value <= RecipeValidators.maxPersonRefAmount
+            return value >= RecipeValidator.minPersonRefAmount && value <= RecipeValidator.maxPersonRefAmount
         }
         return false
     }
