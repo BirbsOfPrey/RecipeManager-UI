@@ -32,18 +32,18 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
     }
 
     updateIngredientComp = (property: string, value: string) => {
-        const updatedIngrComp = {...this.state.ingredientComponent, [property]: value}
+        var updatedIngrComp = {...this.state.ingredientComponent, [property]: value} as IngredientComponent
         this.setState({ ingredientComponent: updatedIngrComp })
     }
 
     updateIngredient = (ingredientName: string) => {
-        var updatedIngrComp = {...this.state.ingredientComponent}
+        var updatedIngrComp = {...this.state.ingredientComponent} as IngredientComponent
         updatedIngrComp.ingredient = updatedIngrComp.ingredient || createIngredient()
         updatedIngrComp.ingredient.name = ingredientName
         this.setState({ ingredientComponent: updatedIngrComp })
     }
 
-    render() {//TODO: Check if cancel or omit for onClose
+    render() {
         return (
             <div>
                 <Dialog open={this.props.open} onClose={this.props.handleCancel}>

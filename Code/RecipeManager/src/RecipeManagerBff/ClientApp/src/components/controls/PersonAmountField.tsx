@@ -5,6 +5,7 @@ import StringResource from "../../resources/StringResource"
 interface IProps {
     personAmount: number
     setValue: (property: string, value: string) => void
+    setViewValue: (value: number) => void
     editable?: boolean
 }
 
@@ -19,7 +20,7 @@ export const PersonAmountField = (props: IProps) => {
             inputProps={{ min: RecipeValidator.minPersonRefAmount, max: RecipeValidator.maxPersonRefAmount }}
             label={StringResource.General.RecipePerson}
             value={props.personAmount}
-            onChange={event => props.editable ? props.setValue('personRefAmount', event.target.value) : props.setValue('personAmount', event.target.value)}
+            onChange={event => props.editable ? props.setValue('personRefAmount', event.target.value) : props.setViewValue(event.target.value as unknown as number)}
             error={!RecipeValidator.validatePersonRefAmount(props.personAmount)}
             helperText={RecipeValidator.validatePersonRefAmount(props.personAmount) ? " " : StringResource.Messages.InvalidPersonAmount}
         />

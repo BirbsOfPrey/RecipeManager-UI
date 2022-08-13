@@ -47,7 +47,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
     }
 
     newIngredientComponent = () => {
-        this.setState({ openDialog: true, ingredientComponentForDialog: {}, indexForDialog: NO_INDEX })
+        this.setState({ openDialog: true, ingredientComponentForDialog: undefined, indexForDialog: NO_INDEX })
     }
 
     openIngredientComponent = (index: number, ingredientComponent: IngredientComponent) => {
@@ -79,6 +79,8 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                 <PersonAmountField
                     personAmount={personAmount}
                     setValue={this.props.setValue}
+                    setViewValue={(value) => this.setState({ personAmount: value })}
+                    editable={this.props.editable}
                 />
                 <List className="recipeEditIngredients__ingredientList">
                     {this.generate(<IngredientComponentListItem 
@@ -86,6 +88,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                         index={NO_INDEX}
                         editable={this.props.editable} 
                         personAmount={personAmount} 
+                        personRefAmount={this.props.recipe.personRefAmount} 
                         ingredientComponentSelected={this.openIngredientComponent}
                         ingredientComponentDeleted={this.props.deleteIngredientComponent} />)}
                     {addComponent}
