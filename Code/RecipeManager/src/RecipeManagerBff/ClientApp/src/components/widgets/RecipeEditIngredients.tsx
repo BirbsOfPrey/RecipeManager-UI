@@ -35,7 +35,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
     }
 
     generate(element: React.ReactElement) {
-        if (this.props.recipe.ingredientComponents) {
+        if (this.props.recipe.ingredientComponents && this.props.recipe.ingredientComponents.length > 0) {
             return this.props.recipe.ingredientComponents.map((ic, idx) =>
                 React.cloneElement(element, {
                     index: idx,
