@@ -1,4 +1,4 @@
-import { RecipeValidators } from "../models/RecipeValidators"
+import { RecipeValidator } from "../models/RecipeValidator"
 
 namespace StringResource {
     export namespace Routes {
@@ -21,7 +21,7 @@ namespace StringResource {
         export const RequiredRecipeName: string = 'Ein Rezeptname ist erforderlich'
         export const RequiredIngredientName: string = 'Ein Zutatenname ist erforderlich'
         export const RequiredIngredientComponentAmount: string = 'Eine Menge ist erforderlich'
-        export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidators.minPersonRefAmount} - ${RecipeValidators.maxPersonRefAmount} liegen`
+        export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidator.minPersonRefAmount} - ${RecipeValidator.maxPersonRefAmount} liegen`
     }
     export namespace General {
         export const RecipeManagement: string = 'Verwaltung Rezepte'
@@ -36,6 +36,7 @@ namespace StringResource {
         export const CreateNewRecipe: string = 'Neues Rezept erstellen'
         export const CreateRecipe: string = 'Rezept erstellen'
         export const AddIngredient: string = 'Weitere Zutat hinzufügen'
+        export const NoIngredients: string = 'Keine Zutaten definiert'
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }

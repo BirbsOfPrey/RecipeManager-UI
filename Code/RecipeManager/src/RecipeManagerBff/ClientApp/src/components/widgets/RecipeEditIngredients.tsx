@@ -1,10 +1,11 @@
 import { List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material"
 import Add from '@mui/icons-material/Add'
+import EggIcon from '@mui/icons-material/Egg'
 import React, { Component, ReactNode } from "react"
 import { Recipe } from "../../models/Recipe"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
 import { createIngredientComponent, IngredientComponent } from "../../models/IngredientComponent"
-import { EmptyListItem } from "./EmptyIngredientComponentListItem"
+import { EmptyListItem } from "./EmptyListItem"
 import { IngredientComponentDialog } from "../dialogs/IngredientComponentDialog"
 import { PersonAmountField } from "../controls/PersonAmountField"
 import StringResource from "../../resources/StringResource"
@@ -38,7 +39,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                     ic: ic
                 }))
         } else {
-            return <EmptyListItem />
+            return <EmptyListItem icon={<EggIcon/>} text={StringResource.General.NoIngredients} />
         }
     }
 
@@ -78,7 +79,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                     setValue={this.props.setValue}
                 />
                 <List className="recipeEditIngredients__ingredientList">
-                    {this.generate(<IngredientComponentListItem ic={createIngredientComponent()} editable={this.props.editable} personAmount={personAmount} ingrCompSelected={this.openIngredientComponent} />)}
+                    {this.generate(<IngredientComponentListItem ingredientComponent={createIngredientComponent()} editable={this.props.editable} personAmount={personAmount} ingredientComponentSelected={this.openIngredientComponent} />)}
                     {addComponent}
                 </List>
                 <IngredientComponentDialog open={this.state.openDialog} handleOk={(ingredientComp: IngredientComponent) => this.handleDialogClose(ingredientComp)} handleCancel={() => this.handleDialogClose()} ingredientComp={this.state.ingrCompForDialog} />

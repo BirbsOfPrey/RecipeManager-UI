@@ -8,7 +8,7 @@ export class IngredientComponent {
 }
 
 export function createIngredientComponents() {
-    return <IngredientComponent[]>[]
+    return [] as IngredientComponent[]
 }
 
 export function createIngredientComponent() {

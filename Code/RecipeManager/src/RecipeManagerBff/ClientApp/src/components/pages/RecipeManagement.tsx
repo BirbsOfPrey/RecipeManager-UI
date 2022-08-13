@@ -1,4 +1,4 @@
-import { Routes, Route, Outlet } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import StringResource from '../../resources/StringResource'
 import { RecipeListView } from './RecipeListView'
 import { RecipeView } from './RecipeView'

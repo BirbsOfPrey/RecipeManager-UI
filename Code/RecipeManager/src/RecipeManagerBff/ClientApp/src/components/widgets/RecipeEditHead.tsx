@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Recipe } from "../../models/Recipe";
 import StringResource from "../../resources/StringResource";
 import { TextField } from "@mui/material";
-import { RecipeValidators } from "../../models/RecipeValidators";
+import { RecipeValidator } from "../../models/RecipeValidator";
 
 interface IProps {
     recipe: Recipe
@@ -25,8 +25,8 @@ export class RecipeEditHead extends Component<IProps, {}> {
                     value={this.props.recipe.name}
                     placeholder={StringResource.General.RecipeName}
                     onChange={event => this.props.setValue('name', event.target.value)}
-                    error={!RecipeValidators.validateName(this.props.recipe.name)}
-                    helperText={RecipeValidators.validateName(this.props.recipe.name) ? " " : StringResource.Messages.RequiredRecipeName}
+                    error={!RecipeValidator.validateName(this.props.recipe.name)}
+                    helperText={RecipeValidator.validateName(this.props.recipe.name) ? " " : StringResource.Messages.RequiredRecipeName}
                 />
             </div>
         )

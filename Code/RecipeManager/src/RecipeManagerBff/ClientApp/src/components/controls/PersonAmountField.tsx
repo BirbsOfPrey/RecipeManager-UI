@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material"
-import { RecipeValidators } from "../../models/RecipeValidators"
+import { RecipeValidator } from "../../models/RecipeValidator"
 import StringResource from "../../resources/StringResource"
 
 interface IProps {
@@ -16,12 +16,12 @@ export const PersonAmountField = (props: IProps) => {
             type="number"
             required
             fullWidth
-            inputProps={{ min: RecipeValidators.minPersonRefAmount, max: RecipeValidators.maxPersonRefAmount }}
+            inputProps={{ min: RecipeValidator.minPersonRefAmount, max: RecipeValidator.maxPersonRefAmount }}
             label={StringResource.General.RecipePerson}
             value={props.personAmount}
             onChange={event => props.editable ? props.setValue('personRefAmount', event.target.value) : props.setValue('personAmount', event.target.value)}
-            error={!RecipeValidators.validatePersonRefAmount(props.personAmount)}
-            helperText={RecipeValidators.validatePersonRefAmount(props.personAmount) ? " " : StringResource.Messages.InvalidPersonAmount}
+            error={!RecipeValidator.validatePersonRefAmount(props.personAmount)}
+            helperText={RecipeValidator.validatePersonRefAmount(props.personAmount) ? " " : StringResource.Messages.InvalidPersonAmount}
         />
     )
 }
