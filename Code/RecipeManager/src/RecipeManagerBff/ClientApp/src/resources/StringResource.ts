@@ -6,6 +6,7 @@ namespace StringResource {
         export const RecipeManagement: string = 'recipemanagement'
         export const Recipe: string = 'recipe'
         export const RecipeId: string = ':recipeId'
+        export const WeeklySchedule: string = 'weeklyschedule'
         export const Any: string = '*'
     }
     export namespace Queries {
@@ -37,6 +38,15 @@ namespace StringResource {
         export const CreateRecipe: string = 'Rezept erstellen'
         export const AddIngredient: string = 'Weitere Zutat hinzufügen'
         export const NoIngredients: string = 'Keine Zutaten definiert'
+        export const WeeklySchedule: string = 'Wochenplan'
+        export const Monday: string = 'Montag'
+        export const Tuesday: string = 'Dienstag'
+        export const Wednesday: string = 'Mittwoch'
+        export const Thursday: string = 'Donnerstag'
+        export const Friday: string = 'Freitag'
+        export const Saturday: string = 'Samstag'
+        export const Sunday: string = 'Sonntag'
+        export const Unknown: string = 'Unbekannt'
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
