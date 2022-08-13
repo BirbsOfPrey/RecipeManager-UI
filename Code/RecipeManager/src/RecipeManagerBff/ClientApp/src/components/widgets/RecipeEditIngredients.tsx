@@ -4,7 +4,7 @@ import EggIcon from '@mui/icons-material/Egg'
 import React, { Component, ReactNode } from "react"
 import { Recipe } from "../../models/Recipe"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
-import { createIngredientComponent, IngredientComponent } from "../../models/IngredientComponent"
+import { createIngredientComponent, IngredientComponent, NO_INDEX } from "../../models/IngredientComponent"
 import { EmptyListItem } from "./EmptyListItem"
 import { IngredientComponentDialog } from "../dialogs/IngredientComponentDialog"
 import { PersonAmountField } from "../controls/PersonAmountField"
@@ -13,14 +13,16 @@ import StringResource from "../../resources/StringResource"
 interface IProps {
     recipe: Recipe
     setValue: (property: string, value: string) => void
-    setIngredientComponent: (ingredientComponent: IngredientComponent) => void
+    setIngredientComponent: (index: number, ingredientComponent: IngredientComponent) => void
+    deleteIngredientComponent: (index: number, ingredientComponent: IngredientComponent) => void
     editable?: boolean
 }
 
 interface IState {
     openDialog: boolean
-    ingrCompForDialog: IngredientComponent
     personAmount: number
+    ingredientComponentForDialog?: IngredientComponent
+    indexForDialog: number
 }
 
 export class RecipeEditIngredients extends Component<IProps, IState> {
@@ -28,15 +30,16 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
     state: IState = {
         openDialog: false,
         personAmount: this.props.recipe.personRefAmount,
-        ingrCompForDialog: createIngredientComponent()
+        ingredientComponentForDialog: createIngredientComponent(),
+        indexForDialog: NO_INDEX
     }
 
     generate(element: React.ReactElement) {
         if (this.props.recipe.ingredientComponents) {
-            return this.props.recipe.ingredientComponents.map((ic) =>
+            return this.props.recipe.ingredientComponents.map((ic, idx) =>
                 React.cloneElement(element, {
-                    key: ic.id,
-                    ic: ic
+                    index: idx,
+                    ingredientComponent: ic
                 }))
         } else {
             return <EmptyListItem icon={<EggIcon/>} text={StringResource.General.NoIngredients} />
@@ -44,17 +47,16 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
     }
 
     newIngredientComponent = () => {
-        this.setState({ openDialog: true,  ingrCompForDialog: createIngredientComponent()})
+        this.setState({ openDialog: true, ingredientComponentForDialog: {}, indexForDialog: NO_INDEX })
     }
 
-    openIngredientComponent = (ingrComp: IngredientComponent) => {
-        this.setState({ openDialog: true,  ingrCompForDialog: ingrComp})
+    openIngredientComponent = (index: number, ingredientComponent: IngredientComponent) => {
+        this.setState({ openDialog: true, ingredientComponentForDialog: ingredientComponent, indexForDialog: index })
     }
-
-    //TODO: Replace Dialog with own "dialog" component? Or hand in ingrComp with state?
-    handleDialogClose = (ingredientComp?: IngredientComponent) => {
-        if (ingredientComp) {
-            this.props.setIngredientComponent(ingredientComp)
+    
+    handleDialogClose = (index: number, ingredientComponent?: IngredientComponent) => {
+        if (ingredientComponent) {
+            this.props.setIngredientComponent(index, ingredientComponent)
             this.setState({ openDialog: false })
         } else {
             this.setState({ openDialog: false })
@@ -79,10 +81,21 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                     setValue={this.props.setValue}
                 />
                 <List className="recipeEditIngredients__ingredientList">
-                    {this.generate(<IngredientComponentListItem ingredientComponent={createIngredientComponent()} editable={this.props.editable} personAmount={personAmount} ingredientComponentSelected={this.openIngredientComponent} />)}
+                    {this.generate(<IngredientComponentListItem 
+                        ingredientComponent={createIngredientComponent()} 
+                        index={NO_INDEX}
+                        editable={this.props.editable} 
+                        personAmount={personAmount} 
+                        ingredientComponentSelected={this.openIngredientComponent}
+                        ingredientComponentDeleted={this.props.deleteIngredientComponent} />)}
                     {addComponent}
                 </List>
-                <IngredientComponentDialog open={this.state.openDialog} handleOk={(ingredientComp: IngredientComponent) => this.handleDialogClose(ingredientComp)} handleCancel={() => this.handleDialogClose()} ingredientComp={this.state.ingrCompForDialog} />
+                <IngredientComponentDialog 
+                    open={this.state.openDialog} 
+                    handleOk={(index: number, ingredientComp: IngredientComponent) => this.handleDialogClose(index, ingredientComp)} 
+                    handleCancel={() => this.handleDialogClose(NO_INDEX)} 
+                    ingredientComponent={this.state.ingredientComponentForDialog}
+                    reference={this.state.indexForDialog} />
             </div>
         )
     }
