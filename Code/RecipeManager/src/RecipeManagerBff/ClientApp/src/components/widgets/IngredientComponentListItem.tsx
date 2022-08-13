@@ -4,7 +4,6 @@ import EggIcon from '@mui/icons-material/Egg'
 import { Component } from "react"
 import { IngredientComponent } from "../../models/IngredientComponent"
 import Edit from '@mui/icons-material/Edit'
-import './IngredientComponentListItem.css'
 
 interface IProps {
     ingredientComponent: IngredientComponent
