@@ -9,7 +9,7 @@ import { Button, IconButton } from "@mui/material"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
-import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
+import { createIngredientComponents, IngredientComponent, NO_INDEX } from "../../models/IngredientComponent"
 
 interface IState {
     redirect: boolean
@@ -41,22 +41,27 @@ export class RecipeCookingView extends Component<IProps, IState> {
     }
 
     update = (property: string, value: string) => {
-        const updatedRecipe = Object.assign(this.state.recipe, {
-            [property]: value
-        })
+        const updatedRecipe = {...this.state.recipe, [property]: value}
         this.setState({ recipe: updatedRecipe, saved: false })
     }
 
-    updateIngredientComponents = (ingredientComponent: IngredientComponent) => {
+    updateIngredientComponents = (index: number, ingredientComponent: IngredientComponent) => {
         var updatedRecipe = {...this.state.recipe}
-        var existingIngrComp = updatedRecipe.ingredientComponents?.find(item => item.id === ingredientComponent.id)
-        if (existingIngrComp) {
-            existingIngrComp = ingredientComponent
+        if (updatedRecipe.ingredientComponents && index > NO_INDEX && updatedRecipe.ingredientComponents.length > index) {
+            updatedRecipe.ingredientComponents[index] = ingredientComponent
         } else {
             if (!updatedRecipe.ingredientComponents) {
                 updatedRecipe.ingredientComponents = createIngredientComponents()
             }
             updatedRecipe.ingredientComponents.push(ingredientComponent)
+        }
+        this.setState({ recipe: updatedRecipe, saved: false })
+    }
+
+    deleteIngredientComponent = (index: number, ingredientComponent: IngredientComponent) => {
+        var updatedRecipe = {...this.state.recipe}
+        if (updatedRecipe.ingredientComponents && index > NO_INDEX && updatedRecipe.ingredientComponents.length > index) {
+            updatedRecipe.ingredientComponents.splice(index, 1);
         }
         this.setState({ recipe: updatedRecipe, saved: false })
     }
@@ -81,7 +86,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
             body: JSON.stringify(this.state.recipe)
         })
 
-        if (response.status !== 204) {
+        if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
             this.setState({ redirect: true, saved: true })
@@ -114,6 +119,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                         recipe={this.state.recipe}
                         setValue={this.update}
                         setIngredientComponent={this.updateIngredientComponents}
+                        deleteIngredientComponent={this.deleteIngredientComponent}
                         editable={this.props.editable}
                     />
                     <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>

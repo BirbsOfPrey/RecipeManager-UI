@@ -1,7 +1,7 @@
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { Component } from 'react';
 import { createIngredient } from '../../models/Ingredient';
-import { IngredientComponent } from '../../models/IngredientComponent';
+import { createIngredientComponent, IngredientComponent, NO_INDEX } from '../../models/IngredientComponent';
 import { IngredientComponentValidator } from '../../models/IngredientComponentValidator';
 import StringResource from '../../resources/StringResource';
 import { IngredientSelectCreate } from '../controls/IngredientSelectCreate';
@@ -10,42 +10,43 @@ import './IngredientComponentDialog.css'
 interface IProps {
     open: boolean
     handleCancel: () => void
-    handleOk: (ingredientComponent: IngredientComponent) => void
-    ingredientComp: IngredientComponent
+    handleOk: (reference: number, ingredientComponent: IngredientComponent) => void
+    ingredientComponent?: IngredientComponent
+    reference: number
 }
 
 interface IState {
-    ingredientComp: IngredientComponent
+    ingredientComponent: IngredientComponent
 }
 
 export class IngredientComponentDialog extends Component<IProps, IState> {
 
     state: IState = {
-        ingredientComp: this.props.ingredientComp
+        ingredientComponent: this.props.ingredientComponent || createIngredientComponent()
     }
 
     componentDidUpdate(prevProps: IProps, _: IState) {
         if (this.props.open && !prevProps.open) {
-            this.setState({ ingredientComp: this.props.ingredientComp })
+            this.setState({ ingredientComponent: this.props.ingredientComponent || createIngredientComponent() })
         }
     }
 
     updateIngredientComp = (property: string, value: string) => {
-        const updatedIngrComp = {...this.state.ingredientComp, [property]: value}
-        this.setState({ ingredientComp: updatedIngrComp })
+        var updatedIngrComp = {...this.state.ingredientComponent, [property]: value} as IngredientComponent
+        this.setState({ ingredientComponent: updatedIngrComp })
     }
 
     updateIngredient = (ingredientName: string) => {
-        var updatedIngrComp = {...this.state.ingredientComp}
+        var updatedIngrComp = {...this.state.ingredientComponent} as IngredientComponent
         updatedIngrComp.ingredient = updatedIngrComp.ingredient || createIngredient()
         updatedIngrComp.ingredient.name = ingredientName
-        this.setState({ ingredientComp: updatedIngrComp })
+        this.setState({ ingredientComponent: updatedIngrComp })
     }
 
     render() {
         return (
             <div>
-                <Dialog open={this.props.open} onClose={this.props.handleOk}>
+                <Dialog open={this.props.open} onClose={this.props.handleCancel}>
                     <DialogTitle>Zutat hinzufügen</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
@@ -53,7 +54,7 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                         </DialogContentText>
                         <IngredientSelectCreate
                             setValue={this.updateIngredient}
-                            ingredient={this.state.ingredientComp.ingredient}
+                            ingredient={this.state.ingredientComponent.ingredient}
                         />
                         <TextField
                             variant="filled"
@@ -61,25 +62,27 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                             id="amount"
                             label="Menge"
                             type="number"
-                            defaultValue={this.state.ingredientComp.amount || IngredientComponentValidator.minAmount}
+                            defaultValue={this.state.ingredientComponent.amount || IngredientComponentValidator.minAmount}
                             inputProps={{ min: IngredientComponentValidator.minAmount }}
                             onChange={event => this.updateIngredientComp('amount', event.target.value)}
-                            error={!IngredientComponentValidator.validateAmount(this.state.ingredientComp.amount)}
-                            helperText={IngredientComponentValidator.validateAmount(this.state.ingredientComp.amount) ? " " : StringResource.Messages.RequiredIngredientComponentAmount}
+                            error={!IngredientComponentValidator.validateAmount(this.state.ingredientComponent.amount)}
+                            helperText={IngredientComponentValidator.validateAmount(this.state.ingredientComponent.amount) ? " " : StringResource.Messages.RequiredIngredientComponentAmount}
                         />
                         <TextField
                             variant="filled"
                             margin="dense"
                             id="unit"
                             label="Einheit"
-                            value={this.state.ingredientComp.physicalQuantity}
+                            value={this.state.ingredientComponent.physicalQuantity}
                             onChange={event => this.updateIngredientComp('physicalQuantity', event.target.value)}
                             helperText=""
                         />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.props.handleCancel}>Abbrechen</Button>
-                        <Button onClick={() => this.props.handleOk(this.state.ingredientComp)}>{this.props.ingredientComp.id ? "Ändern" : "Hinzufügen"}</Button>
+                        <Button onClick={() => this.props.handleOk(this.props.reference, this.state.ingredientComponent)}>
+                            {this.props.reference > NO_INDEX ? "Ändern" : "Hinzufügen"}
+                        </Button>
                     </DialogActions>
                 </Dialog>
             </div>
