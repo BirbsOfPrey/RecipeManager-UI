@@ -25,7 +25,8 @@ export class RecipeListItem extends Component<IProps, {}> {
             <ListItemButton
                 alignItems="flex-start"
                 className="recipeListItem__container"
-                component={Link} to={recipeRoute}>
+                component={Link} to={recipeRoute}
+                sx={{ paddingRight: '64px' }}>
                 <ListItemSecondaryAction>
                     <IconButton
                         edge="end"
