@@ -1,7 +1,6 @@
 import { Component } from "react";
 import StringResource from "../../resources/StringResource";
-import { createDefaultHeader, RecipesUrl } from "../../resources/Api";
-import { ScheduledRecipe } from "../../models/ScheduledRecipe";
+import { createScheduledRecipe, ScheduledRecipe } from "../../models/ScheduledRecipe";
 import { Add } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { Recipe } from "../../models/Recipe";
@@ -9,11 +8,11 @@ import { ScheduledRecipeDialog } from "../dialogs/ScheduledRecipeDialog";
 
 interface IProps {
     date: Date
+    scheduledRecipes: ScheduledRecipe[]
 }
 
 interface IState {
     date: Date
-    scheduledRecipe: ScheduledRecipe[]
     openDialog: boolean
     loading: boolean
     error: string
@@ -25,23 +24,10 @@ export class DailyScheduleItem extends Component<IProps, IState> {
 
     state: IState = {
         date: this.props.date,
-        scheduledRecipe: [],
         openDialog: false,
         loading: false,
         error: '',
         recipe: new Recipe()
-    }
-
-    async componentDidMount() {
-        // TODO: Change to correct API Call
-        await this.fetchRecipe('1')
-    }
-
-    componentDidUpdate(prevProps: IProps) {
-        if (prevProps.date !== this.props.date) {
-            // TODO: Change to correct API Call
-            this.fetchRecipe('2')
-        }
     }
 
     getNameOfCurrentDay = () => {
@@ -74,22 +60,14 @@ export class DailyScheduleItem extends Component<IProps, IState> {
         // TODO: Möglicherweise hier nochmals alle ScheduledRecipe von der DB abfragen
     }
 
-    fetchRecipe = async (id: string) => {
-        this.setState({ loading: true })
-        const response = await fetch(`${RecipesUrl}/${id}`, {
-            headers: createDefaultHeader()
-        })
-        if (response.status >= 300) {
-            this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
-        } else {
-            const recipe = await response.json()
-            this.setState({ loading: false, recipe: recipe })
-        }
-    }
-
     // TODO: Liste der ScheduledRecipes anzeigen mit Möglichkeit zum Löschen und ev. mit Klick das RecipeCookingView öffnen (analog Zutaten-Liste wenn diese fertig ist)
     render() {
         const date: Date = this.props.date
+        let schedule: ScheduledRecipe = createScheduledRecipe(new Date())
+
+        if (this.props.scheduledRecipes[0] !== undefined){
+            schedule = this.props.scheduledRecipes[0]
+        }
 
         return (
             <div>
@@ -99,7 +77,9 @@ export class DailyScheduleItem extends Component<IProps, IState> {
                 </IconButton>
 
                 <p>Hier werden die terminierten Rezepte aufgeführt.</p>
-                <p>{this.state.recipe.name}</p>
+                <p>{this.state.error}</p>
+                <p>{schedule.recipe?.name}</p>
+                <p>{schedule.date.toISOString()}</p>
 
                 <ScheduledRecipeDialog open={this.state.openDialog} date={this.state.date} handleOk={() => this.handleDialogClose()} handleCancel={() => this.handleDialogClose()} />
             </div>
