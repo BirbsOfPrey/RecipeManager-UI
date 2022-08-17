@@ -23,11 +23,14 @@ namespace StringResource {
         export const RequiredIngredientName: string = 'Ein Zutatenname ist erforderlich'
         export const RequiredIngredientComponentAmount: string = 'Eine Menge ist erforderlich'
         export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidator.minPersonRefAmount} - ${RecipeValidator.maxPersonRefAmount} liegen`
+        export const MaxDescriptionLength: string = `Maximallänge der Beschreibung ist ${RecipeValidator.maxDescriptionLength} Zeichen`
+        export const InvalidRecipeFields: string = 'Das Rezept enthält ungültige Werte und kann daher nicht gespeichert werden.'
     }
     export namespace General {
         export const RecipeManagement: string = 'Verwaltung Rezepte'
         export const RecipeName: string = 'Rezeptname'
         export const RecipeId: string = 'Rezept-Id'
+        export const RecipeDescription: string = 'Rezeptbeschreibung'
         export const RecipeList: string = 'Rezepte-Liste'
         export const RecipePerson: string = 'Personen'
         export const RecipeSteps: string = 'Schritte'
@@ -42,6 +45,8 @@ namespace StringResource {
         export const AddIngredient: string = 'Zutat hinzufügen'
         export const AddAnotherIngredient: string = 'Weitere Zutat hinzufügen'
         export const NoIngredients: string = 'Keine Zutaten definiert'
+        export const NoRecipeName: string = 'Kein Name'
+        export const NoRecipeDescription: string = 'Keine Beschreibung'
         export const DefineIngredientComponent: string = 'Wählen Sie die Zutat und die gewünschte Menge für das Rezept'
         export const WeeklySchedule: string = 'Wochenplan'
         export const Monday: string = 'Montag'
