@@ -17,7 +17,7 @@ interface IState {
 export class ScheduledRecipeDialog extends Component<IProps, IState> {
 
     state: IState = {
-        scheduledRecipe: createScheduledRecipe(this.props.date)
+        scheduledRecipe: createScheduledRecipe()
     }
 
     updateScheduledRecipe = (property: string, value: string) => {

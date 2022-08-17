@@ -1,10 +1,10 @@
 import { Component } from "react"
 import { DateHelper } from "../../models/helper/DateHelper"
-import { createScheduledRecipe, ScheduledRecipe } from "../../models/ScheduledRecipe"
+import { ScheduledRecipe } from "../../models/ScheduledRecipe"
 import { Add } from "@mui/icons-material"
 import { IconButton } from "@mui/material"
-import { Recipe } from "../../models/Recipe"
 import { ScheduledRecipeDialog } from "../dialogs/ScheduledRecipeDialog"
+import { ScheduledRecipeList } from "./ScheduledRecipeList"
 
 interface IProps {
     date: Date
@@ -12,22 +12,13 @@ interface IProps {
 }
 
 interface IState {
-    date: Date
     openDialog: boolean
-    loading: boolean
-    error: string
-    // TODO: Remove when changed to correct API Call
-    recipe: Recipe
 }
 
 export class DailyScheduleItem extends Component<IProps, IState> {
 
     state: IState = {
-        date: this.props.date,
         openDialog: false,
-        loading: false,
-        error: '',
-        recipe: new Recipe()
     }
 
     newScheduledRecipe = () => {
@@ -41,26 +32,22 @@ export class DailyScheduleItem extends Component<IProps, IState> {
 
     // TODO: Liste der ScheduledRecipes anzeigen mit Möglichkeit zum Löschen und ev. mit Klick das RecipeCookingView öffnen (analog Zutaten-Liste wenn diese fertig ist)
     render() {
-        const date: Date = this.props.date
-        let schedule: ScheduledRecipe = createScheduledRecipe(new Date())
-
-        if (this.props.scheduledRecipes[0] !== undefined){
-            schedule = this.props.scheduledRecipes[0]
-        }
-
         return (
             <div>
-                <p>{DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {date.toLocaleDateString()}</p>
+                <p>{DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {this.props.date.toLocaleDateString()}</p>
                 <IconButton onClick={this.newScheduledRecipe}>
                     <Add />
                 </IconButton>
 
-                <p>Hier werden die terminierten Rezepte aufgeführt.</p>
-                <p>{this.state.error}</p>
-                <p>{schedule.recipe?.name}</p>
-                <p>{schedule.date.toISOString()}</p>
+                <ScheduledRecipeList
+                        scheduledRecipes={this.props.scheduledRecipes}
+                        //TODO: Methode erstellen und zuweisen
+                        // setValue={this.newScheduledRecipe}
+                        //TODO: Methode erstellen und zuweisen
+                        // deleteScheduledRecipes={this.newScheduledRecipe}
+                    />
 
-                <ScheduledRecipeDialog open={this.state.openDialog} date={this.state.date} handleOk={() => this.handleDialogClose()} handleCancel={() => this.handleDialogClose()} />
+                <ScheduledRecipeDialog open={this.state.openDialog} date={this.props.date} handleOk={() => this.handleDialogClose()} handleCancel={() => this.handleDialogClose()} />
             </div>
         )
     }

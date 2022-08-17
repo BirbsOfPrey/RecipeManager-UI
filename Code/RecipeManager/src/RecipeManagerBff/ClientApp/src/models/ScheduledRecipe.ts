@@ -10,8 +10,8 @@ export class ScheduledRecipe{
     }
 }
 
-export function createScheduledRecipe(date: Date): ScheduledRecipe {
-    return new ScheduledRecipe(date)
+export function createScheduledRecipe(): ScheduledRecipe {
+    return new ScheduledRecipe(new Date())
 }
 
 export function mapIsoStringToDate(scheduledRecipes: ScheduledRecipe[]) {

@@ -39,6 +39,7 @@ namespace StringResource {
         export const CreateRecipe: string = 'Rezept erstellen'
         export const AddIngredient: string = 'Weitere Zutat hinzufügen'
         export const NoIngredients: string = 'Keine Zutaten definiert'
+        export const NoScheduledRecipes: string = 'Keine terminierten Rezepte vorhanden'
         export const WeeklySchedule: string = 'Wochenplan'
         export const Monday: string = 'Montag'
         export const Tuesday: string = 'Dienstag'
