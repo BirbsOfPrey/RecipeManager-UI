@@ -1,8 +1,8 @@
-import { Container } from 'reactstrap'
+import { Container } from '@mui/material'
 import { NavMenu } from './NavMenu'
 import { Copyright } from './widgets/Copyright'
-import './Layout.css'
 import { Outlet } from 'react-router-dom'
+import './Layout.css'
 
 export const Layout = () => {
     return (
