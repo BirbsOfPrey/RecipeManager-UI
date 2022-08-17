@@ -10,6 +10,13 @@ export class ScheduledRecipe{
     }
 }
 
-export function createScheduledRecipe(date: Date) {
+export function createScheduledRecipe(date: Date): ScheduledRecipe {
     return new ScheduledRecipe(date)
+}
+
+export function mapIsoStringToDate(scheduledRecipes: ScheduledRecipe[]) {
+    scheduledRecipes.forEach(scheduledRecipe => {
+        const dateIsoString = scheduledRecipe.date
+        scheduledRecipe.date = new Date(dateIsoString)
+    })
 }

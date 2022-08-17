@@ -3,7 +3,7 @@ import { ArrowCircleLeft, ArrowCircleRight, CalendarMonth, ScheduleSendRounded }
 import { Component } from "react"
 import { createRecipe, Recipe } from "../../models/Recipe"
 import { DailyScheduleItem } from "../widgets/DailyScheduleItem"
-import { ScheduledRecipe } from "../../models/ScheduledRecipe"
+import { mapIsoStringToDate, ScheduledRecipe } from "../../models/ScheduledRecipe"
 import { createDefaultHeader, ScheduledRecipesUrl } from "../../resources/Api"
 import StringResource from "../../resources/StringResource"
 import { DateHelper } from "../../models/helper/DateHelper"
@@ -67,12 +67,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
             this.setState({ error: StringResource.Messages.ScheduledRecipeNotFound, loading: false })
         } else {
             const scheduledRecipes: ScheduledRecipe[] = await response.json()
-
-            scheduledRecipes.forEach(scheduledRecipe => {
-                const dateIsoString = scheduledRecipe.date
-                scheduledRecipe.date = new Date(dateIsoString)
-            })
-
+            mapIsoStringToDate(scheduledRecipes)
             this.setState({ loading: false, scheduledRecipes: scheduledRecipes })
         }
     }
