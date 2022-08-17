@@ -24,6 +24,13 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                 alignItems="flex-start"
                 className="recipeListItem__container"
                 sx={{ paddingRight: '96px' }}>
+                <ListItemAvatar>
+                    <EggIcon />
+                </ListItemAvatar>
+                <ListItemText
+                    primary={this.props.ingredientComponent.ingredient ? this.props.ingredientComponent.ingredient.name : ""}
+                    secondary={(amount > 0 ? amount : "") + " " + this.props.ingredientComponent.physicalQuantity}
+                />
                 <ListItemSecondaryAction>
                     {this.props.editable ?
                         (<>
@@ -42,13 +49,6 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                             </IconButton>
                         </>) : <></>}
                 </ListItemSecondaryAction>
-                <ListItemAvatar>
-                    <EggIcon />
-                </ListItemAvatar>
-                <ListItemText
-                    primary={this.props.ingredientComponent.ingredient ? this.props.ingredientComponent.ingredient.name : ""}
-                    secondary={(amount > 0 ? amount : "") + " " + this.props.ingredientComponent.physicalQuantity}
-                />
             </ListItem>
         )
     }

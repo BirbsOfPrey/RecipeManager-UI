@@ -1,7 +1,5 @@
 import { Ingredient } from "./Ingredient"
 
-export const NO_INDEX = -1
-
 export class IngredientComponent {
     id?: number
     amount?: number

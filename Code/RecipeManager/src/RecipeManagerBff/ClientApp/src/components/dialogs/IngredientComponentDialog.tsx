@@ -1,7 +1,8 @@
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { Component } from 'react';
+import { NO_INDEX } from '../../models/helper/ArrayHelper';
 import { createIngredient } from '../../models/Ingredient';
-import { createIngredientComponent, IngredientComponent, NO_INDEX } from '../../models/IngredientComponent';
+import { createIngredientComponent, IngredientComponent } from '../../models/IngredientComponent';
 import { IngredientComponentValidator } from '../../models/IngredientComponentValidator';
 import StringResource from '../../resources/StringResource';
 import { IngredientSelectCreate } from '../controls/IngredientSelectCreate';
