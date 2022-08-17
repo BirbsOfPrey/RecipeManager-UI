@@ -1,11 +1,12 @@
 import { IconButton, List } from "@mui/material"
-import { ArrowCircleLeft, ArrowCircleRight, CalendarMonth, ScheduleSendRounded } from '@mui/icons-material';
+import { ArrowCircleLeft, ArrowCircleRight, CalendarMonth, ScheduleSendRounded } from '@mui/icons-material'
 import { Component } from "react"
 import { createRecipe, Recipe } from "../../models/Recipe"
-import { DailyScheduleItem } from "../widgets/DailyScheduleItem";
-import { ScheduledRecipe } from "../../models/ScheduledRecipe";
-import { createDefaultHeader, ScheduledRecipesUrl } from "../../resources/Api";
-import StringResource from "../../resources/StringResource";
+import { DailyScheduleItem } from "../widgets/DailyScheduleItem"
+import { ScheduledRecipe } from "../../models/ScheduledRecipe"
+import { createDefaultHeader, ScheduledRecipesUrl } from "../../resources/Api"
+import StringResource from "../../resources/StringResource"
+import { DateHelper } from "../../models/helper/DateHelper"
 
 interface IState {
     dateToShow: Date
@@ -77,9 +78,6 @@ export class WeeklyScheduleView extends Component<{}, IState> {
     }
 
     render() {
-        const dayOfWeek = [1, 2, 3, 4, 5, 6, 7]
-
-
         return (
             <div className="weeklyScheduleView__container">
                 <p>Woche vom {this.getDayOfWeekToShow(1).toLocaleDateString()} - {this.getDayOfWeekToShow(7).toLocaleDateString()}</p>
@@ -94,7 +92,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                 </IconButton>
 
                 <List className="dailySchedule__list">
-                    {dayOfWeek.map(number => (
+                    {DateHelper.getDayOfWeekAsNumbers().map(number => (
                         <DailyScheduleItem
                             key={number}
                             date={this.getDayOfWeekToShow(number)}

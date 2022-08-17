@@ -1,10 +1,10 @@
-import { Component } from "react";
-import StringResource from "../../resources/StringResource";
-import { createScheduledRecipe, ScheduledRecipe } from "../../models/ScheduledRecipe";
-import { Add } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
-import { Recipe } from "../../models/Recipe";
-import { ScheduledRecipeDialog } from "../dialogs/ScheduledRecipeDialog";
+import { Component } from "react"
+import { DateHelper } from "../../models/helper/DateHelper"
+import { createScheduledRecipe, ScheduledRecipe } from "../../models/ScheduledRecipe"
+import { Add } from "@mui/icons-material"
+import { IconButton } from "@mui/material"
+import { Recipe } from "../../models/Recipe"
+import { ScheduledRecipeDialog } from "../dialogs/ScheduledRecipeDialog"
 
 interface IProps {
     date: Date
@@ -30,27 +30,6 @@ export class DailyScheduleItem extends Component<IProps, IState> {
         recipe: new Recipe()
     }
 
-    getNameOfCurrentDay = () => {
-        switch (this.props.date.getDay()) {
-            case 0:
-                return StringResource.General.Sunday
-            case 1:
-                return StringResource.General.Monday
-            case 2:
-                return StringResource.General.Tuesday
-            case 3:
-                return StringResource.General.Wednesday
-            case 4:
-                return StringResource.General.Thursday
-            case 5:
-                return StringResource.General.Friday
-            case 6:
-                return StringResource.General.Saturday
-            default:
-                return StringResource.General.Unknown
-        }
-    }
-
     newScheduledRecipe = () => {
         this.setState({ openDialog: true })
     }
@@ -71,7 +50,7 @@ export class DailyScheduleItem extends Component<IProps, IState> {
 
         return (
             <div>
-                <p>{this.getNameOfCurrentDay()}, {date.toLocaleDateString()}</p>
+                <p>{DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {date.toLocaleDateString()}</p>
                 <IconButton onClick={this.newScheduledRecipe}>
                     <Add />
                 </IconButton>
