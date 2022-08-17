@@ -75,7 +75,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
         } else {
-            const recipe = await response.json()
+            const recipe: Recipe = await response.json()
             this.setState({ loading: false, recipe: recipe })
         }
     }
