@@ -8,6 +8,8 @@ import { createDefaultHeader, ScheduledRecipesUrl } from "../../resources/Api"
 import StringResource from "../../resources/StringResource"
 import { DateHelper } from "../../models/helper/DateHelper"
 
+interface IProps {}
+
 interface IState {
     dateToShow: Date
     scheduledRecipes: ScheduledRecipe[]
@@ -18,7 +20,7 @@ interface IState {
     error: string // TODO: necessary?
 }
 
-export class WeeklyScheduleView extends Component<{}, IState> {
+export class WeeklyScheduleView extends Component<IProps, IState> {
 
     state: IState = {
         dateToShow: new Date(),
@@ -32,6 +34,12 @@ export class WeeklyScheduleView extends Component<{}, IState> {
 
     async componentDidMount() {
         await this.fetchScheduledRecipes()
+    }
+
+    async componentDidUpdate(_: IProps, prevState: IState) {
+        if (this.state.dateToShow !== prevState.dateToShow) {
+            await this.fetchScheduledRecipes()
+        }
     }
 
     getDayOfWeekToShow = (dayOfWeek: number): Date => {
