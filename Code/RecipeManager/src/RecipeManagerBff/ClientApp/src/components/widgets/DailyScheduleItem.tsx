@@ -9,6 +9,7 @@ import { ScheduledRecipeList } from "./ScheduledRecipeList"
 interface IProps {
     date: Date
     scheduledRecipes: ScheduledRecipe[]
+    deleteScheduledRecipe: (scheduledRecipe: ScheduledRecipe) => void
 }
 
 interface IState {
@@ -44,7 +45,7 @@ export class DailyScheduleItem extends Component<IProps, IState> {
                         //TODO: Methode erstellen und zuweisen
                         // setValue={this.newScheduledRecipe}
                         //TODO: Methode erstellen und zuweisen
-                        // deleteScheduledRecipes={this.newScheduledRecipe}
+                        deleteScheduledRecipe={this.props.deleteScheduledRecipe}
                     />
 
                 <ScheduledRecipeDialog open={this.state.openDialog} date={this.props.date} handleOk={() => this.handleDialogClose()} handleCancel={() => this.handleDialogClose()} />

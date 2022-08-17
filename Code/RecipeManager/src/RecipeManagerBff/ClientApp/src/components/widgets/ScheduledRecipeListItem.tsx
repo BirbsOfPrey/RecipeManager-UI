@@ -6,8 +6,7 @@ import { ScheduledRecipe } from "../../models/ScheduledRecipe"
 
 interface IProps {
     scheduledRecipe: ScheduledRecipe
-    index: number
-    // scheduledRecipeDeleted: (index: number, scheduledRecipe: ScheduledRecipe) => void
+    scheduledRecipeDeleted: (scheduledRecipe: ScheduledRecipe) => void
 }
 
 export class ScheduledRecipeListItem extends Component<IProps, {}> {
@@ -23,8 +22,7 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                         <IconButton
                             edge="end"
                             aria-label="delete"
-                            // onClick={() => this.props.scheduledRecipeDeleted(this.props.index, this.props.scheduledRecipe)}>
-                            >
+                            onClick={() => this.props.scheduledRecipeDeleted(this.props.scheduledRecipe)}>
                             <DeleteIcon />
                         </IconButton>
                     </>

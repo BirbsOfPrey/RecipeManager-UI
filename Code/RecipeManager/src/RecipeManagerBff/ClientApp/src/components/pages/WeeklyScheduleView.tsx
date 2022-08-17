@@ -80,6 +80,20 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
         }
     }
 
+    deleteScheduledRecipe = async (scheduledRecipe: ScheduledRecipe) => {
+        const response = await fetch(`${ScheduledRecipesUrl}/${scheduledRecipe.id}`, {
+            method: 'delete',
+            headers: createDefaultHeader(),
+            body: JSON.stringify(scheduledRecipe.id)
+        })
+
+        if (response.status >= 300) {
+            this.setState({ error: StringResource.Messages.GeneralError })
+        } else {
+            await this.fetchScheduledRecipes()
+        }
+    }
+
     render() {
         return (
             <div className="weeklyScheduleView__container">
@@ -101,7 +115,8 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
                             date={this.getDayOfWeekToShow(number)}
                             scheduledRecipes={this.state.scheduledRecipes.filter(scheduledRecipe => {
                                 return scheduledRecipe.date.toDateString() === this.getDayOfWeekToShow(number).toDateString()
-                            })} />
+                            })}
+                            deleteScheduledRecipe={this.deleteScheduledRecipe} />
                     ))}
                 </List>
 
