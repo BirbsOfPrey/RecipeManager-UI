@@ -12,7 +12,8 @@ import StringResource from "../../resources/StringResource"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
 
 interface IProps {
-    recipe: Recipe
+    personRefAmount: number
+    ingredientComponents?: IngredientComponent[]
     setValue: (property: string, value: string) => void
     setIngredientComponent: (index: number, ingredientComponent: IngredientComponent) => void
     deleteIngredientComponent: (index: number, ingredientComponent: IngredientComponent) => void
@@ -30,14 +31,14 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
 
     state: IState = {
         openDialog: false,
-        personAmount: this.props.recipe.personRefAmount,
+        personAmount: this.props.personRefAmount,
         ingredientComponentForDialog: createIngredientComponent(),
         indexForDialog: NO_INDEX
     }
 
     generate(element: React.ReactElement) {
-        if (this.props.recipe.ingredientComponents && this.props.recipe.ingredientComponents.length > 0) {
-            return this.props.recipe.ingredientComponents.map((ic, idx) =>
+        if (this.props.ingredientComponents && this.props.ingredientComponents.length > 0) {
+            return this.props.ingredientComponents.map((ic, idx) =>
                 React.cloneElement(element, {
                     key: idx,
                     index: idx,
@@ -74,7 +75,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                 <ListItemText primary={StringResource.General.AddAnotherIngredient} />
             </ListItemButton>) : <></>
 
-        const personAmount = this.props.editable ? this.props.recipe.personRefAmount : this.state.personAmount
+        const personAmount = this.props.editable ? this.props.personRefAmount : this.state.personAmount
 
         return (
             <div className="recipeEditIngredients__container">
@@ -91,7 +92,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                             index={NO_INDEX}
                             editable={this.props.editable}
                             personAmount={personAmount}
-                            personRefAmount={this.props.recipe.personRefAmount}
+                            personRefAmount={this.props.personRefAmount}
                             ingredientComponentSelected={this.openIngredientComponent}
                             ingredientComponentDeleted={this.props.deleteIngredientComponent}
                         />)}

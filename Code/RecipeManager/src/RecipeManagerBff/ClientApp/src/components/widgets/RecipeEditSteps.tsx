@@ -2,7 +2,6 @@ import { Add } from "@mui/icons-material";
 import { List, ListItemAvatar, ListItemButton, ListItemText, Pagination, TextField } from "@mui/material";
 import React from "react";
 import { Component } from "react";
-import { NO_INDEX } from "../../models/helper/ArrayHelper";
 import { createStep, Step } from "../../models/Step";
 import StringResource from "../../resources/StringResource";
 import { EmptyListItem } from "./EmptyListItem";
@@ -14,7 +13,7 @@ interface IState {
 
 interface IProps {
     steps?: Step[]
-    updateStep: (index: number, step: Step) => void
+    updateStep: (index: number, property: string, value: string) => void
     deleteStep: (index: number, step: Step) => void
     editable?: boolean
 }
@@ -25,14 +24,18 @@ export class RecipeEditSteps extends Component<IProps, {}> {
         contentNr: 1
     }
 
-    generate(element: React.ReactElement) {
+    generate() {
         if (this.props.steps && this.props.steps.length > 0) {
-            return this.props.steps.map((s, idx) =>
-                React.cloneElement(element, {
-                    key: idx,
-                    index: idx,
-                    step: s
-                }))
+            return this.props.steps.map((s, idx) => (
+                <StepListItem
+                    key={idx}
+                    step={s}
+                    index={idx}
+                    editable={this.props.editable}
+                    updateStepInstruction={this.props.updateStep}
+                    stepDeleted={this.props.deleteStep}
+                />
+            ))
         } else {
             return <EmptyListItem text={StringResource.General.NoSteps} />
         }
@@ -51,18 +54,7 @@ export class RecipeEditSteps extends Component<IProps, {}> {
     setContentNr = (event: React.ChangeEvent<unknown>, value: number): void => {
         this.setState({ contentNr: value })
     }
-
-    updateStepInstruction(index: number, instruction: string) {
-        var step: Step
-        if (index === NO_INDEX || !this.props.steps || index >= this.props.steps.length) {
-            step = createStep()
-        } else {
-            step = { ...this.props.steps[index] }
-        }
-        step.instruction = instruction
-        this.props.updateStep(index, step)
-    }
-
+    
     render() {
         const activeStep: Step = this.getActiveStep()
         const activeStepName: string = this.getActiveStepName()
@@ -71,15 +63,8 @@ export class RecipeEditSteps extends Component<IProps, {}> {
         if (this.props.editable) {
             return (
                 <List>
-                    {this.generate(
-                        <StepListItem
-                            step={createStep()}
-                            index={NO_INDEX}
-                            editable={this.props.editable}
-                            updateStepInstruction={(index, instruction) => this.updateStepInstruction(index, instruction)}
-                            stepDeleted={this.props.deleteStep}
-                        />)
-                    } {/* TODO: Add set step */}
+                    {this.generate()} 
+                    {/* TODO: Add set step */}
                     <ListItemButton /*onClick={this.props.setStep}*/>
                         <ListItemAvatar>
                             <Add />
@@ -87,8 +72,6 @@ export class RecipeEditSteps extends Component<IProps, {}> {
                         <ListItemText primary={StringResource.General.AddStep} />
                     </ListItemButton>
                 </List>
-                //Render components below each other with a Title and a step shift
-                //Button to add a new step required as well
             )
         } else {
             return (

@@ -1,6 +1,9 @@
+import { immerable } from "immer"
 import { Ingredient } from "./Ingredient"
 
 export class IngredientComponent {
+    [immerable]: boolean = true
+    
     id?: number
     amount?: number
     physicalQuantity?: string

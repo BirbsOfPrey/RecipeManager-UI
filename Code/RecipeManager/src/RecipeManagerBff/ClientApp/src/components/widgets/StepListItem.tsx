@@ -10,7 +10,7 @@ interface IProps {
     step: Step
     index: number
     editable?: boolean
-    updateStepInstruction: (index: number, instruction: string) => void
+    updateStepInstruction: (index: number, property: string, value: string) => void
     stepDeleted: (index: number, step: Step) => void
 }
 
@@ -31,7 +31,7 @@ export class StepListItem extends Component<IProps, {}> {
                     label={this.props.step.stepNumber}
                     value={this.props.step.instruction}
                     placeholder={StringResource.General.StepInstruction}
-                    onChange={event => this.props.updateStepInstruction(this.props.index, event.target.value)}
+                    onChange={event => this.props.updateStepInstruction(this.props.index, "instruction", event.target.value)}
                 />
                 <ListItemSecondaryAction>
                     {this.props.editable ?

@@ -1,4 +1,8 @@
+import { immerable } from "immer"
+
 export class Step {
+    [immerable]: boolean = true
+    
     id?: number
     stepNumber?: number
     instruction?: string

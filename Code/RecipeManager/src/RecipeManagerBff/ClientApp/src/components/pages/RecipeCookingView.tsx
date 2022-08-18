@@ -13,8 +13,9 @@ import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
 import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
 import { RecipeValidator } from "../../models/RecipeValidator"
-import { createSteps, Step } from "../../models/Step"
+import { createStep, createSteps, Step } from "../../models/Step"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
+import produce from "immer"
 
 interface IState {
     redirect: boolean
@@ -47,50 +48,86 @@ export class RecipeCookingView extends Component<IProps, IState> {
     }
 
     update = (property: string, value: string) => {
-        const updatedRecipe = {...this.state.recipe, [property]: value}
-        this.setState({ recipe: updatedRecipe, saved: false })
+        // const updatedRecipe = {...this.state.recipe, [property]: value}
+        // this.setState({ recipe: updatedRecipe, saved: false })
+        this.setState({
+            recipe: produce(this.state.recipe, draft => {
+                switch (property) {
+                    case "name":
+                        draft.name = value
+                        break
+                    case "description":
+                        draft.description = value
+                        break
+                    case "personRefAmount":
+                        draft.personRefAmount = value as unknown as number
+                        break
+                    default:
+                        break
+                }
+            })
+        })
     }
 
-    updateSteps = (index: number, step: Step) => {
-        var updatedRecipe = {...this.state.recipe}
-        if (updatedRecipe.steps && index > NO_INDEX && updatedRecipe.steps.length > index) {
-            updatedRecipe.steps[index] = step
-        } else {
-            if (!updatedRecipe.steps) {
-                updatedRecipe.steps = createSteps()
-            }
-            updatedRecipe.steps.push(step)
-        }
-        this.updateStateRecipe(updatedRecipe)
+    updateSteps = (index: number, property: string, value: string) => {
+        this.updateStateRecipe(
+            produce(this.state.recipe, draft => {
+                if (draft.steps && index > NO_INDEX && draft.steps.length > index) {
+                    switch (property) {
+                        case "instruction":
+                            draft.steps[index].instruction = value
+                            break
+                        case "stepNumber":
+                            draft.steps[index].stepNumber = value as unknown as number
+                            break
+                        default:
+                            break
+                    }
+                } else {
+                    if (!draft.steps) {
+                        draft.steps = createSteps()
+                    }
+                    var step: Step = createStep()
+                    step.instruction = value
+                    draft.steps.push(step)
+                }
+            })
+        )
     }
 
     deleteStep = (index: number, step: Step) => {
-        var updatedRecipe = {...this.state.recipe}
-        if (updatedRecipe.steps && index > NO_INDEX && updatedRecipe.steps.length > index) {
-            updatedRecipe.steps.splice(index, 1);
-        }
-        this.updateStateRecipe(updatedRecipe)
+        this.setState({
+            recipe: produce(this.state.recipe, draft => {
+                if (draft.steps && index > NO_INDEX && draft.steps.length > index) {
+                    draft.steps.splice(index, 1);
+                }
+            })
+        })
     }
 
     updateIngredientComponents = (index: number, ingredientComponent: IngredientComponent) => {
-        var updatedRecipe = {...this.state.recipe}
-        if (updatedRecipe.ingredientComponents && index > NO_INDEX && updatedRecipe.ingredientComponents.length > index) {
-            updatedRecipe.ingredientComponents[index] = ingredientComponent
-        } else {
-            if (!updatedRecipe.ingredientComponents) {
-                updatedRecipe.ingredientComponents = createIngredientComponents()
-            }
-            updatedRecipe.ingredientComponents.push(ingredientComponent)
-        }
-        this.updateStateRecipe(updatedRecipe)
+        this.updateStateRecipe(
+            produce(this.state.recipe, draft => {
+                if (draft.ingredientComponents && index > NO_INDEX && draft.ingredientComponents.length > index) {
+                    draft.ingredientComponents[index] = ingredientComponent
+                } else {
+                    if (!draft.ingredientComponents) {
+                        draft.ingredientComponents = createIngredientComponents()
+                    }
+                    draft.ingredientComponents.push(ingredientComponent)
+                }
+            })
+        )
     }
 
     deleteIngredientComponent = (index: number, ingredientComponent: IngredientComponent) => {
-        var updatedRecipe = {...this.state.recipe}
-        if (updatedRecipe.ingredientComponents && index > NO_INDEX && updatedRecipe.ingredientComponents.length > index) {
-            updatedRecipe.ingredientComponents.splice(index, 1);
-        }
-        this.updateStateRecipe(updatedRecipe)
+        this.updateStateRecipe(
+            produce(this.state.recipe, draft => {
+                if (draft.ingredientComponents && index > NO_INDEX && draft.ingredientComponents.length > index) {
+                    draft.ingredientComponents.splice(index, 1);
+                }
+            })
+        )
     }
 
     updateStateRecipe(updatedRecipe: Recipe) {
@@ -111,10 +148,9 @@ export class RecipeCookingView extends Component<IProps, IState> {
     }
 
     save = async () => {
-        this.setState({ saving: true})
+        this.setState({ saving: true })
 
-        if (!RecipeValidator.validate(this.state.recipe))
-        {
+        if (!RecipeValidator.validate(this.state.recipe)) {
             this.setState({ error: StringResource.Messages.InvalidRecipeFields })
             return
         }
@@ -131,52 +167,50 @@ export class RecipeCookingView extends Component<IProps, IState> {
             this.setState({ redirect: true, saved: true })
         }
 
-        this.setState({ saving: false})
+        this.setState({ saving: false })
     }
 
     render() {
         const saveContent: ReactNode = this.props.editable ? (
-            <LoadingButton 
-                className="recipeCreateAssistant__saveButton" 
+            <LoadingButton
+                className="recipeCreateAssistant__saveButton"
                 variant="outlined"
                 loadingPosition="start"
                 loading={this.state.saving}
                 startIcon={<SaveIcon />}
-                disabled={this.state.saved} 
+                disabled={this.state.saved}
                 onClick={this.save}>{StringResource.General.Save}
             </LoadingButton>) : <></>
 
-        if (this.state.loading) {
-            return <p>Loading...</p>
-        } else {
-            return (
-                <div className="recipeCreateAssistant__container">
-                    <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
-                        <ArrowBackIcon />
-                    </IconButton>
-                    <span className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
-                    <RecipeEditHead
-                        recipe={this.state.recipe}
-                        setValue={this.update}
-                        editable={this.props.editable}
-                    />
-                    <RecipeEditSteps
-                        steps={this.state.recipe.steps}
-                        updateStep={this.updateSteps}
-                        deleteStep={this.deleteStep}
-                        editable={this.props.editable}
-                    />
-                    <RecipeEditIngredients
-                        recipe={this.state.recipe}
-                        setValue={this.update}
-                        setIngredientComponent={this.updateIngredientComponents}
-                        deleteIngredientComponent={this.deleteIngredientComponent}
-                        editable={this.props.editable}
-                    />
-                    <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
-                    {saveContent}
-                </div>
-            )
-        }
+        return (
+            <div className="recipeCreateAssistant__container">
+                <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
+                    <ArrowBackIcon />
+                </IconButton>
+                <span className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
+                <RecipeEditHead
+                    name={this.state.recipe.name}
+                    description={this.state.recipe.description}
+                    setValue={this.update}
+                    editable={this.props.editable}
+                />
+                <RecipeEditSteps
+                    steps={this.state.recipe.steps}
+                    updateStep={this.updateSteps}
+                    deleteStep={this.deleteStep}
+                    editable={this.props.editable}
+                />
+                <RecipeEditIngredients
+                    personRefAmount={this.state.recipe.personRefAmount}
+                    ingredientComponents={this.state.recipe.ingredientComponents}
+                    setValue={this.update}
+                    setIngredientComponent={this.updateIngredientComponents}
+                    deleteIngredientComponent={this.deleteIngredientComponent}
+                    editable={this.props.editable}
+                />
+                <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
+                {saveContent}
+            </div>
+        )
     }
 }

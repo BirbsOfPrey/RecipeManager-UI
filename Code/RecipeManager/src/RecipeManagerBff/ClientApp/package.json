@@ -18,6 +18,7 @@
     "@types/react-dom": "^18.0.3",
     "bootstrap": "^5.1.0",
     "http-proxy-middleware": "^0.19.1",
+    "immer": "^9.0.15",
     "jquery": "^3.5.1",
     "merge": "^2.1.1",
     "msw": "^0.39.2",
