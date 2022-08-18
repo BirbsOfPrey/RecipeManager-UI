@@ -66,7 +66,8 @@ export class RecipeEditSteps extends Component<IProps, {}> {
     render() {
         const activeStep: Step = this.getActiveStep()
         const activeStepName: string = this.getActiveStepName()
-
+        
+        //TODO: Check if split into edit and not-edit component is better as the components look completely different
         if (this.props.editable) {
             return (
                 <List>
