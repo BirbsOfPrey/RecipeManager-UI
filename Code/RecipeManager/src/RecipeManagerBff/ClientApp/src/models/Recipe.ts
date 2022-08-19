@@ -4,6 +4,7 @@ import { Step } from "./Step"
 export class Recipe{
     id?: number
     name?: string
+    description?: string
     personRefAmount: number
     steps?: Step[]
     ingredientComponents?: IngredientComponent[]

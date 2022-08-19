@@ -20,7 +20,7 @@ export class RecipeList extends Component<{}, IState> {
         const response = await fetch(`${RecipesUrl}`, {
             headers: createDefaultHeader()
         })
-        const recipes = await response.json()
+        const recipes: Recipe[] = await response.json()
         this.setState({recipes})
     }
 

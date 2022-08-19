@@ -47,11 +47,9 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
         return (
             <div>
                 <Dialog open={this.props.open} onClose={this.props.handleCancel}>
-                    <DialogTitle>Zutat hinzufügen</DialogTitle>
+                    <DialogTitle>{StringResource.General.AddIngredient}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>
-                            Wählen Sie die Zutat und die gewünschte Menge für das Rezept
-                        </DialogContentText>
+                        <DialogContentText>{StringResource.General.DefineIngredientComponent}</DialogContentText>
                         <IngredientSelectCreate
                             setValue={this.updateIngredient}
                             ingredient={this.state.ingredientComponent.ingredient}
@@ -79,9 +77,9 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.props.handleCancel}>Abbrechen</Button>
+                        <Button onClick={this.props.handleCancel}>{StringResource.General.Cancel}</Button>
                         <Button onClick={() => this.props.handleOk(this.props.reference, this.state.ingredientComponent)}>
-                            {this.props.reference > NO_INDEX ? "Ändern" : "Hinzufügen"}
+                            {this.props.reference > NO_INDEX ? StringResource.General.Change : StringResource.General.Add}
                         </Button>
                     </DialogActions>
                 </Dialog>

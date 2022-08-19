@@ -10,6 +10,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
 import { createIngredientComponents, IngredientComponent, NO_INDEX } from "../../models/IngredientComponent"
+import { RecipeValidator } from "../../models/RecipeValidator"
 
 interface IState {
     redirect: boolean
@@ -74,12 +75,18 @@ export class RecipeCookingView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
         } else {
-            const recipe = await response.json()
+            const recipe: Recipe = await response.json()
             this.setState({ loading: false, recipe: recipe })
         }
     }
 
     save = async () => {
+        if (!RecipeValidator.validate(this.state.recipe))
+        {
+            this.setState({ error: StringResource.Messages.InvalidRecipeFields })
+            return
+        }
+
         const response = await fetch(`${RecipesUrl}`, {
             method: this.state.recipe.id ? 'put' : 'post',
             headers: createDefaultHeader(),
