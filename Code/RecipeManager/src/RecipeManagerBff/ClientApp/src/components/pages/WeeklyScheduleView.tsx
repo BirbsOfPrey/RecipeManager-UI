@@ -23,8 +23,7 @@ interface IState {
     scheduledRecipeIdToDelete: number | undefined
     createScheduledRecipe: boolean
     scheduledRecipeAddDate: Date
-    loading: boolean // TODO: necessary?
-    error: string // TODO: necessary?
+    error: string
 }
 
 export class WeeklyScheduleView extends Component<IProps, IState> {
@@ -36,7 +35,6 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
         scheduledRecipeIdToDelete: undefined,
         createScheduledRecipe: false,
         scheduledRecipeAddDate: new Date(),
-        loading: false,
         error: ''
     }
 
@@ -75,16 +73,15 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
     }
 
     fetchScheduledRecipes = async () => {
-        this.setState({ loading: true })
         const response = await fetch(`${ScheduledRecipesUrl}/${this.getDayOfWeekToShow(1).toISOString()}/${this.getDayOfWeekToShow(7).toISOString()}`, {
             headers: createDefaultHeader()
         })
         if (response.status >= 300) {
-            this.setState({ error: StringResource.Messages.ScheduledRecipeNotFound, loading: false })
+            this.setState({ error: StringResource.Messages.ScheduledRecipeNotFound })
         } else {
             const scheduledRecipes: ScheduledRecipe[] = await response.json()
             mapIsoStringToDate(scheduledRecipes)
-            this.setState({ loading: false, scheduledRecipes: scheduledRecipes })
+            this.setState({ scheduledRecipes: scheduledRecipes })
         }
     }
 
@@ -141,7 +138,7 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
                 <div className="createScheduledRecipe__container">
                     <ScheduledRecipeCreate 
                     handleCancel={this.cancelAddScheduledRecipe}
-                    handleOk={this.addScheduledRecipe}
+                    handleAdd={this.addScheduledRecipe}
                     date={this.state.scheduledRecipeAddDate}/>
                 </div>
             )
@@ -155,11 +152,11 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
                     <IconButton onClick={() => this.changeWeek('next')}>
                         <ArrowCircleRight />
                     </IconButton>
-                    <IconButton>
-                        <CalendarMonth onClick={this.setDate} />
+                    <IconButton onClick={this.setDate}>
+                        <CalendarMonth />
                     </IconButton>
 
-                    <List className="dailySchedule__list">
+                    <List className="weeklyScheduleView__dailyScheduleList">
                         {DateHelper.getDayOfWeekAsNumbers().map(number => (
                             <DailyScheduleItem
                                 key={number}

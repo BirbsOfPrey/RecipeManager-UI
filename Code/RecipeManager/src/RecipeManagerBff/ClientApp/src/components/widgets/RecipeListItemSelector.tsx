@@ -1,17 +1,16 @@
 import { IconButton, ListItemButton, ListItemAvatar, ListItemText, ListItemSecondaryAction } from "@mui/material";
 import DinnerDining from '@mui/icons-material/DinnerDining'
-import Edit from '@mui/icons-material/Edit'
 import { Recipe } from "../../models/Recipe";
 import { Component } from "react";
-import { Link } from 'react-router-dom';
 import StringResource from "../../resources/StringResource";
 import './RecipeListItem.css'
 
 interface IProps {
     recipe: Recipe
+    selectRecipe: (recipe: Recipe) => void
 }
 
-export class RecipeListItem extends Component<IProps, {}> {
+export class RecipeListItemSelector extends Component<IProps, {}> {
 
     render() {
         const recipe: Recipe = this.props.recipe
@@ -30,7 +29,7 @@ export class RecipeListItem extends Component<IProps, {}> {
             <ListItemButton
                 alignItems="flex-start"
                 className="recipeListItem__container"
-                component={Link} to={recipeRoute}>
+                onClick={() => this.props.selectRecipe(recipe)}>
                 <ListItemAvatar>
                     <DinnerDining />
                 </ListItemAvatar>
@@ -39,14 +38,6 @@ export class RecipeListItem extends Component<IProps, {}> {
                     primary={name}
                     secondary={description}
                 />
-                <ListItemSecondaryAction>
-                    <IconButton
-                        edge="end"
-                        aria-label="edit"
-                        component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
-                        <Edit />
-                    </IconButton>
-                </ListItemSecondaryAction>
             </ListItemButton>
         )
     }

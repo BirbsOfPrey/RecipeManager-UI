@@ -1,14 +1,14 @@
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { Component } from 'react';
 import { Recipe } from '../../models/Recipe';
-import { createScheduledRecipe, ScheduledRecipe } from '../../models/ScheduledRecipe';
-import { createDefaultHeader, RecipesUrl } from '../../resources/Api';
+import { createScheduledRecipeWithDate, ScheduledRecipe } from '../../models/ScheduledRecipe';
 import StringResource from '../../resources/StringResource';
+import { RecipeListSelector } from './RecipeListSelector';
 
 interface IProps {
     date: Date
     handleCancel: () => void
-    handleOk: (scheduledRecipe: ScheduledRecipe) => void
+    handleAdd: (scheduledRecipe: ScheduledRecipe) => void
 }
 
 interface IState {
@@ -18,24 +18,11 @@ interface IState {
 export class ScheduledRecipeCreate extends Component<IProps, IState> {
 
     state: IState = {
-        scheduledRecipe: createScheduledRecipe()
+        scheduledRecipe: createScheduledRecipeWithDate(this.props.date)
     }
 
-    async componentDidMount() {
-        const response = await fetch(`${RecipesUrl}/${8}`, {
-            headers: createDefaultHeader()
-        })
-        const recipe: Recipe = await response.json()
-
-        const scheduledRecipe = createScheduledRecipe()
-        scheduledRecipe.date = this.props.date
-        scheduledRecipe.recipe = recipe
-
-        this.setState({ scheduledRecipe: scheduledRecipe })
-    }
-
-    updateScheduledRecipe = (property: string, value: string) => {
-        const updatedScheduledRecipe = { ...this.state.scheduledRecipe, [property]: value }
+    updateScheduledRecipe = (recipe: Recipe) => {
+        const updatedScheduledRecipe = { ...this.state.scheduledRecipe, ["recipe"]: recipe }
         this.setState({ scheduledRecipe: updatedScheduledRecipe })
     }
 
@@ -43,19 +30,22 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
         return (
             <div>
                 <div className="scheduledRecipeCreate__container">
-                    <TextField
-                        variant="filled"
-                        className="scheduledRecipeCreate__nameField"
-                        required
-                        fullWidth
-                        label={StringResource.General.RecipeName}
-                        placeholder={StringResource.General.RecipeName}
-                        onChange={event => this.updateScheduledRecipe('amount', event.target.value)}
-                    />
+
+                    <p>{StringResource.General.SelectedRecipe}</p>
+                    <p>{this.state.scheduledRecipe.recipe?.name !== undefined ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}</p>
                 </div>
 
                 <Button onClick={this.props.handleCancel}>Abbrechen</Button>
-                <Button onClick={() => this.props.handleOk(this.state.scheduledRecipe)}>Hinzufügen</Button>
+                <Button 
+                    onClick={() => this.props.handleAdd(this.state.scheduledRecipe)}
+                    disabled={this.state.scheduledRecipe.recipe === undefined}>
+                    Hinzufügen
+                </Button>
+
+                <p className="scheduledRecipeCreate__listTitle">Wählen Sie das gewünschte Rezept aus</p>
+
+                <RecipeListSelector
+                    selectRecipe={this.updateScheduledRecipe} />
             </div>
         )
     }

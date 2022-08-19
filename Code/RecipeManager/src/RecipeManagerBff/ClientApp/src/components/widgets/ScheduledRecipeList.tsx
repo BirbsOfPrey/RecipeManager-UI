@@ -1,7 +1,6 @@
 import { List } from "@mui/material"
 import EventIcon from '@mui/icons-material/Event'
 import React, { Component } from "react"
-import { NO_INDEX } from "../../models/IngredientComponent"
 import { EmptyListItem } from "./EmptyListItem"
 import StringResource from "../../resources/StringResource"
 import { ScheduledRecipeListItem } from "./ScheduledRecipeListItem"
@@ -9,8 +8,6 @@ import { createScheduledRecipe, ScheduledRecipe } from "../../models/ScheduledRe
 
 interface IProps {
     scheduledRecipes: ScheduledRecipe[]
-    //TODO: Ist das für das Update hier nötig?
-    // setValue: (property: string, value: string) => void
     deleteScheduledRecipe: (scheduledRecipeId: number | undefined) => void
 }
 
@@ -20,7 +17,8 @@ export class ScheduledRecipeList extends Component<IProps, {}> {
         if (this.props.scheduledRecipes.length > 0) {
             return this.props.scheduledRecipes.map((sr, idx) =>
                 React.cloneElement(element, {
-                    scheduledRecipe: sr
+                    scheduledRecipe: sr,
+                    key: idx
                 }))
         } else {
             return <EmptyListItem icon={<EventIcon/>} text={StringResource.General.NoScheduledRecipes} />
@@ -31,7 +29,7 @@ export class ScheduledRecipeList extends Component<IProps, {}> {
         return (
             <div className="scheduledRecipeList__container">
                 <List className="scheduledRecipeList__List">
-                    {this.generate(<ScheduledRecipeListItem 
+                    {this.generate(<ScheduledRecipeListItem
                         scheduledRecipe={createScheduledRecipe()}
                         scheduledRecipeDeleted={this.props.deleteScheduledRecipe}
                          />)}

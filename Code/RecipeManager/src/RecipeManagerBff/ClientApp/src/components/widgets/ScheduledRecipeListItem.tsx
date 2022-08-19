@@ -17,16 +17,6 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                 alignItems="flex-start"
                 className="scheduledRecipeListItem__container"
                 sx={{ paddingRight: '96px' }}>
-                <ListItemSecondaryAction>
-                    <>
-                        <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => this.props.scheduledRecipeDeleted(this.props.scheduledRecipe.id)}>
-                            <DeleteIcon />
-                        </IconButton>
-                    </>
-                </ListItemSecondaryAction>
                 <ListItemAvatar>
                     <EventIcon />
                 </ListItemAvatar>
@@ -36,6 +26,14 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                     // secondary={this.props.scheduledRecipe.recipe ? this.props.scheduledRecipe.recipe.description : ""}
                     secondary={"Keine Beschreibung vorhanden"}
                 />
+                <ListItemSecondaryAction>
+                        <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => this.props.scheduledRecipeDeleted(this.props.scheduledRecipe.id)}>
+                            <DeleteIcon />
+                        </IconButton>
+                </ListItemSecondaryAction>
             </ListItem>
         )
     }

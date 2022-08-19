@@ -14,6 +14,10 @@ export function createScheduledRecipe(): ScheduledRecipe {
     return new ScheduledRecipe(new Date())
 }
 
+export function createScheduledRecipeWithDate(date: Date): ScheduledRecipe {
+    return new ScheduledRecipe(date)
+}
+
 export function mapIsoStringToDate(scheduledRecipes: ScheduledRecipe[]) {
     scheduledRecipes.forEach(scheduledRecipe => {
         const dateIsoString = scheduledRecipe.date
