@@ -8,15 +8,16 @@ import { EmptyListItem } from "./EmptyListItem"
 import { StepListItem } from "./StepListItem"
 
 interface IProps {
-    steps?: Step[]
-    updateStep: (index: number, property: string, value: string) => void
+    steps: Step[]
+    updateStepInstruction: (index: number, value?: string) => void
+    changeStepOrder: (index: number, increase: boolean, step: Step) => void
     deleteStep: (index: number, step: Step) => void
 }
 
 export class RecipeEditStepList extends Component<IProps, {}> {
 
     addStep = (_: React.MouseEvent): void => {
-        this.props.updateStep(NO_INDEX, "stepNumber", this.props.steps ? (this.props.steps.length + 1) as unknown as string : "1")
+        this.props.updateStepInstruction(NO_INDEX)
     }
 
     generate() {
@@ -32,7 +33,8 @@ export class RecipeEditStepList extends Component<IProps, {}> {
                         index={idx}
                         length={length}
                         editable
-                        updateStepInstruction={this.props.updateStep}
+                        updateStepInstruction={this.props.updateStepInstruction}
+                        changeStepOrder={this.props.changeStepOrder}
                         stepDeleted={this.props.deleteStep}
                     />
                 ))

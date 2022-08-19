@@ -4,8 +4,9 @@ import { RecipeEditStepList } from "./RecipeEditStepList"
 import { RecipeSteps } from "./RecipeSteps"
 
 interface IProps {
-    steps?: Step[]
-    updateStep: (index: number, property: string, value: string) => void
+    steps: Step[]
+    updateStepInstruction: (index: number, value?: string) => void
+    changeStepOrder: (index: number, increase: boolean, step: Step) => void
     deleteStep: (index: number, step: Step) => void
     editable?: boolean
 }
@@ -16,7 +17,8 @@ export class RecipeEditSteps extends Component<IProps, {}> {
         return this.props.editable ? (
             <RecipeEditStepList
                 steps={this.props.steps}
-                updateStep={this.props.updateStep}
+                updateStepInstruction={this.props.updateStepInstruction}
+                changeStepOrder={this.props.changeStepOrder}
                 deleteStep={this.props.deleteStep}
              />
         ) : (

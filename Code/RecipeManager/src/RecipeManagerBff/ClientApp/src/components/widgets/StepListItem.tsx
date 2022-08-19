@@ -11,7 +11,8 @@ interface IProps {
     index: number
     length: number
     editable: boolean
-    updateStepInstruction: (index: number, property: string, value: string) => void
+    updateStepInstruction: (index: number, value: string) => void
+    changeStepOrder: (index: number, increase: boolean, step: Step) => void
     stepDeleted: (index: number, step: Step) => void
 }
 
@@ -32,7 +33,7 @@ export class StepListItem extends Component<IProps, {}> {
                     label={this.props.step.stepNumber}
                     value={this.props.step.instruction}
                     placeholder={StringResource.General.StepInstruction}
-                    onChange={event => this.props.updateStepInstruction(this.props.index, "instruction", event.target.value)}
+                    onChange={event => this.props.updateStepInstruction(this.props.index, event.target.value)}
                 />
                 <ListItemSecondaryAction>
                     {this.props.editable ?
@@ -40,7 +41,7 @@ export class StepListItem extends Component<IProps, {}> {
                             <IconButton
                                 edge="end"
                                 aria-label="move-up"
-                                onClick={() => { }}
+                                onClick={(event) => this.props.changeStepOrder(this.props.index, false, this.props.step)}
                                 disabled={this.props.step.stepNumber === 1}
                                 sx={{ marginRight: '0px' }}>
                                 <KeyboardArrowUpIcon />
@@ -48,7 +49,7 @@ export class StepListItem extends Component<IProps, {}> {
                             <IconButton
                                 edge="end"
                                 aria-label="move-down"
-                                onClick={() => { }}
+                                onClick={(event) => this.props.changeStepOrder(this.props.index, true, this.props.step)}
                                 disabled={this.props.step.stepNumber === this.props.length}
                                 sx={{ marginRight: '0px' }}>
                                 <KeyboardArrowDownIcon />
