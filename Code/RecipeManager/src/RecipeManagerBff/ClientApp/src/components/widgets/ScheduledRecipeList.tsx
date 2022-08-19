@@ -11,7 +11,7 @@ interface IProps {
     scheduledRecipes: ScheduledRecipe[]
     //TODO: Ist das für das Update hier nötig?
     // setValue: (property: string, value: string) => void
-    deleteScheduledRecipe: (scheduledRecipe: ScheduledRecipe) => void
+    deleteScheduledRecipe: (scheduledRecipeId: number | undefined) => void
 }
 
 export class ScheduledRecipeList extends Component<IProps, {}> {

@@ -24,6 +24,8 @@ namespace StringResource {
         export const RequiredIngredientName: string = 'Ein Zutatenname ist erforderlich'
         export const RequiredIngredientComponentAmount: string = 'Eine Menge ist erforderlich'
         export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidator.minPersonRefAmount} - ${RecipeValidator.maxPersonRefAmount} liegen`
+        export const DeleteScheduledRecipeQuestion: string = 'Terminiertes Rezept löschen?'
+        export const DeleteScheduledRecipeContent: string = 'Das terminierte Rezept wird gelöscht'
     }
     export namespace General {
         export const RecipeManagement: string = 'Verwaltung Rezepte'
@@ -49,6 +51,8 @@ namespace StringResource {
         export const Saturday: string = 'Samstag'
         export const Sunday: string = 'Sonntag'
         export const Unknown: string = 'Unbekannt'
+        export const Cancel: string = 'Abbrechen'
+        export const Delete: string = 'Löschen'
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }

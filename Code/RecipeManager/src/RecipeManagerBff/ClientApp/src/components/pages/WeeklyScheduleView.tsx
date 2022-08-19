@@ -1,5 +1,5 @@
 import { IconButton, List } from "@mui/material"
-import { ArrowCircleLeft, ArrowCircleRight, CalendarMonth, ScheduleSendRounded } from '@mui/icons-material'
+import { ArrowCircleLeft, ArrowCircleRight, CalendarMonth } from '@mui/icons-material'
 import { Component } from "react"
 import { createRecipe, Recipe } from "../../models/Recipe"
 import { DailyScheduleItem } from "../widgets/DailyScheduleItem"
@@ -7,12 +7,20 @@ import { mapIsoStringToDate, ScheduledRecipe } from "../../models/ScheduledRecip
 import { createDefaultHeader, ScheduledRecipesUrl } from "../../resources/Api"
 import StringResource from "../../resources/StringResource"
 import { DateHelper } from "../../models/helper/DateHelper"
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
-interface IProps {}
+interface IProps { }
 
 interface IState {
     dateToShow: Date
     scheduledRecipes: ScheduledRecipe[]
+    openDeleteConfirmDialog: boolean
+    scheduledRecipeIdToDelete: number | undefined
     redirect: boolean // TODO: necessary?
     saved: boolean // TODO: necessary?
     recipe: Recipe // TODO: necessary?
@@ -25,6 +33,8 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
     state: IState = {
         dateToShow: new Date(),
         scheduledRecipes: [],
+        openDeleteConfirmDialog: false,
+        scheduledRecipeIdToDelete: undefined,
         redirect: false,
         saved: true,
         recipe: createRecipe(),
@@ -80,18 +90,28 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
         }
     }
 
-    deleteScheduledRecipe = async (scheduledRecipe: ScheduledRecipe) => {
-        const response = await fetch(`${ScheduledRecipesUrl}/${scheduledRecipe.id}`, {
+    requestToDeleteScheduledRecipe = (scheduledRecipeId: number | undefined) => {
+        this.setState({ openDeleteConfirmDialog: true, scheduledRecipeIdToDelete: scheduledRecipeId })
+    }
+
+    deleteScheduledRecipe = async () => {
+        const response = await fetch(`${ScheduledRecipesUrl}/${this.state.scheduledRecipeIdToDelete}`, {
             method: 'delete',
             headers: createDefaultHeader(),
-            body: JSON.stringify(scheduledRecipe.id)
+            body: JSON.stringify(this.state.scheduledRecipeIdToDelete)
         })
 
         if (response.status >= 300) {
-            this.setState({ error: StringResource.Messages.GeneralError })
+            this.setState({ error: StringResource.Messages.GeneralError, openDeleteConfirmDialog: false })
+
         } else {
+            this.setState({ openDeleteConfirmDialog: false })
             await this.fetchScheduledRecipes()
         }
+    }
+
+    handleAbort = () => {
+        this.setState({ openDeleteConfirmDialog: false })
     }
 
     render() {
@@ -116,9 +136,28 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
                             scheduledRecipes={this.state.scheduledRecipes.filter(scheduledRecipe => {
                                 return scheduledRecipe.date.toDateString() === this.getDayOfWeekToShow(number).toDateString()
                             })}
-                            deleteScheduledRecipe={this.deleteScheduledRecipe} />
+                            deleteScheduledRecipe={this.requestToDeleteScheduledRecipe} />
                     ))}
                 </List>
+
+                <Dialog
+                    open={this.state.openDeleteConfirmDialog}
+                    onClose={this.handleAbort}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title">
+                        {StringResource.Messages.DeleteScheduledRecipeQuestion}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {StringResource.Messages.DeleteScheduledRecipeContent}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleAbort}>{StringResource.General.Cancel}</Button>
+                        <Button onClick={this.deleteScheduledRecipe} autoFocus>{StringResource.General.Delete}</Button>
+                    </DialogActions>
+                </Dialog>
 
                 <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
             </div>
