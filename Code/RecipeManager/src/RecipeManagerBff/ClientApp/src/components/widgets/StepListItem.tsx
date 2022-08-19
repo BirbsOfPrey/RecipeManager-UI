@@ -9,7 +9,8 @@ import StringResource from "../../resources/StringResource"
 interface IProps {
     step: Step
     index: number
-    editable?: boolean
+    length: number
+    editable: boolean
     updateStepInstruction: (index: number, property: string, value: string) => void
     stepDeleted: (index: number, step: Step) => void
 }
@@ -39,14 +40,16 @@ export class StepListItem extends Component<IProps, {}> {
                             <IconButton
                                 edge="end"
                                 aria-label="move-up"
-                                onClick={() => {}}
+                                onClick={() => { }}
+                                disabled={this.props.step.stepNumber === 1}
                                 sx={{ marginRight: '0px' }}>
                                 <KeyboardArrowUpIcon />
                             </IconButton>
                             <IconButton
                                 edge="end"
                                 aria-label="move-down"
-                                onClick={() => {}}
+                                onClick={() => { }}
+                                disabled={this.props.step.stepNumber === this.props.length}
                                 sx={{ marginRight: '0px' }}>
                                 <KeyboardArrowDownIcon />
                             </IconButton>
