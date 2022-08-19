@@ -62,7 +62,6 @@ namespace StringResource {
         export const Saturday: string = 'Samstag'
         export const Sunday: string = 'Sonntag'
         export const Unknown: string = 'Unbekannt'
-        export const Cancel: string = 'Abbrechen'
         export const Delete: string = 'Löschen'
         export const SelectedRecipe: string = 'Ausgewähltes Rezept'
         export const SelectNewDate: string = 'Neues Datum auswählen'
