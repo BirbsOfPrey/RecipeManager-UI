@@ -1,18 +1,22 @@
-import { IconButton, List } from "@mui/material"
+import { Box, IconButton, List } from "@mui/material"
 import { ArrowCircleLeft, ArrowCircleRight, CalendarMonth } from '@mui/icons-material'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 import { Component } from "react"
 import { DailyScheduleItem } from "../widgets/DailyScheduleItem"
 import { mapIsoStringToDate, ScheduledRecipe } from "../../models/ScheduledRecipe"
 import { createDefaultHeader, ScheduledRecipesUrl } from "../../resources/Api"
 import StringResource from "../../resources/StringResource"
 import { DateHelper } from "../../models/helper/DateHelper"
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
 import { ScheduledRecipeCreate } from "../widgets/ScheduledRecipeCreate"
+import TextField from "@mui/material/TextField"
 
 interface IProps { }
 
@@ -67,9 +71,10 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
         this.setState({ dateToShow: new Date(dateToShow.setDate(dayOfChangedWeek)) })
     }
 
-    setDate = () => {
-        // TODO: DatePicker ergänzen
-        this.setState({ dateToShow: new Date(2022, 11, 12) })
+    setDate = (newDate: Date | null) => {
+        if (newDate !== null) {
+            this.setState({ dateToShow: newDate })
+        }
     }
 
     fetchScheduledRecipes = async () => {
@@ -86,7 +91,7 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
     }
 
     requestToAddScheduledRecipe = (date: Date) => {
-        this.setState({ createScheduledRecipe: true,  scheduledRecipeAddDate: date})
+        this.setState({ createScheduledRecipe: true, scheduledRecipeAddDate: date })
     }
 
     addScheduledRecipe = async (scheduledRecipe: ScheduledRecipe) => {
@@ -136,10 +141,10 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
         if (this.state.createScheduledRecipe) {
             return (
                 <div className="createScheduledRecipe__container">
-                    <ScheduledRecipeCreate 
-                    handleCancel={this.cancelAddScheduledRecipe}
-                    handleAdd={this.addScheduledRecipe}
-                    date={this.state.scheduledRecipeAddDate}/>
+                    <ScheduledRecipeCreate
+                        handleCancel={this.cancelAddScheduledRecipe}
+                        handleAdd={this.addScheduledRecipe}
+                        date={this.state.scheduledRecipeAddDate} />
                 </div>
             )
         } else {
@@ -152,9 +157,18 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
                     <IconButton onClick={() => this.changeWeek('next')}>
                         <ArrowCircleRight />
                     </IconButton>
-                    <IconButton onClick={this.setDate}>
-                        <CalendarMonth />
-                    </IconButton>
+
+                    <LocalizationProvider dateAdapter={AdapterMoment}>
+                        <DatePicker
+                            label={StringResource.General.SelectNewDate}
+                            value={this.state.dateToShow}
+                            onChange={(newValue: Date | null) => {
+                                this.setDate(newValue);
+                            }}
+                            inputFormat="DD.MM.YYYY"
+                            renderInput={(params: any) => <TextField {...params}>
+                            </TextField>}/>
+                    </LocalizationProvider>
 
                     <List className="weeklyScheduleView__dailyScheduleList">
                         {DateHelper.getDayOfWeekAsNumbers().map(number => (
