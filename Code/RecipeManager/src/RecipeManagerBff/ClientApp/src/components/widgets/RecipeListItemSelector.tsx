@@ -1,8 +1,7 @@
-import { IconButton, ListItemButton, ListItemAvatar, ListItemText, ListItemSecondaryAction } from "@mui/material";
+import { ListItemButton, ListItemAvatar, ListItemText } from "@mui/material"
 import DinnerDining from '@mui/icons-material/DinnerDining'
-import { Recipe } from "../../models/Recipe";
-import { Component } from "react";
-import StringResource from "../../resources/StringResource";
+import { Recipe } from "../../models/Recipe"
+import { Component } from "react"
 import './RecipeListItem.css'
 
 interface IProps {
@@ -22,8 +21,6 @@ export class RecipeListItemSelector extends Component<IProps, {}> {
         } else {
             description = "Keine Beschreibung"
         }
-
-        const recipeRoute: string = `${StringResource.Routes.Recipe}/${recipe.id}`
 
         return (
             <ListItemButton
