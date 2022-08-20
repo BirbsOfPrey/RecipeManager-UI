@@ -2,6 +2,7 @@ export const RecipeManagerAPIEndpoint: string = '/remote/api'
 
 export const RecipesUrl: string = `${RecipeManagerAPIEndpoint}/recipe`
 export const IngredientsUrl: string = `${RecipeManagerAPIEndpoint}/ingredient`
+export const ScheduledRecipesUrl: string = `${RecipeManagerAPIEndpoint}/scheduledrecipe`
 
 export function createDefaultHeader(): Headers {
     return new Headers({

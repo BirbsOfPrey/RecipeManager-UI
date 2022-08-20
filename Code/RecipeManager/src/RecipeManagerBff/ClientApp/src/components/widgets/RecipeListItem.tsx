@@ -27,14 +27,6 @@ export class RecipeListItem extends Component<IProps, {}> {
                 className="recipeListItem__container"
                 component={Link} to={recipeRoute}
                 sx={{ paddingRight: '64px' }}>
-                <ListItemSecondaryAction>
-                    <IconButton
-                        edge="end"
-                        aria-label="edit"
-                        component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
-                        <Edit />
-                    </IconButton>
-                </ListItemSecondaryAction>
                 <ListItemAvatar>
                     <DinnerDining />
                 </ListItemAvatar>
@@ -43,6 +35,14 @@ export class RecipeListItem extends Component<IProps, {}> {
                     primary={name}
                     secondary={description}
                 />
+                <ListItemSecondaryAction>
+                    <IconButton
+                        edge="end"
+                        aria-label="edit"
+                        component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
+                        <Edit />
+                    </IconButton>
+                </ListItemSecondaryAction>
             </ListItemButton>
         )
     }
