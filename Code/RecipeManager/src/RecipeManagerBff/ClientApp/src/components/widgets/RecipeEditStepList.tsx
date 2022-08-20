@@ -25,10 +25,10 @@ export class RecipeEditStepList extends Component<IProps, {}> {
     generate() {
         if (this.props.steps && this.props.steps.length > 0) {
             const length = this.props.steps.length
-            let steps = Array.of(...this.props.steps)
+            var steps = Array.of(...this.props.steps)
             return steps.sort((a, b) => {
                     return (a.stepNumber && b.stepNumber) ? a.stepNumber - b.stepNumber : 0
-                }).map((s, idx) => (
+                }).map((s) => (
                     <StepListItem
                         key={s.stepNumber}
                         step={s}

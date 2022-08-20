@@ -74,16 +74,18 @@ export class RecipeCookingView extends Component<IProps, IState> {
 
         var steps: Step[] = this.state.recipe.steps
         var otherStepNumber: number = increase ? step.stepNumber + 1 : step.stepNumber - 1
-        var otherStep: Step | undefined = steps.find(s => s.stepNumber === otherStepNumber)
 
-        if (!otherStep) {
+        var otherStep: Step | undefined = steps.find(s => s.stepNumber === otherStepNumber)
+        var oldStep: Step | undefined = steps.find(s => s.stepNumber === step.stepNumber)
+        if (!otherStep || !oldStep) {
             return
         }
-        var index = steps.indexOf(step)
         var otherIndex = steps.indexOf(otherStep)
+        var index = steps.indexOf(oldStep)
+        
         this.updateStateRecipe(
             produce(this.state.recipe, draft => {
-                if (draft.steps && index > NO_INDEX && draft.steps.length > index) {
+                if (draft.steps && index > NO_INDEX) {
                     draft.steps[otherIndex].stepNumber = step.stepNumber
                     draft.steps[index].stepNumber = otherStepNumber
                 }
@@ -194,47 +196,53 @@ export class RecipeCookingView extends Component<IProps, IState> {
     }
 
     render() {
-        const saveContent: ReactNode = this.props.editable ? (
-            <LoadingButton
-                className="recipeCreateAssistant__saveButton"
-                variant="outlined"
-                loadingPosition="start"
-                loading={this.state.saving}
-                startIcon={<SaveIcon />}
-                disabled={this.state.saved}
-                onClick={this.save}>{StringResource.General.Save}
-            </LoadingButton>) : <></>
+        if (this.state.loading) {
+            return (
+                <p>Loading...</p>
+            )
+        } else {
+            const saveContent: ReactNode = this.props.editable ? (
+                <LoadingButton
+                    className="recipeCreateAssistant__saveButton"
+                    variant="outlined"
+                    loadingPosition="start"
+                    loading={this.state.saving}
+                    startIcon={<SaveIcon />}
+                    disabled={this.state.saved}
+                    onClick={this.save}>{StringResource.General.Save}
+                </LoadingButton>) : <></>
 
-        return (
-            <div className="recipeCreateAssistant__container">
-                <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
-                    <ArrowBackIcon />
-                </IconButton>
-                <span className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
-                <RecipeEditHead
-                    name={this.state.recipe.name}
-                    description={this.state.recipe.description}
-                    setValue={this.update}
-                    editable={this.props.editable}
-                />
-                <RecipeEditSteps
-                    steps={this.state.recipe.steps ? this.state.recipe.steps : createSteps()}
-                    updateStep={this.updateStep}
-                    changeStepOrder={this.changeStepOrder}
-                    deleteStep={this.deleteStep}
-                    editable={this.props.editable}
-                />
-                <RecipeEditIngredients
-                    personRefAmount={this.state.recipe.personRefAmount}
-                    ingredientComponents={this.state.recipe.ingredientComponents}
-                    setValue={this.update}
-                    setIngredientComponent={this.updateIngredientComponents}
-                    deleteIngredientComponent={this.deleteIngredientComponent}
-                    editable={this.props.editable}
-                />
-                <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
-                {saveContent}
-            </div>
-        )
+            return (
+                <div className="recipeCreateAssistant__container">
+                    <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
+                        <ArrowBackIcon />
+                    </IconButton>
+                    <span className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
+                    <RecipeEditHead
+                        name={this.state.recipe.name}
+                        description={this.state.recipe.description}
+                        setValue={this.update}
+                        editable={this.props.editable}
+                    />
+                    <RecipeEditSteps
+                        steps={this.state.recipe.steps ? this.state.recipe.steps : createSteps()}
+                        updateStep={this.updateStep}
+                        changeStepOrder={this.changeStepOrder}
+                        deleteStep={this.deleteStep}
+                        editable={this.props.editable}
+                    />
+                    <RecipeEditIngredients
+                        personRefAmount={this.state.recipe.personRefAmount}
+                        ingredientComponents={this.state.recipe.ingredientComponents}
+                        setValue={this.update}
+                        setIngredientComponent={this.updateIngredientComponents}
+                        deleteIngredientComponent={this.deleteIngredientComponent}
+                        editable={this.props.editable}
+                    />
+                    <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
+                    {saveContent}
+                </div>
+            )
+        }
     }
 }

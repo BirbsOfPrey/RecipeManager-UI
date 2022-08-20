@@ -1,11 +1,14 @@
 import { immerable } from "immer"
 
 export class Step {
+    constructor() {
+        this.instruction = ""
+    }
     [immerable]: boolean = true
     
     id?: number
     stepNumber?: number
-    instruction?: string
+    instruction: string
 }
 
 export function createStep() {
