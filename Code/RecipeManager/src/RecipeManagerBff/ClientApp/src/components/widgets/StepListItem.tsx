@@ -8,12 +8,11 @@ import StringResource from "../../resources/StringResource"
 
 interface IProps {
     step: Step
-    index: number
     length: number
     editable: boolean
-    updateStepInstruction: (index: number, value: string) => void
-    changeStepOrder: (index: number, increase: boolean, step: Step) => void
-    stepDeleted: (index: number, step: Step) => void
+    updateStep: (step: Step) => void
+    changeStepOrder: (increase: boolean, step: Step) => void
+    stepDeleted: (step: Step) => void
 }
 
 export class StepListItem extends Component<IProps, {}> {
@@ -33,7 +32,7 @@ export class StepListItem extends Component<IProps, {}> {
                     label={this.props.step.stepNumber}
                     value={this.props.step.instruction}
                     placeholder={StringResource.General.StepInstruction}
-                    onChange={event => this.props.updateStepInstruction(this.props.index, event.target.value)}
+                    onChange={event => this.props.updateStep({ ...this.props.step, instruction: event.target.value })}
                 />
                 <ListItemSecondaryAction>
                     {this.props.editable ?
@@ -41,7 +40,7 @@ export class StepListItem extends Component<IProps, {}> {
                             <IconButton
                                 edge="end"
                                 aria-label="move-up"
-                                onClick={(event) => this.props.changeStepOrder(this.props.index, false, this.props.step)}
+                                onClick={(event) => this.props.changeStepOrder(false, this.props.step)}
                                 disabled={this.props.step.stepNumber === 1}
                                 sx={{ marginRight: '0px' }}>
                                 <KeyboardArrowUpIcon />
@@ -49,7 +48,7 @@ export class StepListItem extends Component<IProps, {}> {
                             <IconButton
                                 edge="end"
                                 aria-label="move-down"
-                                onClick={(event) => this.props.changeStepOrder(this.props.index, true, this.props.step)}
+                                onClick={(event) => this.props.changeStepOrder(true, this.props.step)}
                                 disabled={this.props.step.stepNumber === this.props.length}
                                 sx={{ marginRight: '0px' }}>
                                 <KeyboardArrowDownIcon />
@@ -57,7 +56,7 @@ export class StepListItem extends Component<IProps, {}> {
                             <IconButton
                                 edge="end"
                                 aria-label="delete"
-                                onClick={() => this.props.stepDeleted(this.props.index, this.props.step)}>
+                                onClick={() => this.props.stepDeleted(this.props.step)}>
                                 <DeleteIcon />
                             </IconButton>
                         </>) : <></>}

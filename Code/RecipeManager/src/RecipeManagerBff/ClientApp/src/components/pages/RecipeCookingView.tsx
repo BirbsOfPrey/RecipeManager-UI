@@ -5,7 +5,7 @@ import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
-import { IconButton } from "@mui/material"
+import { IconButton, stepClasses } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
@@ -67,50 +67,57 @@ export class RecipeCookingView extends Component<IProps, IState> {
         )
     }
 
-    changeStepOrder = (index: number, increase: boolean, step: Step) => {
-        //TODO: Nur 1x klappt
-        if (this.state.recipe.steps && step.stepNumber) {
-            var steps: Step[] = this.state.recipe.steps
-            var otherStepNumber: number = increase ? step.stepNumber + 1 : step.stepNumber - 1
-            var otherStep: Step | undefined = steps.find(s => s.stepNumber === otherStepNumber)
-            if (otherStep) {
-                var otherIndex = steps.indexOf(otherStep)
-                this.updateStateRecipe(
-                    produce(this.state.recipe, draft => {
-                        if (draft.steps && index > NO_INDEX && draft.steps.length > index) {
-                            draft.steps[otherIndex].stepNumber = step.stepNumber
-                            draft.steps[index].stepNumber = otherStepNumber
-                        }
-                    })
-                )
-            }
+    changeStepOrder = (increase: boolean, step: Step) => {
+        if (!this.state.recipe.steps || !step.stepNumber) {
+            return
         }
-    }
 
-    updateStepInstruction = (index: number, value?: string) => {
+        var steps: Step[] = this.state.recipe.steps
+        var otherStepNumber: number = increase ? step.stepNumber + 1 : step.stepNumber - 1
+        var otherStep: Step | undefined = steps.find(s => s.stepNumber === otherStepNumber)
+
+        if (!otherStep) {
+            return
+        }
+        var index = steps.indexOf(step)
+        var otherIndex = steps.indexOf(otherStep)
         this.updateStateRecipe(
             produce(this.state.recipe, draft => {
                 if (draft.steps && index > NO_INDEX && draft.steps.length > index) {
-                    draft.steps[index].instruction = value
+                    draft.steps[otherIndex].stepNumber = step.stepNumber
+                    draft.steps[index].stepNumber = otherStepNumber
+                }
+            })
+        )
+    }
+
+    updateStep = (step: Step) => {
+        this.updateStateRecipe(
+            produce(this.state.recipe, draft => {
+                if (!draft.steps) {
+                    draft.steps = createSteps()
+                }
+                var oldStep: Step | undefined = draft.steps.find(s => s.stepNumber === step.stepNumber)
+                if (oldStep) {
+                    var index: number = draft.steps.indexOf(oldStep)
+                    draft.steps[index] = step
                 } else {
-                    if (!draft.steps) {
-                        draft.steps = createSteps()
-                    }
-                    var step: Step = createStep()
-                    step.instruction = value
-                    step.stepNumber = draft.steps.length + 1
                     draft.steps.push(step)
                 }
             })
         )
     }
 
-    deleteStep = (index: number, step: Step) => {
+    deleteStep = (step: Step) => {
         this.updateStateRecipe(
             produce(this.state.recipe, draft => {
-                if (draft.steps && index > NO_INDEX && draft.steps.length > index) {
-                    var deletedSteps: Step[] = draft.steps.splice(index, 1)
-                    var deletedStep: Step | undefined = deletedSteps.at(0)
+                if (!draft.steps) {
+                    return
+                }
+                var oldStep: Step | undefined = draft.steps.find(s => s.stepNumber === step.stepNumber)
+                if (oldStep) {
+                    var index: number = draft.steps.indexOf(oldStep)
+                    var deletedStep: Step | undefined = draft.steps.splice(index, 1).at(0)
                     draft.steps.forEach(s => {
                         if (s.stepNumber && deletedStep?.stepNumber && s.stepNumber > deletedStep.stepNumber) {
                             s.stepNumber -= 1
@@ -212,7 +219,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                 />
                 <RecipeEditSteps
                     steps={this.state.recipe.steps ? this.state.recipe.steps : createSteps()}
-                    updateStepInstruction={this.updateStepInstruction}
+                    updateStep={this.updateStep}
                     changeStepOrder={this.changeStepOrder}
                     deleteStep={this.deleteStep}
                     editable={this.props.editable}

@@ -2,22 +2,24 @@ import { Add } from "@mui/icons-material"
 import { List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material"
 import React, { Component } from "react"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
-import { Step } from "../../models/Step"
+import { createStep, Step } from "../../models/Step"
 import StringResource from "../../resources/StringResource"
 import { EmptyListItem } from "./EmptyListItem"
 import { StepListItem } from "./StepListItem"
 
 interface IProps {
     steps: Step[]
-    updateStepInstruction: (index: number, value?: string) => void
-    changeStepOrder: (index: number, increase: boolean, step: Step) => void
-    deleteStep: (index: number, step: Step) => void
+    updateStep: (step: Step) => void
+    changeStepOrder: (increase: boolean, step: Step) => void
+    deleteStep: (step: Step) => void
 }
 
 export class RecipeEditStepList extends Component<IProps, {}> {
 
     addStep = (_: React.MouseEvent): void => {
-        this.props.updateStepInstruction(NO_INDEX)
+        var step = createStep()
+        step.stepNumber = this.props.steps.length + 1
+        this.props.updateStep(step)
     }
 
     generate() {
@@ -28,12 +30,11 @@ export class RecipeEditStepList extends Component<IProps, {}> {
                     return (a.stepNumber && b.stepNumber) ? a.stepNumber - b.stepNumber : 0
                 }).map((s, idx) => (
                     <StepListItem
-                        key={idx}
+                        key={s.stepNumber}
                         step={s}
-                        index={idx}
                         length={length}
                         editable
-                        updateStepInstruction={this.props.updateStepInstruction}
+                        updateStep={this.props.updateStep}
                         changeStepOrder={this.props.changeStepOrder}
                         stepDeleted={this.props.deleteStep}
                     />
