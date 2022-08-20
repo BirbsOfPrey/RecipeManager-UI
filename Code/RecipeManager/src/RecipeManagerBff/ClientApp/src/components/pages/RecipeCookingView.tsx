@@ -5,7 +5,7 @@ import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
-import { IconButton, stepClasses } from "@mui/material"
+import { IconButton } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
@@ -13,7 +13,7 @@ import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
 import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
 import { RecipeValidator } from "../../models/RecipeValidator"
-import { createStep, createSteps, Step } from "../../models/Step"
+import { createSteps, Step } from "../../models/Step"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
 import produce from "immer"
 
@@ -82,7 +82,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         }
         var otherIndex = steps.indexOf(otherStep)
         var index = steps.indexOf(oldStep)
-        
+
         this.updateStateRecipe(
             produce(this.state.recipe, draft => {
                 if (draft.steps && index > NO_INDEX) {
@@ -130,7 +130,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         )
     }
 
-    updateIngredientComponents = (index: number, ingredientComponent: IngredientComponent) => {
+    updateIngredientComponent = (index: number, ingredientComponent: IngredientComponent) => {
         this.updateStateRecipe(
             produce(this.state.recipe, draft => {
                 if (draft.ingredientComponents && index > NO_INDEX && draft.ingredientComponents.length > index) {
@@ -235,7 +235,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                         personRefAmount={this.state.recipe.personRefAmount}
                         ingredientComponents={this.state.recipe.ingredientComponents}
                         setValue={this.update}
-                        setIngredientComponent={this.updateIngredientComponents}
+                        updateIngredientComponent={this.updateIngredientComponent}
                         deleteIngredientComponent={this.deleteIngredientComponent}
                         editable={this.props.editable}
                     />

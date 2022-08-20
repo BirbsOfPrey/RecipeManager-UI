@@ -2,7 +2,6 @@ import { List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/materia
 import Add from '@mui/icons-material/Add'
 import EggIcon from '@mui/icons-material/Egg'
 import React, { Component, ReactNode } from "react"
-import { Recipe } from "../../models/Recipe"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
 import { createIngredientComponent, IngredientComponent } from "../../models/IngredientComponent"
 import { EmptyListItem } from "./EmptyListItem"
@@ -15,7 +14,7 @@ interface IProps {
     personRefAmount: number
     ingredientComponents?: IngredientComponent[]
     setValue: (property: string, value: string) => void
-    setIngredientComponent: (index: number, ingredientComponent: IngredientComponent) => void
+    updateIngredientComponent: (index: number, ingredientComponent: IngredientComponent) => void
     deleteIngredientComponent: (index: number, ingredientComponent: IngredientComponent) => void
     editable?: boolean
 }
@@ -59,7 +58,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
 
     handleDialogClose = (index: number, ingredientComponent?: IngredientComponent) => {
         if (ingredientComponent) {
-            this.props.setIngredientComponent(index, ingredientComponent)
+            this.props.updateIngredientComponent(index, ingredientComponent)
             this.setState({ openDialog: false })
         } else {
             this.setState({ openDialog: false })

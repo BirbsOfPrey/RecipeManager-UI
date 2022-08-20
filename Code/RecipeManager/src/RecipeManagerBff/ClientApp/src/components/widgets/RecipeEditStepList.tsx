@@ -1,7 +1,6 @@
 import { Add } from "@mui/icons-material"
 import { List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material"
 import React, { Component } from "react"
-import { NO_INDEX } from "../../models/helper/ArrayHelper"
 import { createStep, Step } from "../../models/Step"
 import StringResource from "../../resources/StringResource"
 import { EmptyListItem } from "./EmptyListItem"
