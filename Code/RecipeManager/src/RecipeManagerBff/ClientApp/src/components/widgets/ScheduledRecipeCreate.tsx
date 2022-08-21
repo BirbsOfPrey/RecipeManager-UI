@@ -1,9 +1,9 @@
-import { Button } from '@mui/material';
-import { Component } from 'react';
-import { Recipe } from '../../models/Recipe';
-import { createScheduledRecipeWithDate, ScheduledRecipe } from '../../models/ScheduledRecipe';
-import StringResource from '../../resources/StringResource';
-import { RecipeListSelector } from './RecipeListSelector';
+import { Button } from '@mui/material'
+import { Component } from 'react'
+import { Recipe } from '../../models/Recipe'
+import { createScheduledRecipeWithDate, ScheduledRecipe } from '../../models/ScheduledRecipe'
+import StringResource from '../../resources/StringResource'
+import { RecipeListSelector } from './RecipeListSelector'
 
 interface IProps {
     date: Date

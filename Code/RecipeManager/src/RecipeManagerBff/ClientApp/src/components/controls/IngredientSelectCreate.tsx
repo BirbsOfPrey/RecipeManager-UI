@@ -1,4 +1,4 @@
-import { TextField, Autocomplete, Switch } from "@mui/material"
+import { TextField, Autocomplete, Switch, createFilterOptions } from "@mui/material"
 import { Component, ReactNode } from "react"
 import { Ingredient } from "../../models/Ingredient"
 import { IngredientValidator } from "../../models/IngredientValidator"
@@ -7,7 +7,7 @@ import StringResource from "../../resources/StringResource"
 
 interface IProps {
     setValue: (ingredientName: string) => void
-    ingredient?: Ingredient
+    ingredient: Ingredient
 }
 
 interface IState {
@@ -22,7 +22,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
     }
 
     changeMode = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-        this.setState({newIngredient: checked})
+        this.setState({ newIngredient: checked })
     }
 
     async componentDidMount() {
@@ -34,14 +34,14 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
             headers: createDefaultHeader()
         })
         if (response.status >= 300) {
-            this.setState({ingredientNames: []})
+            this.setState({ ingredientNames: [] })
         } else {
             const ingredients: Ingredient[] = await response.json()
-            const ingredientNames: string[] = ingredients.map(i => i.name ? i.name : "")
-            this.setState({ingredientNames: ingredientNames})
+            const ingredientNames: string[] = ingredients.map(i => i.name)
+            this.setState({ ingredientNames: ingredientNames })
         }
     }
-    
+
     render() {
         let field: ReactNode
         if (this.state.newIngredient) {
@@ -52,10 +52,10 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                     required
                     fullWidth
                     label={StringResource.General.Ingredient}
-                    value={this.props.ingredient ? this.props.ingredient.name : ""}
+                    value={this.props.ingredient.name}
                     onChange={event => this.props.setValue(event.target.value)}
-                    error={!IngredientValidator.validateName(this.props.ingredient?.name)}
-                    helperText={IngredientValidator.validateName(this.props.ingredient?.name) ? " " : StringResource.Messages.RequiredIngredientName}
+                    error={!IngredientValidator.validateName(this.props.ingredient.name)}
+                    helperText={IngredientValidator.validateName(this.props.ingredient.name) ? " " : StringResource.Messages.RequiredIngredientName}
                 />)
         } else {
             field = (
@@ -63,8 +63,13 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                     disablePortal
                     className="ingredientSelectCreate__ingredient"
                     options={this.state.ingredientNames}
-                    value={this.props.ingredient ?  this.props.ingredient.name : ""}
-                    onChange={(_, value) => this.props.setValue(value ? value : "")}
+                    filterOptions={createFilterOptions({
+                        matchFrom: 'any',
+                        limit: 100,
+                    })}
+                    value={this.props.ingredient.name}
+                    onChange={(_, value) => this.props.setValue(value ? value : "")
+                    }
                     renderInput={(params) => { return (<TextField {...params} fullWidth label={StringResource.General.Ingredient} variant="filled" />) }}
                 />)
         }
@@ -72,7 +77,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
         return (
             <div>
                 {field}
-                <Switch 
+                <Switch
                     checked={this.state.newIngredient}
                     onChange={this.changeMode}
                 />

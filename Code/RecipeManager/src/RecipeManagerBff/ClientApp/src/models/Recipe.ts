@@ -1,7 +1,10 @@
+import { immerable } from "immer"
 import { IngredientComponent } from "./IngredientComponent"
 import { Step } from "./Step"
 
 export class Recipe{
+    [immerable]: boolean = true
+    
     id?: number
     name?: string
     description?: string

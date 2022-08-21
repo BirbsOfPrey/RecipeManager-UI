@@ -1,44 +1,30 @@
-import { Pagination } from "@mui/material";
-import { Component, ReactNode } from "react";
-import { Step } from "../../models/Step";
-
-interface IState {
-    contentNr: number
-}
+import { Component } from "react"
+import { Step } from "../../models/Step"
+import { RecipeEditStepList } from "./RecipeEditStepList"
+import { RecipeSteps } from "./RecipeSteps"
 
 interface IProps {
-    steps?: Step[]
-    setValue: (property: string, value: string) => void
+    steps: Step[]
+    updateStep: (step: Step) => void
+    changeStepOrder: (increase: boolean, step: Step) => void
+    deleteStep: (step: Step) => void
     editable?: boolean
 }
 
 export class RecipeEditSteps extends Component<IProps, {}> {
-    
-    state: IState = {
-        contentNr: 1
-    }
-
-    setContentNr = (event: React.ChangeEvent<unknown>, value: number) => {
-        this.setState({ contentNr: value })
-    }
 
     render() {
-        const contents: ReactNode[] = [
-            <>Hier steht die Beschreibung</>,
-            <>Und die Instruktionen</>,
-        ]
-
-        const content: ReactNode = contents[this.state.contentNr - 1]
-
-        return (
-        <div>
-                    {content}
-                    <Pagination
-                        variant="outlined"
-                        count={contents.length}
-                        page={this.state.contentNr}
-                        onChange={this.setContentNr}
-                    />
-        </div>)
+        return this.props.editable ? (
+            <RecipeEditStepList
+                steps={this.props.steps}
+                updateStep={this.props.updateStep}
+                changeStepOrder={this.props.changeStepOrder}
+                deleteStep={this.props.deleteStep}
+             />
+        ) : (
+            <RecipeSteps
+                steps={this.props.steps}
+            />
+        )
     }
 }

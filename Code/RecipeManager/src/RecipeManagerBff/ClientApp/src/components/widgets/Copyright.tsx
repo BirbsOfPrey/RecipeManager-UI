@@ -1,4 +1,4 @@
-import { Container } from 'reactstrap'
+import { Container } from '@mui/material'
 import StringResource from '../../resources/StringResource'
 import './Copyright.css'
 

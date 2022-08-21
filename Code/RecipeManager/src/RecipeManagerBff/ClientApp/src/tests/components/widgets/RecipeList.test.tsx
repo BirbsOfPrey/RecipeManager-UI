@@ -5,6 +5,7 @@ import { RecipesUrl } from '../../../resources/Api'
 import { RecipeList } from '../../../components/widgets/RecipeList'
 import { Recipe } from '../../../models/Recipe'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { immerable } from 'immer'
 
 const testRecipe1Id: number = 54
 const testRecipe1Name: string = 'Testrezept'
@@ -15,8 +16,8 @@ let handlers = [
 	rest.get(RecipesUrl, (req: any, res: (arg0: any) => any, ctx: { json: (arg0: Recipe[]) => any }) => {
 		return res(
 			ctx.json([
-				{id: testRecipe1Id, name: testRecipe1Name, personRefAmount: 4, steps: [], ingredientComponents: []},
-				{id: testRecipe2Id, name: testRecipe2Name, personRefAmount: 2, steps: [], ingredientComponents: []}
+				{[immerable]: true, id: testRecipe1Id, name: testRecipe1Name, personRefAmount: 4, steps: [], ingredientComponents: []},
+				{[immerable]: true, id: testRecipe2Id, name: testRecipe2Name, personRefAmount: 2, steps: [], ingredientComponents: []}
 			])
 		)
 	})

@@ -1,8 +1,9 @@
-import { Component } from "react";
-import { Link } from "react-router-dom";
-import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
-import { Claim } from "../models/security/Claim";
-import "./NavMenu.css";
+import { Component } from "react"
+import { Link } from "react-router-dom"
+import { Container } from '@mui/material'
+import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap"
+import { Claim } from "../models/security/Claim"
+import "./NavMenu.css"
 
 interface IState {
   collapsed: boolean

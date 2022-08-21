@@ -1,12 +1,17 @@
-import { Ingredient } from "./Ingredient"
-
-export const NO_INDEX = -1
+import { immerable } from "immer"
+import { createIngredient, Ingredient } from "./Ingredient"
 
 export class IngredientComponent {
+    [immerable]: boolean = true
+    
     id?: number
     amount?: number
     physicalQuantity?: string
-    ingredient?: Ingredient
+    ingredient: Ingredient
+
+    constructor() {
+        this.ingredient = createIngredient()
+    }
 }
 
 export function createIngredientComponents() {
