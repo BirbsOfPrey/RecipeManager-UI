@@ -15,7 +15,21 @@ interface IProps {
     stepDeleted: (step: Step) => void
 }
 
-export class StepListItem extends Component<IProps, {}> {
+interface IState {
+    instruction: string
+}
+
+export class StepListItem extends Component<IProps, IState> {
+
+    state: IState = {
+        instruction: this.props.step.instruction
+    }
+
+    componentDidUpdate(prevProps: IProps, _: IState) {
+        if (this.props.step.instruction !== prevProps.step.instruction) {
+            this.setState({ instruction: this.props.step.instruction })
+        }
+    }
 
     render() {
         return (
@@ -30,9 +44,10 @@ export class StepListItem extends Component<IProps, {}> {
                     fullWidth
                     minRows={5}
                     label={this.props.step.stepNumber}
-                    value={this.props.step.instruction}
+                    value={this.state.instruction}
                     placeholder={StringResource.General.StepInstruction}
-                    onChange={event => this.props.updateStep({ ...this.props.step, instruction: event.target.value })}
+                    onChange={event => this.setState({ instruction: event.target.value })}
+                    onBlur={event => this.props.updateStep({ ...this.props.step, instruction: event.target.value })}
                 />
                 <ListItemSecondaryAction>
                     {this.props.editable ?
