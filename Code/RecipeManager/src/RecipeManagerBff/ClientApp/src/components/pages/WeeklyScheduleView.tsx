@@ -161,7 +161,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                                 this.setDate(newValue)
                             }}
                             inputFormat='dd.MM.yyyy'
-                            renderInput={(params: any) => <TextField {...params} />}
+                            renderInput={(params: any) => <TextField {...params} size='small'/>}
                         />
                     </LocalizationProvider>
 
