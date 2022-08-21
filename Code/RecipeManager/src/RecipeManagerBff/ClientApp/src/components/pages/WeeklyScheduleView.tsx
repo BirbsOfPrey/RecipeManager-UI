@@ -57,15 +57,12 @@ export class WeeklyScheduleView extends Component<{}, IState> {
         return dateOfWeek
     }
 
-    changeWeek = async (direction: string) => {
-        let changeDays = 0
-        if (direction === 'previous') {
-            changeDays = -7
-        } else if (direction === 'next') {
-            changeDays = 7
-        }
+    changeWeek = (increaseWeek: boolean) => {
+        const dayDifferenceNextWeek = 7
+        const dayDifferencePreviousWeek = -7
+
         const dateToShow = new Date(this.state.dateToShow)
-        const dayOfChangedWeek = dateToShow.getDate() + changeDays
+        const dayOfChangedWeek = dateToShow.getDate() + (increaseWeek ? dayDifferenceNextWeek : dayDifferencePreviousWeek)
         this.setState({ dateToShow: new Date(dateToShow.setDate(dayOfChangedWeek)) })
     }
 
@@ -149,10 +146,10 @@ export class WeeklyScheduleView extends Component<{}, IState> {
             return (
                 <div className="weeklyScheduleView__container">
                     <p>Woche vom {this.getDayOfWeekToShow(1).toLocaleDateString()} - {this.getDayOfWeekToShow(7).toLocaleDateString()}</p>
-                    <IconButton onClick={() => this.changeWeek('previous')}>
+                    <IconButton onClick={() => this.changeWeek(false)}>
                         <ArrowCircleLeft />
                     </IconButton>
-                    <IconButton onClick={() => this.changeWeek('next')}>
+                    <IconButton onClick={() => this.changeWeek(true)}>
                         <ArrowCircleRight />
                     </IconButton>
 
