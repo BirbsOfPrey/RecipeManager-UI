@@ -61,6 +61,7 @@ namespace StringResource {
         export const Delete: string = 'Löschen'
         export const SelectedRecipe: string = 'Ausgewähltes Rezept'
         export const SelectNewDate: string = 'Neues Datum auswählen'
+        export const ShowSelectedWeek: string = 'Woche vom '
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
