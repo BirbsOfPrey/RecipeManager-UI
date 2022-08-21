@@ -8,7 +8,7 @@ import { ScheduledRecipeList } from "./ScheduledRecipeList"
 interface IProps {
     date: Date
     scheduledRecipes: ScheduledRecipe[]
-    deleteScheduledRecipe: (scheduledRecipeId: number | undefined) => void
+    deleteScheduledRecipe: (scheduledRecipeId?: number) => void
     addScheduledRecipe: (date: Date) => void
 }
 

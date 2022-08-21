@@ -8,7 +8,7 @@ import { createScheduledRecipe, ScheduledRecipe } from "../../models/ScheduledRe
 
 interface IProps {
     scheduledRecipes: ScheduledRecipe[]
-    deleteScheduledRecipe: (scheduledRecipeId: number | undefined) => void
+    deleteScheduledRecipe: (scheduledRecipeId?: number) => void
 }
 
 export class ScheduledRecipeList extends Component<IProps, {}> {

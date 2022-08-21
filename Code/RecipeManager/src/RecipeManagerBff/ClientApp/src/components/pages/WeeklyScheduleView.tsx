@@ -18,19 +18,17 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { ScheduledRecipeCreate } from "../widgets/ScheduledRecipeCreate"
 import TextField from "@mui/material/TextField"
 
-interface IProps { }
-
 interface IState {
     dateToShow: Date
     scheduledRecipes: ScheduledRecipe[]
     openDeleteConfirmDialog: boolean
-    scheduledRecipeIdToDelete: number | undefined
+    scheduledRecipeIdToDelete?: number
     createScheduledRecipe: boolean
     scheduledRecipeAddDate: Date
     error: string
 }
 
-export class WeeklyScheduleView extends Component<IProps, IState> {
+export class WeeklyScheduleView extends Component<{}, IState> {
 
     state: IState = {
         dateToShow: new Date(),
@@ -46,7 +44,7 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
         await this.fetchScheduledRecipes()
     }
 
-    async componentDidUpdate(_: IProps, prevState: IState) {
+    async componentDidUpdate(_: {}, prevState: IState) {
         if (this.state.dateToShow !== prevState.dateToShow) {
             await this.fetchScheduledRecipes()
         }

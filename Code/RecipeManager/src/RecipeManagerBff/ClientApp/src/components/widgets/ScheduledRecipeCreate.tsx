@@ -32,14 +32,14 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                 <div className="scheduledRecipeCreate__container">
 
                     <p>{StringResource.General.SelectedRecipe}</p>
-                    <p>{this.state.scheduledRecipe.recipe?.name !== undefined ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}</p>
+                    <p>{this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}</p>
                 </div>
 
-                <Button onClick={this.props.handleCancel}>Abbrechen</Button>
+                <Button onClick={this.props.handleCancel}>{StringResource.General.Cancel}</Button>
                 <Button 
                     onClick={() => this.props.handleAdd(this.state.scheduledRecipe)}
                     disabled={this.state.scheduledRecipe.recipe === undefined}>
-                    Hinzufügen
+                    {StringResource.General.Add}
                 </Button>
 
                 <p className="scheduledRecipeCreate__listTitle">Wählen Sie das gewünschte Rezept aus</p>
