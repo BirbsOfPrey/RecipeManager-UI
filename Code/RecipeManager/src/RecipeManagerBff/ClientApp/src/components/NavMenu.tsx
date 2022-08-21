@@ -14,10 +14,10 @@ interface IState {
 interface IProps { }
 
 export class NavMenu extends Component<IProps, IState> {
-  static displayName = NavMenu.name;
+  static displayName = NavMenu.name
 
   constructor(props: IProps) {
-    super(props);
+    super(props)
 
     this.state = {
       collapsed: true,
@@ -25,18 +25,18 @@ export class NavMenu extends Component<IProps, IState> {
       logoutUrl: "/bff/logout"
     }
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.fetchIsUserLoggedIn = this.fetchIsUserLoggedIn.bind(this);
+    this.toggleNavbar = this.toggleNavbar.bind(this)
+    this.fetchIsUserLoggedIn = this.fetchIsUserLoggedIn.bind(this)
   }
 
   componentDidMount() {
-    (async () => this.fetchIsUserLoggedIn())();
+    (async () => this.fetchIsUserLoggedIn())()
   }
 
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed,
-    });
+    })
   }
 
   async fetchIsUserLoggedIn() {
@@ -45,18 +45,18 @@ export class NavMenu extends Component<IProps, IState> {
         headers: {
           "X-CSRF": "1",
         },
-      });
+      })
 
       if (response.ok && response.status === 200) {
-        const data = await response.json();
+        const data = await response.json()
         const logoutUrl =
           data.find((claim: Claim) => claim.type === "bff:logout_url")?.value ??
-          this.state.logoutUrl;
-        this.setState({ loggedIn: true, logoutUrl });
+          this.state.logoutUrl
+        this.setState({ loggedIn: true, logoutUrl })
       }
     } catch (e) {
-      console.error(e);
-      this.setState({ loggedIn: false });
+      console.error(e)
+      this.setState({ loggedIn: false })
     }
   }
 
@@ -104,6 +104,6 @@ export class NavMenu extends Component<IProps, IState> {
           </Container>
         </Navbar>
       </header>
-    );
+    )
   }
 }

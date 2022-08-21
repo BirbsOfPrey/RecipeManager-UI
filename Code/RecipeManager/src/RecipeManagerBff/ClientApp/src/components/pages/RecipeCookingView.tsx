@@ -149,7 +149,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         this.updateStateRecipe(
             produce(this.state.recipe, draft => {
                 if (draft.ingredientComponents && index > NO_INDEX && draft.ingredientComponents.length > index) {
-                    draft.ingredientComponents.splice(index, 1);
+                    draft.ingredientComponents.splice(index, 1)
                 }
             })
         )

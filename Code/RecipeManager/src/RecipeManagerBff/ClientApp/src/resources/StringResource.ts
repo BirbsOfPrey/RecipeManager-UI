@@ -65,4 +65,4 @@ namespace StringResource {
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
 
-export default StringResource;
+export default StringResource

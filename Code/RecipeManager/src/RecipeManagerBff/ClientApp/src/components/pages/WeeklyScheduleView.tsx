@@ -65,7 +65,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
             changeDays = 7
         }
         const dateToShow = new Date(this.state.dateToShow)
-        const dayOfChangedWeek = dateToShow.getDate() + changeDays;
+        const dayOfChangedWeek = dateToShow.getDate() + changeDays
         this.setState({ dateToShow: new Date(dateToShow.setDate(dayOfChangedWeek)) })
     }
 
@@ -161,7 +161,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                             label={StringResource.General.SelectNewDate}
                             value={this.state.dateToShow}
                             onChange={(newValue: Date | null) => {
-                                this.setDate(newValue);
+                                this.setDate(newValue)
                             }}
                             inputFormat='dd.MM.yyyy'
                             renderInput={(params: any) => <TextField {...params} />}

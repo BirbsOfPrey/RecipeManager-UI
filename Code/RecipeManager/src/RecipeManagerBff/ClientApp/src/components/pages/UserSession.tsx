@@ -1,5 +1,5 @@
-import { Component } from "react";
-import { Claim } from "../../models/security/Claim";
+import { Component } from "react"
+import { Claim } from "../../models/security/Claim"
 
 interface IState {
   userSessionInfo: [Claim]
@@ -9,15 +9,15 @@ interface IState {
 interface IProps { }
 
 export class UserSession extends Component<IProps, IState> {
-  static displayName = UserSession.name;
+  static displayName = UserSession.name
 
   constructor(props: IProps) {
-    super(props);
-    this.state = { userSessionInfo: [{}], loading: true };
+    super(props)
+    this.state = { userSessionInfo: [{}], loading: true }
   }
 
   componentDidMount() {
-    this.fetchUserSessionInfo();
+    this.fetchUserSessionInfo()
   }
 
   static renderUserSessionTable(userSession: [Claim]) {
@@ -38,7 +38,7 @@ export class UserSession extends Component<IProps, IState> {
           ))}
         </tbody>
       </table>
-    );
+    )
   }
 
   render() {
@@ -48,7 +48,7 @@ export class UserSession extends Component<IProps, IState> {
       </p>
     ) : (
       UserSession.renderUserSessionTable(this.state.userSessionInfo)
-    );
+    )
 
     return (
       <div>
@@ -56,7 +56,7 @@ export class UserSession extends Component<IProps, IState> {
         <p>This pages shows the current user's session.</p>
         {contents}
       </div>
-    );
+    )
   }
 
   async fetchUserSessionInfo() {
@@ -64,8 +64,8 @@ export class UserSession extends Component<IProps, IState> {
       headers: {
         "X-CSRF": "1",
       },
-    });
-    const data = await response.json();
-    this.setState({ userSessionInfo: data, loading: false });
+    })
+    const data = await response.json()
+    this.setState({ userSessionInfo: data, loading: false })
   }
 }
