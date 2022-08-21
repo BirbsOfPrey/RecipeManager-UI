@@ -18,11 +18,15 @@ namespace StringResource {
         export const GeneralError: string = 'Es ist ein Fehler aufgetreten!'
         export const NoRecipesToDisplay: string = 'Es wurden keine Rezepte zur Darstellung gefunden!'
         export const RecipeNotFound: string = 'Rezept nicht gefunden. Berechtigung fehlt oder Rezept existiert nicht.'
+        export const ScheduledRecipeNotFound: string = 'Terminiertes Rezept nicht gefunden. Berechtigung fehlt oder terminiertes Rezept existiert nicht.'
         export const NoContent: string = 'Hier ist nichts vorhanden!'
         export const RequiredRecipeName: string = 'Ein Rezeptname ist erforderlich'
         export const RequiredIngredientName: string = 'Ein Zutatenname ist erforderlich'
         export const RequiredIngredientComponentAmount: string = 'Eine Menge ist erforderlich'
         export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidator.minPersonRefAmount} - ${RecipeValidator.maxPersonRefAmount} liegen`
+        export const DeleteScheduledRecipeQuestion: string = 'Terminiertes Rezept löschen?'
+        export const DeleteScheduledRecipeContent: string = 'Das terminierte Rezept wird gelöscht'
+        export const NoRecipeSelected: string = 'Kein Rezept ausgewählt'
         export const MaxDescriptionLength: string = `Maximallänge der Beschreibung ist ${RecipeValidator.maxDescriptionLength} Zeichen`
         export const InvalidRecipeFields: string = 'Das Rezept enthält ungültige Werte und kann daher nicht gespeichert werden.'
     }
@@ -46,6 +50,7 @@ namespace StringResource {
         export const AddIngredient: string = 'Zutat hinzufügen'
         export const AddAnotherIngredient: string = 'Weitere Zutat hinzufügen'
         export const NoIngredients: string = 'Keine Zutaten definiert'
+        export const NoScheduledRecipes: string = 'Keine terminierten Rezepte vorhanden'
         export const NoRecipeName: string = 'Kein Name'
         export const NoRecipeDescription: string = 'Keine Beschreibung'
         export const DefineIngredientComponent: string = 'Wählen Sie die Zutat und die gewünschte Menge für das Rezept'
@@ -53,14 +58,9 @@ namespace StringResource {
         export const AddStep: string = 'Schritt hinzufügen'
         export const StepInstruction: string = 'Beschreiben Sie die Tätigkeiten von diesem Schritt'
         export const WeeklySchedule: string = 'Wochenplan'
-        export const Monday: string = 'Montag'
-        export const Tuesday: string = 'Dienstag'
-        export const Wednesday: string = 'Mittwoch'
-        export const Thursday: string = 'Donnerstag'
-        export const Friday: string = 'Freitag'
-        export const Saturday: string = 'Samstag'
-        export const Sunday: string = 'Sonntag'
-        export const Unknown: string = 'Unbekannt'
+        export const Delete: string = 'Löschen'
+        export const SelectedRecipe: string = 'Ausgewähltes Rezept'
+        export const SelectNewDate: string = 'Neues Datum auswählen'
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
