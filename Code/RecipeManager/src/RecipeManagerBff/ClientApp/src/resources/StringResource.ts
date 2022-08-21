@@ -31,7 +31,8 @@ namespace StringResource {
         export const InvalidRecipeFields: string = 'Das Rezept enthält ungültige Werte und kann daher nicht gespeichert werden.'
     }
     export namespace General {
-        export const RecipeManagement: string = 'Verwaltung Rezepte'
+        export const AppTitle: string = 'RECIPE MANAGER'
+        export const RecipeManagement: string = 'Rezepte'
         export const RecipeName: string = 'Rezeptname'
         export const RecipeId: string = 'Rezept-Id'
         export const RecipeDescription: string = 'Rezeptbeschreibung'
