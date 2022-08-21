@@ -3,7 +3,7 @@ import { Recipe } from '../../models/Recipe'
 import { createDefaultHeader, RecipesUrl } from '../../resources/Api'
 import './RecipeList.css'
 import StringResource from '../../resources/StringResource'
-import { List } from '@mui/material'
+import { LinearProgress, List } from '@mui/material'
 import { RecipeListItemSelector } from './RecipeListItemSelector'
 
 interface IProps {
@@ -31,29 +31,29 @@ export class RecipeListSelector extends Component<IProps, IState> {
     }
 
     render() {
-        const { recipes } = this.state
+        const recipes = this.state.recipes
 
-        if (this.state.loading) {
-            return <p>Loading...</p>
+        if (recipes.length !== 0) {
+            return (
+                <div className="recipeListContentSelector__container">
+                    <List className="recipeListContentSelector__list">
+                        {recipes.map(recipe => (
+                            <RecipeListItemSelector
+                                key={recipe.id}
+                                recipe={recipe}
+                                selectRecipe={this.props.selectRecipe} />
+                        ))}
+                    </List>
+                </div>
+            )
+        } else if (this.state.loading === true) {
+            return (
+                <LinearProgress />
+            )
         } else {
-            if (recipes.length !== 0) {
-                return (
-                    <div className="recipeListContentSelector__container">
-                        <List className="recipeListContentSelector__list">
-                            {recipes.map(recipe => (
-                                <RecipeListItemSelector
-                                    key={recipe.id}
-                                    recipe={recipe}
-                                    selectRecipe={this.props.selectRecipe} />
-                            ))}
-                        </List>
-                    </div>
-                )
-            } else {
-                return (
-                    <p className="recipeListContent__message">{StringResource.Messages.NoRecipesToDisplay}</p>
-                )
-            }
+            return (
+                <p className="recipeListContent__message">{StringResource.Messages.NoRecipesToDisplay}</p>
+            )
         }
     }
 }
