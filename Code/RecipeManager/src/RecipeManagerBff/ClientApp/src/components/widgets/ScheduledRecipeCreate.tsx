@@ -22,7 +22,7 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
     }
 
     updateScheduledRecipe = (recipe: Recipe) => {
-        const updatedScheduledRecipe = { ...this.state.scheduledRecipe, ["recipe"]: recipe }
+        const updatedScheduledRecipe = { ...this.state.scheduledRecipe, recipe: recipe }
         this.setState({ scheduledRecipe: updatedScheduledRecipe })
     }
 

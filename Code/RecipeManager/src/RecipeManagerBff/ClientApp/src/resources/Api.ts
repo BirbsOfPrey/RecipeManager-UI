@@ -10,3 +10,7 @@ export function createDefaultHeader(): Headers {
         'Content-Type': 'application/json'
     })
 }
+
+export function scheduledRecipeFromToQuery(from: Date, to: Date): string {
+    return `${ScheduledRecipesUrl}?from=${from.toISOString()}&to=${to.toISOString()}`
+}
