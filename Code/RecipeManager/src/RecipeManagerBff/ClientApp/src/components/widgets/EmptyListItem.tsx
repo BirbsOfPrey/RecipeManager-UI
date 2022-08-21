@@ -1,4 +1,4 @@
-import { ListItem, ListItemAvatar, ListItemText } from "@mui/material";
+import { ListItem, ListItemAvatar, ListItemText } from "@mui/material"
 
 interface IProps {
     icon?: React.ReactElement

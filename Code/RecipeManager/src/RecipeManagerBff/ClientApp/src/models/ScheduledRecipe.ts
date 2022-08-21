@@ -1,6 +1,9 @@
+import { immerable } from "immer"
 import { Recipe } from "./Recipe"
 
 export class ScheduledRecipe{
+    [immerable]: boolean = true
+    
     id?: number
     date: Date
     recipe?: Recipe

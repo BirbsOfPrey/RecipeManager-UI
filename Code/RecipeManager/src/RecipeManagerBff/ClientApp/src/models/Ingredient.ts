@@ -4,7 +4,11 @@ export class Ingredient {
     [immerable]: boolean = true
     
     id?: number
-    name?: string
+    name: string
+
+    constructor() {
+        this.name = ""
+    }
 }
 
 export function createIngredient() {

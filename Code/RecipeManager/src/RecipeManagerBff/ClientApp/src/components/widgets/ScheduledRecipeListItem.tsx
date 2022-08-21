@@ -1,6 +1,6 @@
 import { IconButton, ListItemAvatar, ListItemText, ListItemSecondaryAction, ListItem } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
-import EventIcon from '@mui/icons-material/Event';
+import EventIcon from '@mui/icons-material/Event'
 import { Component } from "react"
 import { ScheduledRecipe } from "../../models/ScheduledRecipe"
 

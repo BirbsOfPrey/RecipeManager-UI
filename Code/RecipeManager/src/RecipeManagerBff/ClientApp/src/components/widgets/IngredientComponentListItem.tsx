@@ -28,7 +28,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                     <EggIcon />
                 </ListItemAvatar>
                 <ListItemText
-                    primary={this.props.ingredientComponent.ingredient ? this.props.ingredientComponent.ingredient.name : ""}
+                    primary={this.props.ingredientComponent.ingredient.name}
                     secondary={(amount > 0 ? amount : "") + " " + this.props.ingredientComponent.physicalQuantity}
                 />
                 <ListItemSecondaryAction>

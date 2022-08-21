@@ -7,7 +7,7 @@ import StringResource from "../../resources/StringResource"
 
 interface IProps {
     setValue: (ingredientName: string) => void
-    ingredient?: Ingredient
+    ingredient: Ingredient
 }
 
 interface IState {
@@ -37,7 +37,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
             this.setState({ ingredientNames: [] })
         } else {
             const ingredients: Ingredient[] = await response.json()
-            const ingredientNames: string[] = ingredients.map(i => i.name ? i.name : "")
+            const ingredientNames: string[] = ingredients.map(i => i.name)
             this.setState({ ingredientNames: ingredientNames })
         }
     }
@@ -52,10 +52,10 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                     required
                     fullWidth
                     label={StringResource.General.Ingredient}
-                    value={this.props.ingredient ? this.props.ingredient.name : ""}
+                    value={this.props.ingredient.name}
                     onChange={event => this.props.setValue(event.target.value)}
-                    error={!IngredientValidator.validateName(this.props.ingredient?.name)}
-                    helperText={IngredientValidator.validateName(this.props.ingredient?.name) ? " " : StringResource.Messages.RequiredIngredientName}
+                    error={!IngredientValidator.validateName(this.props.ingredient.name)}
+                    helperText={IngredientValidator.validateName(this.props.ingredient.name) ? " " : StringResource.Messages.RequiredIngredientName}
                 />)
         } else {
             field = (
@@ -67,7 +67,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                         matchFrom: 'any',
                         limit: 100,
                     })}
-                    value={this.props.ingredient ? this.props.ingredient.name : ""}
+                    value={this.props.ingredient.name}
                     onChange={(_, value) => this.props.setValue(value ? value : "")
                     }
                     renderInput={(params) => { return (<TextField {...params} fullWidth label={StringResource.General.Ingredient} variant="filled" />) }}

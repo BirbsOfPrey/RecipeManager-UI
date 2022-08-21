@@ -1,11 +1,11 @@
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { Component } from 'react';
-import { NO_INDEX } from '../../models/helper/ArrayHelper';
-import { createIngredient } from '../../models/Ingredient';
-import { createIngredientComponent, IngredientComponent } from '../../models/IngredientComponent';
-import { IngredientComponentValidator } from '../../models/IngredientComponentValidator';
-import StringResource from '../../resources/StringResource';
-import { IngredientSelectCreate } from '../controls/IngredientSelectCreate';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+import produce from 'immer'
+import { Component } from 'react'
+import { NO_INDEX } from '../../models/helper/ArrayHelper'
+import { createIngredientComponent, IngredientComponent } from '../../models/IngredientComponent'
+import { IngredientComponentValidator } from '../../models/IngredientComponentValidator'
+import StringResource from '../../resources/StringResource'
+import { IngredientSelectCreate } from '../controls/IngredientSelectCreate'
 import './IngredientComponentDialog.css'
 
 interface IProps {
@@ -28,20 +28,37 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
 
     componentDidUpdate(prevProps: IProps, _: IState) {
         if (this.props.open && !prevProps.open) {
-            this.setState({ ingredientComponent: this.props.ingredientComponent || createIngredientComponent() })
+            this.updateStateIngredientComponent(this.props.ingredientComponent || createIngredientComponent())
         }
     }
 
-    updateIngredientComp = (property: string, value: string) => {
-        var updatedIngrComp = {...this.state.ingredientComponent, [property]: value} as IngredientComponent
-        this.setState({ ingredientComponent: updatedIngrComp })
+    updateIngredientComponent = (property: string, value: string) => {
+        this.updateStateIngredientComponent(
+            produce(this.state.ingredientComponent, draft => {
+                switch (property) {
+                    case "physicalQuantity":
+                        draft.physicalQuantity = value
+                        break
+                    case "amount":
+                        draft.amount = value as unknown as number
+                        break
+                    default:
+                        break
+                }
+            })
+        )
     }
 
     updateIngredient = (ingredientName: string) => {
-        var updatedIngrComp = {...this.state.ingredientComponent} as IngredientComponent
-        updatedIngrComp.ingredient = updatedIngrComp.ingredient || createIngredient()
-        updatedIngrComp.ingredient.name = ingredientName
-        this.setState({ ingredientComponent: updatedIngrComp })
+        this.updateStateIngredientComponent(
+            produce(this.state.ingredientComponent, draft => {
+                draft.ingredient.name = ingredientName
+            })
+        )
+    }
+
+    updateStateIngredientComponent(updatedIngredientComponent: IngredientComponent) {
+        this.setState({ ingredientComponent: updatedIngredientComponent })
     }
 
     render() {
@@ -63,7 +80,7 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                             type="number"
                             defaultValue={this.state.ingredientComponent.amount || IngredientComponentValidator.minAmount}
                             inputProps={{ min: IngredientComponentValidator.minAmount }}
-                            onChange={event => this.updateIngredientComp('amount', event.target.value)}
+                            onChange={event => this.updateIngredientComponent('amount', event.target.value)}
                             error={!IngredientComponentValidator.validateAmount(this.state.ingredientComponent.amount)}
                             helperText={IngredientComponentValidator.validateAmount(this.state.ingredientComponent.amount) ? " " : StringResource.Messages.RequiredIngredientComponentAmount}
                         />
@@ -73,7 +90,7 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                             id="unit"
                             label="Einheit"
                             value={this.state.ingredientComponent.physicalQuantity}
-                            onChange={event => this.updateIngredientComp('physicalQuantity', event.target.value)}
+                            onChange={event => this.updateIngredientComponent('physicalQuantity', event.target.value)}
                             helperText=""
                         />
                     </DialogContent>
