@@ -7,6 +7,10 @@ namespace StringResource {
         export const Recipe: string = 'recipe'
         export const RecipeId: string = ':recipeId'
         export const WeeklySchedule: string = 'weeklyschedule'
+        export const UserSession: string = 'user-session'
+        export const Login: string = 'bff/login'
+        export const Logout: string = 'bff/logout'
+        export const About: string = 'about'
         export const Any: string = '*'
     }
     export namespace Queries {
@@ -62,6 +66,10 @@ namespace StringResource {
         export const Delete: string = 'Löschen'
         export const SelectedRecipe: string = 'Ausgewähltes Rezept'
         export const SelectNewDate: string = 'Neues Datum auswählen'
+        export const Session: string = 'Sitzung'
+        export const About: string = 'Über'
+        export const Login: string = 'Login'
+        export const Logout: string = 'Logout'
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }

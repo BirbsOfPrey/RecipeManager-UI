@@ -1,39 +1,87 @@
 import * as React from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
-import MenuItem from '@mui/material/MenuItem'
+import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography, Tooltip } from '@mui/material'
 import DinnerDining from '@mui/icons-material/DinnerDining'
+import MenuIcon from '@mui/icons-material/Menu'
 import StringResource from '../resources/StringResource'
+import { useNavigate } from 'react-router-dom'
+import { Claim } from '../models/security/Claim'
+import { createDefaultHeader } from '../resources/Api'
+import { useEffect } from 'react'
 
 const pages = [StringResource.General.RecipeManagement, StringResource.General.WeeklySchedule]
-const settings = ['Session', 'About', 'Logout']
+const settings = [StringResource.General.Session, StringResource.General.About]
 
 const AppNavBar = () => {
+  const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
+  const [loggedIn, setLoggedIn] = React.useState<boolean>(false)
+  const [logoutUrl, setLogoutUrl] = React.useState<string>(StringResource.Routes.Logout)
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+    setAnchorElNav(event.currentTarget)
   }
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
+    setAnchorElUser(event.currentTarget)
   }
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    setAnchorElNav(null)
   }
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    setAnchorElUser(null)
+  }
+
+  useEffect(() => {
+    (async () => await fetchIsUserLoggedIn())()
+  })
+
+  const openPage = (page: String) => {
+    handleCloseNavMenu()
+    handleCloseUserMenu()
+
+    switch (page) {
+      case StringResource.General.RecipeManagement:
+        navigate(StringResource.Routes.RecipeManagement)
+        break
+      case StringResource.General.WeeklySchedule:
+        navigate(StringResource.Routes.WeeklySchedule)
+        break
+      case StringResource.General.Session:
+        navigate(StringResource.Routes.UserSession)
+        break
+      case StringResource.General.About:
+        navigate(StringResource.Routes.About)
+        break
+      case StringResource.General.Login:
+        navigate(StringResource.Routes.Login)
+        break
+      case StringResource.General.Logout:
+        navigate(StringResource.Routes.Logout)
+        break
+      default:
+        break
+    }
+    (async () => fetchIsUserLoggedIn())()
+  }
+
+  const fetchIsUserLoggedIn = async () => {
+    try {
+      const response = await fetch("/bff/user", {
+        headers: createDefaultHeader()
+      })
+
+      if (response.ok && response.status === 200) {
+        const data = await response.json()
+        const url = data.find((claim: Claim) => claim.type === "bff:logout_url")?.value ?? logoutUrl
+        setLogoutUrl(url)
+        setLoggedIn(true)
+      }
+    } catch (e) {
+      console.error(e);
+      setLoggedIn(false)
+    }
   }
 
   return (
@@ -63,15 +111,15 @@ const AppNavBar = () => {
 
           {/* Pages:    Medium size and higher */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {loggedIn ? pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => openPage(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
-            ))}
+            )) : <></>}
           </Box>
 
           {/* Menu with pages:    Small sizes */}
@@ -104,11 +152,11 @@ const AppNavBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {loggedIn ? pages.map((page) => (
+                <MenuItem key={page} onClick={() => openPage(page)}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
-              ))}
+              )) : <></>}
             </Menu>
           </Box>
 
@@ -155,11 +203,14 @@ const AppNavBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              {loggedIn ? settings.map((setting) => (
+                <MenuItem key={setting} onClick={() => openPage(setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              )) : <></>}
+              <MenuItem component="a" href={loggedIn ? logoutUrl : StringResource.Routes.Login}>
+                <Typography textAlign="center">{loggedIn ? StringResource.General.Logout : StringResource.General.Login}</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
