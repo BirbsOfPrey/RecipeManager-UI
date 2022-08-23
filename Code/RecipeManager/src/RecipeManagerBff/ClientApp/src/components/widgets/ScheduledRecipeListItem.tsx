@@ -3,6 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EventIcon from '@mui/icons-material/Event'
 import { Component } from "react"
 import { ScheduledRecipe } from "../../models/ScheduledRecipe"
+import StringResource from "../../resources/StringResource"
 
 interface IProps {
     scheduledRecipe: ScheduledRecipe
@@ -21,10 +22,8 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                     <EventIcon />
                 </ListItemAvatar>
                 <ListItemText
-                    primary={this.props.scheduledRecipe.recipe ? this.props.scheduledRecipe.recipe.name : ""}
-                    // TODO: Auskommentieren, wenn verfügbar
-                    // secondary={this.props.scheduledRecipe.recipe ? this.props.scheduledRecipe.recipe.description : ""}
-                    secondary={"Keine Beschreibung vorhanden"}
+                    primary={this.props.scheduledRecipe.recipe?.name ? this.props.scheduledRecipe.recipe.name : StringResource.General.NoRecipeName}
+                    secondary={this.props.scheduledRecipe.recipe?.description ? this.props.scheduledRecipe.recipe.description : StringResource.General.NoRecipeDescription}
                 />
                 <ListItemSecondaryAction>
                         <IconButton
