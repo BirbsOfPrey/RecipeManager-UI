@@ -52,6 +52,12 @@ export class WeeklyScheduleView extends Component<{}, IState> {
 
     getDayOfWeekToShow = (dayOfWeek: number): Date => {
         const dateToShow = new Date(this.state.dateToShow)
+
+        // If dateToShow is Sunday switch week, because the internal week is from Sunday-->Saturday instead of Monday-->Sunday
+        if (dateToShow.getDay() === 0){
+            dayOfWeek -= 7
+        }
+
         const dayOfWeekToShow = dateToShow.getDate() - dateToShow.getDay() + dayOfWeek
         const dateOfWeek = new Date(dateToShow.setDate(dayOfWeekToShow))
         return dateOfWeek
