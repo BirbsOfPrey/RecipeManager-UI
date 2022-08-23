@@ -65,6 +65,6 @@ test('calls method scheduledRecipeDeleted on click with correct parameter', () =
     userEvent.click(screen.getByRole("button"))
 
     // Assert
-    expect(mockDeleted.mock.calls.length).toEqual(1)
+    expect(mockDeleted.mock.calls.length).toBe(1)
     expect(mockDeleted).toHaveBeenCalledWith(testId)
 })
