@@ -1,10 +1,10 @@
 import { List } from "@mui/material"
 import EventIcon from '@mui/icons-material/Event'
-import React, { Component } from "react"
+import { Component } from "react"
 import { EmptyListItem } from "./EmptyListItem"
 import StringResource from "../../resources/StringResource"
 import { ScheduledRecipeListItem } from "./ScheduledRecipeListItem"
-import { createScheduledRecipe, ScheduledRecipe } from "../../models/ScheduledRecipe"
+import { ScheduledRecipe } from "../../models/ScheduledRecipe"
 
 interface IProps {
     scheduledRecipes: ScheduledRecipe[]
@@ -13,15 +13,16 @@ interface IProps {
 
 export class ScheduledRecipeList extends Component<IProps, {}> {
 
-    generate(element: React.ReactElement) {
+    generate() {
         if (this.props.scheduledRecipes.length > 0) {
             return this.props.scheduledRecipes.map((sr, idx) =>
-                React.cloneElement(element, {
-                    scheduledRecipe: sr,
-                    key: idx
-                }))
+            (<ScheduledRecipeListItem
+                key={idx}
+                scheduledRecipe={sr}
+                scheduledRecipeDeleted={this.props.deleteScheduledRecipe}
+            />))
         } else {
-            return <EmptyListItem icon={<EventIcon/>} text={StringResource.General.NoScheduledRecipes} />
+            return <EmptyListItem icon={<EventIcon />} text={StringResource.General.NoScheduledRecipes} />
         }
     }
 
@@ -29,10 +30,7 @@ export class ScheduledRecipeList extends Component<IProps, {}> {
         return (
             <div className="scheduledRecipeList__container">
                 <List className="scheduledRecipeList__List">
-                    {this.generate(<ScheduledRecipeListItem
-                        scheduledRecipe={createScheduledRecipe()}
-                        scheduledRecipeDeleted={this.props.deleteScheduledRecipe}
-                         />)}
+                    {this.generate()}
                 </List>
             </div>
         )

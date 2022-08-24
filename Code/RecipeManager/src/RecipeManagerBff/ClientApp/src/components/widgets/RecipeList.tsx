@@ -37,15 +37,16 @@ export class RecipeList extends Component<{}, IState> {
         const recipes = this.state.recipes
 
         if (this.state.error.length > 0) {
-            return (
-                <p className="recipeListContent__message">{StringResource.Messages.NoRecipesToDisplay}</p>
-            )
+            return <p className="recipeListContent__message">{this.state.error}</p>
+        } else if (this.state.loading) {
+            return <LinearProgress />
+        } else if (recipes.length <= 0) {
+            return <p>{StringResource.Messages.NoRecipesToDisplay}</p>
         }
 
         return (
             <div className="recipeListContent__container">
                 <p className="recipeListContent__title">{StringResource.General.RecipeList}</p>
-                {this.state.loading ? <LinearProgress /> : <></>}
                 <List className="recipeListContent__list">
                     {recipes.map(recipe => (
                         <RecipeListItem
