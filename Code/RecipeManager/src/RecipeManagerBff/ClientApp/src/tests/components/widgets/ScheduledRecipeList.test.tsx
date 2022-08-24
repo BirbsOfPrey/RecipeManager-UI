@@ -44,9 +44,9 @@ test('calls method deleteScheduledRecipe on click in ScheduledRecipeListItem wit
     // Arrange
     const testId = 66
     testScheduledRecipe.id = testId
-
-    // Act
     render(<BrowserRouter><ScheduledRecipeList scheduledRecipes={[testScheduledRecipe]} deleteScheduledRecipe={mockDelete} /></BrowserRouter>)
+    
+    // Act
     userEvent.click(screen.getByRole("button"))
 
     // Assert
