@@ -1,6 +1,6 @@
 import { RecipeCookingView } from "./RecipeCookingView"
-import { useParams, useSearchParams } from "react-router-dom";
-import StringResource from "../../resources/StringResource";
+import { useParams, useSearchParams } from "react-router-dom"
+import StringResource from "../../resources/StringResource"
 
 export const RecipeView = () => {
     let params = useParams()

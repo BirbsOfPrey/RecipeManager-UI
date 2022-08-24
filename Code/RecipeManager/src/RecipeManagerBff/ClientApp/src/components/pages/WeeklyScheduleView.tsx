@@ -18,19 +18,17 @@ import DialogTitle from '@mui/material/DialogTitle'
 import { ScheduledRecipeCreate } from "../widgets/ScheduledRecipeCreate"
 import TextField from "@mui/material/TextField"
 
-interface IProps { }
-
 interface IState {
     dateToShow: Date
     scheduledRecipes: ScheduledRecipe[]
     openDeleteConfirmDialog: boolean
-    scheduledRecipeIdToDelete: number | undefined
+    scheduledRecipeIdToDelete?: number
     createScheduledRecipe: boolean
     scheduledRecipeAddDate: Date
     error: string
 }
 
-export class WeeklyScheduleView extends Component<IProps, IState> {
+export class WeeklyScheduleView extends Component<{}, IState> {
 
     state: IState = {
         dateToShow: new Date(),
@@ -46,7 +44,7 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
         await this.fetchScheduledRecipes()
     }
 
-    async componentDidUpdate(_: IProps, prevState: IState) {
+    async componentDidUpdate(_: {}, prevState: IState) {
         if (this.state.dateToShow !== prevState.dateToShow) {
             await this.fetchScheduledRecipes()
         }
@@ -54,20 +52,23 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
 
     getDayOfWeekToShow = (dayOfWeek: number): Date => {
         const dateToShow = new Date(this.state.dateToShow)
+
+        // If dateToShow is Sunday switch week, because the internal week is from Sunday-->Saturday instead of Monday-->Sunday
+        if (dateToShow.getDay() === 0){
+            dayOfWeek -= 7
+        }
+
         const dayOfWeekToShow = dateToShow.getDate() - dateToShow.getDay() + dayOfWeek
         const dateOfWeek = new Date(dateToShow.setDate(dayOfWeekToShow))
         return dateOfWeek
     }
 
-    changeWeek = async (direction: string) => {
-        let changeDays = 0
-        if (direction === 'previous') {
-            changeDays = -7
-        } else if (direction === 'next') {
-            changeDays = 7
-        }
+    changeWeek = (increaseWeek: boolean) => {
+        const dayDifferenceNextWeek = 7
+        const dayDifferencePreviousWeek = -7
+
         const dateToShow = new Date(this.state.dateToShow)
-        const dayOfChangedWeek = dateToShow.getDate() + changeDays;
+        const dayOfChangedWeek = dateToShow.getDate() + (increaseWeek ? dayDifferenceNextWeek : dayDifferencePreviousWeek)
         this.setState({ dateToShow: new Date(dateToShow.setDate(dayOfChangedWeek)) })
     }
 
@@ -150,11 +151,11 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
         } else {
             return (
                 <div className="weeklyScheduleView__container">
-                    <p>Woche vom {this.getDayOfWeekToShow(1).toLocaleDateString()} - {this.getDayOfWeekToShow(7).toLocaleDateString()}</p>
-                    <IconButton onClick={() => this.changeWeek('previous')}>
+                    <p>{StringResource.General.ShowSelectedWeek}{this.getDayOfWeekToShow(1).toLocaleDateString()} - {this.getDayOfWeekToShow(7).toLocaleDateString()}</p>
+                    <IconButton onClick={() => this.changeWeek(false)}>
                         <ArrowCircleLeft />
                     </IconButton>
-                    <IconButton onClick={() => this.changeWeek('next')}>
+                    <IconButton onClick={() => this.changeWeek(true)}>
                         <ArrowCircleRight />
                     </IconButton>
 
@@ -163,10 +164,10 @@ export class WeeklyScheduleView extends Component<IProps, IState> {
                             label={StringResource.General.SelectNewDate}
                             value={this.state.dateToShow}
                             onChange={(newValue: Date | null) => {
-                                this.setDate(newValue);
+                                this.setDate(newValue)
                             }}
                             inputFormat='dd.MM.yyyy'
-                            renderInput={(params: any) => <TextField {...params} />}
+                            renderInput={(params: any) => <TextField {...params} size='small'/>}
                         />
                     </LocalizationProvider>
 

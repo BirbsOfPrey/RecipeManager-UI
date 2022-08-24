@@ -70,8 +70,9 @@ namespace StringResource {
         export const About: string = 'Über'
         export const Login: string = 'Login'
         export const Logout: string = 'Logout'
+        export const ShowSelectedWeek: string = 'Woche vom '
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
 
-export default StringResource;
+export default StringResource
