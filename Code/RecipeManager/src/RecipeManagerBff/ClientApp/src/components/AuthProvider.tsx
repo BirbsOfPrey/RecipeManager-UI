@@ -20,7 +20,7 @@ const defaultAuthProps: IAuthProps = {
 const AuthContext = React.createContext(defaultAuthProps)
 
 export const useAuth = () => {
-    return React.useContext(AuthContext);
+    return React.useContext(AuthContext)
 }
 
 interface IProps { }
@@ -46,7 +46,6 @@ export const AuthProvider = (props: React.PropsWithChildren<IProps>) => {
                 setLoggedIn(true)
             }
         } catch (e) {
-            console.error(e);
             setLoggedIn(false)
         }
     }
