@@ -4,6 +4,7 @@ import { createDefaultHeader } from "../resources/Api"
 import StringResource from "../resources/StringResource"
 
 interface IAuthProps {
+    valid: boolean
     loggedIn: boolean
     logoutUrl: string
     handleLogin: () => void
@@ -11,10 +12,11 @@ interface IAuthProps {
 }
 
 const defaultAuthProps: IAuthProps = {
+    valid: false,
     loggedIn: false,
     logoutUrl: StringResource.Routes.Logout,
-    handleLogin: () => {},
-    handleLogout: () => {}
+    handleLogin: () => { },
+    handleLogout: () => { }
 }
 
 const AuthContext = React.createContext(defaultAuthProps)
@@ -26,6 +28,7 @@ export const useAuth = () => {
 interface IProps { }
 
 export const AuthProvider = (props: React.PropsWithChildren<IProps>) => {
+    const [valid, setValidState] = React.useState<boolean>(false)
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false)
     const [logoutUrl, setLogoutUrl] = React.useState<string>(StringResource.Routes.Logout)
 
@@ -47,20 +50,26 @@ export const AuthProvider = (props: React.PropsWithChildren<IProps>) => {
             } else {
                 setLoggedIn(false)
             }
+            setValidState(true)
         } catch (e) {
             setLoggedIn(false)
         }
     }
 
     const handleLogin = () => {
-        window.location.replace(StringResource.Routes.Login)
+        if (valid && !loggedIn) {
+            window.location.replace(StringResource.Routes.Login)
+        }
     }
 
     const handleLogout = () => {
-        window.location.replace(logoutUrl)
+        if (valid && loggedIn) {
+            window.location.replace(logoutUrl)
+        }
     }
 
     const value = {
+        valid,
         loggedIn,
         logoutUrl,
         handleLogin,
