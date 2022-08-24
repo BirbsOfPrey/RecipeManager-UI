@@ -1,6 +1,7 @@
 import { createScheduledRecipe, ScheduledRecipe } from "../../../models/ScheduledRecipe"
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { BrowserRouter } from 'react-router-dom'
 import StringResource from "../../../resources/StringResource"
 import { ScheduledRecipeList } from "../../../components/widgets/ScheduledRecipeList"
 
@@ -11,7 +12,7 @@ test('renders default text if no scheduled recipes in the list', () => {
     // Arrange
 
     // Act
-    render(<ScheduledRecipeList scheduledRecipes={[]} deleteScheduledRecipe={mockDelete} />)
+    render(<BrowserRouter><ScheduledRecipeList scheduledRecipes={[]} deleteScheduledRecipe={mockDelete} /></BrowserRouter>)
 
     // Assert
     const linkElementNoScheduledRecipes = screen.getByText(StringResource.General.NoScheduledRecipes)
@@ -22,7 +23,7 @@ test('does not render default text if any scheduled recipe is in the list', () =
     // Arrange
 
     // Act
-    render(<ScheduledRecipeList scheduledRecipes={[testScheduledRecipe]} deleteScheduledRecipe={mockDelete} />)
+    render(<BrowserRouter><ScheduledRecipeList scheduledRecipes={[testScheduledRecipe]} deleteScheduledRecipe={mockDelete} /></BrowserRouter>)
 
     // Assert
     const linkElementNoScheduledRecipes = screen.queryByText(StringResource.General.NoScheduledRecipes)
@@ -33,7 +34,7 @@ test('render as much list items as scheduled recipes are passed', () => {
     // Arrange
 
     // Act
-    const { container } = render(<ScheduledRecipeList scheduledRecipes={[testScheduledRecipe, testScheduledRecipe]} deleteScheduledRecipe={mockDelete} />)
+    const { container } = render(<BrowserRouter><ScheduledRecipeList scheduledRecipes={[testScheduledRecipe, testScheduledRecipe]} deleteScheduledRecipe={mockDelete} /></BrowserRouter>)
 
     // Assert
     expect(container.getElementsByClassName('scheduledRecipeListItem__container').length).toBe(2);
@@ -45,7 +46,7 @@ test('calls method deleteScheduledRecipe on click in ScheduledRecipeListItem wit
     testScheduledRecipe.id = testId
 
     // Act
-    render(<ScheduledRecipeList scheduledRecipes={[testScheduledRecipe]} deleteScheduledRecipe={mockDelete} />)
+    render(<BrowserRouter><ScheduledRecipeList scheduledRecipes={[testScheduledRecipe]} deleteScheduledRecipe={mockDelete} /></BrowserRouter>)
     userEvent.click(screen.getByRole("button"))
 
     // Assert

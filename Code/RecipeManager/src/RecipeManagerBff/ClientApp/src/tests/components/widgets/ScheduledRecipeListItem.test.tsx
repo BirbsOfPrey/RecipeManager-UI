@@ -2,6 +2,7 @@ import { ScheduledRecipeListItem } from "../../../components/widgets/ScheduledRe
 import { createScheduledRecipeWithDate, ScheduledRecipe } from "../../../models/ScheduledRecipe"
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { BrowserRouter } from 'react-router-dom'
 import { createRecipe, Recipe } from "../../../models/Recipe"
 import StringResource from "../../../resources/StringResource"
 
@@ -16,7 +17,7 @@ test('renders default text if no recipe in the scheduled recipe', () => {
     // Arrange
 
     // Act
-    render(<ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} />)
+    render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Assert
     const linkElementRecipeName = screen.getByText(StringResource.General.NoRecipeName)
@@ -30,7 +31,7 @@ test('renders default text if recipe without name and description in the schedul
     testScheduledRecipe.recipe = testRecipe
     
     // Act
-    render(<ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} />)
+    render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Assert
     const linkElementRecipeName = screen.getByText(StringResource.General.NoRecipeName)
@@ -46,7 +47,7 @@ test('renders correct name and description of the recipe in the scheduled recipe
     testScheduledRecipe.recipe = testRecipe
     
     // Act
-    render(<ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} />)
+    render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Assert
     const linkElementRecipeName = screen.getByText(testRecipeName)
@@ -59,7 +60,7 @@ test('calls method scheduledRecipeDeleted on click with correct parameter', () =
     // Arrange
     const testId = 66
     testScheduledRecipe.id = testId
-    render(<ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} />)
+    render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Act
     userEvent.click(screen.getByRole("button"))
