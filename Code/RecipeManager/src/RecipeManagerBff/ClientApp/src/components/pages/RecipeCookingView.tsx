@@ -1,5 +1,5 @@
 import { Component, ReactNode } from "react"
-import { Link } from "react-router-dom"
+import { Link, NavigateFunction } from "react-router-dom"
 import { createDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
@@ -33,6 +33,7 @@ interface IState {
 interface IProps {
     recipeId?: string
     editable?: boolean
+    navigate: NavigateFunction
 }
 
 export class RecipeCookingView extends Component<IProps, IState> {
@@ -225,7 +226,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
 
     render() {
         if (this.state.redirect) {
-            window.location.replace(StringResource.Routes.RecipeManagement)
+            this.props.navigate(`/${StringResource.Routes.RecipeManagement}`)
         }
 
         const saveContent: ReactNode = this.props.editable ? (
