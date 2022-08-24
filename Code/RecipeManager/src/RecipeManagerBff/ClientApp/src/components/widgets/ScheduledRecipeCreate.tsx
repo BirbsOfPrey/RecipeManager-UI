@@ -39,7 +39,7 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                     {StringResource.General.Add}
                 </Button>
 
-                <p className="scheduledRecipeCreate__listTitle">Wählen Sie das gewünschte Rezept aus</p>
+                <p className="scheduledRecipeCreate__listTitle">{StringResource.General.SelectRecipe}</p>
 
                 <RecipeListSelector
                     selectRecipe={this.updateScheduledRecipe} />
