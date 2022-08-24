@@ -7,6 +7,10 @@ namespace StringResource {
         export const Recipe: string = 'recipe'
         export const RecipeId: string = ':recipeId'
         export const WeeklySchedule: string = 'weeklyschedule'
+        export const UserSession: string = 'user-session'
+        export const Login: string = 'bff/login'
+        export const Logout: string = 'bff/logout'
+        export const About: string = 'about'
         export const Any: string = '*'
     }
     export namespace Queries {
@@ -31,7 +35,8 @@ namespace StringResource {
         export const InvalidRecipeFields: string = 'Das Rezept enthält ungültige Werte und kann daher nicht gespeichert werden.'
     }
     export namespace General {
-        export const RecipeManagement: string = 'Verwaltung Rezepte'
+        export const AppTitle: string = 'RECIPE MANAGER'
+        export const RecipeManagement: string = 'Rezepte'
         export const RecipeName: string = 'Rezeptname'
         export const RecipeId: string = 'Rezept-Id'
         export const RecipeDescription: string = 'Rezeptbeschreibung'
@@ -61,6 +66,10 @@ namespace StringResource {
         export const Delete: string = 'Löschen'
         export const SelectedRecipe: string = 'Ausgewähltes Rezept'
         export const SelectNewDate: string = 'Neues Datum auswählen'
+        export const Session: string = 'Sitzung'
+        export const About: string = 'Über'
+        export const Login: string = 'Login'
+        export const Logout: string = 'Logout'
         export const ShowSelectedWeek: string = 'Woche vom '
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'

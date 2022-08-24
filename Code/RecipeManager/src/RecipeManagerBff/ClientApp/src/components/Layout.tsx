@@ -1,21 +1,17 @@
 import { Container } from '@mui/material'
-import { NavMenu } from './NavMenu'
-import { Copyright } from './widgets/Copyright'
 import { Outlet } from 'react-router-dom'
+import AppNavBar from './AppNavBar'
 import './Layout.css'
 
 export const Layout = () => {
     return (
         <div className={"layout__container "}>
-            <nav>
-                <NavMenu />
-            </nav>
+            <AppNavBar />
             <main>
                 <Container>
-                    <Outlet/>
+                    <Outlet />
                 </Container>
             </main>
-            <Copyright />
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import { List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material"
 import Add from '@mui/icons-material/Add'
 import EggIcon from '@mui/icons-material/Egg'
-import React, { Component, ReactNode } from "react"
+import { Component, ReactNode } from "react"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
 import { createIngredientComponent, IngredientComponent } from "../../models/IngredientComponent"
 import { EmptyListItem } from "./EmptyListItem"
@@ -35,14 +35,19 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
         indexForDialog: NO_INDEX
     }
 
-    generate(element: React.ReactElement) {
+    generate(personAmount: number) {
         if (this.props.ingredientComponents && this.props.ingredientComponents.length > 0) {
             return this.props.ingredientComponents.map((ic, idx) =>
-                React.cloneElement(element, {
-                    key: idx,
-                    index: idx,
-                    ingredientComponent: ic
-                }))
+            (<IngredientComponentListItem
+                key={idx}
+                ingredientComponent={ic}
+                index={idx}
+                editable={this.props.editable}
+                personAmount={personAmount}
+                personRefAmount={this.props.personRefAmount}
+                ingredientComponentSelected={this.openIngredientComponent}
+                ingredientComponentDeleted={this.props.deleteIngredientComponent}
+            />))
         } else {
             return <EmptyListItem icon={<EggIcon />} text={StringResource.General.NoIngredients} />
         }
@@ -85,16 +90,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                     editable={this.props.editable}
                 />
                 <List className="recipeEditIngredients__ingredientList">
-                    {this.generate(
-                        <IngredientComponentListItem
-                            ingredientComponent={createIngredientComponent()}
-                            index={NO_INDEX}
-                            editable={this.props.editable}
-                            personAmount={personAmount}
-                            personRefAmount={this.props.personRefAmount}
-                            ingredientComponentSelected={this.openIngredientComponent}
-                            ingredientComponentDeleted={this.props.deleteIngredientComponent}
-                        />)}
+                    {this.generate(personAmount)}
                     {addComponent}
                 </List>
                 <IngredientComponentDialog
