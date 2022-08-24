@@ -1,6 +1,5 @@
-import { IconButton, ListItemButton, ListItemAvatar, ListItemText, ListItemSecondaryAction } from "@mui/material"
+import { ListItemButton, ListItemAvatar, ListItemText } from "@mui/material"
 import DinnerDining from '@mui/icons-material/DinnerDining'
-import Edit from '@mui/icons-material/Edit'
 import { Recipe } from "../../models/Recipe"
 import { Component } from "react"
 import { Link } from 'react-router-dom'
@@ -35,14 +34,6 @@ export class RecipeListItem extends Component<IProps, {}> {
                     primary={name}
                     secondary={description}
                 />
-                <ListItemSecondaryAction>
-                    <IconButton
-                        edge="end"
-                        aria-label="edit"
-                        component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
-                        <Edit />
-                    </IconButton>
-                </ListItemSecondaryAction>
             </ListItemButton>
         )
     }

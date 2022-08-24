@@ -5,15 +5,15 @@ interface IProps { }
 
 export const ProtectedRoute = (props: React.PropsWithChildren<IProps>): ReactJSXElement => {
     const { loggedIn, handleLogin } = useAuth()
-  
+
     if (!loggedIn) {
-      handleLogin()
-      return <div></div>
+        handleLogin()
+        return <div></div>
     }
-    
+
     if (props.children) {
         return props.children as ReactJSXElement
     } else {
         return <></>
     }
-  }
+}

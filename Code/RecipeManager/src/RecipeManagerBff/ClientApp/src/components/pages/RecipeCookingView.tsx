@@ -1,14 +1,17 @@
 import { Component, ReactNode } from "react"
-import { Link } from "react-router-dom"
+import { Link, NavigateFunction } from "react-router-dom"
 import { createDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
-import { IconButton, LinearProgress } from "@mui/material"
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+import Edit from '@mui/icons-material/Edit'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import DeleteIcon from '@mui/icons-material/Delete'
 import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
 import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
@@ -23,12 +26,14 @@ interface IState {
     recipe: Recipe
     loading: boolean
     saving: boolean
+    openDeleteConfirmDialog: boolean
     error: string
 }
 
 interface IProps {
     recipeId?: string
     editable?: boolean
+    navigate: NavigateFunction
 }
 
 export class RecipeCookingView extends Component<IProps, IState> {
@@ -38,6 +43,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         recipe: createRecipe(),
         loading: false,
         saving: false,
+        openDeleteConfirmDialog: false,
         error: ''
     }
 
@@ -172,6 +178,29 @@ export class RecipeCookingView extends Component<IProps, IState> {
         }
     }
 
+    requestToDeleteRecipe = () => {
+        this.setState({ openDeleteConfirmDialog: true })
+    }
+
+    deleteRecipe = async () => {
+        const response = await fetch(`${RecipesUrl}/${this.props.recipeId}`, {
+            method: 'delete',
+            headers: createDefaultHeader()
+        })
+
+        if (response.status >= 300) {
+            this.setState({ error: StringResource.Messages.GeneralError })
+        } else {
+            this.setState({ redirect: true })
+        }
+
+        this.setState({ openDeleteConfirmDialog: false })
+    }
+
+    handleAbort = () => {
+        this.setState({ openDeleteConfirmDialog: false })
+    }
+
     save = async () => {
         if (!RecipeValidator.validate(this.state.recipe)) {
             this.setState({ error: StringResource.Messages.InvalidRecipeFields })
@@ -189,13 +218,17 @@ export class RecipeCookingView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ redirect: true, saved: true })
+            this.setState({ saved: true })
         }
 
         this.setState({ saving: false })
     }
 
     render() {
+        if (this.state.redirect) {
+            this.props.navigate(`/${StringResource.Routes.RecipeManagement}`)
+        }
+
         const saveContent: ReactNode = this.props.editable ? (
             <LoadingButton
                 className="recipeCreateAssistant__saveButton"
@@ -207,6 +240,8 @@ export class RecipeCookingView extends Component<IProps, IState> {
                 onClick={this.save}>{StringResource.General.Save}
             </LoadingButton>) : <></>
 
+        const recipeRoute: string = `/${StringResource.Routes.RecipeManagement}/${StringResource.Routes.Recipe}/${this.props.recipeId}`
+
         return (
             <div className="recipeCreateAssistant__container">
                 {this.state.loading ? <LinearProgress /> : <></> /* TODO: Decide if this should be generally used to show data loading/API fetches */}
@@ -214,6 +249,26 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     <ArrowBackIcon />
                 </IconButton>
                 <span className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
+                {this.props.editable ? (
+                    <>
+                        <IconButton
+                            aria-label="view"
+                            component={Link} to={`${recipeRoute}`}>
+                            <VisibilityIcon />
+                        </IconButton>
+                        <IconButton
+                            aria-label="delete"
+                            onClick={this.requestToDeleteRecipe}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </>
+                ) : (
+                    <IconButton
+                        aria-label="edit"
+                        component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
+                        <Edit />
+                    </IconButton>)
+                }
                 <RecipeEditHead
                     name={this.state.recipe.name}
                     description={this.state.recipe.description}
@@ -237,6 +292,25 @@ export class RecipeCookingView extends Component<IProps, IState> {
                 />
                 <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
                 {saveContent}
+
+                <Dialog
+                    open={this.state.openDeleteConfirmDialog}
+                    onClose={this.handleAbort}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description">
+                    <DialogTitle id="alert-dialog-title">
+                        {StringResource.Messages.DeleteRecipeQuestion}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {StringResource.Messages.DeleteRecipeContent}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleAbort}>{StringResource.General.Cancel}</Button>
+                        <Button onClick={this.deleteRecipe} autoFocus>{StringResource.General.Delete}</Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         )
     }
