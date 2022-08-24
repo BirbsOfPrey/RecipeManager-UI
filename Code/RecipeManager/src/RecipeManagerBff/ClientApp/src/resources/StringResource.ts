@@ -10,6 +10,7 @@ namespace StringResource {
         export const UserSession: string = 'user-session'
         export const Login: string = 'bff/login'
         export const Logout: string = 'bff/logout'
+        export const User: string = 'bff/user'
         export const About: string = 'about'
         export const Any: string = '*'
     }

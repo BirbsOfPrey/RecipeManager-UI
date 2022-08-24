@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Claim } from "../models/security/Claim"
+import { Claim, ClaimTypes } from "../models/security/Claim"
 import { createDefaultHeader } from "../resources/Api"
 import StringResource from "../resources/StringResource"
 
@@ -35,15 +35,17 @@ export const AuthProvider = (props: React.PropsWithChildren<IProps>) => {
 
     const fetchIsUserLoggedIn = async () => {
         try {
-            const response = await fetch("/bff/user", {
+            const response = await fetch(StringResource.Routes.User, {
                 headers: createDefaultHeader()
             })
 
             if (response.ok && response.status === 200) {
                 const data = await response.json()
-                const url = data.find((claim: Claim) => claim.type === "bff:logout_url")?.value ?? logoutUrl
+                const url = data.find((claim: Claim) => claim.type === ClaimTypes.LogoutUrl)?.value ?? logoutUrl
                 setLogoutUrl(url)
                 setLoggedIn(true)
+            } else {
+                setLoggedIn(false)
             }
         } catch (e) {
             setLoggedIn(false)
