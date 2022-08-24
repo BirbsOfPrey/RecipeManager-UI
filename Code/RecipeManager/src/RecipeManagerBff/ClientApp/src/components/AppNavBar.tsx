@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthProvider'
 
 const pages = [StringResource.General.RecipeManagement, StringResource.General.WeeklySchedule]
-const settings = [StringResource.General.Session, StringResource.General.About]
+const protectedSettings = [StringResource.General.Session]
+const settings = [StringResource.General.About]
 
 const AppNavBar = () => {
     const navigate = useNavigate()
@@ -180,11 +181,16 @@ const AppNavBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {loggedIn ? settings.map((setting) => (
+                            {loggedIn ? protectedSettings.map((setting) => (
                                 <MenuItem key={setting} onClick={() => openPage(setting)}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             )) : <></>}
+                            {settings.map((setting) => (
+                                <MenuItem key={setting} onClick={() => openPage(setting)}>
+                                    <Typography textAlign="center">{setting}</Typography>
+                                </MenuItem>
+                            ))}
                             <MenuItem onClick={loggedIn ? handleLogout : handleLogin}>
                                 <Typography textAlign="center">{loggedIn ? StringResource.General.Logout : StringResource.General.Login}</Typography>
                             </MenuItem>
