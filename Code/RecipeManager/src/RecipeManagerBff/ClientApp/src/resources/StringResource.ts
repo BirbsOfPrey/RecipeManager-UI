@@ -30,6 +30,8 @@ namespace StringResource {
         export const InvalidPersonAmount: string = `Anzahl muss im Bereich ${RecipeValidator.minPersonRefAmount} - ${RecipeValidator.maxPersonRefAmount} liegen`
         export const DeleteScheduledRecipeQuestion: string = 'Terminiertes Rezept löschen?'
         export const DeleteScheduledRecipeContent: string = 'Das terminierte Rezept wird gelöscht'
+        export const DeleteRecipeQuestion: string = 'Rezept löschen?'
+        export const DeleteRecipeContent: string = 'Das Rezept wird gelöscht. Wenn noch terminierte Rezepte mit diesem Rezept verknüpft sind, werden diese ebenfalls gelöscht.'
         export const NoRecipeSelected: string = 'Kein Rezept ausgewählt'
         export const MaxDescriptionLength: string = `Maximallänge der Beschreibung ist ${RecipeValidator.maxDescriptionLength} Zeichen`
         export const InvalidRecipeFields: string = 'Das Rezept enthält ungültige Werte und kann daher nicht gespeichert werden.'
