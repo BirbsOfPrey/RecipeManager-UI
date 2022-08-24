@@ -2,10 +2,9 @@ import { Component, ReactNode } from "react"
 import { Link, NavigateFunction } from "react-router-dom"
 import { createDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { createRecipe, Recipe } from "../../models/Recipe"
-import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/RecipeEditHead"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress } from "@mui/material"
+import { IconButton, LinearProgress } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
@@ -17,8 +16,10 @@ import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
 import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
 import { RecipeValidator } from "../../models/RecipeValidator"
 import { createSteps, Step } from "../../models/Step"
+import { DeleteDialog } from "../dialogs/DeleteDialog"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
 import produce from "immer"
+import "./RecipeCookingView.css"
 
 interface IState {
     redirect: boolean
@@ -293,24 +294,13 @@ export class RecipeCookingView extends Component<IProps, IState> {
                 <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
                 {saveContent}
 
-                <Dialog
+                <DeleteDialog
                     open={this.state.openDeleteConfirmDialog}
-                    onClose={this.handleAbort}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description">
-                    <DialogTitle id="alert-dialog-title">
-                        {StringResource.Messages.DeleteRecipeQuestion}
-                    </DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            {StringResource.Messages.DeleteRecipeContent}
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleAbort}>{StringResource.General.Cancel}</Button>
-                        <Button onClick={this.deleteRecipe} autoFocus>{StringResource.General.Delete}</Button>
-                    </DialogActions>
-                </Dialog>
+                    title={StringResource.Messages.DeleteRecipeQuestion}
+                    content={StringResource.Messages.DeleteRecipeContent}
+                    handleAbort={this.handleAbort}
+                    handleDelete={this.deleteRecipe}
+                />
             </div>
         )
     }
