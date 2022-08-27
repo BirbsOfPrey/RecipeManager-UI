@@ -4,12 +4,9 @@ import { useAuth } from "./AuthProvider"
 interface IProps { }
 
 export const ProtectedRoute = (props: React.PropsWithChildren<IProps>): ReactJSXElement => {
-    const { loggedIn, handleLogin } = useAuth()
+    const { handleLogin } = useAuth()
 
-    if (!loggedIn) {
-        handleLogin()
-        return <div></div>
-    }
+    handleLogin()
 
     if (props.children) {
         return props.children as ReactJSXElement

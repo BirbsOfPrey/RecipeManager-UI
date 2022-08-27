@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using Duende.Bff.Yarp;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.HttpOverrides;
 
 namespace RecipeManagerBff.Extensions
 {
@@ -11,11 +10,6 @@ namespace RecipeManagerBff.Extensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
       builder.Services.AddAuthorization();
-      builder.Services.Configure<ForwardedHeadersOptions>(options =>
-      {
-        options.ForwardedHeaders =
-          ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-      });
 
       builder.Services
         .AddBff()
@@ -33,19 +27,14 @@ namespace RecipeManagerBff.Extensions
         .AddOpenIdConnect("oidc", options =>
         {
           //options.Authority = builder.Configuration.GetValue<string>("IdentityServer:Authority");
-          options.Authority = "http://sinv-56060.rj.ost.ch:40000";
-
-          options.RequireHttpsMetadata = false;
+          //Or from environment $"https://{Environment.GetEnvironmentVariable("AUTHORITY_URI")}"
+          options.Authority = "https://sinv-56060.rj.ost.ch:40000";
 
           options.ClientId = "bff";
           options.ClientSecret = "secret";
           options.ResponseType = "code";
-
-          //options.Scope.Clear(); //This causes Exception on IdentityServer!
+          
           options.Scope.Add("api1");
-          //options.Scope.Add("openid");
-          //options.Scope.Add("profile");
-          //options.Scope.Add("offline_access");
 
           options.SaveTokens = true;
           options.GetClaimsFromUserInfoEndpoint = true;
@@ -60,8 +49,6 @@ namespace RecipeManagerBff.Extensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
-      app.UseForwardedHeaders();
-
       if (app.Environment.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
@@ -69,10 +56,6 @@ namespace RecipeManagerBff.Extensions
 
       app.UseDefaultFiles();
       app.UseStaticFiles();
-      // app.UseCookiePolicy(new CookiePolicyOptions
-      // {
-      //     MinimumSameSitePolicy = SameSiteMode.Lax
-      // });
 
       app.UseRouting();
 
