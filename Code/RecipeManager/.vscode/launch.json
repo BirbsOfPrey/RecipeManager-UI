@@ -35,7 +35,7 @@
             "name": "Launch Firefox",
             "type": "firefox",
             "request": "launch",
-            "url": "http://localhost:13511",
+            "url": "https://localhost:13511",
             "pathMappings": [
                 {
                     "url": "webpack://recipe_manager/",
