@@ -73,6 +73,17 @@ test('calls method handleCancel on click', () => {
     expect(mockHandleCancel.mock.calls.length).toBe(1)
 })
 
+test('does not call method handleAdd on click', () => {
+    // Arrange
+    render(<BrowserRouter><Routes><Route path='/' element={<ScheduledRecipeCreate date={testDate} handleCancel={mockHandleCancel} handleAdd={mockHandleAdd} />} /></Routes></BrowserRouter>)
+
+    // Act
+    expect(userEvent.click(screen.getByText(StringResource.General.Add), undefined, {skipPointerEventsCheck: true}))
+
+    // Assert
+    expect(mockHandleAdd).not.toHaveBeenCalled
+})
+
 test('calls method handleAdd on click', async () => {
     // Arrange
     const { findByText } = render(<BrowserRouter><Routes><Route path='/' element={<ScheduledRecipeCreate date={testDate} handleCancel={mockHandleCancel} handleAdd={mockHandleAdd} />} /></Routes></BrowserRouter>)
@@ -83,4 +94,19 @@ test('calls method handleAdd on click', async () => {
 
     // Assert
     expect(mockHandleAdd.mock.calls.length).toBe(1)
+})
+
+test('renders selected recipe name if a recipe was selected', async () => {
+    // Arrange
+    const { container, findByText } = render(<BrowserRouter><Routes><Route path='/' element={<ScheduledRecipeCreate date={testDate} handleCancel={mockHandleCancel} handleAdd={mockHandleAdd} />} /></Routes></BrowserRouter>)
+    
+
+    // Act
+    userEvent.click(await findByText(testRecipe1Name))
+
+    // Assert
+    const element = container.getElementsByClassName('scheduledRecipeCreate__selectedRecipeName')[0]
+    expect(element.textContent).toBe(testRecipe1Name)
+    const linkElementNoRecipeSelected = screen.queryByText(StringResource.Messages.NoRecipeSelected)
+    expect(linkElementNoRecipeSelected).not.toBeInTheDocument()
 })
