@@ -15,8 +15,8 @@ test('renders default text if no scheduled recipes in the list', () => {
     render(<BrowserRouter><ScheduledRecipeList scheduledRecipes={[]} deleteScheduledRecipe={mockDelete} /></BrowserRouter>)
 
     // Assert
-    const linkElementNoScheduledRecipes = screen.getByText(StringResource.General.NoScheduledRecipes)
-    expect(linkElementNoScheduledRecipes).toBeInTheDocument()
+    const linkElementNoScheduledRecipesDefault = screen.getByText(StringResource.General.NoScheduledRecipes)
+    expect(linkElementNoScheduledRecipesDefault).toBeInTheDocument()
 })
 
 test('does not render default text if any scheduled recipe is in the list', () => {

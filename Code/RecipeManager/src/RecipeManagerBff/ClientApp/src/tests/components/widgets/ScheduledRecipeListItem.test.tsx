@@ -20,10 +20,10 @@ test('renders default text if no recipe in the scheduled recipe', () => {
     render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Assert
-    const linkElementRecipeName = screen.getByText(StringResource.General.NoRecipeName)
-    expect(linkElementRecipeName).toBeInTheDocument()
-    const linkElementRecipeDescription = screen.getByText(StringResource.General.NoRecipeDescription)
-    expect(linkElementRecipeDescription).toBeInTheDocument()
+    const linkElementRecipeNameDefault = screen.getByText(StringResource.General.NoRecipeName)
+    expect(linkElementRecipeNameDefault).toBeInTheDocument()
+    const linkElementRecipeDescriptionDefault = screen.getByText(StringResource.General.NoRecipeDescription)
+    expect(linkElementRecipeDescriptionDefault).toBeInTheDocument()
 })
 
 test('renders default text if recipe without name and description in the scheduled recipe', () => {
@@ -34,10 +34,10 @@ test('renders default text if recipe without name and description in the schedul
     render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Assert
-    const linkElementRecipeName = screen.getByText(StringResource.General.NoRecipeName)
-    expect(linkElementRecipeName).toBeInTheDocument()
-    const linkElementRecipeDescription = screen.getByText(StringResource.General.NoRecipeDescription)
-    expect(linkElementRecipeDescription).toBeInTheDocument()
+    const linkElementRecipeNameDefault = screen.getByText(StringResource.General.NoRecipeName)
+    expect(linkElementRecipeNameDefault).toBeInTheDocument()
+    const linkElementRecipeDescriptionDefault = screen.getByText(StringResource.General.NoRecipeDescription)
+    expect(linkElementRecipeDescriptionDefault).toBeInTheDocument()
 })
 
 test('renders correct name and description of the recipe in the scheduled recipe', () => {
@@ -54,6 +54,11 @@ test('renders correct name and description of the recipe in the scheduled recipe
     expect(linkElementRecipeName).toBeInTheDocument()
     const linkElementRecipeDescription = screen.getByText(testRecipeDescription)
     expect(linkElementRecipeDescription).toBeInTheDocument()
+
+    const linkElementRecipeNameDefault = screen.queryByText(StringResource.General.NoRecipeName)
+    expect(linkElementRecipeNameDefault).not.toBeInTheDocument()
+    const linkElementRecipeDescriptionDefault = screen.queryByText(StringResource.General.NoRecipeDescription)
+    expect(linkElementRecipeDescriptionDefault).not.toBeInTheDocument()
 })
 
 test('calls method scheduledRecipeDeleted on click with correct parameter', () => {
