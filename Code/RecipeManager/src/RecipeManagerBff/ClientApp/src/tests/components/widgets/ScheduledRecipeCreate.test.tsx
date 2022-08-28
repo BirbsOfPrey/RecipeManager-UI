@@ -81,7 +81,7 @@ test('does not call method handleAdd on click', () => {
     expect(userEvent.click(screen.getByText(StringResource.General.Add), undefined, {skipPointerEventsCheck: true}))
 
     // Assert
-    expect(mockHandleAdd).not.toHaveBeenCalled
+    expect(mockHandleAdd).not.toHaveBeenCalled()
 })
 
 test('calls method handleAdd on click', async () => {

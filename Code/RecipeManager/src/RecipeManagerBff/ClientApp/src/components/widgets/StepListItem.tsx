@@ -39,7 +39,7 @@ export class StepListItem extends Component<IProps, IState> {
                 sx={{ paddingLeft: '0px', paddingRight: '132px' }}>
                 <TextField
                     variant="filled"
-                    className="recipeEditHead__descriptionField"
+                    className="stepListItem__instructionField"
                     multiline
                     fullWidth
                     minRows={5}
@@ -55,7 +55,8 @@ export class StepListItem extends Component<IProps, IState> {
                             <IconButton
                                 edge="end"
                                 aria-label="move-up"
-                                onClick={(event) => this.props.changeStepOrder(false, this.props.step)}
+                                className="stepListItem__moveUpButton"
+                                onClick={() => this.props.changeStepOrder(false, this.props.step)}
                                 disabled={this.props.step.stepNumber === 1}
                                 sx={{ marginRight: '0px' }}>
                                 <KeyboardArrowUpIcon />
@@ -63,7 +64,8 @@ export class StepListItem extends Component<IProps, IState> {
                             <IconButton
                                 edge="end"
                                 aria-label="move-down"
-                                onClick={(event) => this.props.changeStepOrder(true, this.props.step)}
+                                className="stepListItem__moveDownButton"
+                                onClick={() => this.props.changeStepOrder(true, this.props.step)}
                                 disabled={this.props.step.stepNumber === this.props.length}
                                 sx={{ marginRight: '0px' }}>
                                 <KeyboardArrowDownIcon />
@@ -71,6 +73,7 @@ export class StepListItem extends Component<IProps, IState> {
                             <IconButton
                                 edge="end"
                                 aria-label="delete"
+                                className="stepListItem__deleteButton"
                                 onClick={() => this.props.stepDeleted(this.props.step)}>
                                 <DeleteIcon />
                             </IconButton>
