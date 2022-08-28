@@ -151,7 +151,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
         } else {
             return (
                 <div className="weeklyScheduleView__container">
-                    <p className="weeklyScheduleView__header">{StringResource.General.ShowSelectedWeek}{this.getDayOfWeekToShow(1).toLocaleDateString()} - {this.getDayOfWeekToShow(7).toLocaleDateString()}</p>
+                    <p className="weeklyScheduleView__header">{StringResource.General.ShowSelectedWeek}{new Intl.DateTimeFormat('de-DE').format(this.getDayOfWeekToShow(1))} - {this.getDayOfWeekToShow(7).toLocaleDateString()}</p>
                     <IconButton className="weeklyScheduleView__buttonPrevious" onClick={() => this.changeWeek(false)}>
                         <ArrowCircleLeft />
                     </IconButton>
