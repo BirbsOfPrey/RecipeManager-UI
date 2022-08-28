@@ -33,13 +33,13 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 beforeAll(() => {
-    jest.useFakeTimers('modern');
-    jest.setSystemTime(new Date("2022-08-24"));
-});
+    jest.useFakeTimers('modern')
+    jest.setSystemTime(new Date("2022-08-24"))
+})
 
 afterAll(() => {
-    jest.useRealTimers();
-});
+    jest.useRealTimers()
+})
 
 test('renders correct header', () => {
     // Arrange

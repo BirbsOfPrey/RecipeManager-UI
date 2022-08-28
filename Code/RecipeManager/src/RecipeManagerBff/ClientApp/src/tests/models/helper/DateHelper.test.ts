@@ -25,3 +25,14 @@ describe('Method getNameOfCurrentDay returns ', () => {
         expect(DateHelper.getNameOfCurrentDay(day)).toEqual(result)
     })
 })
+
+test('Method getStringOfDate returns date in correct format', () => {
+    // Arrange
+    const testDate: Date = new Date("2022-03-08")
+
+    // Act
+    const dateAsString: string = DateHelper.getStringOfDate(testDate)
+
+    // Assert
+    expect(dateAsString).toEqual("8.3.2022")
+})

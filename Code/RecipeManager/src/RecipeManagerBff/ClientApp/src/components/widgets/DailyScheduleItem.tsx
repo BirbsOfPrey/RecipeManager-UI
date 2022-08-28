@@ -19,7 +19,7 @@ export class DailyScheduleItem extends Component<IProps, {}> {
     render() {
         return (
             <div className="dailyScheduleItem__container">
-                <p className="dailyScheduleItem__header">{DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {this.props.date.toLocaleDateString()}</p>
+                <p className="dailyScheduleItem__header">{DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {DateHelper.getStringOfDate(this.props.date)}</p>
                 <IconButton size="large" className="dailyScheduleItem__addButton" onClick={() => this.props.addScheduledRecipe(this.props.date)}>
                     <Add />
                 </IconButton>

@@ -37,7 +37,7 @@ test('render as much list items as scheduled recipes are passed', () => {
     const { container } = render(<BrowserRouter><ScheduledRecipeList scheduledRecipes={[testScheduledRecipe, testScheduledRecipe]} deleteScheduledRecipe={mockDelete} /></BrowserRouter>)
 
     // Assert
-    expect(container.getElementsByClassName('scheduledRecipeListItem__container').length).toBe(2);
+    expect(container.getElementsByClassName("scheduledRecipeListItem__container").length).toBe(2)
 })
 
 test('calls method deleteScheduledRecipe on click in ScheduledRecipeListItem with correct parameter', () => {

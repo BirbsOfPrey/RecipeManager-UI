@@ -35,7 +35,7 @@ test('renders header with correct day and date', () => {
     const { container } = render(<BrowserRouter><DailyScheduleItem date={testDate} scheduledRecipes={testScheduledRecipes} deleteScheduledRecipe={mockDeleteScheduledRecipe} addScheduledRecipe={mockAddScheduledRecipe} /></BrowserRouter>)
 
     // Assert
-    const element = container.getElementsByClassName('dailyScheduleItem__header')[0]
+    const element = container.getElementsByClassName("dailyScheduleItem__header")[0]
     expect(element.textContent).toBe("Montag, 15.8.2022")
 })
 

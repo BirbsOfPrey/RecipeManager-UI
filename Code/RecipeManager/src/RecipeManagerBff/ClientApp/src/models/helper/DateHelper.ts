@@ -10,4 +10,8 @@ export class DateHelper {
         day = day === 0 ? 6 : day - 1
         return Info.weekdays("long", {locale: "de-DE"})[day]
     }
+
+    static getStringOfDate(date: Date): string {
+        return new Intl.DateTimeFormat("de-DE").format(date)
+    }
 }

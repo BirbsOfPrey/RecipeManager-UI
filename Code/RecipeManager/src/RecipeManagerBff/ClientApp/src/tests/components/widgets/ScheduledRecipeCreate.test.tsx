@@ -105,7 +105,7 @@ test('renders selected recipe name if a recipe was selected', async () => {
     userEvent.click(await findByText(testRecipe1Name))
 
     // Assert
-    const element = container.getElementsByClassName('scheduledRecipeCreate__selectedRecipeName')[0]
+    const element = container.getElementsByClassName("scheduledRecipeCreate__selectedRecipeName")[0]
     expect(element.textContent).toBe(testRecipe1Name)
     const linkElementNoRecipeSelected = screen.queryByText(StringResource.Messages.NoRecipeSelected)
     expect(linkElementNoRecipeSelected).not.toBeInTheDocument()
