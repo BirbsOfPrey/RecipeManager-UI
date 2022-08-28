@@ -33,7 +33,8 @@ export class StepListItem extends Component<IProps, IState> {
 
     render() {
         return (
-            <ListItem
+            <ListItem 
+                className="stepListItem__container"
                 alignItems="flex-start"
                 dense
                 sx={{ paddingLeft: '0px', paddingRight: '132px' }}>

@@ -47,7 +47,7 @@ export class RecipeEditStepList extends Component<IProps, {}> {
         return (
             <List>
                 {this.generate()}
-                <ListItemButton onClick={this.addStep}>
+                <ListItemButton className="recipeEditStepList__addStepButton" onClick={this.addStep}>
                     <ListItemAvatar>
                         <Add />
                     </ListItemAvatar>
