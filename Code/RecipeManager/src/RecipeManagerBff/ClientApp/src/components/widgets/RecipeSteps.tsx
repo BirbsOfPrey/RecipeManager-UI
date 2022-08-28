@@ -4,15 +4,15 @@ import { Component } from "react"
 import { createStep, Step } from "../../models/Step"
 import StringResource from "../../resources/StringResource"
 
-interface IState {
-    contentNr: number
-}
-
 interface IProps {
     steps?: Step[]
 }
 
-export class RecipeSteps extends Component<IProps, {}> {
+interface IState {
+    contentNr: number
+}
+
+export class RecipeSteps extends Component<IProps, IState> {
 
     state: IState = {
         contentNr: 1
