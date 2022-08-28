@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { RecipeSteps } from '../../../components/widgets/RecipeSteps'
 import { createStep, Step } from '../../../models/Step'
 
-test('renders textfield of description', () => {
+test('renders textfield of instruction', () => {
     // Arrange
     const step: Step = createStep()
     const stepNumber: number = 1

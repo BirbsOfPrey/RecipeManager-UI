@@ -36,7 +36,7 @@ export class RecipeSteps extends Component<IProps, IState> {
             `${StringResource.General.RecipeStep} ${activeStep.stepNumber ? activeStep.stepNumber as unknown as string : ""}`
 
         return (
-            <div>
+            <div className="recipeSteps__container">
                 <TextField
                     variant="filled"
                     className="recipeEditHead__descriptionField"
