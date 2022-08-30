@@ -73,7 +73,7 @@ test('calls method handleCancel on click', () => {
     expect(mockHandleCancel.mock.calls.length).toBe(1)
 })
 
-test('does not call method handleAdd on click', () => {
+test('does not call method handleAdd on click when no recipe is selcted', () => {
     // Arrange
     render(<BrowserRouter><Routes><Route path='/' element={<ScheduledRecipeCreate date={testDate} handleCancel={mockHandleCancel} handleAdd={mockHandleAdd} />} /></Routes></BrowserRouter>)
 
