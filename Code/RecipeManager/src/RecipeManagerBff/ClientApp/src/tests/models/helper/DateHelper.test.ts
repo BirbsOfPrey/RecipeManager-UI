@@ -22,7 +22,7 @@ describe('Method getNameOfCurrentDay returns ', () => {
         ["Freitag", 5],
         ["Samstag", 6],
         ["Sonntag", 7],
-        ["Montag", 8],
+        ["", 8],
     ])('%s when invoked with %p', (result: string, day: number) => {
         expect(DateHelper.getNameOfCurrentDay(day)).toEqual(result)
     })
