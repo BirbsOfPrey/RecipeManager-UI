@@ -36,6 +36,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                         (<>
                             <IconButton
                                 edge="end"
+                                className="recipeListItem__editButton"
                                 aria-label="edit"
                                 onClick={() => this.props.ingredientComponentSelected(this.props.index, this.props.ingredientComponent)}
                                 sx={{ marginRight: '0px' }}>
@@ -43,6 +44,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                             </IconButton>
                             <IconButton
                                 edge="end"
+                                className="recipeListItem__deleteButton"
                                 aria-label="delete"
                                 onClick={() => this.props.ingredientComponentDeleted(this.props.index, this.props.ingredientComponent)}>
                                 <DeleteIcon />

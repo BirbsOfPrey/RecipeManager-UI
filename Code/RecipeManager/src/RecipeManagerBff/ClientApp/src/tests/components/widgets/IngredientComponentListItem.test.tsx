@@ -61,7 +61,7 @@ test('calls method scheduledRecipeDeleted on click with correct parameter', () =
     const { container } = render(<IngredientComponentListItem ingredientComponent={ingredientComponent} index={index} editable={true} personRefAmount={4} personAmount={2} ingredientComponentSelected={mockIngredientComponentSelected} ingredientComponentDeleted={mockIngredientComponentDeleted} />)
 
     // Act
-    userEvent.click(container.getElementsByClassName("MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-jlikuz-MuiButtonBase-root-MuiIconButton-root")[0])
+    userEvent.click(container.getElementsByClassName("recipeListItem__editButton")[0])
 
     // Assert
     expect(mockIngredientComponentSelected.mock.calls.length).toBe(1)
@@ -73,7 +73,7 @@ test('calls method scheduledRecipeDeleted on click with correct parameter', () =
     const { container } = render(<IngredientComponentListItem ingredientComponent={ingredientComponent} index={index} editable={true} personRefAmount={4} personAmount={2} ingredientComponentSelected={mockIngredientComponentSelected} ingredientComponentDeleted={mockIngredientComponentDeleted} />)
 
     // Act
-    userEvent.click(container.getElementsByClassName("MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root")[0])
+    userEvent.click(container.getElementsByClassName("recipeListItem__deleteButton")[0])
 
     // Assert
     expect(mockIngredientComponentDeleted.mock.calls.length).toBe(1)
