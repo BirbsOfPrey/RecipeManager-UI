@@ -77,5 +77,5 @@ test('render as much list items as recipes are passed', async () => {
     const { container } = render(<BrowserRouter><RecipeListSelector selectRecipe={mockSelectRecipe} /></BrowserRouter>)
     
     // Assert
-    await waitFor(() => { expect(container.getElementsByClassName("MuiButtonBase-root MuiListItemButton-root MuiListItemButton-gutters MuiListItemButton-alignItemsFlexStart recipeListItemSelector__container css-1nn8m8x-MuiButtonBase-root-MuiListItemButton-root").length).toBe(2) })
+    await waitFor(() => { expect(container.getElementsByClassName("recipeListItemSelector__container").length).toBe(2) })
 })
