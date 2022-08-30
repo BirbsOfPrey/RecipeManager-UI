@@ -1,0 +1,22 @@
+.dailyScheduleItem__container {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+                "header addButton"
+                "list list";
+}
+
+.dailyScheduleItem__container .dailyScheduleItem__header {
+    grid-area: header;
+    font-weight: bold;
+}
+
+.dailyScheduleItem__container .dailyScheduleItem__addButton {
+    grid-area: addButton;
+    justify-self: end;
+}
+
+.dailyScheduleItem__container .scheduledRecipeList__container {
+    grid-area: list;
+}

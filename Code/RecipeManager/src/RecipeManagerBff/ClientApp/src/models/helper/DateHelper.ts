@@ -6,7 +6,14 @@ export class DateHelper {
     }
     
     static getNameOfCurrentDay(day: number): string {
+        if (day < 0 || day > 6) {
+            return ""
+        }
         day = day === 0 ? 6 : day - 1
-        return Info.weekdays("long", {locale: "ch-DE"})[day]
+        return Info.weekdays("long", {locale: "de-DE"})[day]
+    }
+
+    static getStringOfDate(date: Date): string {
+        return new Intl.DateTimeFormat("de-DE").format(date)
     }
 }

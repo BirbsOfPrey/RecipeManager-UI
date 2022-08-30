@@ -28,21 +28,18 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
 
     render() {
         return (
-            <div>
-                <div className="scheduledRecipeCreate__container">
-
-                    <p>{StringResource.General.SelectedRecipe}</p>
-                    <p>{this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}</p>
-                </div>
+            <div className="scheduledRecipeCreate__container">
+                <p>{StringResource.General.SelectedRecipe}</p>
+                <p className="scheduledRecipeCreate__selectedRecipeName">{this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}</p>
 
                 <Button onClick={this.props.handleCancel}>{StringResource.General.Cancel}</Button>
-                <Button 
+                <Button
                     onClick={() => this.props.handleAdd(this.state.scheduledRecipe)}
                     disabled={this.state.scheduledRecipe.recipe === undefined}>
                     {StringResource.General.Add}
                 </Button>
 
-                <p className="scheduledRecipeCreate__listTitle">Wählen Sie das gewünschte Rezept aus</p>
+                <p className="scheduledRecipeCreate__listTitle">{StringResource.General.SelectRecipe}</p>
 
                 <RecipeListSelector
                     selectRecipe={this.updateScheduledRecipe} />
