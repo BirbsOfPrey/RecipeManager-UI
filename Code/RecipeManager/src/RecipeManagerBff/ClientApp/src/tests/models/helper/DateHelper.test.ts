@@ -14,15 +14,14 @@ test('Method getDayOfWeekAsNumbers returns correct number array', () => {
 describe('Method getNameOfCurrentDay returns ', () => {
     it.each([
         ["", -1],
-        ["", 0],
+        ["Sonntag", 0],
         ["Montag", 1],
         ["Dienstag", 2],
         ["Mittwoch", 3],
         ["Donnerstag", 4],
         ["Freitag", 5],
         ["Samstag", 6],
-        ["Sonntag", 7],
-        ["", 8],
+        ["", 7]
     ])('%s when invoked with %p', (result: string, day: number) => {
         expect(DateHelper.getNameOfCurrentDay(day)).toEqual(result)
     })
