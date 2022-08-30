@@ -73,7 +73,7 @@ test('calls method handleCancel on click', () => {
     expect(mockHandleCancel.mock.calls.length).toBe(1)
 })
 
-test('does not call method handleAdd on click', () => {
+test('does not call method handleAdd on click when no recipe is selcted', () => {
     // Arrange
     render(<BrowserRouter><Routes><Route path='/' element={<ScheduledRecipeCreate date={testDate} handleCancel={mockHandleCancel} handleAdd={mockHandleAdd} />} /></Routes></BrowserRouter>)
 
@@ -84,7 +84,7 @@ test('does not call method handleAdd on click', () => {
     expect(mockHandleAdd).not.toHaveBeenCalled()
 })
 
-test('calls method handleAdd on click', async () => {
+test('calls method handleAdd on click when recipe is selcted', async () => {
     // Arrange
     const { findByText } = render(<BrowserRouter><Routes><Route path='/' element={<ScheduledRecipeCreate date={testDate} handleCancel={mockHandleCancel} handleAdd={mockHandleAdd} />} /></Routes></BrowserRouter>)
     userEvent.click(await findByText(testRecipe1Name))

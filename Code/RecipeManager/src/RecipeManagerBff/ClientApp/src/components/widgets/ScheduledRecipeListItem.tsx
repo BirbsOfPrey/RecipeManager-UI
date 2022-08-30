@@ -33,7 +33,8 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                     <IconButton
                         edge="end"
                         aria-label="open"
-                        component={Link} to={`${recipeRoute}`}>
+                        component={Link} to={`${recipeRoute}`}
+                        sx={{ marginRight: '0px' }}>
                         <OpenInNewIcon />
                     </IconButton>
                     <IconButton

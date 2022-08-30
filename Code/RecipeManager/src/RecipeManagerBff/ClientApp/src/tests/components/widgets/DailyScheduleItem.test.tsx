@@ -44,7 +44,7 @@ test('calls method addScheduledRecipe on click', async () => {
     const { container } = render(<BrowserRouter><DailyScheduleItem date={testDate} scheduledRecipes={testScheduledRecipes} deleteScheduledRecipe={mockDeleteScheduledRecipe} addScheduledRecipe={mockAddScheduledRecipe} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge dailyScheduleItem__addButton css-mf1cb5-MuiButtonBase-root-MuiIconButton-root")[0])
+    userEvent.click(container.getElementsByClassName("dailyScheduleItem__addButton")[0])
 
     // Assert
     expect(mockAddScheduledRecipe.mock.calls.length).toBe(1)

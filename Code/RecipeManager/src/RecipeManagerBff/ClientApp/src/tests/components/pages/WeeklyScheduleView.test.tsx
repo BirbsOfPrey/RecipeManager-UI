@@ -56,7 +56,7 @@ test('renders correct header with click on previous week', () => {
     const { container } = render(<WeeklyScheduleView />)
 
     // Act
-    userEvent.click(container.getElementsByClassName("MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium weeklyScheduleView__buttonPrevious css-78trlr-MuiButtonBase-root-MuiIconButton-root")[0])
+    userEvent.click(container.getElementsByClassName("weeklyScheduleView__buttonPrevious")[0])
 
     // Assert
     expect(container.getElementsByClassName("weeklyScheduleView__header")[0].textContent).toBe("Woche vom 15.8.2022 - 21.8.2022")
@@ -67,7 +67,7 @@ test('renders correct header with click on next week', () => {
     const { container } = render(<WeeklyScheduleView />)
 
     // Act
-    userEvent.click(container.getElementsByClassName("MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium weeklyScheduleView__buttonNext css-78trlr-MuiButtonBase-root-MuiIconButton-root")[0])
+    userEvent.click(container.getElementsByClassName("weeklyScheduleView__buttonNext")[0])
 
     // Assert
     expect(container.getElementsByClassName("weeklyScheduleView__header")[0].textContent).toBe("Woche vom 29.8.2022 - 4.9.2022")

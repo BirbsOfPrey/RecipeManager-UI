@@ -6,7 +6,9 @@ export class DateHelper {
     }
     
     static getNameOfCurrentDay(day: number): string {
-        day %= 7
+        if (day < 0 || day > 6) {
+            return ""
+        }
         day = day === 0 ? 6 : day - 1
         return Info.weekdays("long", {locale: "de-DE"})[day]
     }
