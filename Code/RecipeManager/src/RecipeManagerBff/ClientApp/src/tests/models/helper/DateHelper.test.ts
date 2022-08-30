@@ -13,6 +13,8 @@ test('Method getDayOfWeekAsNumbers returns correct number array', () => {
 
 describe('Method getNameOfCurrentDay returns ', () => {
     it.each([
+        ["", -1],
+        ["", 0],
         ["Montag", 1],
         ["Dienstag", 2],
         ["Mittwoch", 3],
