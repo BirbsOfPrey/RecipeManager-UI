@@ -22,7 +22,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
         return (
             <ListItem
                 alignItems="flex-start"
-                className="recipeListItem__container"
+                className="ingredientComponentListItem__container"
                 sx={{ paddingRight: '96px' }}>
                 <ListItemAvatar>
                     <EggIcon />
@@ -36,7 +36,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                         (<>
                             <IconButton
                                 edge="end"
-                                className="recipeListItem__editButton"
+                                className="ingredientComponentListItem__editButton"
                                 aria-label="edit"
                                 onClick={() => this.props.ingredientComponentSelected(this.props.index, this.props.ingredientComponent)}
                                 sx={{ marginRight: '0px' }}>
@@ -44,7 +44,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                             </IconButton>
                             <IconButton
                                 edge="end"
-                                className="recipeListItem__deleteButton"
+                                className="ingredientComponentListItem__deleteButton"
                                 aria-label="delete"
                                 onClick={() => this.props.ingredientComponentDeleted(this.props.index, this.props.ingredientComponent)}>
                                 <DeleteIcon />
