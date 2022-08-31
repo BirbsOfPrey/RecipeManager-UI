@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { createRecipe, Recipe } from "../../../models/Recipe"
+import { createRecipe, Recipe } from "../../../../models/Recipe"
 import { BrowserRouter } from "react-router-dom"
-import { DailyScheduleItem } from '../../../components/widgets/DailyScheduleItem'
-import { createScheduledRecipeWithDate, ScheduledRecipe } from '../../../models/ScheduledRecipe'
+import { DailyScheduleItem } from '../../../../components/widgets/scheduledRecipe/DailyScheduleItem'
+import { createScheduledRecipeWithDate, ScheduledRecipe } from '../../../../models/ScheduledRecipe'
 
 const testDate: Date = new Date("2022-08-15")
 const mockDeleteScheduledRecipe = jest.fn()

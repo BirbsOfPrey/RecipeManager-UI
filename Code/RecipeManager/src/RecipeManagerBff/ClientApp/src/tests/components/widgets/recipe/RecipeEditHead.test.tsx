@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { RecipeEditHead } from '../../../components/widgets/RecipeEditHead'
-import StringResource from '../../../resources/StringResource'
+import { RecipeEditHead } from '../../../../components/widgets/recipe/RecipeEditHead'
+import StringResource from '../../../../resources/StringResource'
 
 const recipeName: string = "Kn"
 const recipeDescription: string = "überbacken"

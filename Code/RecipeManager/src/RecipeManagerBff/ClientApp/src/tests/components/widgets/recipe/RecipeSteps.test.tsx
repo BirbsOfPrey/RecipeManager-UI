@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import { RecipeSteps } from '../../../components/widgets/RecipeSteps'
-import { createStep, Step } from '../../../models/Step'
-import StringResource from '../../../resources/StringResource'
+import { RecipeSteps } from '../../../../components/widgets/recipe/RecipeSteps'
+import { createStep, Step } from '../../../../models/Step'
+import StringResource from '../../../../resources/StringResource'
 
 test('renders textfield of instruction', () => {
     // Arrange

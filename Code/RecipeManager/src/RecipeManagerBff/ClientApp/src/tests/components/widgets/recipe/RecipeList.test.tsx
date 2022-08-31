@@ -1,12 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import { RecipesUrl } from '../../../resources/Api'
-import { RecipeList } from '../../../components/widgets/RecipeList'
-import { Recipe } from '../../../models/Recipe'
+import { RecipesUrl } from '../../../../resources/Api'
+import { RecipeList } from '../../../../components/widgets/recipe/RecipeList'
+import { Recipe } from '../../../../models/Recipe'
 import { BrowserRouter } from 'react-router-dom'
 import { immerable } from 'immer'
-import StringResource from '../../../resources/StringResource'
+import StringResource from '../../../../resources/StringResource'
 
 const testRecipe1Id: number = 54
 const testRecipe1Name: string = 'Testrezept'

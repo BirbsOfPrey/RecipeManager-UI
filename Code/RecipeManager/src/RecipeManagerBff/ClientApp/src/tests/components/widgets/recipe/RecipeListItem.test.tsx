@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import { createRecipe, Recipe } from "../../../models/Recipe"
-import StringResource from "../../../resources/StringResource"
-import { RecipeListItem } from "../../../components/widgets/RecipeListItem"
+import { createRecipe, Recipe } from "../../../../models/Recipe"
+import StringResource from "../../../../resources/StringResource"
+import { RecipeListItem } from "../../../../components/widgets/recipe/RecipeListItem"
 import { BrowserRouter } from 'react-router-dom'
 
 const testRecipe: Recipe = createRecipe()

@@ -1,9 +1,9 @@
-import { createScheduledRecipe, ScheduledRecipe } from "../../../models/ScheduledRecipe"
+import { createScheduledRecipe, ScheduledRecipe } from "../../../../models/ScheduledRecipe"
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { BrowserRouter } from 'react-router-dom'
-import StringResource from "../../../resources/StringResource"
-import { ScheduledRecipeList } from "../../../components/widgets/ScheduledRecipeList"
+import StringResource from "../../../../resources/StringResource"
+import { ScheduledRecipeList } from "../../../../components/widgets/scheduledRecipe/ScheduledRecipeList"
 
 const testScheduledRecipe: ScheduledRecipe = createScheduledRecipe()
 const mockDelete = jest.fn()

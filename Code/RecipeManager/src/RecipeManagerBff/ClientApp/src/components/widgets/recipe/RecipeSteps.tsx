@@ -1,8 +1,8 @@
 import { Pagination, TextField } from "@mui/material"
 import React from "react"
 import { Component } from "react"
-import { createStep, Step } from "../../models/Step"
-import StringResource from "../../resources/StringResource"
+import { createStep, Step } from "../../../models/Step"
+import StringResource from "../../../resources/StringResource"
 
 interface IProps {
     steps?: Step[]

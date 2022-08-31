@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { StepListItem } from '../../../components/widgets/StepListItem'
-import { createStep, Step } from '../../../models/Step'
+import { StepListItem } from '../../../../components/widgets/recipe/StepListItem'
+import { createStep, Step } from '../../../../models/Step'
 
 const step: Step = createStep()
 const stepNumber: number = 3

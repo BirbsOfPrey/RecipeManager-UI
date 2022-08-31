@@ -1,16 +1,16 @@
 import { ListItemButton, ListItemAvatar, ListItemText } from "@mui/material"
 import DinnerDining from '@mui/icons-material/DinnerDining'
-import { Recipe } from "../../models/Recipe"
+import { Recipe } from "../../../models/Recipe"
 import { Component } from "react"
+import { Link } from 'react-router-dom'
+import StringResource from "../../../resources/StringResource"
 import './RecipeListItem.css'
-import StringResource from "../../resources/StringResource"
 
 interface IProps {
     recipe: Recipe
-    selectRecipe: (recipe: Recipe) => void
 }
 
-export class RecipeListItemSelector extends Component<IProps, {}> {
+export class RecipeListItem extends Component<IProps, {}> {
 
     render() {
         const recipe: Recipe = this.props.recipe
@@ -18,16 +18,19 @@ export class RecipeListItemSelector extends Component<IProps, {}> {
         let name: string = recipe.name ? recipe.name : StringResource.General.NoRecipeName
         let description: string = recipe.description ? recipe.description : StringResource.General.NoRecipeDescription
 
+        const recipeRoute: string = `${StringResource.Routes.Recipe}/${recipe.id}`
+
         return (
             <ListItemButton
                 alignItems="flex-start"
-                className="recipeListItemSelector__container"
-                onClick={() => this.props.selectRecipe(recipe)}>
+                className="recipeListItem__container"
+                component={Link} to={recipeRoute}
+                sx={{ paddingRight: '64px' }}>
                 <ListItemAvatar>
                     <DinnerDining />
                 </ListItemAvatar>
                 <ListItemText
-                    className="recipeListItemSelector__text"
+                    className="recipeListItem__text"
                     primary={name}
                     secondary={description}
                 />

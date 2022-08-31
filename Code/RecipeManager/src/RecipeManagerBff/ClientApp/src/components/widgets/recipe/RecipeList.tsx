@@ -1,8 +1,8 @@
 import { Component } from 'react'
-import { Recipe } from '../../models/Recipe'
-import { createDefaultHeader, RecipesUrl } from '../../resources/Api'
+import { Recipe } from '../../../models/Recipe'
+import { createDefaultHeader, RecipesUrl } from '../../../resources/Api'
 import './RecipeList.css'
-import StringResource from '../../resources/StringResource'
+import StringResource from '../../../resources/StringResource'
 import { LinearProgress, List } from '@mui/material'
 import { RecipeListItem } from './RecipeListItem'
 

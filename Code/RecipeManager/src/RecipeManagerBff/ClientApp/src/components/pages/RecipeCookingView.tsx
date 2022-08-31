@@ -4,7 +4,7 @@ import { createDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
-import { RecipeEditHead } from "../widgets/RecipeEditHead"
+import { RecipeEditHead } from "../widgets/recipe/RecipeEditHead"
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
@@ -12,8 +12,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import Edit from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
-import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
+import { RecipeEditIngredients } from "../widgets/recipe/RecipeEditIngredients"
+import { RecipeEditSteps } from "../widgets/recipe/RecipeEditSteps"
 import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
 import { RecipeValidator } from "../../models/RecipeValidator"
 import { createSteps, Step } from "../../models/Step"

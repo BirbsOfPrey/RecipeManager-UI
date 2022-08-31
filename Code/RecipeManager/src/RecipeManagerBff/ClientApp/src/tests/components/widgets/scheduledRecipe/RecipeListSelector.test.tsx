@@ -1,12 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import StringResource from "../../../resources/StringResource"
+import StringResource from "../../../../resources/StringResource"
 import { immerable } from "immer"
 import { rest } from "msw"
 import { setupServer } from "msw/node"
-import { Recipe } from "../../../models/Recipe"
-import { RecipesUrl } from "../../../resources/Api"
-import { RecipeListSelector } from "../../../components/widgets/RecipeListSelector"
+import { Recipe } from "../../../../models/Recipe"
+import { RecipesUrl } from "../../../../resources/Api"
+import { RecipeListSelector } from "../../../../components/widgets/scheduledRecipe/RecipeListSelector"
 import userEvent from "@testing-library/user-event"
 
 const mockSelectRecipe = jest.fn()

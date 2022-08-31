@@ -1,9 +1,9 @@
 import { Add } from "@mui/icons-material"
 import { List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material"
 import React, { Component } from "react"
-import { createStep, Step } from "../../models/Step"
-import StringResource from "../../resources/StringResource"
-import { EmptyListItem } from "./EmptyListItem"
+import { createStep, Step } from "../../../models/Step"
+import StringResource from "../../../resources/StringResource"
+import { EmptyListItem } from "../EmptyListItem"
 import { StepListItem } from "./StepListItem"
 
 interface IProps {

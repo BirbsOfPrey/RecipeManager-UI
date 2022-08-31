@@ -2,7 +2,7 @@ import { IconButton, ListItemAvatar, ListItemText, ListItemSecondaryAction, List
 import DeleteIcon from '@mui/icons-material/Delete'
 import EggIcon from '@mui/icons-material/Egg'
 import { Component } from "react"
-import { calculateIngredientAmount, IngredientComponent } from "../../models/IngredientComponent"
+import { calculateIngredientAmount, IngredientComponent } from "../../../models/IngredientComponent"
 import Edit from '@mui/icons-material/Edit'
 
 interface IProps {

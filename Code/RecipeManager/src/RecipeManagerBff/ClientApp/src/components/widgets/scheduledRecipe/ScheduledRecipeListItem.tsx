@@ -4,8 +4,8 @@ import EventIcon from '@mui/icons-material/Event'
 import OpenInNewIcon from '@mui/icons-material/OpenInNew'
 import { Component } from "react"
 import { Link } from 'react-router-dom'
-import { ScheduledRecipe } from "../../models/ScheduledRecipe"
-import StringResource from "../../resources/StringResource"
+import { ScheduledRecipe } from "../../../models/ScheduledRecipe"
+import StringResource from "../../../resources/StringResource"
 
 interface IProps {
     scheduledRecipe: ScheduledRecipe

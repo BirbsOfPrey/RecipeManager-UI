@@ -1,10 +1,10 @@
-import { ScheduledRecipeListItem } from "../../../components/widgets/ScheduledRecipeListItem"
-import { createScheduledRecipeWithDate, ScheduledRecipe } from "../../../models/ScheduledRecipe"
+import { ScheduledRecipeListItem } from "../../../../components/widgets/scheduledRecipe/ScheduledRecipeListItem"
+import { createScheduledRecipeWithDate, ScheduledRecipe } from "../../../../models/ScheduledRecipe"
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { BrowserRouter } from 'react-router-dom'
-import { createRecipe, Recipe } from "../../../models/Recipe"
-import StringResource from "../../../resources/StringResource"
+import { createRecipe, Recipe } from "../../../../models/Recipe"
+import StringResource from "../../../../resources/StringResource"
 
 const testDate: Date = new Date("2022-07-20")
 const testRecipe: Recipe = createRecipe()

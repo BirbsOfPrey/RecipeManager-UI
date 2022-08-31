@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { RecipeEditStepList } from '../../../components/widgets/RecipeEditStepList'
-import { createStep, Step } from '../../../models/Step'
-import StringResource from '../../../resources/StringResource'
+import { RecipeEditStepList } from '../../../../components/widgets/recipe/RecipeEditStepList'
+import { createStep, Step } from '../../../../models/Step'
+import StringResource from '../../../../resources/StringResource'
 
 const step1: Step = createStep()
 const stepNumber1: number = 1

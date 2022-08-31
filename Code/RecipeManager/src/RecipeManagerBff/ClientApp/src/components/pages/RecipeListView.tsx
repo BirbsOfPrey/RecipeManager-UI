@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import StringResource from '../../resources/StringResource'
-import { RecipeList } from '../widgets/RecipeList'
+import { RecipeList } from '../widgets/recipe/RecipeList'
 import './RecipeManagement.css'
 
 export const RecipeListView = () => {

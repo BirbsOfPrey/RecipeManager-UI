@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { createIngredientComponent, IngredientComponent } from "../../../models/IngredientComponent"
-import { createIngredient, Ingredient } from "../../../models/Ingredient"
-import { IngredientComponentListItem } from "../../../components/widgets/IngredientComponentListItem"
+import { createIngredientComponent, IngredientComponent } from "../../../../models/IngredientComponent"
+import { createIngredient, Ingredient } from "../../../../models/Ingredient"
+import { IngredientComponentListItem } from "../../../../components/widgets/recipe/IngredientComponentListItem"
 
 const ingredientComponent: IngredientComponent = createIngredientComponent()
 const ingredient: Ingredient = createIngredient()

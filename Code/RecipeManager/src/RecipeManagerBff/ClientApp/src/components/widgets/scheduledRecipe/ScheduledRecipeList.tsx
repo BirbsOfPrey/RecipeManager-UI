@@ -1,10 +1,10 @@
 import { List } from "@mui/material"
 import EventIcon from '@mui/icons-material/Event'
 import { Component } from "react"
-import { EmptyListItem } from "./EmptyListItem"
-import StringResource from "../../resources/StringResource"
+import { EmptyListItem } from "../EmptyListItem"
+import StringResource from "../../../resources/StringResource"
 import { ScheduledRecipeListItem } from "./ScheduledRecipeListItem"
-import { ScheduledRecipe } from "../../models/ScheduledRecipe"
+import { ScheduledRecipe } from "../../../models/ScheduledRecipe"
 
 interface IProps {
     scheduledRecipes: ScheduledRecipe[]

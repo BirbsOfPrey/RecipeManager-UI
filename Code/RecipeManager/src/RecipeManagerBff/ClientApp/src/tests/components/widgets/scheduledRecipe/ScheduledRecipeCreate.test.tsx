@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import StringResource from "../../../resources/StringResource"
-import { ScheduledRecipeCreate } from "../../../components/widgets/ScheduledRecipeCreate"
-import { RecipesUrl } from "../../../resources/Api"
+import StringResource from "../../../../resources/StringResource"
+import { ScheduledRecipeCreate } from "../../../../components/widgets/scheduledRecipe/ScheduledRecipeCreate"
+import { RecipesUrl } from "../../../../resources/Api"
 import { immerable } from "immer"
 import { rest } from "msw"
 import { setupServer } from "msw/node"
-import { Recipe } from "../../../models/Recipe"
+import { Recipe } from "../../../../models/Recipe"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 const testDate: Date = new Date("2022-02-01")

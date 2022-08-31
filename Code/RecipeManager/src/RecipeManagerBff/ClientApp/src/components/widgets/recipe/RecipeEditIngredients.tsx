@@ -3,12 +3,12 @@ import Add from '@mui/icons-material/Add'
 import EggIcon from '@mui/icons-material/Egg'
 import { Component, ReactNode } from "react"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
-import { createIngredientComponent, IngredientComponent } from "../../models/IngredientComponent"
-import { EmptyListItem } from "./EmptyListItem"
-import { IngredientComponentDialog } from "../dialogs/IngredientComponentDialog"
-import { PersonAmountField } from "../controls/PersonAmountField"
-import StringResource from "../../resources/StringResource"
-import { NO_INDEX } from "../../models/helper/ArrayHelper"
+import { createIngredientComponent, IngredientComponent } from "../../../models/IngredientComponent"
+import { EmptyListItem } from "../EmptyListItem"
+import { IngredientComponentDialog } from "../../dialogs/IngredientComponentDialog"
+import { PersonAmountField } from "../../controls/PersonAmountField"
+import StringResource from "../../../resources/StringResource"
+import { NO_INDEX } from "../../../models/helper/ArrayHelper"
 
 interface IProps {
     personRefAmount: number

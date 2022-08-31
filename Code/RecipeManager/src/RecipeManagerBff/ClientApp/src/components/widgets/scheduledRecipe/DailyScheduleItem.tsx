@@ -1,6 +1,6 @@
 import { Component } from "react"
-import { DateHelper } from "../../models/helper/DateHelper"
-import { ScheduledRecipe } from "../../models/ScheduledRecipe"
+import { DateHelper } from "../../../models/helper/DateHelper"
+import { ScheduledRecipe } from "../../../models/ScheduledRecipe"
 import { Add } from "@mui/icons-material"
 import { IconButton } from "@mui/material"
 import { ScheduledRecipeList } from "./ScheduledRecipeList"

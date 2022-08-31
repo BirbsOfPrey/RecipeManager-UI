@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Step } from "../../models/Step"
+import { Step } from "../../../models/Step"
 import { RecipeEditStepList } from "./RecipeEditStepList"
 import { RecipeSteps } from "./RecipeSteps"
 

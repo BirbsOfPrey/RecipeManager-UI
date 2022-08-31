@@ -1,7 +1,7 @@
 import { Component } from "react"
-import StringResource from "../../resources/StringResource"
+import StringResource from "../../../resources/StringResource"
 import { TextField } from "@mui/material"
-import { RecipeValidator } from "../../models/RecipeValidator"
+import { RecipeValidator } from "../../../models/RecipeValidator"
 
 interface IProps {
     name?: string

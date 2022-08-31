@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { RecipeEditSteps } from '../../../components/widgets/RecipeEditSteps'
+import { RecipeEditSteps } from '../../../../components/widgets/recipe/RecipeEditSteps'
 
 const mockUpdateStep = jest.fn()
 const mockChangeOrderStep = jest.fn()

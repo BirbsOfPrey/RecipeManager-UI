@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { createRecipe, Recipe } from "../../../models/Recipe"
-import StringResource from "../../../resources/StringResource"
-import { RecipeListItemSelector } from "../../../components/widgets/RecipeListItemSelector"
+import { createRecipe, Recipe } from "../../../../models/Recipe"
+import StringResource from "../../../../resources/StringResource"
+import { RecipeListItemSelector } from "../../../../components/widgets/scheduledRecipe/RecipeListItemSelector"
 
 const testRecipe: Recipe = createRecipe()
 const testRecipeName: string = "Cookie"
