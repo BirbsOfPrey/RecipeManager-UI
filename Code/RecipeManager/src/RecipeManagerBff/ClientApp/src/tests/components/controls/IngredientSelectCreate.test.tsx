@@ -17,6 +17,5 @@ test('renders textfield of ingredient name correct', () => {
     // Assert
     expect(screen.getByDisplayValue(ingredientName)).toBeInTheDocument()
 
-    const elements = container.getElementsByClassName("ingredientSelectCreate__ingredient")
-    expect(elements.length).toBe(1)
+    expect(container.getElementsByClassName("ingredientSelectCreate__ingredient").length).toBe(1)
 })

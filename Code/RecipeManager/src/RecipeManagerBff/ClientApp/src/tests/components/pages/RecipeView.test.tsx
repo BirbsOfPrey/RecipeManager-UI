@@ -9,6 +9,5 @@ test('renders RecipeCookingView correct', () => {
     const { container } = render(<BrowserRouter><RecipeView /></BrowserRouter>)
 
     // Assert
-    const linkElementRecipeCookingView = container.getElementsByClassName("recipeCreateAssistant__container")[0]
-    expect(linkElementRecipeCookingView).toBeInTheDocument()
+    expect(container.getElementsByClassName("recipeCreateAssistant__container").length).toBe(1)
 })

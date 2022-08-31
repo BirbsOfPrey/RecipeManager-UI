@@ -22,8 +22,7 @@ test('renders textfield of instruction correct', () => {
     // Assert
     expect(screen.getByDisplayValue(stepInstruction)).toBeInTheDocument()
 
-    const elements = container.getElementsByClassName("stepListItem__instructionField")
-    expect(elements.length).toBe(1)
+    expect(container.getElementsByClassName("stepListItem__instructionField").length).toBe(1)
 })
 
 test('renders no button if not editable', () => {

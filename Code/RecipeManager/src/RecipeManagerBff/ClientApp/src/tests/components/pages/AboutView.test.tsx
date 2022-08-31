@@ -8,6 +8,5 @@ test('renders copyright correct', () => {
     const { container } = render(<AboutView />)
 
     // Assert
-    const linkElementCopyright = container.getElementsByClassName("copyright__container")[0]
-    expect(linkElementCopyright).toBeInTheDocument()
+    expect(container.getElementsByClassName("copyright__container").length).toBe(1)
 })

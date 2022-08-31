@@ -24,6 +24,9 @@ let handlers = [
 
             ])
         )
+    }),
+    rest.delete('/remote/api/scheduledrecipe/33', (req: any, res: any, ctx: any ) => {
+        return res()
     })
 ]
 

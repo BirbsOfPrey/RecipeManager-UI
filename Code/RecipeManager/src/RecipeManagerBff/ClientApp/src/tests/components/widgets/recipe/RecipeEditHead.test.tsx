@@ -16,8 +16,7 @@ test('renders textfield of name', () => {
     // Assert
     expect(screen.getByDisplayValue(recipeName)).toBeInTheDocument()
 
-    const elements = container.getElementsByClassName("recipeEditHead__nameField")
-    expect(elements.length).toBe(1)
+    expect(container.getElementsByClassName("recipeEditHead__nameField").length).toBe(1)
 })
 
 test('does not render textfield of description if not editable', () => {
@@ -27,8 +26,7 @@ test('does not render textfield of description if not editable', () => {
     const { container } = render(<RecipeEditHead name={recipeName} description={recipeDescription} setValue={mockSetValue} editable={false} />)
 
     // Assert
-    const elements = container.getElementsByClassName("recipeEditHead__descriptionField")
-    expect(elements.length).toBe(0)
+    expect(container.getElementsByClassName("recipeEditHead__descriptionField").length).toBe(0)
 })
 
 test('renders textfield of description if editable', () => {
@@ -40,8 +38,7 @@ test('renders textfield of description if editable', () => {
     // Assert
     expect(screen.getByDisplayValue(recipeDescription)).toBeInTheDocument()
 
-    const elements = container.getElementsByClassName("recipeEditHead__descriptionField")
-    expect(elements.length).toBe(1)
+    expect(container.getElementsByClassName("recipeEditHead__descriptionField").length).toBe(1)
 })
 
 test('renders helpertext if recipe name not valid', () => {

@@ -17,8 +17,7 @@ test('renders textfield of instruction', () => {
     // Assert
     expect(screen.getByDisplayValue(stepInstruction)).toBeInTheDocument()
 
-    const elements = container.getElementsByClassName("recipeEditHead__descriptionField")
-    expect(elements.length).toBe(1)
+    expect(container.getElementsByClassName("recipeEditHead__descriptionField").length).toBe(1)
 })
 
 test('renders no steps text if no step present', () => {
@@ -30,6 +29,5 @@ test('renders no steps text if no step present', () => {
     // Assert
     expect(screen.getByText(StringResource.General.NoSteps)).toBeInTheDocument()
 
-    const elements = container.getElementsByClassName("recipeEditHead__descriptionField")
-    expect(elements.length).toBe(1)
+    expect(container.getElementsByClassName("recipeEditHead__descriptionField").length).toBe(1)
 })

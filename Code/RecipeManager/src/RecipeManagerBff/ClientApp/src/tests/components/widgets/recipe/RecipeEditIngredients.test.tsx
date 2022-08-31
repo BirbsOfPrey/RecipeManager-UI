@@ -20,7 +20,7 @@ test('renders PersonAmountField correct', () => {
     const { container } = render(<RecipeEditIngredients personRefAmount={6} ingredientComponents={undefined} setValue={mockSetValue} updateIngredientComponent={mockUpdateIngredientComponent} deleteIngredientComponent={mockDeleteIngredientComponent} editable={false} />)
 
     // Assert
-    expect(container.getElementsByClassName("personAmountField__refAmount")[0]).toBeInTheDocument
+    expect(container.getElementsByClassName("personAmountField__refAmount").length).toBe(1)
 })
 
 test('renders no ingredients text if no ingredient components present', () => {

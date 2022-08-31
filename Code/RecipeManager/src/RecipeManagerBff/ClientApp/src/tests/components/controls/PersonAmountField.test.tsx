@@ -14,6 +14,5 @@ test('renders textfield of person amount correct', () => {
     // Assert
     expect(screen.getByDisplayValue(personAmount)).toBeInTheDocument()
 
-    const elements = container.getElementsByClassName("personAmountField__refAmount")
-    expect(elements.length).toBe(1)
+    expect(container.getElementsByClassName("personAmountField__refAmount").length).toBe(1)
 })
