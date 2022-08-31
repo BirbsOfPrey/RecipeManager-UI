@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import StringResource from "../../../../resources/StringResource"
 import { immerable } from "immer"
 import { rest } from "msw"
-import { setupServer } from "msw/node"
+import { setupServer, SetupServerApi } from "msw/node"
 import { Recipe } from "../../../../models/Recipe"
 import { RecipesUrl } from "../../../../resources/Api"
 import { RecipeListSelector } from "../../../../components/widgets/scheduledRecipe/RecipeListSelector"
@@ -27,14 +27,23 @@ let handlers = [
     })
 ]
 
-const server = setupServer(...handlers)
+let emptyHandlers = [
+    rest.get(RecipesUrl, (req: any, res: (arg0: any) => any, ctx: { json: (arg0: Recipe[]) => any }) => {
+        return res(
+            ctx.json([])
+        )
+    })
+]
 
-beforeAll(() => server.listen())
+let server: SetupServerApi
+
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 test('renders correct recipes in the list', async () => {
     // Arrange
+    server = setupServer(...handlers)
+    server.listen()
 
     // Act
     render(<BrowserRouter><RecipeListSelector selectRecipe={mockSelectRecipe} /></BrowserRouter>)
@@ -61,6 +70,8 @@ test('renders progress bar if recipes loading', async () => {
 
 test('calls method selectRecipe on click', async () => {
     // Arrange
+    server = setupServer(...handlers)
+    server.listen()
     render(<BrowserRouter><RecipeListSelector selectRecipe={mockSelectRecipe} /></BrowserRouter>)
 
     // Act
@@ -72,10 +83,24 @@ test('calls method selectRecipe on click', async () => {
 
 test('render as much list items as recipes are passed', async () => {
     // Arrange
+    server = setupServer(...handlers)
+    server.listen()
 
     // Act
     const { container } = render(<BrowserRouter><RecipeListSelector selectRecipe={mockSelectRecipe} /></BrowserRouter>)
     
     // Assert
     await waitFor(() => { expect(container.getElementsByClassName("recipeListItemSelector__container").length).toBe(2) })
+})
+
+test('renders no recipes text correct', async () => {
+    // Arrange
+    server = setupServer(...emptyHandlers)
+    server.listen()
+
+    // Act
+    render(<BrowserRouter><RecipeListSelector selectRecipe={mockSelectRecipe} /></BrowserRouter>)
+    
+    // Assert
+    await waitFor(() => { expect(screen.getByText(StringResource.Messages.NoRecipesToDisplay)).toBeInTheDocument })
 })
