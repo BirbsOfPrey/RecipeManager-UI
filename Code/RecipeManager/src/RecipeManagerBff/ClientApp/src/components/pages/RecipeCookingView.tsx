@@ -20,6 +20,12 @@ import { createSteps, Step } from "../../models/Step"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
 import produce from "immer"
 
+interface IProps {
+    recipeId?: string
+    editable?: boolean
+    navigate: NavigateFunction
+}
+
 interface IState {
     redirect: boolean
     saved: boolean
@@ -28,12 +34,6 @@ interface IState {
     saving: boolean
     openDeleteConfirmDialog: boolean
     error: string
-}
-
-interface IProps {
-    recipeId?: string
-    editable?: boolean
-    navigate: NavigateFunction
 }
 
 export class RecipeCookingView extends Component<IProps, IState> {
@@ -253,11 +253,13 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     <>
                         <IconButton
                             aria-label="view"
+                            className="recipeCreateAssistant__viewButton"
                             component={Link} to={`${recipeRoute}`}>
                             <VisibilityIcon />
                         </IconButton>
                         <IconButton
                             aria-label="delete"
+                            className="recipeCreateAssistant__deleteButton"
                             onClick={this.requestToDeleteRecipe}>
                             <DeleteIcon />
                         </IconButton>
@@ -265,6 +267,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                 ) : (
                     <IconButton
                         aria-label="edit"
+                        className="recipeCreateAssistant__editButton"
                         component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
                         <Edit />
                     </IconButton>)
@@ -297,7 +300,8 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     open={this.state.openDeleteConfirmDialog}
                     onClose={this.handleAbort}
                     aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description">
+                    aria-describedby="alert-dialog-description"
+                    className="recipeCreateAssistant__dialog">
                     <DialogTitle id="alert-dialog-title">
                         {StringResource.Messages.DeleteRecipeQuestion}
                     </DialogTitle>
