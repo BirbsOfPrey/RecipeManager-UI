@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { RecipeSteps } from '../../../components/widgets/RecipeSteps'
 import { createStep, Step } from '../../../models/Step'
+import StringResource from '../../../resources/StringResource'
 
 test('renders textfield of instruction', () => {
     // Arrange
@@ -15,6 +16,19 @@ test('renders textfield of instruction', () => {
 
     // Assert
     expect(screen.getByDisplayValue(stepInstruction)).toBeInTheDocument()
+
+    const elements = container.getElementsByClassName("recipeEditHead__descriptionField")
+    expect(elements.length).toBe(1)
+})
+
+test('renders no steps text if no step present', () => {
+    // Arrange
+
+    // Act
+    const { container } = render(<RecipeSteps steps={undefined} />)
+
+    // Assert
+    expect(screen.getByText(StringResource.General.NoSteps)).toBeInTheDocument()
 
     const elements = container.getElementsByClassName("recipeEditHead__descriptionField")
     expect(elements.length).toBe(1)

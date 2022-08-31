@@ -10,8 +10,8 @@ step1.stepNumber = stepNumber1
 step1.id = stepNumber1
 const step2: Step = createStep()
 const stepNumber2: number = 2
-step1.stepNumber = stepNumber2
-step1.id = stepNumber2
+step2.stepNumber = stepNumber2
+step2.id = stepNumber2
 
 const mockUpdateStep = jest.fn()
 const mockChangeOrderStep = jest.fn()
@@ -52,7 +52,6 @@ test('calls method addStep on click with correct parameter', () => {
     const step3: Step = createStep()
     const stepNumber3: number = 3
     step3.stepNumber = stepNumber3
-    step1.id = stepNumber3
     const { container } = render(<RecipeEditStepList steps={[step1, step2]} updateStep={mockUpdateStep} changeStepOrder={mockChangeOrderStep} deleteStep={mockDeleteStep} />)
 
     // Act

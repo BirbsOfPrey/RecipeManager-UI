@@ -46,7 +46,7 @@ export class RecipeSteps extends Component<IProps, IState> {
                     disabled={activeStep === undefined}
                     inputProps={{ readOnly: true, disabled: true }}
                     label={activeStepName}
-                    value={activeStep ? activeStep.instruction : StringResource.General.NoSteps}
+                    value={activeStep.stepNumber ? activeStep.instruction : StringResource.General.NoSteps}
                 />
                 <Pagination
                     variant="outlined"
