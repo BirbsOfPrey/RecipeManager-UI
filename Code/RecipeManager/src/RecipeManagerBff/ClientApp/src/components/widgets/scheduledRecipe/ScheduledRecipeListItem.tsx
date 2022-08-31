@@ -40,6 +40,7 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                     <IconButton
                         edge="end"
                         aria-label="delete"
+                        className="scheduledRecipeListItem__deleteButton"
                         onClick={() => this.props.scheduledRecipeDeleted(this.props.scheduledRecipe.id)}>
                         <DeleteIcon />
                     </IconButton>

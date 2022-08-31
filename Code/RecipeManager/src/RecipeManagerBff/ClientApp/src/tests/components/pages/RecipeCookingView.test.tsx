@@ -2,7 +2,6 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { BrowserRouter } from 'react-router-dom'
 import { RecipeCookingView } from '../../../components/pages/RecipeCookingView'
-import { IngredientComponent, createIngredientComponent } from '../../../models/IngredientComponent'
 import StringResource from '../../../resources/StringResource'
 
 const mockNavigate = jest.fn()
@@ -145,7 +144,7 @@ test('renders dialog with correct delete button on click on delete button', asyn
     await waitFor(() => { expect(screen.getByText(StringResource.General.Delete)).toBeInTheDocument() })
 })
 
-test('does not render dialog after click on cancel button in the dialog', async () => {
+test('returns to CookingView after click on cancel button in the dialog', async () => {
     // Arrange
     const { container } = render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
     userEvent.click(container.getElementsByClassName("recipeCreateAssistant__deleteButton")[0])
