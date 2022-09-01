@@ -48,7 +48,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
             field = (
                 <TextField
                     variant="filled"
-                    className="ingredientSelectCreate__ingredient"
+                    className="ingredientSelectCreate__newIngredient"
                     required
                     fullWidth
                     label={StringResource.General.Ingredient}

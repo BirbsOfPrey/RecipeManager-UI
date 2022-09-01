@@ -4,7 +4,7 @@ import { createDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
-import { RecipeEditHead } from "../widgets/RecipeEditHead"
+import { RecipeEditHead } from "../widgets/recipe/RecipeEditHead"
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
@@ -12,13 +12,19 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import Edit from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { RecipeEditIngredients } from "../widgets/RecipeEditIngredients"
-import { RecipeEditSteps } from "../widgets/RecipeEditSteps"
+import { RecipeEditIngredients } from "../widgets/recipe/RecipeEditIngredients"
+import { RecipeEditSteps } from "../widgets/recipe/RecipeEditSteps"
 import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
 import { RecipeValidator } from "../../models/RecipeValidator"
 import { createSteps, Step } from "../../models/Step"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
 import produce from "immer"
+
+interface IProps {
+    recipeId?: string
+    editable?: boolean
+    navigate: NavigateFunction
+}
 
 interface IState {
     redirect: boolean
@@ -28,12 +34,6 @@ interface IState {
     saving: boolean
     openDeleteConfirmDialog: boolean
     error: string
-}
-
-interface IProps {
-    recipeId?: string
-    editable?: boolean
-    navigate: NavigateFunction
 }
 
 export class RecipeCookingView extends Component<IProps, IState> {
@@ -253,11 +253,13 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     <>
                         <IconButton
                             aria-label="view"
+                            className="recipeCreateAssistant__viewButton"
                             component={Link} to={`${recipeRoute}`}>
                             <VisibilityIcon />
                         </IconButton>
                         <IconButton
                             aria-label="delete"
+                            className="recipeCreateAssistant__deleteButton"
                             onClick={this.requestToDeleteRecipe}>
                             <DeleteIcon />
                         </IconButton>
@@ -265,6 +267,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                 ) : (
                     <IconButton
                         aria-label="edit"
+                        className="recipeCreateAssistant__editButton"
                         component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
                         <Edit />
                     </IconButton>)
@@ -297,7 +300,8 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     open={this.state.openDeleteConfirmDialog}
                     onClose={this.handleAbort}
                     aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description">
+                    aria-describedby="alert-dialog-description"
+                    className="recipeCreateAssistant__dialog">
                     <DialogTitle id="alert-dialog-title">
                         {StringResource.Messages.DeleteRecipeQuestion}
                     </DialogTitle>

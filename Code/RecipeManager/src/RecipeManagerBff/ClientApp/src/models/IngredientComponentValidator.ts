@@ -2,9 +2,9 @@ export class IngredientComponentValidator {
     static minAmount: number = 0
 
     static validateAmount(amount?: number): boolean {
-        if (amount) {
-            return amount >= IngredientComponentValidator.minAmount
+        if (amount === undefined || amount < 0) {
+            return false
         }
-        return false
+        return amount >= IngredientComponentValidator.minAmount
     }
 }

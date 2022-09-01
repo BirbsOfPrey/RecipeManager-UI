@@ -4,7 +4,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon'
 import { Component } from "react"
-import { DailyScheduleItem } from "../widgets/DailyScheduleItem"
+import { DailyScheduleItem } from "../widgets/scheduledRecipe/DailyScheduleItem"
 import { mapIsoStringToDate, ScheduledRecipe } from "../../models/ScheduledRecipe"
 import { createDefaultHeader, scheduledRecipeFromToQuery, ScheduledRecipesUrl } from "../../resources/Api"
 import StringResource from "../../resources/StringResource"
@@ -15,7 +15,7 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
-import { ScheduledRecipeCreate } from "../widgets/ScheduledRecipeCreate"
+import { ScheduledRecipeCreate } from "../widgets/scheduledRecipe/ScheduledRecipeCreate"
 import TextField from "@mui/material/TextField"
 
 interface IState {
