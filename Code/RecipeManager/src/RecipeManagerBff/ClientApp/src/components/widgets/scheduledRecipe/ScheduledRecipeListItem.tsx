@@ -21,7 +21,7 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
             <ListItem
                 alignItems="flex-start"
                 className="scheduledRecipeListItem__container"
-                sx={{ paddingRight: '96px' }}>
+                sx={{ paddingRight: '96px', paddingTop: '0px', paddingBottom: '0px' }}>
                 <ListItemAvatar>
                     <EventIcon />
                 </ListItemAvatar>

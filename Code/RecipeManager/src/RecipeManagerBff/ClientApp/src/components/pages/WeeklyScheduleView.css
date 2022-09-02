@@ -1,0 +1,33 @@
+.weeklyScheduleView__container {
+    display: grid;
+    grid-template-columns: 350px 50px 1fr 180px;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "header previousButton nextButton datePicker"
+        "list list list list";
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.weeklyScheduleView__container .weeklyScheduleView__header {
+    grid-area: header;
+    align-self: center;
+}
+
+.weeklyScheduleView__container .weeklyScheduleView__buttonPrevious {
+    grid-area: previousButton;
+}
+
+.weeklyScheduleView__container .weeklyScheduleView__buttonNext {
+    grid-area: nextButton;
+    justify-self: start;
+}
+
+.weeklyScheduleView__container .weeklyScheduleView__datePicker {
+    grid-area: datePicker;
+    justify-self: end;
+}
+
+.weeklyScheduleView__container .weeklyScheduleView__dailyScheduleList {
+    grid-area: list;
+}

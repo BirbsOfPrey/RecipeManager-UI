@@ -7,14 +7,16 @@ interface IProps {
 
 export const EmptyListItem = (props: IProps) => {
     return (
-        <ListItem>
+        <ListItem
+            sx={{ paddingTop: '0px', paddingBottom: '0px' }}
+        >
             {props.icon ? (
-            <ListItemAvatar>
-                {props.icon}
-            </ListItemAvatar>) : <></>}
+                <ListItemAvatar>
+                    {props.icon}
+                </ListItemAvatar>) : <></>}
             <ListItemText
                 primary={props.text}
             />
         </ListItem>
-        )
+    )
 }
