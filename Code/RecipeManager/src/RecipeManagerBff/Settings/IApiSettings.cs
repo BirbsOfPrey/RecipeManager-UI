@@ -6,6 +6,8 @@ public interface IApiSettings
   string ApiScopeName { get; set; }
   string BffClientId { get; set; }
   string BffClientSecret { get; set; }
-  string ProxyRoute { get; set; }
-  string ProxyAddress { get; set; }
+  string ProxyRouteApi { get; set; }
+  string ProxyAddressApi { get; set; }
+  string ProxyRouteAuth { get; set; }
+  string ProxyAddressAuth { get; set; }
 }

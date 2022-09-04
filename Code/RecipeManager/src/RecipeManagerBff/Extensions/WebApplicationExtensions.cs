@@ -109,7 +109,9 @@ namespace RecipeManagerBff.Extensions
           .RequireAuthorization()
           .AsBffApiEndpoint();
 
-        endpoints.MapRemoteBffApiEndpoint(apiSettings.ProxyRoute, apiSettings.ProxyAddress)
+        endpoints.MapRemoteBffApiEndpoint(apiSettings.ProxyRouteApi, apiSettings.ProxyAddressApi)
+          .RequireAccessToken();
+        endpoints.MapRemoteBffApiEndpoint(apiSettings.ProxyRouteAuth, apiSettings.ProxyAddressAuth)
           .RequireAccessToken();
 
       });
