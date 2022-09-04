@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using Duende.Bff.Yarp;
-using Microsoft.AspNetCore.Authorization;
 using RecipeManagerBff.Settings;
 using Serilog;
 
@@ -81,6 +79,13 @@ namespace RecipeManagerBff.Extensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
+      app.Use((context, next) =>
+      {
+        //Required, as it is hosted behind reverse proxy (forwarded headers middleware didn't work)
+        context.Request.Scheme = "https";
+        return next();
+      });
+
       if (app.Environment.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
