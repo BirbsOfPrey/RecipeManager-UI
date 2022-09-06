@@ -1,0 +1,50 @@
+.scheduledRecipeCreate__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-template-areas:
+        "header header"
+        "selectedRecipe selectedRecipe"
+        "addButton cancelButton"
+        "listTitle listTitle"
+        "progress progress"
+        "list list"
+        "message message";
+}
+
+.scheduledRecipeCreate__container .scheduledRecipeCreate__header {
+    grid-area: header;
+}
+
+.scheduledRecipeCreate__container .scheduledRecipeCreate__selectedRecipeName {
+    grid-area: selectedRecipe;
+}
+
+.scheduledRecipeCreate__container .scheduledRecipeCreate__cancelButton {
+    grid-area: cancelButton;
+    justify-self: start;
+}
+
+.scheduledRecipeCreate__container .scheduledRecipeCreate__addButton {
+    grid-area: addButton;
+    justify-self: start;
+}
+
+.scheduledRecipeCreate__container .scheduledRecipeCreate__listTitle {
+    grid-area: listTitle;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
+
+.scheduledRecipeCreate__container .recipeListContentSelector__progress {
+    grid-area: progress;
+}
+
+.scheduledRecipeCreate__container .recipeListContentSelector__container {
+    grid-area: list;
+    max-height: 60vh;
+}
+
+.scheduledRecipeCreate__container .recipeListContentSelector__message {
+    grid-area: message;
+}

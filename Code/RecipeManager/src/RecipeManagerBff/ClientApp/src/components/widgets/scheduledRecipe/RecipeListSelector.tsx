@@ -35,7 +35,9 @@ export class RecipeListSelector extends Component<IProps, IState> {
         if (recipes.length !== 0) {
             return (
                 <div className="recipeListContentSelector__container">
-                    <List className="recipeListContentSelector__list">
+                    <List className="recipeListContentSelector__list"
+                        disablePadding={true}
+                        style={{ maxHeight: '100%', overflow: 'auto' }}>
                         {recipes.map(recipe => (
                             <RecipeListItemSelector
                                 key={recipe.id}
@@ -47,11 +49,12 @@ export class RecipeListSelector extends Component<IProps, IState> {
             )
         } else if (this.state.loading === true) {
             return (
-                <LinearProgress />
+                <LinearProgress
+                    className="recipeListContentSelector__progress" />
             )
         } else {
             return (
-                <p className="recipeListContent__message">{StringResource.Messages.NoRecipesToDisplay}</p>
+                <p className="recipeListContentSelector__message">{StringResource.Messages.NoRecipesToDisplay}</p>
             )
         }
     }
