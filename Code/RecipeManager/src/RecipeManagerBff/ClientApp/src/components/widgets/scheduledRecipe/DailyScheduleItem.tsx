@@ -19,18 +19,14 @@ export class DailyScheduleItem extends Component<IProps, {}> {
     render() {
         return (
             <Paper className="dailyScheduleItem__container"
-            elevation={2}>
+                elevation={2}>
                 <Box className="dailyScheduleItem__header"
-                    sx={{
-                        backgroundColor: "secondary.main"
-                    }}>
+                    sx={{ backgroundColor: "secondary.main" }}>
                     <Typography
                         className="dailyScheduleItem__title"
                         variant="subtitle1"
                         component="p"
-                        sx={{
-                            mr: 2
-                        }}>
+                        sx={{ mr: "15px", pl: "18px" }}>
                         {DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {DateHelper.getStringOfDate(this.props.date)}
                     </Typography>
                     <IconButton size="large" className="dailyScheduleItem__addButton" onClick={() => this.props.addScheduledRecipe(this.props.date)}>

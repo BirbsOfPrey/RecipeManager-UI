@@ -11,7 +11,6 @@
 .dailyScheduleItem__container .dailyScheduleItem__title {
     flex: auto;
     align-self: center;
-    padding-left: 18px;
 }
 
 .dailyScheduleItem__container .scheduledRecipeList__container {

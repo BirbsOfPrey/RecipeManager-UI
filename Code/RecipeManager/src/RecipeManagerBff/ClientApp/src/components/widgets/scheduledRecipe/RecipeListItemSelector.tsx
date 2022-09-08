@@ -21,7 +21,7 @@ export class RecipeListItemSelector extends Component<IProps, {}> {
             <ListItemButton
                 alignItems="flex-start"
                 className="recipeListItemSelector__container"
-                sx={{ paddingTop: '0px', paddingBottom: '0px' }}
+                sx={{ pt: "0px", pb: "0px" }}
                 onClick={() => this.props.selectRecipe(recipe)}>
                 <ListItemAvatar>
                     <DinnerDining />

@@ -8,8 +8,7 @@ interface IProps {
 export const EmptyListItem = (props: IProps) => {
     return (
         <ListItem
-            sx={{ paddingTop: '5px', paddingBottom: '5px' }}
-        >
+            sx={{ pt: "5px", pb: "5px" }}>
             {props.icon ? (
                 <ListItemAvatar>
                     {props.icon}

@@ -33,14 +33,11 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
         return (
             <div className="scheduledRecipeCreate__container">
                 <Paper className="scheduledRecipeCreate__header"
-                    sx={{ pt: 2, pb: 2, pl: 3 }}>
+                    sx={{ pt: "15px", pb: "15px", pl: "25px", mb: "15px" }}>
                     <Typography
                         variant="subtitle1"
                         component="p"
-                        sx={{
-                            mr: 2,
-                            fontWeight: 'bold'
-                        }}>
+                        sx={{ fontWeight: "bold" }}>
                         {StringResource.General.SelectedRecipe}{DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {DateHelper.getStringOfDate(this.props.date)}
                     </Typography>
 
@@ -49,8 +46,8 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                         variant="body1"
                         noWrap
                         component="p"
-                        sx={{ mt: 1 }}>
-                        <DinnerDining sx={{ mr: 3 }} />
+                        sx={{ mt: "10px" }}>
+                        <DinnerDining sx={{ mr: "25px" }} />
                         {this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}
                     </Typography>
                 </Paper>
@@ -61,6 +58,7 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                     variant="outlined">
                     {StringResource.General.Cancel}
                 </Button>
+
                 <Button
                     className="scheduledRecipeCreate__addButton"
                     onClick={() => this.props.handleAdd(this.state.scheduledRecipe)}
@@ -74,8 +72,9 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                     variant="subtitle1"
                     component="p"
                     sx={{
-                        mr: 2,
-                        fontWeight: 'bold'
+                        mt: "25px",
+                        mb: "5px",
+                        fontWeight: "bold"
                     }}>
                     {StringResource.General.SelectRecipe}
                 </Typography>

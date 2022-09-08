@@ -16,7 +16,6 @@
 
 .scheduledRecipeCreate__container .scheduledRecipeCreate__header {
     grid-area: header;
-    margin-bottom: 15px;
 }
 
 .scheduledRecipeCreate__container .scheduledRecipeCreate__cancelButton {
@@ -31,8 +30,6 @@
 
 .scheduledRecipeCreate__container .scheduledRecipeCreate__listTitle {
     grid-area: listTitle;
-    margin-top: 25px;
-    margin-bottom: 5px;
 }
 
 .scheduledRecipeCreate__container .recipeListContentSelector__progress {

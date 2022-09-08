@@ -1,10 +1,11 @@
 import { Box, Typography } from '@mui/material'
 import StringResource from '../../resources/StringResource'
-import './Copyright.css'
 
 export const Copyright = () => {
     return (
-        <Box className="copyright__container" alignItems="center" sx={{ mt: 20 }}>
+        <Box className="copyright__container"
+            alignItems="center"
+            sx={{ mt: "150px" }}>
             <Typography
                 align="center"
                 variant="subtitle1"

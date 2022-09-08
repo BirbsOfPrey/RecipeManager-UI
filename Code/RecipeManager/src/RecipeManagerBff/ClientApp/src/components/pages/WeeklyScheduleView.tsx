@@ -157,8 +157,8 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                         variant="subtitle1"
                         component="p"
                         sx={{
-                            mr: 2,
-                            fontWeight: 'bold'
+                            mr: "15px",
+                            fontWeight: "bold"
                         }}>
                         {StringResource.General.ShowSelectedWeek}{DateHelper.getStringOfDate(this.getDayOfWeekToShow(1))} - {DateHelper.getStringOfDate(this.getDayOfWeekToShow(7))}
                     </Typography>
@@ -178,8 +178,8 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                             onChange={(newValue: Date | null) => {
                                 this.setDate(newValue)
                             }}
-                            inputFormat='dd.MM.yyyy'
-                            renderInput={(params: any) => <TextField {...params} size='small' />}
+                            inputFormat="dd.MM.yyyy"
+                            renderInput={(params: any) => <TextField {...params} size="small" />}
                         />
                     </LocalizationProvider>
 
