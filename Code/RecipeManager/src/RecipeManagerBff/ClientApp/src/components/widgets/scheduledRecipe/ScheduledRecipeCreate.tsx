@@ -35,7 +35,6 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                     component="p"
                     sx={{
                         mr: 2,
-                        display: { xs: 'flex', md: 'block' },
                         fontWeight: 'bold'
                     }}>
                     {StringResource.General.SelectedRecipe}
@@ -48,7 +47,6 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                     component="p"
                     sx={{
                         mr: 2,
-                        display: { xs: 'block', md: 'flex' }
                     }}>
                     {this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}
                 </Typography>
@@ -56,13 +54,14 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                 <Button
                     className="scheduledRecipeCreate__cancelButton"
                     onClick={this.props.handleCancel}
-                    background-color="inherit">
+                    variant="outlined">
                     {StringResource.General.Cancel}
                 </Button>
                 <Button
                     className="scheduledRecipeCreate__addButton"
                     onClick={() => this.props.handleAdd(this.state.scheduledRecipe)}
-                    disabled={this.state.scheduledRecipe.recipe === undefined}>
+                    disabled={this.state.scheduledRecipe.recipe === undefined}
+                    variant="outlined">
                     {StringResource.General.Add}
                 </Button>
 
@@ -73,7 +72,6 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                     component="p"
                     sx={{
                         mr: 2,
-                        display: { xs: 'none', md: 'flex' },
                         fontWeight: 'bold'
                     }}>
                     {StringResource.General.SelectRecipe}

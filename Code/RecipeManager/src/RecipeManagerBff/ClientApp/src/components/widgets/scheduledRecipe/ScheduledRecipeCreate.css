@@ -42,7 +42,6 @@
 
 .scheduledRecipeCreate__container .recipeListContentSelector__container {
     grid-area: list;
-    max-height: 60vh;
 }
 
 .scheduledRecipeCreate__container .recipeListContentSelector__message {

@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { Recipe } from '../../../models/Recipe'
 import { createDefaultHeader, RecipesUrl } from '../../../resources/Api'
 import StringResource from '../../../resources/StringResource'
-import { LinearProgress, List } from '@mui/material'
+import { LinearProgress, List, Paper } from '@mui/material'
 import { RecipeListItemSelector } from './RecipeListItemSelector'
 
 interface IProps {
@@ -34,10 +34,10 @@ export class RecipeListSelector extends Component<IProps, IState> {
 
         if (recipes.length !== 0) {
             return (
-                <div className="recipeListContentSelector__container">
+                <Paper className="recipeListContentSelector__container"
+                    sx={{ maxHeight: "60vh", overflow: "auto" }}>
                     <List className="recipeListContentSelector__list"
-                        disablePadding={true}
-                        style={{ maxHeight: '100%', overflow: 'auto' }}>
+                        disablePadding={true}>
                         {recipes.map(recipe => (
                             <RecipeListItemSelector
                                 key={recipe.id}
@@ -45,7 +45,7 @@ export class RecipeListSelector extends Component<IProps, IState> {
                                 selectRecipe={this.props.selectRecipe} />
                         ))}
                     </List>
-                </div>
+                </Paper>
             )
         } else if (this.state.loading === true) {
             return (

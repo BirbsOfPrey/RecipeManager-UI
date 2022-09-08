@@ -2,7 +2,7 @@ import { Component } from "react"
 import { DateHelper } from "../../../models/helper/DateHelper"
 import { ScheduledRecipe } from "../../../models/ScheduledRecipe"
 import { Add } from "@mui/icons-material"
-import { Box, IconButton, Typography } from "@mui/material"
+import { Box, IconButton, Paper, Typography } from "@mui/material"
 import { ScheduledRecipeList } from "./ScheduledRecipeList"
 import './DailyScheduleItem.css'
 
@@ -18,10 +18,11 @@ export class DailyScheduleItem extends Component<IProps, {}> {
 
     render() {
         return (
-            <div className="dailyScheduleItem__container">
+            <Paper className="dailyScheduleItem__container"
+            elevation={2}>
                 <Box className="dailyScheduleItem__header"
                     sx={{
-                        backgroundColor: "primary.main"
+                        backgroundColor: "secondary.main"
                     }}>
                     <Typography
                         className="dailyScheduleItem__title"
@@ -41,7 +42,7 @@ export class DailyScheduleItem extends Component<IProps, {}> {
                     scheduledRecipes={this.props.scheduledRecipes}
                     deleteScheduledRecipe={this.props.deleteScheduledRecipe}
                 />
-            </div >
+            </Paper >
         )
     }
 }
