@@ -2,7 +2,7 @@ import { Component } from "react"
 import { DateHelper } from "../../../models/helper/DateHelper"
 import { ScheduledRecipe } from "../../../models/ScheduledRecipe"
 import { Add } from "@mui/icons-material"
-import { IconButton, Typography } from "@mui/material"
+import { Box, IconButton, Typography } from "@mui/material"
 import { ScheduledRecipeList } from "./ScheduledRecipeList"
 import './DailyScheduleItem.css'
 
@@ -19,27 +19,29 @@ export class DailyScheduleItem extends Component<IProps, {}> {
     render() {
         return (
             <div className="dailyScheduleItem__container">
-                <Typography
-                    className="dailyScheduleItem__header"
-                    variant="h6"
-                    noWrap
-                    component="p"
+                <Box className="dailyScheduleItem__header"
                     sx={{
-                        mr: 2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontWeight: 'bold'
+                        backgroundColor: "primary.main"
                     }}>
-                    {DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {DateHelper.getStringOfDate(this.props.date)}
-                </Typography>
-                <IconButton size="large" className="dailyScheduleItem__addButton" onClick={() => this.props.addScheduledRecipe(this.props.date)}>
-                    <Add />
-                </IconButton>
+                    <Typography
+                        className="dailyScheduleItem__title"
+                        variant="subtitle1"
+                        component="p"
+                        sx={{
+                            mr: 2
+                        }}>
+                        {DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {DateHelper.getStringOfDate(this.props.date)}
+                    </Typography>
+                    <IconButton size="large" className="dailyScheduleItem__addButton" onClick={() => this.props.addScheduledRecipe(this.props.date)}>
+                        <Add />
+                    </IconButton>
+                </Box>
 
                 <ScheduledRecipeList
                     scheduledRecipes={this.props.scheduledRecipes}
                     deleteScheduledRecipe={this.props.deleteScheduledRecipe}
                 />
-            </div>
+            </div >
         )
     }
 }

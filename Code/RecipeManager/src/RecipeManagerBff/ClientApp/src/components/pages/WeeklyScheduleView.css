@@ -1,12 +1,32 @@
-.weeklyScheduleView__container {
-    display: grid;
-    grid-template-columns: 350px 50px 1fr 180px;
-    grid-template-rows: auto auto;
-    grid-template-areas:
-        "header previousButton nextButton datePicker"
-        "list list list list";
-    margin-top: 50px;
-    margin-bottom: 50px;
+@media (min-width: 900px) {
+    .weeklyScheduleView__container {
+        display: grid;
+        grid-template-columns: 350px 50px 1fr 180px;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "header previousButton nextButton datePicker"
+            "list list list list";
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width: 900px) {
+    .weeklyScheduleView__container {
+        display: grid;
+        grid-template-columns: 50px 50px 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "header header header"
+            "previousButton nextButton datePicker"
+            "list list list";
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .weeklyScheduleView__container .weeklyScheduleView__header {
+        margin-bottom: 15px;
+    }
 }
 
 .weeklyScheduleView__container .weeklyScheduleView__header {

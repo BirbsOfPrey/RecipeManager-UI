@@ -55,7 +55,8 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
 
                 <Button
                     className="scheduledRecipeCreate__cancelButton"
-                    onClick={this.props.handleCancel}>
+                    onClick={this.props.handleCancel}
+                    background-color="inherit">
                     {StringResource.General.Cancel}
                 </Button>
                 <Button

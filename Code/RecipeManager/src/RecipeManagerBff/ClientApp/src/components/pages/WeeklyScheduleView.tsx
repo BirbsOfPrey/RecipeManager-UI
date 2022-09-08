@@ -154,16 +154,15 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                 <div className="weeklyScheduleView__container">
                     <Typography
                         className="weeklyScheduleView__header"
-                        variant="h6"
-                        noWrap
+                        variant="subtitle1"
                         component="p"
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' }
+                            fontWeight: 'bold'
                         }}>
                         {StringResource.General.ShowSelectedWeek}{DateHelper.getStringOfDate(this.getDayOfWeekToShow(1))} - {DateHelper.getStringOfDate(this.getDayOfWeekToShow(7))}
                     </Typography>
-                    {/* <p className="weeklyScheduleView__header">{StringResource.General.ShowSelectedWeek}{DateHelper.getStringOfDate(this.getDayOfWeekToShow(1))} - {DateHelper.getStringOfDate(this.getDayOfWeekToShow(7))}</p> */}
+
                     <IconButton className="weeklyScheduleView__buttonPrevious" onClick={() => this.changeWeek(false)}>
                         <ArrowCircleLeft />
                     </IconButton>
