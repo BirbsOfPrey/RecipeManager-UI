@@ -5,35 +5,34 @@
     grid-template-areas:
         "header header"
         "selectedRecipe selectedRecipe"
-        "addButton cancelButton"
+        "cancelButton addButton"
         "listTitle listTitle"
         "progress progress"
         "list list"
         "message message";
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .scheduledRecipeCreate__container .scheduledRecipeCreate__header {
     grid-area: header;
-}
-
-.scheduledRecipeCreate__container .scheduledRecipeCreate__selectedRecipeName {
-    grid-area: selectedRecipe;
+    margin-bottom: 15px;
 }
 
 .scheduledRecipeCreate__container .scheduledRecipeCreate__cancelButton {
     grid-area: cancelButton;
-    justify-self: start;
+    justify-self: end;
 }
 
 .scheduledRecipeCreate__container .scheduledRecipeCreate__addButton {
     grid-area: addButton;
-    justify-self: start;
+    justify-self: end;
 }
 
 .scheduledRecipeCreate__container .scheduledRecipeCreate__listTitle {
     grid-area: listTitle;
-    margin-top: 2em;
-    margin-bottom: 0.5em;
+    margin-top: 25px;
+    margin-bottom: 5px;
 }
 
 .scheduledRecipeCreate__container .recipeListContentSelector__progress {

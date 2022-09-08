@@ -67,7 +67,7 @@ namespace StringResource {
         export const StepInstruction: string = 'Beschreiben Sie die Tätigkeiten von diesem Schritt'
         export const WeeklySchedule: string = 'Wochenplan'
         export const Delete: string = 'Löschen'
-        export const SelectedRecipe: string = 'Ausgewähltes Rezept'
+        export const SelectedRecipe: string = 'Ausgewähltes Rezept für '
         export const SelectNewDate: string = 'Neues Datum auswählen'
         export const Session: string = 'Sitzung'
         export const About: string = 'Über'

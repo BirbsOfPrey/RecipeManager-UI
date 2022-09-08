@@ -42,7 +42,7 @@ export class RecipeListSelector extends Component<IProps, IState> {
         if (recipes.length !== 0) {
             return (
                 <Paper className="recipeListContentSelector__container"
-                    sx={{ maxHeight: "60vh", overflow: "auto" }}>
+                    sx={{ maxHeight: "50vh", overflow: "auto" }}>
                     <List className="recipeListContentSelector__list"
                         disablePadding={true}>
                         {recipes.map(recipe => (
@@ -75,7 +75,17 @@ export class RecipeListSelector extends Component<IProps, IState> {
             )
         } else {
             return (
-                <p className="recipeListContentSelector__message">{StringResource.Messages.NoRecipesToDisplay}</p>
+                <Typography
+                    className="recipeListContentSelector__message"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main"
+                    sx={{
+                        mt: "20px",
+                        mb: "20px"
+                    }}>
+                    {StringResource.Messages.NoRecipesToDisplay}
+                </Typography>
             )
         }
     }

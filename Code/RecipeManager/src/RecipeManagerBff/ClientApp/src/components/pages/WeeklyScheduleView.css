@@ -50,7 +50,7 @@
     justify-self: end;
 }
 
-.weeklyScheduleView__container .weeklyScheduleView__dailyScheduleList {
+.weeklyScheduleView__container .weeklyScheduleView__dailyScheduleListContainer {
     grid-area: list;
 }
 

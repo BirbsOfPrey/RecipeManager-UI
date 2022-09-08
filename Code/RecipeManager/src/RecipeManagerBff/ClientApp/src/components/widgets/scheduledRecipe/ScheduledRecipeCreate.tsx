@@ -1,10 +1,12 @@
 import { DinnerDining } from '@mui/icons-material'
-import { Button, Typography } from '@mui/material'
+import { Button, Paper, Typography } from '@mui/material'
 import { Component } from 'react'
+import { DateHelper } from '../../../models/helper/DateHelper'
 import { Recipe } from '../../../models/Recipe'
 import { createScheduledRecipeWithDate, ScheduledRecipe } from '../../../models/ScheduledRecipe'
 import StringResource from '../../../resources/StringResource'
 import { RecipeListSelector } from './RecipeListSelector'
+import './ScheduledRecipeCreate.css'
 
 interface IProps {
     date: Date
@@ -30,30 +32,28 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
     render() {
         return (
             <div className="scheduledRecipeCreate__container">
-                <Typography
-                    className="scheduledRecipeCreate__header"
-                    variant="h6"
-                    component="p"
-                    sx={{
-                        mr: 2,
-                        fontWeight: 'bold'
-                    }}>
-                    {StringResource.General.SelectedRecipe}
-                </Typography>
+                <Paper className="scheduledRecipeCreate__header"
+                    sx={{ pt: 2, pb: 2, pl: 3 }}>
+                    <Typography
+                        variant="subtitle1"
+                        component="p"
+                        sx={{
+                            mr: 2,
+                            fontWeight: 'bold'
+                        }}>
+                        {StringResource.General.SelectedRecipe}{DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {DateHelper.getStringOfDate(this.props.date)}
+                    </Typography>
 
-                <Typography
-                    className="scheduledRecipeCreate__selectedRecipeName"
-                    variant="body1"
-                    noWrap
-                    component="p"
-                    sx={{
-                        mr: 2,
-                    }}>
-                    <DinnerDining sx={{
-                            mr: 3
-                        }}/>
+                    <Typography
+                        className="scheduledRecipeCreate__selectedRecipeName"
+                        variant="body1"
+                        noWrap
+                        component="p"
+                        sx={{ mt: 1 }}>
+                        <DinnerDining sx={{ mr: 3 }} />
                         {this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}
-                </Typography>
+                    </Typography>
+                </Paper>
 
                 <Button
                     className="scheduledRecipeCreate__cancelButton"
@@ -72,7 +72,6 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                 <Typography
                     className="scheduledRecipeCreate__listTitle"
                     variant="subtitle1"
-                    noWrap
                     component="p"
                     sx={{
                         mr: 2,
@@ -83,7 +82,7 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
 
                 <RecipeListSelector
                     selectRecipe={this.updateScheduledRecipe} />
-            </div>
+            </div >
         )
     }
 }

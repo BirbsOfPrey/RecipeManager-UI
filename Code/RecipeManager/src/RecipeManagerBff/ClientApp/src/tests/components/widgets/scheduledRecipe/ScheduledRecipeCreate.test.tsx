@@ -8,6 +8,7 @@ import { rest } from "msw"
 import { setupServer } from "msw/node"
 import { Recipe } from "../../../../models/Recipe"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { DateHelper } from '../../../../models/helper/DateHelper'
 
 const testDate: Date = new Date("2022-02-01")
 const mockHandleCancel = jest.fn()
@@ -43,7 +44,7 @@ test('renders header of selected recipe and default text if no recipe selected',
     render(<ScheduledRecipeCreate date={testDate} handleCancel={mockHandleCancel} handleAdd={mockHandleAdd} />)
 
     // Assert
-    const linkElementSelectedRecipe = screen.getByText(StringResource.General.SelectedRecipe)
+    const linkElementSelectedRecipe = screen.getByText(StringResource.General.SelectedRecipe + DateHelper.getNameOfCurrentDay(testDate.getDay()) + ", " + DateHelper.getStringOfDate(testDate))
     expect(linkElementSelectedRecipe).toBeInTheDocument()
     const linkElementNoRecipeSelected = screen.getByText(StringResource.Messages.NoRecipeSelected)
     expect(linkElementNoRecipeSelected).toBeInTheDocument()

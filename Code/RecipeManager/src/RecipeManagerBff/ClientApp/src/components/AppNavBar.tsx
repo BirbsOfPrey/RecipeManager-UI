@@ -151,7 +151,7 @@ const AppNavBar = () => {
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
                             fontFamily: 'monospace',
-                            fontWeight: 700,
+                            fontWeight: 600,
                             color: 'inherit',
                             textDecoration: 'none',
                         }}

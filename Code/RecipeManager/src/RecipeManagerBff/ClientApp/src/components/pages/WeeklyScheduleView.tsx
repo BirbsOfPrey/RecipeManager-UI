@@ -1,4 +1,4 @@
-import { IconButton, List, Typography } from "@mui/material"
+import { IconButton, List, Paper, Typography } from "@mui/material"
 import { ArrowCircleLeft, ArrowCircleRight } from '@mui/icons-material'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -183,20 +183,23 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                         />
                     </LocalizationProvider>
 
-                    <List
-                        className="weeklyScheduleView__dailyScheduleList"
-                        sx={{ paddingTop: '20px', paddingBottom: '0px' }}>
-                        {DateHelper.getDayOfWeekAsNumbers().map(number => (
-                            <DailyScheduleItem
-                                key={number}
-                                date={this.getDayOfWeekToShow(number)}
-                                scheduledRecipes={this.state.scheduledRecipes.filter(scheduledRecipe => {
-                                    return scheduledRecipe.date.toDateString() === this.getDayOfWeekToShow(number).toDateString()
-                                })}
-                                deleteScheduledRecipe={this.requestToDeleteScheduledRecipe}
-                                addScheduledRecipe={this.requestToAddScheduledRecipe} />
-                        ))}
-                    </List>
+                    <Paper className="weeklyScheduleView__dailyScheduleListContainer"
+                        sx={{ maxHeight: "60vh", overflow: "auto" }}>
+                        <List
+                            className="weeklyScheduleView__dailyScheduleList"
+                            sx={{ padding: "5px" }}>
+                            {DateHelper.getDayOfWeekAsNumbers().map(number => (
+                                <DailyScheduleItem
+                                    key={number}
+                                    date={this.getDayOfWeekToShow(number)}
+                                    scheduledRecipes={this.state.scheduledRecipes.filter(scheduledRecipe => {
+                                        return scheduledRecipe.date.toDateString() === this.getDayOfWeekToShow(number).toDateString()
+                                    })}
+                                    deleteScheduledRecipe={this.requestToDeleteScheduledRecipe}
+                                    addScheduledRecipe={this.requestToAddScheduledRecipe} />
+                            ))}
+                        </List>
+                    </Paper>
 
                     <Dialog
                         open={this.state.openDeleteConfirmDialog}
