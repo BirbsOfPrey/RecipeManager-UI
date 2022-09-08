@@ -1,3 +1,4 @@
+import { DinnerDining } from '@mui/icons-material'
 import { Button, Typography } from '@mui/material'
 import { Component } from 'react'
 import { Recipe } from '../../../models/Recipe'
@@ -48,7 +49,10 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                     sx={{
                         mr: 2,
                     }}>
-                    {this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}
+                    <DinnerDining sx={{
+                            mr: 3
+                        }}/>
+                        {this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}
                 </Typography>
 
                 <Button

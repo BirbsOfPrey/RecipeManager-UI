@@ -217,7 +217,17 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                         </DialogActions>
                     </Dialog>
 
-                    <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
+                    <Typography
+                        className="recipeCreateAssistant__errorField"
+                        variant="subtitle1"
+                        component="p"
+                        color="error.main"
+                        sx={{
+                            mt: "20px",
+                            mb: "20px"
+                        }}>
+                        {this.state.error}
+                    </Typography>
                 </div>
             )
         }

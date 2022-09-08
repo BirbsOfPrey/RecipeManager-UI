@@ -5,6 +5,7 @@
         grid-template-rows: auto auto;
         grid-template-areas:
             "header previousButton nextButton datePicker"
+            "error error error error"
             "list list list list";
         margin-top: 50px;
         margin-bottom: 50px;
@@ -19,6 +20,7 @@
         grid-template-areas:
             "header header header"
             "previousButton nextButton datePicker"
+            "error error error"
             "list list list";
         margin-top: 25px;
         margin-bottom: 25px;
@@ -50,4 +52,8 @@
 
 .weeklyScheduleView__container .weeklyScheduleView__dailyScheduleList {
     grid-area: list;
+}
+
+.weeklyScheduleView__container .recipeCreateAssistant__errorField {
+    grid-area: error;
 }

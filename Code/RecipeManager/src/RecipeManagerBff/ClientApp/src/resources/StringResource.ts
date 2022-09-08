@@ -23,7 +23,7 @@ namespace StringResource {
         export const GeneralError: string = 'Es ist ein Fehler aufgetreten!'
         export const NoRecipesToDisplay: string = 'Es wurden keine Rezepte zur Darstellung gefunden!'
         export const RecipeNotFound: string = 'Rezept nicht gefunden. Berechtigung fehlt oder Rezept existiert nicht.'
-        export const ScheduledRecipeNotFound: string = 'Terminiertes Rezept nicht gefunden. Berechtigung fehlt oder terminiertes Rezept existiert nicht.'
+        export const ScheduledRecipeNotFound: string = 'Kein terminiertes Rezept gefunden, da die Berechtigung fehlt.'
         export const NoContent: string = 'Hier ist nichts vorhanden!'
         export const RequiredRecipeName: string = 'Ein Rezeptname ist erforderlich'
         export const RequiredIngredientName: string = 'Ein Zutatenname ist erforderlich'

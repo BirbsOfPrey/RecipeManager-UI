@@ -20,6 +20,9 @@ const themeOptions: ThemeOptions = {
         secondary: {
             main: '#66bb6a',
         },
+        error: {
+            main: '#fb8c00',
+        },
     },
 }
 
