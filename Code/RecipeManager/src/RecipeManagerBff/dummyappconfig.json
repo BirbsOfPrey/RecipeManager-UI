@@ -1,0 +1,10 @@
+{
+  "ApiSettings": {
+    "Authority": "a",
+    "ApiScopeName": "a",
+    "BffClientId": "a",
+    "BffClientSecret": "a",
+    "ProxyRoute": "a",
+    "ProxyAddress": "a"
+  }
+}
