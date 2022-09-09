@@ -8,18 +8,18 @@ interface IProps {
  }
 
 export const ProtectedRoute = (props: React.PropsWithChildren<IProps>): ReactJSXElement => {
-    const { handleLogin, isAdmin, loggedIn } = useAuth()
+    const { handleLogin, isAdmin, loggedIn, valid } = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
         handleLogin()
 
-        if (props.requireAdmin && !isAdmin) {
+        if (valid && props.requireAdmin && !isAdmin) {
             navigate(-1)
         }
     })
 
-    if (loggedIn && props.children) {
+    if (valid && loggedIn && props.children) {
         return props.children as ReactJSXElement
     } else {
         return <></>

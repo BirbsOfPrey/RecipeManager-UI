@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import StringResource from '../../resources/StringResource'
 import { UserList } from '../widgets/user/UserList'
 

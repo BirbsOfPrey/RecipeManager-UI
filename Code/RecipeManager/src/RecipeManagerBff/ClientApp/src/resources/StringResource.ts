@@ -1,4 +1,5 @@
 import { RecipeValidator } from "../models/RecipeValidator"
+import { UserValidator } from "../models/security/UserValidator"
 
 namespace StringResource {
     export namespace Routes {
@@ -36,10 +37,17 @@ namespace StringResource {
         export const DeleteScheduledRecipeContent: string = 'Das terminierte Rezept wird gelöscht'
         export const DeleteRecipeQuestion: string = 'Rezept löschen?'
         export const DeleteRecipeContent: string = 'Das Rezept wird gelöscht. Wenn noch terminierte Rezepte mit diesem Rezept verknüpft sind, werden diese ebenfalls gelöscht.'
+        export const DeleteUserQuestion: string = 'Benutzer löschen?'
+        export const DeleteUserContent: string = 'Der Benutzer wird gelöscht. Der Benutzer kann sich danach nicht mehr einloggen.'
         export const NoRecipeSelected: string = 'Kein Rezept ausgewählt'
         export const MaxDescriptionLength: string = `Maximallänge der Beschreibung ist ${RecipeValidator.maxDescriptionLength} Zeichen`
         export const InvalidRecipeFields: string = 'Das Rezept enthält ungültige Werte und kann daher nicht gespeichert werden.'
+        export const RequiredUserName: string = `Erlaubt sind die Zeichen ${UserValidator.allowedChars}`
+        export const RequiredPassword: string = `Passwortänge muss mindestens ${UserValidator.minPasswordLength} sein. Es muss aus Zahl, Sonderzeichen, Klein- und Grossbuchstaben bestehen.`
+        export const RequiredOldPassword: string = 'Altes Passwort zur Verifikation benötigt'
         export const NoUsersToDisplay: string = 'Es wurden keine Benutzer gefunden!'
+        export const UserNotFound: string = 'Benutzer nicht gefunden.'
+        export const InvalidUserFields: string = 'Der User enthält ungültige Werte und kann nicht gespeichert werden.'
     }
     export namespace General {
         export const AppTitle: string = 'RECIPE MANAGER'
@@ -80,7 +88,19 @@ namespace StringResource {
         export const ShowSelectedWeek: string = 'Woche vom '
         export const SelectRecipe: string = 'Wählen Sie das gewünschte Rezept aus'
         export const UserManagement: string = 'Benutzer'
+        export const User: string = 'Benutzer'
         export const CreateUser: string = 'Benutzer erstellen'
+        export const CreateNewUser: string = 'Neuen Benutzer erstellen'
+        export const EditUser: string = 'Benutzer bearbeiten'
+        export const UserName: string = 'Benutzername'
+        export const NoUserName: string = 'Kein Benutzername'
+        export const Role: string = 'Rolle'
+        export const NoUserRole: string = 'Keine Rolle zugewiesen'
+        export const OldPassword: string = 'Altes Passwort'
+        export const NewPassword: string = 'Neues Passwort'
+        export const FirstName: string = 'Vorname'
+        export const FamilyName: string = 'Nachname'
+        export const EMail: string = 'E-Mail'
     }
     export const CopyrightHeader: string = 'MAS SE 2020-22: Masterarbeit RecipeManager'
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'

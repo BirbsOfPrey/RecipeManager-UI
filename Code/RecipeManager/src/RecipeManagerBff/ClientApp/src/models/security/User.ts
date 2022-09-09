@@ -1,3 +1,4 @@
+import { immerable } from "immer"
 
 export class User {
     id?: string
@@ -8,4 +9,8 @@ export class User {
     newPassword?: string
     email?: string
     role?: string
+}
+
+export function createUser() {
+    return new User()
 }

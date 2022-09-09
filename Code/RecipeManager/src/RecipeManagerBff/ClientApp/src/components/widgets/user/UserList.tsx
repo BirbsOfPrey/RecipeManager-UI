@@ -3,6 +3,7 @@ import { Component } from 'react'
 import { User } from '../../../models/security/User'
 import { createDefaultHeader, UsersUrl } from '../../../resources/Api'
 import StringResource from '../../../resources/StringResource'
+import { UserListItem } from './UserListItem'
 
 interface IState {
     loading: boolean
@@ -43,20 +44,12 @@ export class UserList extends Component<{}, IState> {
 
         return (
             <div className="userListContent__container">
-                <p className="userListContent__title">{StringResource.General.RecipeList}</p>
                 <List className="userListContent__list">
                     {users.map(user => (
-                        <div>
-                            <div>
-                                {"User ID: " + user.id}
-                            </div>
-                            <div>
-                                {"User Name: " + user.name}
-                            </div>
-                            <div>
-                                {"User Role: " + user.role}
-                            </div>
-                        </div>
+                        <UserListItem
+                            key={user.id}
+                            user={user}
+                        />
                     ))}
                 </List>
             </div>
