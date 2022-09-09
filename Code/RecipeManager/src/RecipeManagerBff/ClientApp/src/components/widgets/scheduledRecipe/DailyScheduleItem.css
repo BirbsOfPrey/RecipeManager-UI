@@ -3,20 +3,21 @@
     grid-template-columns: 5fr 1fr;
     grid-template-rows: auto auto;
     grid-template-areas:
-                "header addButton"
-                "list list";
+        "header header"
+        "list list";
+    margin-bottom: 1em;
 }
 
-.dailyScheduleItem__container .dailyScheduleItem__header {
-    grid-area: header;
-    font-weight: bold;
-}
-
-.dailyScheduleItem__container .dailyScheduleItem__addButton {
-    grid-area: addButton;
-    justify-self: end;
+.dailyScheduleItem__container .dailyScheduleItem__title {
+    flex: auto;
+    align-self: center;
 }
 
 .dailyScheduleItem__container .scheduledRecipeList__container {
     grid-area: list;
+}
+
+.dailyScheduleItem__container .dailyScheduleItem__header {
+    grid-area: header;
+    display: flex;
 }

@@ -1,4 +1,4 @@
-import { IconButton, List } from "@mui/material"
+import { IconButton, List, Paper, Typography } from "@mui/material"
 import { ArrowCircleLeft, ArrowCircleRight } from '@mui/icons-material'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -17,6 +17,7 @@ import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import { ScheduledRecipeCreate } from "../widgets/scheduledRecipe/ScheduledRecipeCreate"
 import TextField from "@mui/material/TextField"
+import './WeeklyScheduleView.css'
 
 interface IState {
     dateToShow: Date
@@ -54,7 +55,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
         const dateToShow = new Date(this.state.dateToShow)
 
         // If dateToShow is Sunday switch week, because the internal week is from Sunday-->Saturday instead of Monday-->Sunday
-        if (dateToShow.getDay() === 0){
+        if (dateToShow.getDay() === 0) {
             dayOfWeek -= 7
         }
 
@@ -151,7 +152,17 @@ export class WeeklyScheduleView extends Component<{}, IState> {
         } else {
             return (
                 <div className="weeklyScheduleView__container">
-                    <p className="weeklyScheduleView__header">{StringResource.General.ShowSelectedWeek}{DateHelper.getStringOfDate(this.getDayOfWeekToShow(1))} - {DateHelper.getStringOfDate(this.getDayOfWeekToShow(7))}</p>
+                    <Typography
+                        className="weeklyScheduleView__header"
+                        variant="subtitle1"
+                        component="p"
+                        sx={{
+                            mr: "15px",
+                            fontWeight: "bold"
+                        }}>
+                        {StringResource.General.ShowSelectedWeek}{DateHelper.getStringOfDate(this.getDayOfWeekToShow(1))} - {DateHelper.getStringOfDate(this.getDayOfWeekToShow(7))}
+                    </Typography>
+
                     <IconButton className="weeklyScheduleView__buttonPrevious" onClick={() => this.changeWeek(false)}>
                         <ArrowCircleLeft />
                     </IconButton>
@@ -161,28 +172,34 @@ export class WeeklyScheduleView extends Component<{}, IState> {
 
                     <LocalizationProvider dateAdapter={AdapterLuxon}>
                         <DatePicker
+                            className="weeklyScheduleView__datePicker"
                             label={StringResource.General.SelectNewDate}
                             value={this.state.dateToShow}
                             onChange={(newValue: Date | null) => {
                                 this.setDate(newValue)
                             }}
-                            inputFormat='dd.MM.yyyy'
-                            renderInput={(params: any) => <TextField {...params} size='small'/>}
+                            inputFormat="dd.MM.yyyy"
+                            renderInput={(params: any) => <TextField {...params} size="small" />}
                         />
                     </LocalizationProvider>
 
-                    <List className="weeklyScheduleView__dailyScheduleList">
-                        {DateHelper.getDayOfWeekAsNumbers().map(number => (
-                            <DailyScheduleItem
-                                key={number}
-                                date={this.getDayOfWeekToShow(number)}
-                                scheduledRecipes={this.state.scheduledRecipes.filter(scheduledRecipe => {
-                                    return scheduledRecipe.date.toDateString() === this.getDayOfWeekToShow(number).toDateString()
-                                })}
-                                deleteScheduledRecipe={this.requestToDeleteScheduledRecipe}
-                                addScheduledRecipe={this.requestToAddScheduledRecipe} />
-                        ))}
-                    </List>
+                    <Paper className="weeklyScheduleView__dailyScheduleListContainer"
+                        sx={{ maxHeight: {xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
+                        <List
+                            className="weeklyScheduleView__dailyScheduleList"
+                            sx={{ padding: "5px" }}>
+                            {DateHelper.getDayOfWeekAsNumbers().map(number => (
+                                <DailyScheduleItem
+                                    key={number}
+                                    date={this.getDayOfWeekToShow(number)}
+                                    scheduledRecipes={this.state.scheduledRecipes.filter(scheduledRecipe => {
+                                        return scheduledRecipe.date.toDateString() === this.getDayOfWeekToShow(number).toDateString()
+                                    })}
+                                    deleteScheduledRecipe={this.requestToDeleteScheduledRecipe}
+                                    addScheduledRecipe={this.requestToAddScheduledRecipe} />
+                            ))}
+                        </List>
+                    </Paper>
 
                     <Dialog
                         open={this.state.openDeleteConfirmDialog}
@@ -203,7 +220,17 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                         </DialogActions>
                     </Dialog>
 
-                    <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
+                    <Typography
+                        className="recipeCreateAssistant__errorField"
+                        variant="subtitle1"
+                        component="p"
+                        color="error.main"
+                        sx={{
+                            mt: "20px",
+                            mb: "20px"
+                        }}>
+                        {this.state.error}
+                    </Typography>
                 </div>
             )
         }

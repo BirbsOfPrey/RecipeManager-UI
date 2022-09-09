@@ -21,7 +21,7 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
             <ListItem
                 alignItems="flex-start"
                 className="scheduledRecipeListItem__container"
-                sx={{ paddingRight: '96px' }}>
+                sx={{ pr: "96px", pt: "0px", pb: "0px" }}>
                 <ListItemAvatar>
                     <EventIcon />
                 </ListItemAvatar>
@@ -34,7 +34,7 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                         edge="end"
                         aria-label="open"
                         component={Link} to={`${recipeRoute}`}
-                        sx={{ marginRight: '0px' }}>
+                        sx={{ mr: "0px" }}>
                         <OpenInNewIcon />
                     </IconButton>
                     <IconButton
