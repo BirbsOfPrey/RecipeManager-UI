@@ -64,11 +64,13 @@ namespace RecipeManagerBff.Extensions
           options.ClientSecret = apiSettings.BffClientSecret;
           options.ResponseType = "code";
           
+          options.Scope.Add("openid");
+          options.Scope.Add("profile");
           options.Scope.Add(apiSettings.ApiScopeName);
+          options.Scope.Add("IdentityServerApi");
 
           options.SaveTokens = true;
           options.GetClaimsFromUserInfoEndpoint = true;
-
         });
 
       builder.Services.AddControllers();
@@ -103,15 +105,13 @@ namespace RecipeManagerBff.Extensions
       var apiSettings = app.Services.GetRequiredService<IApiSettings>();
       app.UseEndpoints(endpoints =>
       {
+
         endpoints.MapBffManagementEndpoints();
 
-        endpoints.MapControllers()
-          .RequireAuthorization()
-          .AsBffApiEndpoint();
+        endpoints.MapRemoteBffApiEndpoint(apiSettings.ProxyRouteAuth, apiSettings.ProxyAddressAuth)
+          .RequireAccessToken();
 
         endpoints.MapRemoteBffApiEndpoint(apiSettings.ProxyRouteApi, apiSettings.ProxyAddressApi)
-          .RequireAccessToken();
-        endpoints.MapRemoteBffApiEndpoint(apiSettings.ProxyRouteAuth, apiSettings.ProxyAddressAuth)
           .RequireAccessToken();
 
       });

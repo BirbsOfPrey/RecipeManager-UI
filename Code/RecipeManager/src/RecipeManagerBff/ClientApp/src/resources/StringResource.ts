@@ -7,10 +7,13 @@ namespace StringResource {
         export const Recipe: string = 'recipe'
         export const RecipeId: string = ':recipeId'
         export const WeeklySchedule: string = 'weeklyschedule'
+        export const UserManagement: string = 'usermanagement'
+        export const User: string = 'user'
+        export const UserId: string = ':userId'
         export const UserSession: string = 'user-session'
-        export const Login: string = 'bff/login'
-        export const Logout: string = 'bff/logout'
-        export const User: string = 'bff/user'
+        export const BffLogin: string = 'bff/login'
+        export const BffLogout: string = 'bff/logout'
+        export const BffUser: string = 'bff/user'
         export const About: string = 'about'
         export const Any: string = '*'
     }
@@ -36,6 +39,7 @@ namespace StringResource {
         export const NoRecipeSelected: string = 'Kein Rezept ausgewählt'
         export const MaxDescriptionLength: string = `Maximallänge der Beschreibung ist ${RecipeValidator.maxDescriptionLength} Zeichen`
         export const InvalidRecipeFields: string = 'Das Rezept enthält ungültige Werte und kann daher nicht gespeichert werden.'
+        export const NoUsersToDisplay: string = 'Es wurden keine Benutzer gefunden!'
     }
     export namespace General {
         export const AppTitle: string = 'RECIPE MANAGER'
@@ -75,6 +79,8 @@ namespace StringResource {
         export const Logout: string = 'Logout'
         export const ShowSelectedWeek: string = 'Woche vom '
         export const SelectRecipe: string = 'Wählen Sie das gewünschte Rezept aus'
+        export const UserManagement: string = 'Benutzer'
+        export const CreateUser: string = 'Benutzer erstellen'
     }
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
