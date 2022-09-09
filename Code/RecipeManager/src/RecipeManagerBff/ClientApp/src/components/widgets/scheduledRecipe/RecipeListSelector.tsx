@@ -2,7 +2,7 @@ import { Component } from 'react'
 import { Recipe } from '../../../models/Recipe'
 import { createDefaultHeader, RecipesUrl } from '../../../resources/Api'
 import StringResource from '../../../resources/StringResource'
-import { LinearProgress, List } from '@mui/material'
+import { LinearProgress, List, Paper, Typography } from '@mui/material'
 import { RecipeListItemSelector } from './RecipeListItemSelector'
 
 interface IProps {
@@ -12,21 +12,28 @@ interface IProps {
 interface IState {
     recipes: Recipe[]
     loading: boolean
+    error: string
 }
 
 export class RecipeListSelector extends Component<IProps, IState> {
 
     state: IState = {
         recipes: [],
-        loading: true
+        loading: true,
+        error: ''
     }
 
     async componentDidMount() {
         const response = await fetch(`${RecipesUrl}`, {
             headers: createDefaultHeader()
         })
-        const recipes = await response.json()
-        this.setState({ recipes: recipes, loading: false })
+
+        if (response.status >= 300) {
+            this.setState({ error: StringResource.Messages.GeneralError, loading: false })
+        } else {
+            const recipes = await response.json()
+            this.setState({ recipes: recipes, loading: false })
+        }
     }
 
     render() {
@@ -34,8 +41,10 @@ export class RecipeListSelector extends Component<IProps, IState> {
 
         if (recipes.length !== 0) {
             return (
-                <div className="recipeListContentSelector__container">
-                    <List className="recipeListContentSelector__list">
+                <Paper className="recipeListContentSelector__container"
+                    sx={{ maxHeight: "50vh", overflow: "auto" }}>
+                    <List className="recipeListContentSelector__list"
+                        disablePadding={true}>
                         {recipes.map(recipe => (
                             <RecipeListItemSelector
                                 key={recipe.id}
@@ -43,15 +52,40 @@ export class RecipeListSelector extends Component<IProps, IState> {
                                 selectRecipe={this.props.selectRecipe} />
                         ))}
                     </List>
-                </div>
+                </Paper>
             )
         } else if (this.state.loading === true) {
             return (
-                <LinearProgress />
+                <LinearProgress
+                    className="recipeListContentSelector__progress" />
+            )
+        } else if (this.state.error) {
+            return (
+                <Typography
+                    className="recipeListContentSelector__errorField"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main"
+                    sx={{
+                        mt: "20px",
+                        mb: "20px"
+                    }}>
+                    {this.state.error}
+                </Typography>
             )
         } else {
             return (
-                <p className="recipeListContent__message">{StringResource.Messages.NoRecipesToDisplay}</p>
+                <Typography
+                    className="recipeListContentSelector__message"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main"
+                    sx={{
+                        mt: "20px",
+                        mb: "20px"
+                    }}>
+                    {StringResource.Messages.NoRecipesToDisplay}
+                </Typography>
             )
         }
     }

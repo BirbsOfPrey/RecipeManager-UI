@@ -19,3 +19,14 @@ test('renders correct copyright text', () => {
     const linkElementCopyright = screen.getByText(StringResource.Copyright)
     expect(linkElementCopyright).toBeInTheDocument()
 })
+
+test('renders correct copyright header text', () => {
+    // Arrange
+
+    // Act
+    render(<Copyright />)
+
+    // Assert
+    const linkElementCopyrightHeader = screen.getByText(StringResource.CopyrightHeader)
+    expect(linkElementCopyrightHeader).toBeInTheDocument()
+})

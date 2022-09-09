@@ -7,8 +7,7 @@ import { WeeklyScheduleView } from './pages/WeeklyScheduleView'
 import { AboutView } from './pages/AboutView'
 import { AuthProvider } from './AuthProvider'
 import { ProtectedRoute } from './ProtectedRoute'
-import { ThemeProvider } from '@emotion/react'
-import { createTheme, ThemeOptions } from '@mui/material/styles'
+import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles'
 import StringResource from '../resources/StringResource'
 import './App.css'
 
@@ -19,7 +18,10 @@ const themeOptions: ThemeOptions = {
             main: '#4caf50',
         },
         secondary: {
-            main: '#78909c',
+            main: '#66bb6a',
+        },
+        error: {
+            main: '#fb8c00',
         },
     },
 }

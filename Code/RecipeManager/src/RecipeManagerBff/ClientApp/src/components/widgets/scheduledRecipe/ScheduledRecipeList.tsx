@@ -29,7 +29,7 @@ export class ScheduledRecipeList extends Component<IProps, {}> {
     render() {
         return (
             <div className="scheduledRecipeList__container">
-                <List className="scheduledRecipeList__List">
+                <List disablePadding={true} className="scheduledRecipeList__List">
                     {this.generate()}
                 </List>
             </div>

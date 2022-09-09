@@ -23,7 +23,7 @@ namespace StringResource {
         export const GeneralError: string = 'Es ist ein Fehler aufgetreten!'
         export const NoRecipesToDisplay: string = 'Es wurden keine Rezepte zur Darstellung gefunden!'
         export const RecipeNotFound: string = 'Rezept nicht gefunden. Berechtigung fehlt oder Rezept existiert nicht.'
-        export const ScheduledRecipeNotFound: string = 'Terminiertes Rezept nicht gefunden. Berechtigung fehlt oder terminiertes Rezept existiert nicht.'
+        export const ScheduledRecipeNotFound: string = 'Kein terminiertes Rezept gefunden, da die Berechtigung fehlt.'
         export const NoContent: string = 'Hier ist nichts vorhanden!'
         export const RequiredRecipeName: string = 'Ein Rezeptname ist erforderlich'
         export const RequiredIngredientName: string = 'Ein Zutatenname ist erforderlich'
@@ -67,7 +67,7 @@ namespace StringResource {
         export const StepInstruction: string = 'Beschreiben Sie die Tätigkeiten von diesem Schritt'
         export const WeeklySchedule: string = 'Wochenplan'
         export const Delete: string = 'Löschen'
-        export const SelectedRecipe: string = 'Ausgewähltes Rezept'
+        export const SelectedRecipe: string = 'Ausgewähltes Rezept für '
         export const SelectNewDate: string = 'Neues Datum auswählen'
         export const Session: string = 'Sitzung'
         export const About: string = 'Über'
@@ -76,6 +76,7 @@ namespace StringResource {
         export const ShowSelectedWeek: string = 'Woche vom '
         export const SelectRecipe: string = 'Wählen Sie das gewünschte Rezept aus'
     }
+    export const CopyrightHeader: string = 'MAS SE 2020-22: Masterarbeit RecipeManager'
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
 }
 
