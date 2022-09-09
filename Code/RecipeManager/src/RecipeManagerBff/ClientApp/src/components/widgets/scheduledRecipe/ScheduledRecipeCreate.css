@@ -5,7 +5,7 @@
     grid-template-areas:
         "header header"
         "selectedRecipe selectedRecipe"
-        "cancelButton addButton"
+        "buttons buttons"
         "listTitle listTitle"
         "progress progress"
         "list list"
@@ -18,13 +18,8 @@
     grid-area: header;
 }
 
-.scheduledRecipeCreate__container .scheduledRecipeCreate__cancelButton {
-    grid-area: cancelButton;
-    justify-self: end;
-}
-
-.scheduledRecipeCreate__container .scheduledRecipeCreate__addButton {
-    grid-area: addButton;
+.scheduledRecipeCreate__container .scheduledRecipeCreate__buttons {
+    grid-area: buttons;
     justify-self: end;
 }
 

@@ -1,5 +1,5 @@
 import { DinnerDining } from '@mui/icons-material'
-import { Button, Paper, Typography } from '@mui/material'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import { Component } from 'react'
 import { DateHelper } from '../../../models/helper/DateHelper'
 import { Recipe } from '../../../models/Recipe'
@@ -51,22 +51,23 @@ export class ScheduledRecipeCreate extends Component<IProps, IState> {
                         {this.state.scheduledRecipe.recipe?.name ? this.state.scheduledRecipe.recipe?.name : StringResource.Messages.NoRecipeSelected}
                     </Typography>
                 </Paper>
+                <Box className="scheduledRecipeCreate__buttons">
+                    <Button
+                        className="scheduledRecipeCreate__cancelButton"
+                        onClick={this.props.handleCancel}
+                        variant="outlined"
+                        sx={{ mr: "10px" }}>
+                        {StringResource.General.Cancel}
+                    </Button>
 
-                <Button
-                    className="scheduledRecipeCreate__cancelButton"
-                    onClick={this.props.handleCancel}
-                    variant="outlined">
-                    {StringResource.General.Cancel}
-                </Button>
-
-                <Button
-                    className="scheduledRecipeCreate__addButton"
-                    onClick={() => this.props.handleAdd(this.state.scheduledRecipe)}
-                    disabled={this.state.scheduledRecipe.recipe === undefined}
-                    variant="outlined">
-                    {StringResource.General.Add}
-                </Button>
-
+                    <Button
+                        className="scheduledRecipeCreate__addButton"
+                        onClick={() => this.props.handleAdd(this.state.scheduledRecipe)}
+                        disabled={this.state.scheduledRecipe.recipe === undefined}
+                        variant="outlined">
+                        {StringResource.General.Add}
+                    </Button>
+                </Box>
                 <Typography
                     className="scheduledRecipeCreate__listTitle"
                     variant="subtitle1"

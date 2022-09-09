@@ -184,7 +184,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                     </LocalizationProvider>
 
                     <Paper className="weeklyScheduleView__dailyScheduleListContainer"
-                        sx={{ maxHeight: "60vh", overflow: "auto" }}>
+                        sx={{ maxHeight: {xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
                         <List
                             className="weeklyScheduleView__dailyScheduleList"
                             sx={{ padding: "5px" }}>
