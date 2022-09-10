@@ -52,7 +52,7 @@ namespace StringResource {
         export const Cancel: string = 'Abbrechen'
         export const Change: string = 'Ändern'
         export const Add: string = 'Hinzufügen'
-        export const CreateNewRecipe: string = 'Neues Rezept erstellen'
+        export const CreateOrEditRecipe: string = 'Neues Rezept erstellen/bearbeiten'
         export const CreateRecipe: string = 'Neues Rezept erstellen'
         export const AddIngredient: string = 'Zutat hinzufügen'
         export const AddAnotherIngredient: string = 'Weitere Zutat hinzufügen'
@@ -74,6 +74,7 @@ namespace StringResource {
         export const Logout: string = 'Logout'
         export const ShowSelectedWeek: string = 'Woche vom '
         export const SelectRecipe: string = 'Wählen Sie das gewünschte Rezept aus'
+        export const RecipeView: string = 'Rezepteansicht'
     }
     export const CopyrightHeader: string = 'MAS SE 2020-22: Masterarbeit RecipeManager'
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'

@@ -6,14 +6,24 @@ import StringResource from '../../../resources/StringResource'
 
 const mockNavigate = jest.fn()
 
-test('renders main title correct', () => {
+test('renders main title correct if editable', () => {
+    // Arrange
+
+    // Act
+    render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
+
+    // Assert
+    expect(screen.getByText(StringResource.General.CreateOrEditRecipe)).toBeInTheDocument
+})
+
+test('renders main title correct if not editable', () => {
     // Arrange
 
     // Act
     render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={false} navigate={mockNavigate} /></BrowserRouter>)
 
     // Assert
-    expect(screen.getByText(StringResource.General.CreateNewRecipe)).toBeInTheDocument
+    expect(screen.getByText(StringResource.General.RecipeView)).toBeInTheDocument
 })
 
 test('renders editButton if not editable', () => {
@@ -154,7 +164,7 @@ test('returns to CookingView after click on cancel button in the dialog', async 
     userEvent.click(screen.getByText(StringResource.General.Cancel))
 
     // Assert
-    await waitFor(() => { expect(screen.getByText(StringResource.General.CreateNewRecipe)).toBeInTheDocument })
+    await waitFor(() => { expect(screen.getByText(StringResource.General.CreateOrEditRecipe)).toBeInTheDocument })
 })
 
 test('returns to CookingView after click on delete button in the dialog', async () => {
@@ -167,5 +177,5 @@ test('returns to CookingView after click on delete button in the dialog', async 
     userEvent.click(screen.getByText(StringResource.General.Delete))
 
     // Assert
-    await waitFor(() => { expect(screen.getByText(StringResource.General.CreateNewRecipe)).toBeInTheDocument })
+    await waitFor(() => { expect(screen.getByText(StringResource.General.CreateOrEditRecipe)).toBeInTheDocument })
 })

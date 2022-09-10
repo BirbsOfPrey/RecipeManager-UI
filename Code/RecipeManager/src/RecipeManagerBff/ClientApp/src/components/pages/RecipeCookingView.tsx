@@ -5,7 +5,7 @@ import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/recipe/RecipeEditHead"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress } from "@mui/material"
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress, Typography } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
@@ -245,10 +245,15 @@ export class RecipeCookingView extends Component<IProps, IState> {
         return (
             <div className="recipeCreateAssistant__container">
                 {this.state.loading ? <LinearProgress /> : <></> /* TODO: Decide if this should be generally used to show data loading/API fetches */}
+                <Typography
+                    className="recipeCreateAssistant__mainTitle"
+                    variant="h6"
+                    component="p">
+                    {this.props.editable ? StringResource.General.CreateOrEditRecipe : StringResource.General.RecipeView }
+                </Typography>
                 <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
                     <ArrowBackIcon />
                 </IconButton>
-                <span className="recipeCreateAssistant__mainTitle">{StringResource.General.CreateNewRecipe}</span>
                 {this.props.editable ? (
                     <>
                         <IconButton
@@ -293,7 +298,17 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     deleteIngredientComponent={this.deleteIngredientComponent}
                     editable={this.props.editable}
                 />
-                <p className="recipeCreateAssistant__errorField" >{this.state.error}</p>
+                <Typography
+                    className="recipeCreateAssistant__errorField"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main"
+                    sx={{
+                        mt: "25px"
+                    }}>
+                    {this.state.error}
+                </Typography>
+                
                 {saveContent}
 
                 <Dialog
