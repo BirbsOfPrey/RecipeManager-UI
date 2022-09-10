@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthProvider'
 
 const pages = [StringResource.General.RecipeManagement, StringResource.General.WeeklySchedule]
+const adminPages = [StringResource.General.UserManagement]
 const protectedSettings = [StringResource.General.Session]
 const settings = [StringResource.General.About]
 
@@ -18,7 +19,7 @@ const AppNavBar = () => {
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget)
     }
-    
+
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget)
     }
@@ -31,7 +32,7 @@ const AppNavBar = () => {
         setAnchorElUser(null)
     }
 
-    const { loggedIn, handleLogin, handleLogout } = useAuth()
+    const { loggedIn, isAdmin, handleLogin, handleLogout } = useAuth()
 
     const openPage = (page: String) => {
         handleCloseNavMenu()
@@ -44,6 +45,9 @@ const AppNavBar = () => {
             case StringResource.General.WeeklySchedule:
                 navigate(StringResource.Routes.WeeklySchedule)
                 break
+            case StringResource.General.UserManagement:
+                navigate(StringResource.Routes.UserManagement)
+                break
             case StringResource.General.Session:
                 navigate(StringResource.Routes.UserSession)
                 break
@@ -51,10 +55,10 @@ const AppNavBar = () => {
                 navigate(StringResource.Routes.About)
                 break
             case StringResource.General.Login:
-                navigate(StringResource.Routes.Login)
+                navigate(StringResource.Routes.BffLogin)
                 break
             case StringResource.General.Logout:
-                navigate(StringResource.Routes.Logout)
+                navigate(StringResource.Routes.BffLogout)
                 break
             default:
                 break
@@ -89,6 +93,15 @@ const AppNavBar = () => {
                     {/* Pages:    Medium size and higher */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {loggedIn ? pages.map((page) => (
+                            <Button
+                                key={page}
+                                onClick={() => openPage(page)}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                {page}
+                            </Button>
+                        )) : <></>}
+                        {isAdmin ? adminPages.map((page) => (
                             <Button
                                 key={page}
                                 onClick={() => openPage(page)}
@@ -135,6 +148,11 @@ const AppNavBar = () => {
                                         <Typography textAlign="center">{page}</Typography>
                                     </MenuItem>
                                 ))}
+                                {isAdmin ? adminPages.map((page) => (
+                                    <MenuItem key={page} onClick={() => openPage(page)}>
+                                        <Typography textAlign="center">{page}</Typography>
+                                    </MenuItem>
+                                )) : <></>}
                             </Menu>
                         </Box>) : <></>
                     }

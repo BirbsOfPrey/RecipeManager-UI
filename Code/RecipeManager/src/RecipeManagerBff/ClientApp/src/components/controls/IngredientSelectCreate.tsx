@@ -68,8 +68,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                         limit: 100,
                     })}
                     value={this.props.ingredient.name}
-                    onChange={(_, value) => this.props.setValue(value ? value : "")
-                    }
+                    onChange={(_, value) => this.props.setValue(value ? value : "")}
                     renderInput={(params) => { return (<TextField {...params} fullWidth label={StringResource.General.Ingredient} variant="filled" />) }}
                 />)
         }
