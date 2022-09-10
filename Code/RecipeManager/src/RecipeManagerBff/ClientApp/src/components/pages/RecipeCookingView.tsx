@@ -5,7 +5,7 @@ import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/recipe/RecipeEditHead"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress, Typography } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress, Typography } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
@@ -19,6 +19,7 @@ import { RecipeValidator } from "../../models/RecipeValidator"
 import { createSteps, Step } from "../../models/Step"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
 import produce from "immer"
+import './RecipeCookingView.css'
 
 interface IProps {
     recipeId?: string
@@ -229,17 +230,6 @@ export class RecipeCookingView extends Component<IProps, IState> {
             this.props.navigate(`/${StringResource.Routes.RecipeManagement}`)
         }
 
-        const saveContent: ReactNode = this.props.editable ? (
-            <LoadingButton
-                className="recipeCreateAssistant__saveButton"
-                variant="outlined"
-                loadingPosition="start"
-                loading={this.state.saving}
-                startIcon={<SaveIcon />}
-                disabled={this.state.saved}
-                onClick={this.save}>{StringResource.General.Save}
-            </LoadingButton>) : <></>
-
         const recipeRoute: string = `/${StringResource.Routes.RecipeManagement}/${StringResource.Routes.Recipe}/${this.props.recipeId}`
 
         return (
@@ -249,34 +239,50 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     className="recipeCreateAssistant__mainTitle"
                     variant="h6"
                     component="p">
-                    {this.props.editable ? StringResource.General.CreateOrEditRecipe : StringResource.General.RecipeView }
+                    {this.props.editable ? StringResource.General.CreateOrEditRecipe : StringResource.General.RecipeView}
                 </Typography>
-                <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
-                    <ArrowBackIcon />
-                </IconButton>
-                {this.props.editable ? (
-                    <>
+
+                <Box className="recipeCreateAssistant__buttons">
+                    <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
+                        <ArrowBackIcon />
+                    </IconButton>
+
+                    {this.props.editable ? (
+                        <>
+                            <IconButton
+                                aria-label="view"
+                                className="recipeCreateAssistant__viewButton"
+                                component={Link} to={`${recipeRoute}`}>
+                                <VisibilityIcon />
+                            </IconButton>
+                            <LoadingButton
+                                className="recipeCreateAssistant__saveButton"
+                                variant="outlined"
+                                loadingPosition="start"
+                                loading={this.state.saving}
+                                startIcon={<SaveIcon />}
+                                disabled={this.state.saved}
+                                onClick={this.save}>{StringResource.General.Save}
+                            </LoadingButton>
+                            <IconButton
+                                aria-label="delete"
+                                className="recipeCreateAssistant__deleteButton"
+                                sx={{ alignSelf: "flex-end" }}
+                                onClick={this.requestToDeleteRecipe}>
+                                <DeleteIcon />
+                            </IconButton>
+                        </>
+                    ) : (
                         <IconButton
-                            aria-label="view"
-                            className="recipeCreateAssistant__viewButton"
-                            component={Link} to={`${recipeRoute}`}>
-                            <VisibilityIcon />
-                        </IconButton>
-                        <IconButton
-                            aria-label="delete"
-                            className="recipeCreateAssistant__deleteButton"
-                            onClick={this.requestToDeleteRecipe}>
-                            <DeleteIcon />
-                        </IconButton>
-                    </>
-                ) : (
-                    <IconButton
-                        aria-label="edit"
-                        className="recipeCreateAssistant__editButton"
-                        component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
-                        <Edit />
-                    </IconButton>)
-                }
+                            aria-label="edit"
+                            className="recipeCreateAssistant__editButton"
+                            component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
+                            <Edit />
+                        </IconButton>)
+                    }
+                </Box>
+
+
                 <RecipeEditHead
                     name={this.state.recipe.name}
                     description={this.state.recipe.description}
@@ -308,8 +314,6 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     }}>
                     {this.state.error}
                 </Typography>
-                
-                {saveContent}
 
                 <Dialog
                     open={this.state.openDeleteConfirmDialog}
