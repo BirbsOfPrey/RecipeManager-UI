@@ -4,7 +4,6 @@ import { Recipe } from "../../../models/Recipe"
 import { Component } from "react"
 import { Link } from 'react-router-dom'
 import StringResource from "../../../resources/StringResource"
-import './RecipeListItem.css'
 
 interface IProps {
     recipe: Recipe
