@@ -1,5 +1,3 @@
-import { immerable } from "immer"
-
 export class User {
     id?: string
     name?: string
