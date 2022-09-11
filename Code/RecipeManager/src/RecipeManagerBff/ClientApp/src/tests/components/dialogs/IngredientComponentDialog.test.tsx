@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { IngredientSelectCreate } from '../../../components/controls/IngredientSelectCreate'
 import { IngredientComponentDialog } from '../../../components/dialogs/IngredientComponentDialog'
 import { NO_INDEX } from '../../../models/helper/ArrayHelper'
-import { createIngredient, Ingredient } from '../../../models/Ingredient'
 import { createIngredientComponent, IngredientComponent } from '../../../models/IngredientComponent'
 import StringResource from '../../../resources/StringResource'
 

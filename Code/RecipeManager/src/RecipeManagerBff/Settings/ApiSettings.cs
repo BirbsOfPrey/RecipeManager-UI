@@ -13,7 +13,11 @@ public class ApiSettings : IApiSettings
   [Required]
   public string BffClientSecret { get; set; } = null!;
   [Required]
-  public string ProxyRoute { get; set; } = null!;
+  public string ProxyRouteApi { get; set; } = null!;
   [Required]
-  public string ProxyAddress { get; set; } = null!;
+  public string ProxyAddressApi { get; set; } = null!;
+  [Required]
+  public string ProxyRouteAuth { get; set; } = null!;
+  [Required]
+  public string ProxyAddressAuth { get; set; } = null!;
 }

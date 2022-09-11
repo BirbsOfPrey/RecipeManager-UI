@@ -5,5 +5,6 @@ export class Claim {
 }
 
 export namespace ClaimTypes {
+    export const Role = "role"
     export const LogoutUrl = "bff:logout_url"
 }

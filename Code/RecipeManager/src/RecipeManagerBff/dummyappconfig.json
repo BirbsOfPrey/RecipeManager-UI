@@ -4,7 +4,9 @@
     "ApiScopeName": "a",
     "BffClientId": "a",
     "BffClientSecret": "a",
-    "ProxyRoute": "a",
-    "ProxyAddress": "a"
+    "ProxyRouteApi": "a",
+    "ProxyAddressApi": "a",
+    "ProxyRouteAuth": "a",
+    "ProxyAddressAuth": "a"
   }
 }

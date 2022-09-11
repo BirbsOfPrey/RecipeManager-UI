@@ -10,5 +10,4 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:80
     ports:
-      #- 13511:3000
       - 13511:80

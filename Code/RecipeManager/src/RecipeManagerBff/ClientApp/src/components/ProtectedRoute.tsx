@@ -1,14 +1,25 @@
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { useAuth } from "./AuthProvider"
 
-interface IProps { }
+interface IProps {
+    requireAdmin?: boolean
+ }
 
 export const ProtectedRoute = (props: React.PropsWithChildren<IProps>): ReactJSXElement => {
-    const { handleLogin } = useAuth()
+    const { handleLogin, isAdmin, loggedIn, valid } = useAuth()
+    const navigate = useNavigate()
 
-    handleLogin()
+    useEffect(() => {
+        handleLogin()
 
-    if (props.children) {
+        if (valid && props.requireAdmin && !isAdmin) {
+            navigate(-1)
+        }
+    })
+
+    if (valid && loggedIn && props.children) {
         return props.children as ReactJSXElement
     } else {
         return <></>
