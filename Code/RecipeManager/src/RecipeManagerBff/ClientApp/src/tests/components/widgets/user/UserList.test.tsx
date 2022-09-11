@@ -11,10 +11,6 @@ const testUser1Id: string = "abc-def-ghi"
 const testUser1Name: string = "Franzi"
 const testUser2Id: string = "jkl-mno-pqr"
 const testUser2Name: string = "Bobby"
-// const testUserId: string = 54
-// const testRecipe1Name: string = 'Testrezept'
-// const testRecipe2Id: number = 68
-// const testRecipe2Name: string = 'Super gutes Rezept'
 
 let handlers = [
 	rest.get(UsersUrl, (req: any, res: (arg0: any) => any, ctx: { json: (arg0: User[]) => any }) => {
