@@ -60,7 +60,7 @@ export class UserDetailView extends Component<IProps, IState> {
     }
 
     update = (property: string, value: string) => {
-        var userToUpdate = {...this.state.user, [property]: value}
+        var userToUpdate = { ...this.state.user, [property]: value }
         this.setState({ user: userToUpdate, saved: false })
     }
 
@@ -137,9 +137,9 @@ export class UserDetailView extends Component<IProps, IState> {
                 <IconButton component={Link} to={`/${StringResource.Routes.UserManagement}`}>
                     <ArrowBackIcon />
                 </IconButton>
-                <span className="userDetailView__mainTitle">{user.id ? StringResource.General.EditUser : StringResource.General.CreateNewUser}</span>
                 {this.props.editable ? (
                     <>
+                        <span className="userDetailView__mainTitle">{this.props.userId ? StringResource.General.EditUser : StringResource.General.CreateNewUser}</span>
                         <IconButton
                             aria-label="view"
                             className="userDetailView__viewButton"
@@ -161,7 +161,7 @@ export class UserDetailView extends Component<IProps, IState> {
                         <Edit />
                     </IconButton>)
                 }
-                <UserEdit 
+                <UserEdit
                     user={user}
                     setValue={this.update}
                     editable={this.props.editable}
