@@ -17,7 +17,7 @@ export class UserListItem extends Component<IProps, {}> {
         let name: string = user.name ? user.name : StringResource.General.NoUserName
         let role: string = user.role ? user.role : StringResource.General.NoUserRole
 
-        const userRoute: string = '${StringResource.Routes.User}/${user.id}'
+        const userRoute: string = `${StringResource.Routes.User}/${user.id}`
 
         return (
             <ListItemButton

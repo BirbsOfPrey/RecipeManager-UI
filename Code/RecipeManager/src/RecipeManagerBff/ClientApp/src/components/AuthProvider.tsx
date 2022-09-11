@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { Claim, ClaimTypes } from "../models/security/Claim"
-import { Roles } from "../models/security/Role"
+import { Roles } from "../models/security/Roles"
 import { createDefaultHeader } from "../resources/Api"
 import StringResource from "../resources/StringResource"
 
