@@ -50,6 +50,6 @@ test('calls method selectRecipe on click with correct parameter', () => {
     userEvent.click(screen.getByRole("button"))
 
     // Assert
-    expect(mockSelectRecipe.mock.calls.length).toBe(1)
+    expect(mockSelectRecipe).toBeCalledTimes(1)
     expect(mockSelectRecipe).toHaveBeenCalledWith(testRecipe)
 })

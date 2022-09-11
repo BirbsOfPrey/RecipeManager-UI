@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Box, Paper, Stack, TextField } from "@mui/material"
+import { Paper, Stack, TextField } from "@mui/material"
 import { User } from "../../../models/security/User"
 import { UserValidator } from "../../../models/security/UserValidator"
 import { RoleAutocomplete } from "../../controls/RoleAutocomplete"

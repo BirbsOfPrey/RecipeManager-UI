@@ -100,7 +100,7 @@ const AppNavBar = () => {
                             >
                                 {page}
                             </Button>
-                        )) : <></>}
+                        )) : <div/>}
                         {isAdmin ? adminPages.map((page) => (
                             <Button
                                 key={page}
@@ -109,7 +109,7 @@ const AppNavBar = () => {
                             >
                                 {page}
                             </Button>
-                        )) : <></>}
+                        )) :<div/>}
                     </Box>
 
                     {/* Menu with pages:    Small sizes */}
@@ -152,9 +152,9 @@ const AppNavBar = () => {
                                     <MenuItem key={page} onClick={() => openPage(page)}>
                                         <Typography textAlign="center">{page}</Typography>
                                     </MenuItem>
-                                )) : <></>}
+                                )) : <div/>}
                             </Menu>
-                        </Box>) : <></>
+                        </Box>) : <div/>
                     }
 
                     {/* Logo and Title:    Small sizes */}
@@ -204,7 +204,7 @@ const AppNavBar = () => {
                                 <MenuItem key={setting} onClick={() => openPage(setting)}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
-                            )) : <></>}
+                            )) : <div/>}
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={() => openPage(setting)}>
                                     <Typography textAlign="center">{setting}</Typography>

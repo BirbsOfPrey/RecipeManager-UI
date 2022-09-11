@@ -78,7 +78,7 @@ test('calls method selectRecipe on click', async () => {
     await waitFor(() => { userEvent.click(screen.getAllByRole("button")[1]) })
 
     // Assert
-    expect(mockSelectRecipe.mock.calls.length).toBe(1)
+    expect(mockSelectRecipe).toBeCalledTimes(1)
 })
 
 test('render as much list items as recipes are passed', async () => {
