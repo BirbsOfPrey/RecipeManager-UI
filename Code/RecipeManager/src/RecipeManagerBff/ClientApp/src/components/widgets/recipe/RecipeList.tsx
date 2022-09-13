@@ -1,9 +1,8 @@
 import { Component } from 'react'
 import { Recipe } from '../../../models/Recipe'
 import { createDefaultHeader, RecipesUrl } from '../../../resources/Api'
-import './RecipeList.css'
 import StringResource from '../../../resources/StringResource'
-import { LinearProgress, List } from '@mui/material'
+import { LinearProgress, List, Paper, Typography } from '@mui/material'
 import { RecipeListItem } from './RecipeListItem'
 
 interface IState {
@@ -37,23 +36,58 @@ export class RecipeList extends Component<{}, IState> {
         const recipes = this.state.recipes
 
         if (this.state.error.length > 0) {
-            return <p className="recipeListContent__message">{this.state.error}</p>
+            return (
+                <Typography
+                    className="recipeListContent__message"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main"
+                    sx={{
+                        mt: "25px"
+                    }}>
+                    {this.state.error}
+                </Typography>
+            )
         } else if (this.state.loading) {
-            return <LinearProgress />
+            return <LinearProgress sx={{ mt: "25px" }} />
         } else if (recipes.length <= 0) {
-            return <p>{StringResource.Messages.NoRecipesToDisplay}</p>
+            return (
+                <Typography
+                    variant="subtitle1"
+                    component="p"
+                    sx={{
+                        mt: "25px",
+                        fontWeight: "bold"
+                    }}>
+                    {StringResource.Messages.NoRecipesToDisplay}
+                </Typography>
+            )
         }
 
         return (
             <div className="recipeListContent__container">
-                <p className="recipeListContent__title">{StringResource.General.RecipeList}</p>
-                <List className="recipeListContent__list">
-                    {recipes.map(recipe => (
-                        <RecipeListItem
-                            key={recipe.id}
-                            recipe={recipe} />
-                    ))}
-                </List>
+                <Typography
+                    className="recipeListContent__title"
+                    variant="subtitle1"
+                    component="p"
+                    sx={{
+                        mt: "25px",
+                        mb: "5px",
+                        fontWeight: "bold"
+                    }}>
+                    {StringResource.General.SelectRecipe}
+                </Typography>
+                <Paper className="recipeListContentSelector__container"
+                    sx={{ maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
+                    <List disablePadding={true} className="recipeListContent__list">
+                        {recipes.map(recipe => (
+                            <RecipeListItem
+                                key={recipe.id}
+                                recipe={recipe} />
+                        ))}
+                    </List>
+                </Paper>
+
             </div>
         )
     }

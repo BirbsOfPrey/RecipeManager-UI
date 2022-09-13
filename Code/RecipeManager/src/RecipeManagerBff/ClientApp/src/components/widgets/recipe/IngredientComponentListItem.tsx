@@ -23,7 +23,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
             <ListItem
                 alignItems="flex-start"
                 className="ingredientComponentListItem__container"
-                sx={{ paddingRight: '96px' }}>
+                sx={{ pr: "96px", pt: "0px", pb: "0px" }}>
                 <ListItemAvatar>
                     <EggIcon />
                 </ListItemAvatar>
@@ -39,7 +39,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                                 className="ingredientComponentListItem__editButton"
                                 aria-label="edit"
                                 onClick={() => this.props.ingredientComponentSelected(this.props.index, this.props.ingredientComponent)}
-                                sx={{ marginRight: '0px' }}>
+                                sx={{ mr: "0px" }}>
                                 <Edit />
                             </IconButton>
                             <IconButton

@@ -187,7 +187,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                         sx={{ maxHeight: {xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
                         <List
                             className="weeklyScheduleView__dailyScheduleList"
-                            sx={{ padding: "5px" }}>
+                            sx={{ p: "5px" }}>
                             {DateHelper.getDayOfWeekAsNumbers().map(number => (
                                 <DailyScheduleItem
                                     key={number}

@@ -74,7 +74,7 @@ test('renders correct list title', async () => {
     render(<BrowserRouter><RecipeList /></BrowserRouter>)
 
     // Assert
-    await waitFor(() => { expect(screen.getByText(StringResource.General.RecipeList)).toBeInTheDocument })
+    await waitFor(() => { expect(screen.getByText(StringResource.General.SelectRecipe)).toBeInTheDocument })
 })
 
 test('render as much list items as recipes are passed', async () => {

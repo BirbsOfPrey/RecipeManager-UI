@@ -4,7 +4,6 @@ import { Recipe } from "../../../models/Recipe"
 import { Component } from "react"
 import { Link } from 'react-router-dom'
 import StringResource from "../../../resources/StringResource"
-import './RecipeListItem.css'
 
 interface IProps {
     recipe: Recipe
@@ -25,7 +24,7 @@ export class RecipeListItem extends Component<IProps, {}> {
                 alignItems="flex-start"
                 className="recipeListItem__container"
                 component={Link} to={recipeRoute}
-                sx={{ paddingRight: '64px' }}>
+                sx={{ pr: "64px", pt: "0px", pb: "0px" }}>
                 <ListItemAvatar>
                     <DinnerDining />
                 </ListItemAvatar>

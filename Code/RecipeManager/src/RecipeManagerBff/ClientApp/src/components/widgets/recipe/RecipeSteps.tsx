@@ -53,6 +53,7 @@ export class RecipeSteps extends Component<IProps, IState> {
                     count={this.props.steps?.length}
                     page={this.state.contentNr}
                     onChange={this.setContentNr}
+                    sx={{ mt: "10px", mb: "5px" }}
                 />
             </div>)
     }

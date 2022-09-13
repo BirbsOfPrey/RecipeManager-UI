@@ -6,7 +6,6 @@ import { createIngredientComponent, IngredientComponent } from '../../models/Ing
 import { IngredientComponentValidator } from '../../models/IngredientComponentValidator'
 import StringResource from '../../resources/StringResource'
 import { IngredientSelectCreate } from '../controls/IngredientSelectCreate'
-import './IngredientComponentDialog.css'
 
 interface IProps {
     open: boolean
@@ -78,6 +77,7 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                             id="amount"
                             label="Menge"
                             type="number"
+                            sx={{ mr: { sm: "15px", md: "15px" } }}
                             defaultValue={this.state.ingredientComponent.amount || IngredientComponentValidator.minAmount}
                             inputProps={{ min: IngredientComponentValidator.minAmount }}
                             onChange={event => this.updateIngredientComponent('amount', event.target.value)}

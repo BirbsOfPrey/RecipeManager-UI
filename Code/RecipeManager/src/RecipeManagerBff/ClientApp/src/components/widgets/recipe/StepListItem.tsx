@@ -37,7 +37,7 @@ export class StepListItem extends Component<IProps, IState> {
                 className="stepListItem__container"
                 alignItems="flex-start"
                 dense
-                sx={{ paddingLeft: '0px', paddingRight: '132px' }}>
+                sx={{ pl: "0px", pr: "132px" }}>
                 <TextField
                     variant="filled"
                     className="stepListItem__instructionField"
@@ -59,7 +59,7 @@ export class StepListItem extends Component<IProps, IState> {
                                 className="stepListItem__moveUpButton"
                                 onClick={() => this.props.changeStepOrder(false, this.props.step)}
                                 disabled={this.props.step.stepNumber === 1}
-                                sx={{ marginRight: '0px' }}>
+                                sx={{ mr: "0px" }}>
                                 <KeyboardArrowUpIcon />
                             </IconButton>
                             <IconButton
@@ -68,7 +68,7 @@ export class StepListItem extends Component<IProps, IState> {
                                 className="stepListItem__moveDownButton"
                                 onClick={() => this.props.changeStepOrder(true, this.props.step)}
                                 disabled={this.props.step.stepNumber === this.props.length}
-                                sx={{ marginRight: '0px' }}>
+                                sx={{ mr: "0px" }}>
                                 <KeyboardArrowDownIcon />
                             </IconButton>
                             <IconButton
