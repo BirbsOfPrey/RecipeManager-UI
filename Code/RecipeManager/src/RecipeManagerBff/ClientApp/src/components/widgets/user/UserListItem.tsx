@@ -24,7 +24,7 @@ export class UserListItem extends Component<IProps, {}> {
                 alignItems="flex-start"
                 className="userListItem__container"
                 component={Link} to={userRoute}
-                sx={{ pr: "64px" }}>
+                sx={{ pt: "0px", pb: "0px" }}>
                 <ListItemAvatar>
                     <AccountCircle />
                 </ListItemAvatar>

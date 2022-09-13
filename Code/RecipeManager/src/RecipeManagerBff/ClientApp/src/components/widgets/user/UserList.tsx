@@ -1,4 +1,4 @@
-import { LinearProgress, List } from '@mui/material'
+import { LinearProgress, List, Paper } from '@mui/material'
 import { Component } from 'react'
 import { User } from '../../../models/security/User'
 import { createDefaultHeader, UsersUrl } from '../../../resources/Api'
@@ -44,14 +44,17 @@ export class UserList extends Component<{}, IState> {
 
         return (
             <div className="userListContent__container">
-                <List className="userListContent__list">
-                    {users.map(user => (
-                        <UserListItem
-                            key={user.id}
-                            user={user}
-                        />
-                    ))}
-                </List>
+                <Paper className="recipeListContentSelector__container"
+                    sx={{ maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
+                    <List disablePadding={true} className="userListContent__list">
+                        {users.map(user => (
+                            <UserListItem
+                                key={user.id}
+                                user={user}
+                            />
+                        ))}
+                    </List>
+                </Paper>
             </div>
         )
     }
