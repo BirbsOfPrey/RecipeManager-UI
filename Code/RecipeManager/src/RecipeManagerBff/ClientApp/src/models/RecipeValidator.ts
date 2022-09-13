@@ -27,7 +27,7 @@ export class RecipeValidator {
 
     static validatePersonRefAmount(value?: number): boolean {
         if (value) {
-            return value >= RecipeValidator.minPersonRefAmount && value <= RecipeValidator.maxPersonRefAmount && Number.isInteger(value)
+            return value >= RecipeValidator.minPersonRefAmount && value <= RecipeValidator.maxPersonRefAmount
         }
         return false
     }

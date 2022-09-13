@@ -55,6 +55,7 @@ export class RecipeList extends Component<{}, IState> {
                 <Typography
                     variant="subtitle1"
                     component="p"
+                    color="error.main"
                     sx={{
                         mt: "25px",
                         fontWeight: "bold"

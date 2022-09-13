@@ -34,8 +34,6 @@ describe('Method validatePersonRefAmount returns ', () => {
         [true, 499],
         [false, 1001],
         [false, 0],
-        [false, 1.5],
-        [false, 1.001],
         [false, undefined]
     ])('%p when invoked with personRefAmount: %p', (result: boolean, value?: number) => {
         expect(RecipeValidator.validatePersonRefAmount(value)).toBe(result)

@@ -17,7 +17,7 @@ export class RecipeListItem extends Component<IProps, {}> {
         let name: string = recipe.name ? recipe.name : StringResource.General.NoRecipeName
         let description: string = recipe.description ? recipe.description : StringResource.General.NoRecipeDescription
 
-        const recipeRoute: string = `${StringResource.Routes.Recipe}/${recipe.id}`
+        const recipeRoute: string = `/${StringResource.Routes.RecipeManagement}/${StringResource.Routes.Recipe}/${recipe.id}`
 
         return (
             <ListItemButton
