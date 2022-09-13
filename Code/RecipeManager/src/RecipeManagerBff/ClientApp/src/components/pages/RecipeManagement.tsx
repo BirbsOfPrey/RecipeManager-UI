@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom'
 import StringResource from '../../resources/StringResource'
 import { RecipeListView } from './RecipeListView'
 import { RecipeView } from './RecipeView'
-import './RecipeManagement.css'
 
 export const RecipeManagement = () => {
     return (
