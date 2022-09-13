@@ -1,8 +1,10 @@
+import { Button, Typography } from '@mui/material'
 import { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { mapIsoStringToDate, ScheduledRecipe } from '../../models/ScheduledRecipe'
 import { createDefaultHeader, scheduledRecipeFromToQuery } from '../../resources/Api'
 import StringResource from '../../resources/StringResource'
+import { useAuth } from '../AuthProvider'
 import { DailyScheduleItem } from '../widgets/scheduledRecipe/DailyScheduleItem'
 import './MainView.css'
 
@@ -39,13 +41,26 @@ export class MainView extends Component<{}, IState> {
 
     render() {
         return (
-            <div className="mainview__container">
-                <Link className="mainview__RecipeManagement" to={StringResource.Routes.RecipeManagement}>
-                    <button>{StringResource.General.RecipeManagement}</button>
-                </Link>
-                <Link className="mainview__WeeklySchedule" to={StringResource.Routes.WeeklySchedule}>
-                    <button>{StringResource.General.WeeklySchedule}</button>
-                </Link>
+            <div className="mainView__container">
+                <Typography
+                    className="mainView__title"
+                    variant="h6"
+                    component="p"
+                    sx={{ mt: "50px", mb: "15px" }}>
+                    {StringResource.General.ScheduledRecipesToday}
+                </Typography>
+
+                <Typography
+                    className="mainView__errorField"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main"
+                    sx={{
+                        mt: "20px",
+                        mb: "20px"
+                    }}>
+                    {this.state.error}
+                </Typography>
 
                 <DailyScheduleItem
                     editable={false}
@@ -53,6 +68,18 @@ export class MainView extends Component<{}, IState> {
                     scheduledRecipes={this.state.scheduledRecipes}
                     addScheduledRecipe={() => { }}
                     deleteScheduledRecipe={() => { }} />
+
+                <Typography
+                    className="mainView__title"
+                    variant="h6"
+                    component="p"
+                    sx={{ mt: "50px", mb: "20px" }}>
+                    {StringResource.General.AdditionalRecipes}
+                </Typography>
+
+                <Link className="mainView__recipeManagement" to={StringResource.Routes.RecipeManagement}>
+                    <Button variant="outlined">{StringResource.General.RecipeManagement}</Button>
+                </Link>
             </div>
         )
     }
