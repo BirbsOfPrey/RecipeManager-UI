@@ -1,6 +1,6 @@
 import { Claim, ClaimTypes } from "../../../models/security/Claim"
 
-const claimValue = "User"
+const claimValue: string = "User"
 
 test('Claim type is undefined by default', () => {
     // Arrange

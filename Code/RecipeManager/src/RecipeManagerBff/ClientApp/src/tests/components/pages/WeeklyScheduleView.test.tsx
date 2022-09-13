@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { BrowserRouter } from 'react-router-dom'
 import { WeeklyScheduleView } from "../../../components/pages/WeeklyScheduleView"
-import { setupServer } from "msw/node"
+import { setupServer, SetupServerApi } from "msw/node"
 import { ScheduledRecipesUrl } from "../../../resources/Api"
 import { rest } from "msw"
 import { immerable } from "immer"
@@ -30,7 +30,7 @@ let handlers = [
     })
 ]
 
-const server = setupServer(...handlers)
+const server: SetupServerApi = setupServer(...handlers)
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())

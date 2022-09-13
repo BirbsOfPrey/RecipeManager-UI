@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { immerable } from 'immer'
 import { rest } from 'msw'
-import { setupServer } from 'msw/node'
+import { setupServer, SetupServerApi } from 'msw/node'
 import { BrowserRouter } from 'react-router-dom'
 import { MainView } from '../../../components/pages/MainView'
 import { ScheduledRecipe } from '../../../models/ScheduledRecipe'
@@ -23,7 +23,7 @@ let handlers = [
     })
 ]
 
-const server = setupServer(...handlers)
+const server: SetupServerApi = setupServer(...handlers)
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())

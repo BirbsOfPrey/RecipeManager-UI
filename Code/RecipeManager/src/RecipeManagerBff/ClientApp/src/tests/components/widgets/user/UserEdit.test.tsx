@@ -12,7 +12,7 @@ const testOldPassword: string = "lKr24589!"
 const testNewPassword: string = "lKr24500!"
 const testEmail: string = "franzi@noemail.com"
 const testRole: string = "User"
-const testUser = {
+const testUser: User = {
     name: testUserName,
     firstName: testFirstName,
     familyName: testFamilyName,
@@ -20,7 +20,7 @@ const testUser = {
     email: testEmail,
     role: testRole
 } as User
-const testExistingUser = {
+const testExistingUser: User = {
     id: testUserId,
     name: testUserName,
     firstName: testFirstName,
