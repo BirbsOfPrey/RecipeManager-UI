@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom'
 import { mapIsoStringToDate, ScheduledRecipe } from '../../models/ScheduledRecipe'
 import { createDefaultHeader, scheduledRecipeFromToQuery } from '../../resources/Api'
 import StringResource from '../../resources/StringResource'
-import { useAuth } from '../AuthProvider'
 import { DailyScheduleItem } from '../widgets/scheduledRecipe/DailyScheduleItem'
-import './MainView.css'
 
 interface IState {
     dateToShow: Date
@@ -43,7 +41,7 @@ export class MainView extends Component<{}, IState> {
         return (
             <div className="mainView__container">
                 <Typography
-                    className="mainView__title"
+                    className="mainView__scheduledRecipes"
                     variant="h6"
                     component="p"
                     sx={{ mt: "50px", mb: "15px" }}>
@@ -70,7 +68,7 @@ export class MainView extends Component<{}, IState> {
                     deleteScheduledRecipe={() => { }} />
 
                 <Typography
-                    className="mainView__title"
+                    className="mainView__recipeManagement"
                     variant="h6"
                     component="p"
                     sx={{ mt: "50px", mb: "20px" }}>
