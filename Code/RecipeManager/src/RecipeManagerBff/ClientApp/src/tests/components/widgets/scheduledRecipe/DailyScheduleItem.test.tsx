@@ -32,7 +32,7 @@ test('renders header with correct day and date', () => {
     // Arrange
 
     // Act
-    const { container } = render(<BrowserRouter><DailyScheduleItem date={testDate} scheduledRecipes={testScheduledRecipes} deleteScheduledRecipe={mockDeleteScheduledRecipe} addScheduledRecipe={mockAddScheduledRecipe} /></BrowserRouter>)
+    const { container } = render(<BrowserRouter><DailyScheduleItem editable={true} date={testDate} scheduledRecipes={testScheduledRecipes} deleteScheduledRecipe={mockDeleteScheduledRecipe} addScheduledRecipe={mockAddScheduledRecipe} /></BrowserRouter>)
 
     // Assert
     const element = container.getElementsByClassName("dailyScheduleItem__header")[0]
@@ -41,12 +41,22 @@ test('renders header with correct day and date', () => {
 
 test('calls method addScheduledRecipe on click', async () => {
     // Arrange
-    const { container } = render(<BrowserRouter><DailyScheduleItem date={testDate} scheduledRecipes={testScheduledRecipes} deleteScheduledRecipe={mockDeleteScheduledRecipe} addScheduledRecipe={mockAddScheduledRecipe} /></BrowserRouter>)
+    const { container } = render(<BrowserRouter><DailyScheduleItem editable={true} date={testDate} scheduledRecipes={testScheduledRecipes} deleteScheduledRecipe={mockDeleteScheduledRecipe} addScheduledRecipe={mockAddScheduledRecipe} /></BrowserRouter>)
 
     // Act
     userEvent.click(container.getElementsByClassName("dailyScheduleItem__addButton")[0])
 
     // Assert
-    expect(mockAddScheduledRecipe.mock.calls.length).toBe(1)
+    expect(mockAddScheduledRecipe).toBeCalledTimes(1)
     expect(mockAddScheduledRecipe).toHaveBeenCalledWith(testDate)
+})
+
+test('does not render add Button if not editable', () => {
+    // Arrange
+
+    // Act
+    const { container } = render(<BrowserRouter><DailyScheduleItem editable={false} date={testDate} scheduledRecipes={testScheduledRecipes} deleteScheduledRecipe={mockDeleteScheduledRecipe} addScheduledRecipe={mockAddScheduledRecipe} /></BrowserRouter>)
+
+    // Assert
+    expect(container.getElementsByClassName("dailyScheduleItem__addButton").length).toBe(0)
 })

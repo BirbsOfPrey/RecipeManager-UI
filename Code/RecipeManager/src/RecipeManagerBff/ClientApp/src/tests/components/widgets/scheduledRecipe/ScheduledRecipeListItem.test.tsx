@@ -17,7 +17,7 @@ test('renders default text if no recipe in the scheduled recipe', () => {
     // Arrange
 
     // Act
-    render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
+    render(<BrowserRouter><ScheduledRecipeListItem editable={true} scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Assert
     const linkElementRecipeNameDefault = screen.getByText(StringResource.General.NoRecipeName)
@@ -31,7 +31,7 @@ test('renders default text if recipe without name and description in the schedul
     testScheduledRecipe.recipe = testRecipe
     
     // Act
-    render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
+    render(<BrowserRouter><ScheduledRecipeListItem editable={true} scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Assert
     const linkElementRecipeNameDefault = screen.getByText(StringResource.General.NoRecipeName)
@@ -47,7 +47,7 @@ test('renders correct name and description of the recipe in the scheduled recipe
     testScheduledRecipe.recipe = testRecipe
     
     // Act
-    render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
+    render(<BrowserRouter><ScheduledRecipeListItem editable={true} scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Assert
     const linkElementRecipeName = screen.getByText(testRecipeName)
@@ -65,7 +65,7 @@ test('calls method scheduledRecipeDeleted on click with correct parameter', () =
     // Arrange
     const testId = 66
     testScheduledRecipe.id = testId
-    render(<BrowserRouter><ScheduledRecipeListItem scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
+    render(<BrowserRouter><ScheduledRecipeListItem editable={true} scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
 
     // Act
     userEvent.click(screen.getByRole("button"))
@@ -73,4 +73,13 @@ test('calls method scheduledRecipeDeleted on click with correct parameter', () =
     // Assert
     expect(mockDeleted.mock.calls.length).toBe(1)
     expect(mockDeleted).toHaveBeenCalledWith(testId)
+})
+
+test('does not render delete Button if not editable', () => {
+    // Arrange
+
+    // Act
+    const { container } = render(<BrowserRouter><ScheduledRecipeListItem editable={false} scheduledRecipe={testScheduledRecipe} scheduledRecipeDeleted={mockDeleted} /></BrowserRouter>)
+    // Assert
+    expect(container.getElementsByClassName("scheduledRecipeListItem__deleteButton").length).toBe(0)
 })

@@ -7,6 +7,7 @@ import { ScheduledRecipeListItem } from "./ScheduledRecipeListItem"
 import { ScheduledRecipe } from "../../../models/ScheduledRecipe"
 
 interface IProps {
+    editable: boolean
     scheduledRecipes: ScheduledRecipe[]
     deleteScheduledRecipe: (scheduledRecipeId?: number) => void
 }
@@ -18,6 +19,7 @@ export class ScheduledRecipeList extends Component<IProps, {}> {
             return this.props.scheduledRecipes.map((sr, idx) =>
             (<ScheduledRecipeListItem
                 key={idx}
+                editable={this.props.editable}
                 scheduledRecipe={sr}
                 scheduledRecipeDeleted={this.props.deleteScheduledRecipe}
             />))
