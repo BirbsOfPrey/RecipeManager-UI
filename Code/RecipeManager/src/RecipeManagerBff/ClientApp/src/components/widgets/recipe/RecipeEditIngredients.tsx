@@ -89,7 +89,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                     setViewValue={(value) => this.setState({ personAmount: value })}
                     editable={this.props.editable}
                 />
-                <List className="recipeEditIngredients__ingredientList">
+                <List disablePadding={true} className="recipeEditIngredients__ingredientList">
                     {this.generate(personAmount)}
                     {addComponent}
                 </List>

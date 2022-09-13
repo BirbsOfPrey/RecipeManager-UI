@@ -1,11 +1,11 @@
-import { Component, ReactNode } from "react"
+import { Component } from "react"
 import { Link, NavigateFunction } from "react-router-dom"
 import { createDefaultHeader, RecipesUrl } from "../../resources/Api"
 import { createRecipe, Recipe } from "../../models/Recipe"
 import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/recipe/RecipeEditHead"
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress, Typography } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress, Paper, Stack, Typography } from "@mui/material"
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
@@ -238,23 +238,35 @@ export class RecipeCookingView extends Component<IProps, IState> {
                 <Typography
                     className="recipeCreateAssistant__mainTitle"
                     variant="h6"
-                    component="p">
+                    component="p"
+                    sx={{ pb: "5px" }}>
                     {this.props.editable ? StringResource.General.CreateOrEditRecipe : StringResource.General.RecipeView}
                 </Typography>
 
-                <Box className="recipeCreateAssistant__buttons">
+                <Box className="recipeCreateAssistant__handleButtons">
                     <IconButton component={Link} to={`/${StringResource.Routes.RecipeManagement}`}>
                         <ArrowBackIcon />
                     </IconButton>
 
                     {this.props.editable ? (
+                        <IconButton
+                            aria-label="view"
+                            className="recipeCreateAssistant__viewButton"
+                            component={Link} to={`${recipeRoute}`}>
+                            <VisibilityIcon />
+                        </IconButton>) : (
+                        <IconButton
+                            aria-label="edit"
+                            className="recipeCreateAssistant__editButton"
+                            component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
+                            <Edit />
+                        </IconButton>)
+                    }
+                </Box>
+
+                <Box className="recipeCreateAssistant__editButtons">
+                    {this.props.editable ? (
                         <>
-                            <IconButton
-                                aria-label="view"
-                                className="recipeCreateAssistant__viewButton"
-                                component={Link} to={`${recipeRoute}`}>
-                                <VisibilityIcon />
-                            </IconButton>
                             <LoadingButton
                                 className="recipeCreateAssistant__saveButton"
                                 variant="outlined"
@@ -271,47 +283,44 @@ export class RecipeCookingView extends Component<IProps, IState> {
                                 onClick={this.requestToDeleteRecipe}>
                                 <DeleteIcon />
                             </IconButton>
-                        </>
-                    ) : (
-                        <IconButton
-                            aria-label="edit"
-                            className="recipeCreateAssistant__editButton"
-                            component={Link} to={`${recipeRoute}?${StringResource.Queries.EditOn}`}>
-                            <Edit />
-                        </IconButton>)
+                        </>) : <></>
                     }
                 </Box>
 
+                <Paper
+                    className="recipeCreateAssistant__editContent"
+                    sx={{ p: "20px", maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
+                    <Stack spacing={2}>
+                        <RecipeEditHead
+                            name={this.state.recipe.name}
+                            description={this.state.recipe.description}
+                            setValue={this.update}
+                            editable={this.props.editable}
+                        />
+                        <RecipeEditSteps
+                            steps={this.state.recipe.steps ? this.state.recipe.steps : createSteps()}
+                            updateStep={this.updateStep}
+                            changeStepOrder={this.changeStepOrder}
+                            deleteStep={this.deleteStep}
+                            editable={this.props.editable}
+                        />
+                        <RecipeEditIngredients
+                            personRefAmount={this.state.recipe.personRefAmount}
+                            ingredientComponents={this.state.recipe.ingredientComponents}
+                            setValue={this.update}
+                            updateIngredientComponent={this.updateIngredientComponent}
+                            deleteIngredientComponent={this.deleteIngredientComponent}
+                            editable={this.props.editable}
+                        />
+                    </Stack>
+                </Paper>
 
-                <RecipeEditHead
-                    name={this.state.recipe.name}
-                    description={this.state.recipe.description}
-                    setValue={this.update}
-                    editable={this.props.editable}
-                />
-                <RecipeEditSteps
-                    steps={this.state.recipe.steps ? this.state.recipe.steps : createSteps()}
-                    updateStep={this.updateStep}
-                    changeStepOrder={this.changeStepOrder}
-                    deleteStep={this.deleteStep}
-                    editable={this.props.editable}
-                />
-                <RecipeEditIngredients
-                    personRefAmount={this.state.recipe.personRefAmount}
-                    ingredientComponents={this.state.recipe.ingredientComponents}
-                    setValue={this.update}
-                    updateIngredientComponent={this.updateIngredientComponent}
-                    deleteIngredientComponent={this.deleteIngredientComponent}
-                    editable={this.props.editable}
-                />
                 <Typography
                     className="recipeCreateAssistant__errorField"
                     variant="subtitle1"
                     component="p"
                     color="error.main"
-                    sx={{
-                        mt: "25px"
-                    }}>
+                    sx={{ mt: "25px" }}>
                     {this.state.error}
                 </Typography>
 
@@ -334,7 +343,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                         <Button onClick={this.deleteRecipe} autoFocus>{StringResource.General.Delete}</Button>
                     </DialogActions>
                 </Dialog>
-            </div>
+            </div >
         )
     }
 }

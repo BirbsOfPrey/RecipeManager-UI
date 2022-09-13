@@ -5,7 +5,7 @@
     grid-template-areas:
         "header header"
         "list list";
-    margin-bottom: 1em;
+    margin-bottom: 15px;
 }
 
 .dailyScheduleItem__container .dailyScheduleItem__title {

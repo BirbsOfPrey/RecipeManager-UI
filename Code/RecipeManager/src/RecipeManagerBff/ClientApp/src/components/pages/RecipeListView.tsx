@@ -8,7 +8,7 @@ export const RecipeListView = () => {
     return (
         <div className="RecipeListView__container">
             <Link className="RecipeListView__createRecipe" to={StringResource.Routes.Recipe}>
-                <Button sx={{ mt: "30px" }}>{StringResource.General.CreateRecipe}</Button>
+                <Button variant="outlined" sx={{ mt: "30px" }}>{StringResource.General.CreateRecipe}</Button>
             </Link>
             <RecipeList/>
         </div>

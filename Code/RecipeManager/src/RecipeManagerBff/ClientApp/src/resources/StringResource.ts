@@ -64,7 +64,7 @@ namespace StringResource {
         export const Cancel: string = 'Abbrechen'
         export const Change: string = 'Ändern'
         export const Add: string = 'Hinzufügen'
-        export const CreateOrEditRecipe: string = 'Neues Rezept erstellen/bearbeiten'
+        export const CreateOrEditRecipe: string = 'Rezept erstellen/bearbeiten'
         export const CreateRecipe: string = 'Neues Rezept erstellen'
         export const AddIngredient: string = 'Zutat hinzufügen'
         export const AddAnotherIngredient: string = 'Weitere Zutat hinzufügen'
