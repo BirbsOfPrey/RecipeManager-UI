@@ -8,6 +8,7 @@ namespace StringResource {
         export const Recipe: string = 'recipe'
         export const RecipeId: string = ':recipeId'
         export const WeeklySchedule: string = 'weeklyschedule'
+        export const RecipeImport: string = 'recipeimport'
         export const UserManagement: string = 'usermanagement'
         export const User: string = 'user'
         export const UserId: string = ':userId'
@@ -101,6 +102,7 @@ namespace StringResource {
         export const FamilyName: string = 'Nachname'
         export const EMail: string = 'E-Mail'
         export const RecipeView: string = 'Rezepteansicht'
+        export const RecipeImport: string = 'Import'
     }
     export const CopyrightHeader: string = 'MAS SE 2020-22: Masterarbeit RecipeManager'
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'

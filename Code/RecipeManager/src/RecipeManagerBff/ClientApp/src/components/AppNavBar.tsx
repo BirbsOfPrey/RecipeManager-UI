@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from './AuthProvider'
 
 const pages = [StringResource.General.RecipeManagement, StringResource.General.WeeklySchedule]
-const adminPages = [StringResource.General.UserManagement]
+const adminPages = [StringResource.General.RecipeImport, StringResource.General.UserManagement]
 const protectedSettings = [StringResource.General.Session]
 const settings = [StringResource.General.About]
 
@@ -44,6 +44,9 @@ const AppNavBar = () => {
                 break
             case StringResource.General.WeeklySchedule:
                 navigate(StringResource.Routes.WeeklySchedule)
+                break
+            case StringResource.General.RecipeImport:
+                navigate(StringResource.Routes.RecipeImport)
                 break
             case StringResource.General.UserManagement:
                 navigate(StringResource.Routes.UserManagement)
@@ -100,7 +103,7 @@ const AppNavBar = () => {
                             >
                                 {page}
                             </Button>
-                        )) : <div/>}
+                        )) : <div />}
                         {isAdmin ? adminPages.map((page) => (
                             <Button
                                 key={page}
@@ -109,7 +112,7 @@ const AppNavBar = () => {
                             >
                                 {page}
                             </Button>
-                        )) :<div/>}
+                        )) : <div />}
                     </Box>
 
                     {/* Menu with pages:    Small sizes */}
@@ -152,9 +155,9 @@ const AppNavBar = () => {
                                     <MenuItem key={page} onClick={() => openPage(page)}>
                                         <Typography textAlign="center">{page}</Typography>
                                     </MenuItem>
-                                )) : <div/>}
+                                )) : <div />}
                             </Menu>
-                        </Box>) : <div/>
+                        </Box>) : <div />
                     }
 
                     {/* Logo and Title:    Small sizes */}
@@ -204,7 +207,7 @@ const AppNavBar = () => {
                                 <MenuItem key={setting} onClick={() => openPage(setting)}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
-                            )) : <div/>}
+                            )) : <div />}
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={() => openPage(setting)}>
                                     <Typography textAlign="center">{setting}</Typography>
