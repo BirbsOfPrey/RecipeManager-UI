@@ -1,3 +1,4 @@
+import { RecipeImportValidator } from "../models/RecipeImportValidator"
 import { RecipeValidator } from "../models/RecipeValidator"
 import { UserValidator } from "../models/security/UserValidator"
 
@@ -8,6 +9,7 @@ namespace StringResource {
         export const Recipe: string = 'recipe'
         export const RecipeId: string = ':recipeId'
         export const WeeklySchedule: string = 'weeklyschedule'
+        export const RecipeImport: string = 'recipeimport'
         export const UserManagement: string = 'usermanagement'
         export const User: string = 'user'
         export const UserId: string = ':userId'
@@ -48,6 +50,9 @@ namespace StringResource {
         export const NoUsersToDisplay: string = 'Es wurden keine Benutzer gefunden!'
         export const UserNotFound: string = 'Benutzer nicht gefunden.'
         export const InvalidUserFields: string = 'Der User enthält ungültige Werte und kann nicht gespeichert werden.'
+        export const InvalidImportAmount: string = `Anzahl muss im Bereich ${RecipeImportValidator.minImportAmount} - ${RecipeImportValidator.maxImportAmount} liegen`
+        export const NoRecipesImported: string = 'Es wurden keine Rezepte importiert! (Ursache: Die gefundenen Rezepte sind bereits vorhanden oder deren Format war nicht passend.)'
+        export const RecipeImportError: string = 'Import fehlgeschlagen oder Berechtigung fehlt.'
     }
     export namespace General {
         export const AppTitle: string = 'RECIPE MANAGER'
@@ -101,6 +106,11 @@ namespace StringResource {
         export const FamilyName: string = 'Nachname'
         export const EMail: string = 'E-Mail'
         export const RecipeView: string = 'Rezepteansicht'
+        export const RecipeImport: string = 'Import'
+        export const RecipeImportHeader: string = 'Nachfolgend können Rezepte von TheMealDB importiert werden'
+        export const RecipeImportButton: string = 'Rezepte importieren'
+        export const RecipeImportListHeader: string = 'Die folgenden Rezepte wurden importiert'
+        export const RecipeImportAmount: string = 'Anzahl Rezepte'
     }
     export const CopyrightHeader: string = 'MAS SE 2020-22: Masterarbeit RecipeManager'
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'
