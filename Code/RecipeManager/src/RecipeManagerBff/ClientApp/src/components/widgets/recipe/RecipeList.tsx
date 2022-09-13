@@ -41,15 +41,12 @@ export class RecipeList extends Component<{}, IState> {
                     className="recipeListContent__message"
                     variant="subtitle1"
                     component="p"
-                    color="error.main"
-                    sx={{
-                        mt: "25px"
-                    }}>
+                    color="error.main">
                     {this.state.error}
                 </Typography>
             )
         } else if (this.state.loading) {
-            return <LinearProgress sx={{ mt: "25px" }} />
+            return <LinearProgress />
         } else if (recipes.length <= 0) {
             return (
                 <Typography
@@ -57,7 +54,6 @@ export class RecipeList extends Component<{}, IState> {
                     component="p"
                     color="error.main"
                     sx={{
-                        mt: "25px",
                         fontWeight: "bold"
                     }}>
                     {StringResource.Messages.NoRecipesToDisplay}
@@ -72,7 +68,6 @@ export class RecipeList extends Component<{}, IState> {
                     variant="subtitle1"
                     component="p"
                     sx={{
-                        mt: "25px",
                         mb: "5px",
                         fontWeight: "bold"
                     }}>

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { UserDetailView } from '../../../../components/widgets/user/UserDetailView'
 import StringResource from '../../../../resources/StringResource'
 
-const testUserId = "abc-def"
+const testUserId: string = "abc-def"
 
 const mockNavigate = jest.fn()
 

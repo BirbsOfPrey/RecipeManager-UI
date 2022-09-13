@@ -8,6 +8,7 @@ import './DailyScheduleItem.css'
 
 
 interface IProps {
+    editable: boolean
     date: Date
     scheduledRecipes: ScheduledRecipe[]
     deleteScheduledRecipe: (scheduledRecipeId?: number) => void
@@ -26,15 +27,20 @@ export class DailyScheduleItem extends Component<IProps, {}> {
                         className="dailyScheduleItem__title"
                         variant="subtitle1"
                         component="p"
-                        sx={{ mr: "15px", pl: "18px" }}>
+                        sx={{ mr: "15px", pl: "18px", pt: "5px", pb: "5px" }}>
                         {DateHelper.getNameOfCurrentDay(this.props.date.getDay())}, {DateHelper.getStringOfDate(this.props.date)}
                     </Typography>
-                    <IconButton size="large" className="dailyScheduleItem__addButton" onClick={() => this.props.addScheduledRecipe(this.props.date)}>
-                        <Add />
-                    </IconButton>
+                    {this.props.editable ? (
+                        <IconButton size="large" className="dailyScheduleItem__addButton" onClick={() => this.props.addScheduledRecipe(this.props.date)}>
+                            <Add />
+                        </IconButton>
+                    ) : (
+                        <></>
+                    )}
                 </Box>
 
                 <ScheduledRecipeList
+                    editable={this.props.editable}
                     scheduledRecipes={this.props.scheduledRecipes}
                     deleteScheduledRecipe={this.props.deleteScheduledRecipe}
                 />

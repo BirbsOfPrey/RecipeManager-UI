@@ -8,6 +8,7 @@ import { ScheduledRecipe } from "../../../models/ScheduledRecipe"
 import StringResource from "../../../resources/StringResource"
 
 interface IProps {
+    editable: boolean
     scheduledRecipe: ScheduledRecipe
     scheduledRecipeDeleted: (scheduledRecipeId: number | undefined) => void
 }
@@ -37,13 +38,16 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                         sx={{ mr: "0px" }}>
                         <OpenInNewIcon />
                     </IconButton>
-                    <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        className="scheduledRecipeListItem__deleteButton"
-                        onClick={() => this.props.scheduledRecipeDeleted(this.props.scheduledRecipe.id)}>
-                        <DeleteIcon />
-                    </IconButton>
+                    {this.props.editable ? (
+                        <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            className="scheduledRecipeListItem__deleteButton"
+                            onClick={() => this.props.scheduledRecipeDeleted(this.props.scheduledRecipe.id)}>
+                            <DeleteIcon />
+                        </IconButton>
+                    ) : ( <></> )
+                    }
                 </ListItemSecondaryAction>
             </ListItem>
         )

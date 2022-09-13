@@ -111,6 +111,8 @@ namespace StringResource {
         export const RecipeImportButton: string = 'Rezepte importieren'
         export const RecipeImportListHeader: string = 'Die folgenden Rezepte wurden importiert'
         export const RecipeImportAmount: string = 'Anzahl Rezepte'
+        export const ScheduledRecipesToday: string = 'Heute sind die folgenden Rezepte geplant'
+        export const AdditionalRecipes: string = 'Zu den weiteren Rezepten geht es hier'
     }
     export const CopyrightHeader: string = 'MAS SE 2020-22: Masterarbeit RecipeManager'
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'

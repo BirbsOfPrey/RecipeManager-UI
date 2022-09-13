@@ -5,7 +5,7 @@ import { ScheduledRecipeCreate } from "../../../../components/widgets/scheduledR
 import { RecipesUrl } from "../../../../resources/Api"
 import { immerable } from "immer"
 import { rest } from "msw"
-import { setupServer } from "msw/node"
+import { setupServer, SetupServerApi } from "msw/node"
 import { Recipe } from "../../../../models/Recipe"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { DateHelper } from '../../../../models/helper/DateHelper'
@@ -30,7 +30,7 @@ let handlers = [
     })
 ]
 
-const server = setupServer(...handlers)
+const server: SetupServerApi = setupServer(...handlers)
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())

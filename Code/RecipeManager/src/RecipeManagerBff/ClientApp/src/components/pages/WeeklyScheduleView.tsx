@@ -38,7 +38,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
         scheduledRecipeIdToDelete: undefined,
         createScheduledRecipe: false,
         scheduledRecipeAddDate: new Date(),
-        error: ''
+        error: ""
     }
 
     async componentDidMount() {
@@ -191,6 +191,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                             {DateHelper.getDayOfWeekAsNumbers().map(number => (
                                 <DailyScheduleItem
                                     key={number}
+                                    editable={true}
                                     date={this.getDayOfWeekToShow(number)}
                                     scheduledRecipes={this.state.scheduledRecipes.filter(scheduledRecipe => {
                                         return scheduledRecipe.date.toDateString() === this.getDayOfWeekToShow(number).toDateString()
