@@ -21,7 +21,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
         ingredientNames: []
     }
 
-    changeMode = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    changeMode = (_: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
         this.setState({ newIngredient: checked })
     }
 

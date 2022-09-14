@@ -13,7 +13,7 @@ const testScheduledRecipe2Id: number = 56
 const testDate: Date = new Date("2022-06-21")
 
 let handlers = [
-    rest.get(ScheduledRecipesUrl, (req: any, res: (arg0: any) => any, ctx: { json: (arg0: ScheduledRecipe[]) => any }) => {
+    rest.get(ScheduledRecipesUrl, (_: any, res: (arg0: any) => any, ctx: { json: (arg0: ScheduledRecipe[]) => any }) => {
         return res(
             ctx.json([
                 { [immerable]: true, id: testScheduledRecipe1Id, date: testDate, recipe: undefined },
@@ -38,14 +38,14 @@ afterAll(() => {
     jest.useRealTimers()
 })
 
-test('renders text of RecipeManagement button correct', () => {
+test('renders text of recipes button correct', () => {
     // Arrange
 
     // Act
     render(<BrowserRouter><MainView /></BrowserRouter>)
 
     // Assert
-    expect(screen.getByText(StringResource.General.RecipeManagement)).toBeInTheDocument()
+    expect(screen.getByText(StringResource.General.AdditionalRecipes)).toBeInTheDocument()
 })
 
 test('renders text of scheduled recipes title correct', () => {

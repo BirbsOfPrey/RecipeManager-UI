@@ -13,7 +13,6 @@ namespace StringResource {
         export const UserManagement: string = 'usermanagement'
         export const User: string = 'user'
         export const UserId: string = ':userId'
-        export const UserSession: string = 'user-session'
         export const BffLogin: string = 'bff/login'
         export const BffLogout: string = 'bff/logout'
         export const BffUser: string = 'bff/user'
@@ -27,7 +26,7 @@ namespace StringResource {
     }
     export namespace Messages {
         export const GeneralError: string = 'Es ist ein Fehler aufgetreten!'
-        export const NoRecipesToDisplay: string = 'Es wurden keine Rezepte zur Darstellung gefunden!'
+        export const NoRecipesToDisplay: string = 'Es wurden keine Rezepte zur Darstellung gefunden.'
         export const RecipeNotFound: string = 'Rezept nicht gefunden. Berechtigung fehlt oder Rezept existiert nicht.'
         export const ScheduledRecipeNotFound: string = 'Kein terminiertes Rezept gefunden, da die Berechtigung fehlt.'
         export const NoContent: string = 'Hier ist nichts vorhanden!'
@@ -47,7 +46,7 @@ namespace StringResource {
         export const RequiredUserName: string = `Erlaubt sind die Zeichen ${UserValidator.allowedChars}`
         export const RequiredPassword: string = `Passwortänge muss mindestens ${UserValidator.minPasswordLength} sein. Es muss aus Zahl, Sonderzeichen, Klein- und Grossbuchstaben bestehen.`
         export const RequiredOldPassword: string = 'Altes Passwort zur Verifikation benötigt'
-        export const NoUsersToDisplay: string = 'Es wurden keine Benutzer gefunden!'
+        export const NoUsersToDisplay: string = 'Es wurden keine Benutzer gefunden.'
         export const UserNotFound: string = 'Benutzer nicht gefunden.'
         export const InvalidUserFields: string = 'Der User enthält ungültige Werte und kann nicht gespeichert werden.'
         export const InvalidImportAmount: string = `Anzahl muss im Bereich ${RecipeImportValidator.minImportAmount} - ${RecipeImportValidator.maxImportAmount} liegen`
@@ -115,8 +114,8 @@ namespace StringResource {
         export const RecipeImportButton: string = 'Rezepte importieren'
         export const RecipeImportListHeader: string = 'Importierte Rezepte'
         export const RecipeImportAmount: string = 'Anzahl Rezepte'
-        export const ScheduledRecipesToday: string = 'Heute sind die folgenden Rezepte geplant'
-        export const AdditionalRecipes: string = 'Zu den weiteren Rezepten geht es hier'
+        export const ScheduledRecipesToday: string = 'Tagesplan'
+        export const AdditionalRecipes: string = 'Weitere Rezepte'
     }
     export const CopyrightHeader: string = 'MAS SE 2020-22: Masterarbeit RecipeManager'
     export const Copyright: string = '\u00A9 2022 - Adrian Zigerlig, Silvan Wirz'

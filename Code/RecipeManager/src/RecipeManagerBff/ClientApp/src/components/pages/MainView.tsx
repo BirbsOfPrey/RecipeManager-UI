@@ -9,15 +9,13 @@ import { DailyScheduleItem } from '../widgets/scheduledRecipe/DailyScheduleItem'
 interface IState {
     dateToShow: Date
     scheduledRecipes: ScheduledRecipe[]
-    error: string
 }
 
 export class MainView extends Component<{}, IState> {
 
     state: IState = {
         dateToShow: new Date(),
-        scheduledRecipes: [],
-        error: ""
+        scheduledRecipes: []
     }
 
     async componentDidMount() {
@@ -28,12 +26,10 @@ export class MainView extends Component<{}, IState> {
         const response = await fetch(scheduledRecipeFromToQuery(this.state.dateToShow, this.state.dateToShow), {
             headers: createDefaultHeader()
         })
-        if (response.status >= 300) {
-            this.setState({ error: StringResource.Messages.ScheduledRecipeNotFound })
-        } else {
+        if (response.status < 300) {
             const scheduledRecipes: ScheduledRecipe[] = await response.json()
             mapIsoStringToDate(scheduledRecipes)
-            this.setState({ error: "", scheduledRecipes: scheduledRecipes })
+            this.setState({ scheduledRecipes: scheduledRecipes })
         }
     }
 
@@ -48,18 +44,6 @@ export class MainView extends Component<{}, IState> {
                     {StringResource.General.ScheduledRecipesToday}
                 </Typography>
 
-                <Typography
-                    className="mainView__errorField"
-                    variant="subtitle1"
-                    component="p"
-                    color="error.main"
-                    sx={{
-                        mt: "20px",
-                        mb: "20px"
-                    }}>
-                    {this.state.error}
-                </Typography>
-
                 <DailyScheduleItem
                     editable={false}
                     date={this.state.dateToShow}
@@ -67,16 +51,12 @@ export class MainView extends Component<{}, IState> {
                     addScheduledRecipe={() => { }}
                     deleteScheduledRecipe={() => { }} />
 
-                <Typography
-                    className="mainView__recipeManagement"
-                    variant="h6"
-                    component="p"
-                    sx={{ mt: "50px", mb: "20px" }}>
-                    {StringResource.General.AdditionalRecipes}
-                </Typography>
-
                 <Link className="mainView__recipeManagement" to={StringResource.Routes.RecipeManagement}>
-                    <Button variant="outlined">{StringResource.General.RecipeManagement}</Button>
+                    <Button
+                        variant="outlined"
+                        sx={{ mt: "50px", mb: "30px" }}>
+                        {StringResource.General.AdditionalRecipes}
+                    </Button>
                 </Link>
             </div>
         )

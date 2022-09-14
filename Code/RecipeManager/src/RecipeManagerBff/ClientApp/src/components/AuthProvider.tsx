@@ -4,7 +4,7 @@ import { Roles } from "../models/security/Roles"
 import { createDefaultHeader } from "../resources/Api"
 import StringResource from "../resources/StringResource"
 
-interface IAuthProps {
+export interface IAuthProps {
     valid: boolean
     loggedIn: boolean
     isAdmin: boolean

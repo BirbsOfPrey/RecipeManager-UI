@@ -8,7 +8,6 @@ import { useAuth } from './AuthProvider'
 
 const pages = [StringResource.General.RecipeManagement, StringResource.General.WeeklySchedule]
 const adminPages = [StringResource.General.RecipeImport, StringResource.General.UserManagement]
-const protectedSettings = [StringResource.General.Session]
 const settings = [StringResource.General.About]
 
 const AppNavBar = () => {
@@ -50,9 +49,6 @@ const AppNavBar = () => {
                 break
             case StringResource.General.UserManagement:
                 navigate(StringResource.Routes.UserManagement)
-                break
-            case StringResource.General.Session:
-                navigate(StringResource.Routes.UserSession)
                 break
             case StringResource.General.About:
                 navigate(StringResource.Routes.About)
@@ -201,11 +197,6 @@ const AppNavBar = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {loggedIn ? protectedSettings.map((setting) => (
-                                <MenuItem key={setting} onClick={() => openPage(setting)}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            )) : <div />}
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={() => openPage(setting)}>
                                     <Typography textAlign="center">{setting}</Typography>

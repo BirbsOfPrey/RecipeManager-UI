@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import { MainView } from './pages/MainView'
-import { UserSession } from "./pages/UserSession"
 import { Layout } from './Layout'
 import { RecipeManagement } from './pages/RecipeManagement'
 import { WeeklyScheduleView } from './pages/WeeklyScheduleView'
@@ -44,7 +43,6 @@ export const App = () => {
                             <Route path={`${StringResource.Routes.WeeklySchedule}/*`} element={<ProtectedRoute><WeeklyScheduleView /></ProtectedRoute>} />
                             <Route path={`${StringResource.Routes.RecipeImport}/*`} element={<ProtectedRoute requireAdmin><ExternalRecipeImportView /></ProtectedRoute>} />
                             <Route path={`${StringResource.Routes.UserManagement}/*`} element={<ProtectedRoute requireAdmin><UserManagement /></ProtectedRoute>} />
-                            <Route path={`${StringResource.Routes.UserSession}/*`} element={<ProtectedRoute><UserSession /></ProtectedRoute>} />
                             <Route path={`${StringResource.Routes.About}/*`} element={<AboutView />} />
                         </Route>
                         <Route path={StringResource.Routes.Any} element={<p>{StringResource.Messages.NoContent}</p>} />
