@@ -37,6 +37,12 @@ export class RecipeSteps extends Component<IProps, IState> {
 
         return (
             <div className="recipeSteps__container">
+                <Pagination
+                    variant="text"
+                    count={this.props.steps?.length}
+                    page={this.state.contentNr}
+                    onChange={this.setContentNr}
+                />
                 <TextField
                     variant="outlined"
                     className="recipeEditHead__descriptionField"
@@ -47,13 +53,7 @@ export class RecipeSteps extends Component<IProps, IState> {
                     inputProps={{ readOnly: true, disabled: true }}
                     label={activeStepName}
                     value={activeStep.stepNumber ? activeStep.instruction : StringResource.General.NoSteps}
-                />
-                <Pagination
-                    variant="text"
-                    count={this.props.steps?.length}
-                    page={this.state.contentNr}
-                    onChange={this.setContentNr}
-                    sx={{ mt: "10px", mb: "5px" }}
+                    sx={{ mt: "20px", mb: "10px" }}
                 />
             </div>)
     }

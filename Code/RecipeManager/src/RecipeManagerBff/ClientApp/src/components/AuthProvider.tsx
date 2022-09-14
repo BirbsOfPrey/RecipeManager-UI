@@ -50,9 +50,10 @@ export const AuthProvider = (props: React.PropsWithChildren<IProps>) => {
                 const data = await response.json()
                 const url = data.find((claim: Claim) => claim.type === ClaimTypes.LogoutUrl)?.value ?? logoutUrl
                 const admin = data.find((claim: Claim) => claim.type === ClaimTypes.Role)?.value === Roles.Administrator ?? false
+                const expired = data.find((claim: Claim) => claim.type === ClaimTypes.SessionExpiry)?.value <= 0
                 setLogoutUrl(url)
                 setAdmin(admin)
-                setLoggedIn(true)
+                setLoggedIn(!expired)
             } else {
                 setLoggedIn(false)
             }

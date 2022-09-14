@@ -7,7 +7,7 @@ export const UserListView = () => {
     return (
         <div className="UserListView__container">
             <Link className="UserListView__createUser" to={StringResource.Routes.User}>
-                <Button variant="outlined" sx={{ mt: "30px", mb: "25px" }}>{StringResource.General.CreateUser}</Button>
+                <Button variant="outlined" sx={{ mt: "30px", mb: "20px" }}>{StringResource.General.CreateUser}</Button>
             </Link>
             <UserList />
         </div>

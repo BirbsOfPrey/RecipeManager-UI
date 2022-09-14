@@ -13,7 +13,7 @@ test('renders main title correct if editable', () => {
     render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Assert
-    expect(screen.getByText(StringResource.General.CreateOrEditRecipe)).toBeInTheDocument
+    expect(screen.getByText(StringResource.General.EditRecipe)).toBeInTheDocument
 })
 
 test('renders main title correct if not editable', () => {
@@ -164,7 +164,7 @@ test('returns to CookingView after click on cancel button in the dialog', async 
     userEvent.click(screen.getByText(StringResource.General.Cancel))
 
     // Assert
-    await waitFor(() => { expect(screen.getByText(StringResource.General.CreateOrEditRecipe)).toBeInTheDocument })
+    await waitFor(() => { expect(screen.getByText(StringResource.General.EditRecipe)).toBeInTheDocument })
 })
 
 test('returns to CookingView after click on delete button in the dialog', async () => {
@@ -177,5 +177,5 @@ test('returns to CookingView after click on delete button in the dialog', async 
     userEvent.click(screen.getByText(StringResource.General.Delete))
 
     // Assert
-    await waitFor(() => { expect(screen.getByText(StringResource.General.CreateOrEditRecipe)).toBeInTheDocument })
+    await waitFor(() => { expect(screen.getByText(StringResource.General.EditRecipe)).toBeInTheDocument })
 })

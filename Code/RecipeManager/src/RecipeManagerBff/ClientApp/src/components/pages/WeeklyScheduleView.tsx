@@ -1,4 +1,4 @@
-import { IconButton, List, Paper, Typography } from "@mui/material"
+import { Box, IconButton, List, Paper, Typography } from "@mui/material"
 import { ArrowCircleLeft, ArrowCircleRight } from '@mui/icons-material'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
@@ -154,21 +154,35 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                 <div className="weeklyScheduleView__container">
                     <Typography
                         className="weeklyScheduleView__header"
+                        variant="h6"
+                        component="p"
+                        sx={{
+                            display: { xs: "none", md: "flex" },
+                            mr: "15px"
+                        }}>
+                        {StringResource.General.ShowSelectedWeek}{DateHelper.getStringOfDate(this.getDayOfWeekToShow(1))} - {DateHelper.getStringOfDate(this.getDayOfWeekToShow(7))}
+                    </Typography>
+                    <Typography
+                        className="weeklyScheduleView__header"
                         variant="subtitle1"
                         component="p"
                         sx={{
-                            mr: "15px",
-                            fontWeight: "bold"
+                            display: { xs: "flex", md: "none" },
+                            mr: "15px"
                         }}>
                         {StringResource.General.ShowSelectedWeek}{DateHelper.getStringOfDate(this.getDayOfWeekToShow(1))} - {DateHelper.getStringOfDate(this.getDayOfWeekToShow(7))}
                     </Typography>
 
-                    <IconButton className="weeklyScheduleView__buttonPrevious" onClick={() => this.changeWeek(false)}>
-                        <ArrowCircleLeft />
-                    </IconButton>
-                    <IconButton className="weeklyScheduleView__buttonNext" onClick={() => this.changeWeek(true)}>
-                        <ArrowCircleRight />
-                    </IconButton>
+                    <Box
+                        className="weeklyScheduleView__buttonsArrow"
+                        display="flex">
+                        <IconButton className="weeklyScheduleView__buttonPrevious" onClick={() => this.changeWeek(false)}>
+                            <ArrowCircleLeft />
+                        </IconButton>
+                        <IconButton className="weeklyScheduleView__buttonNext" onClick={() => this.changeWeek(true)}>
+                            <ArrowCircleRight />
+                        </IconButton>
+                    </Box>
 
                     <LocalizationProvider dateAdapter={AdapterLuxon}>
                         <DatePicker
@@ -184,7 +198,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                     </LocalizationProvider>
 
                     <Paper className="weeklyScheduleView__dailyScheduleListContainer"
-                        sx={{ maxHeight: {xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
+                        sx={{ mt: "20px", maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
                         <List
                             className="weeklyScheduleView__dailyScheduleList"
                             sx={{ p: "5px" }}>
@@ -221,17 +235,14 @@ export class WeeklyScheduleView extends Component<{}, IState> {
                         </DialogActions>
                     </Dialog>
 
-                    <Typography
+                    {this.state.error ? <Typography
                         className="recipeCreateAssistant__errorField"
                         variant="subtitle1"
                         component="p"
                         color="error.main"
-                        sx={{
-                            mt: "20px",
-                            mb: "20px"
-                        }}>
+                        sx={{ mt: "20px" }}>
                         {this.state.error}
-                    </Typography>
+                    </Typography> : <div></div>}
                 </div>
             )
         }

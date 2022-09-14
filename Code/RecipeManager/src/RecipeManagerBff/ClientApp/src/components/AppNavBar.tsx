@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography, Tooltip } from '@mui/material'
+import React from 'react'
+import { AppBar, Avatar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
 import DinnerDining from '@mui/icons-material/DinnerDining'
 import MenuIcon from '@mui/icons-material/Menu'
 import StringResource from '../resources/StringResource'
@@ -182,11 +182,9 @@ const AppNavBar = () => {
 
                     {/* User and About:    All sizes */}
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar />
-                            </IconButton>
-                        </Tooltip>
+                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                            <Avatar />
+                        </IconButton>
                         <Menu
                             sx={{ mt: '45px' }}
                             id="menu-appbar"

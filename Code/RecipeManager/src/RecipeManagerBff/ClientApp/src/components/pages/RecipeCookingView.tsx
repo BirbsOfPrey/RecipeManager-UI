@@ -239,8 +239,8 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     className="recipeCreateAssistant__mainTitle"
                     variant="h6"
                     component="p"
-                    sx={{ pb: "5px" }}>
-                    {this.props.editable ? StringResource.General.CreateOrEditRecipe : StringResource.General.RecipeView}
+                    sx={{ pb: "5px", mt: "30px" }}>
+                    {this.props.editable ? (this.props.recipeId ? StringResource.General.EditRecipe : StringResource.General.CreateRecipe) : StringResource.General.RecipeView}
                 </Typography>
 
                 <Box className="recipeCreateAssistant__handleButtons">
@@ -287,9 +287,18 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     }
                 </Box>
 
+                <Typography
+                    className="recipeCreateAssistant__errorField"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main"
+                    sx={{ mt: "25px" }}>
+                    {this.state.error}
+                </Typography>
+
                 <Paper
                     className="recipeCreateAssistant__editContent"
-                    sx={{ p: "20px", maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
+                    sx={{ p: "20px", maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, mb: "20px", overflow: "auto" }}>
                     <Stack spacing={2}>
                         <RecipeEditHead
                             name={this.state.recipe.name}
@@ -314,15 +323,6 @@ export class RecipeCookingView extends Component<IProps, IState> {
                         />
                     </Stack>
                 </Paper>
-
-                <Typography
-                    className="recipeCreateAssistant__errorField"
-                    variant="subtitle1"
-                    component="p"
-                    color="error.main"
-                    sx={{ mt: "25px" }}>
-                    {this.state.error}
-                </Typography>
 
                 <Dialog
                     open={this.state.openDeleteConfirmDialog}

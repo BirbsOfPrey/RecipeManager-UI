@@ -7,11 +7,13 @@ import StringResource from "../../resources/StringResource"
 import { EmptyListItem } from "../widgets/EmptyListItem"
 import { RecipeListItem } from "../widgets/recipe/RecipeListItem"
 import { DinnerDining } from "@mui/icons-material"
+import LoadingButton from "@mui/lab/LoadingButton"
 
 interface IState {
     importAmount: number
     importedRecipes: Recipe[]
     importCompleted: boolean
+    loading: boolean
     error: string
 }
 
@@ -20,10 +22,12 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
         importAmount: 1,
         importedRecipes: [],
         importCompleted: false,
+        loading: false,
         error: ""
     }
 
     fetchRecipesFromExternalApi = async () => {
+        this.setState({ loading: true })
         const response = await fetch(recipeImportAmountQuery(this.state.importAmount), {
             method: 'post',
             headers: createDefaultHeader()
@@ -34,6 +38,7 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
             const recipes: Recipe[] = await response.json()
             this.setState({ importedRecipes: recipes, importCompleted: true })
         }
+        this.setState({ loading: false })
     }
 
     render() {
@@ -41,9 +46,9 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
             <div className="externalRecipeImportView__container" >
                 <Typography
                     className="externalRecipeImportView__header"
-                    variant="subtitle1"
+                    variant="h6"
                     component="p"
-                    sx={{ mt: "50px", mb: "20px", fontWeight: "bold" }}>
+                    sx={{ mt: "30px", mb: "20px" }}>
                     {StringResource.General.RecipeImportHeader}
                 </Typography>
 
@@ -61,12 +66,13 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
                     helperText={RecipeImportValidator.validateImportAmount(this.state.importAmount) ? " " : StringResource.Messages.InvalidImportAmount}
                 />
 
-                <Button
+                <LoadingButton
                     variant="outlined"
+                    loading={this.state.loading}
                     onClick={() => this.fetchRecipesFromExternalApi()}
-                    sx={{ mt: "20px", mb: "20px" }}>
+                    sx={{ mt: "10px", mb: "20px" }}>
                     {StringResource.General.RecipeImportButton}
-                </Button>
+                </LoadingButton>
 
                 {this.state.importCompleted ? (
                     <Paper className="externalRecipeImportView__importedRecipes"
@@ -88,7 +94,7 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
                                 ))}
                             </List>
                         ) : (
-                            <EmptyListItem icon={<DinnerDining />} text={StringResource.Messages.NoRecipesImported} />
+                            <EmptyListItem text={StringResource.Messages.NoRecipesImported} />
                         )}
                     </Paper>
                 ) : (

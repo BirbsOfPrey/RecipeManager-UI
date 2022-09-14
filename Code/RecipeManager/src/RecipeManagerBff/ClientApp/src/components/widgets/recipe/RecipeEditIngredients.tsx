@@ -1,4 +1,4 @@
-import { List, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material"
+import { List, ListItemAvatar, ListItemButton, ListItemText, Typography } from "@mui/material"
 import Add from '@mui/icons-material/Add'
 import EggIcon from '@mui/icons-material/Egg'
 import { Component, ReactNode } from "react"
@@ -89,6 +89,15 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                     setViewValue={(value) => this.setState({ personAmount: value })}
                     editable={this.props.editable}
                 />
+
+                <Typography
+                    className="recipeEditIngredients__title"
+                    variant="subtitle1"
+                    component="p"
+                    sx={{ ml: "5px", mt: "5px", mb: "10px" }}>
+                    {StringResource.General.Ingredients}
+                </Typography>
+
                 <List disablePadding={true} className="recipeEditIngredients__ingredientList">
                     {this.generate(personAmount)}
                     {addComponent}

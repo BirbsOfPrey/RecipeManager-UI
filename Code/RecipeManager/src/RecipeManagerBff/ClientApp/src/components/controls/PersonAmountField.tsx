@@ -19,7 +19,7 @@ export const PersonAmountField = (props: IProps) => {
             required
             fullWidth
             inputProps={{ min: RecipeValidator.minPersonRefAmount, max: RecipeValidator.maxPersonRefAmount }}
-            label={StringResource.General.RecipePerson}
+            label={props.editable ? StringResource.General.RecipeRefPerson : StringResource.General.RecipePerson}
             value={props.personAmount}
             onChange={event => props.editable ? props.setValue('personRefAmount', event.target.value) : props.setViewValue(parseInt(event.target.value))}
             error={!RecipeValidator.validatePersonRefAmount(props.personAmount)}

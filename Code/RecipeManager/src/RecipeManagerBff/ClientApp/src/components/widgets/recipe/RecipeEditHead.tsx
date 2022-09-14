@@ -25,7 +25,7 @@ export class RecipeEditHead extends Component<IProps, {}> {
                     label={StringResource.General.RecipeName}
                     value={this.props.name ? this.props.name : ""}
                     placeholder={StringResource.General.RecipeName}
-                    onChange={event => this.props.setValue('name', event.target.value)}
+                    onChange={event => this.props.setValue("name", event.target.value)}
                     error={!RecipeValidator.validateName(this.props.name)}
                     helperText={RecipeValidator.validateName(this.props.name) ? " " : StringResource.Messages.RequiredRecipeName}
                 />
@@ -38,7 +38,7 @@ export class RecipeEditHead extends Component<IProps, {}> {
                         label={StringResource.General.RecipeDescription}
                         value={this.props.description ? this.props.description : ""}
                         placeholder={StringResource.General.RecipeDescription}
-                        onChange={event => this.props.setValue('description', event.target.value)}
+                        onChange={event => this.props.setValue("description", event.target.value)}
                         error={!RecipeValidator.validateDescription(this.props.description)}
                         helperText={RecipeValidator.validateDescription(this.props.description) ? " " : StringResource.Messages.MaxDescriptionLength}
                     />) : <div></div>}

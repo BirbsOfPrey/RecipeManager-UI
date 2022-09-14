@@ -65,11 +65,10 @@ export class RecipeList extends Component<{}, IState> {
             <div className="recipeListContent__container">
                 <Typography
                     className="recipeListContent__title"
-                    variant="subtitle1"
+                    variant="h6"
                     component="p"
                     sx={{
-                        mb: "5px",
-                        fontWeight: "bold"
+                        mb: "10px"
                     }}>
                     {StringResource.General.SelectRecipe}
                 </Typography>
