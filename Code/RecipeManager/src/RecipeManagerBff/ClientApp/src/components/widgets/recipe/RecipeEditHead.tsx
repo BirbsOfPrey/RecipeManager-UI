@@ -13,10 +13,11 @@ interface IProps {
 export class RecipeEditHead extends Component<IProps, {}> {
 
     render() {
+        const variant = this.props.editable ? "filled" : "outlined"
         return (
             <div className="recipeEditHead__container">
                 <TextField
-                    variant="filled"
+                    variant={variant}
                     className="recipeEditHead__nameField"
                     required
                     fullWidth
@@ -30,7 +31,7 @@ export class RecipeEditHead extends Component<IProps, {}> {
                 />
                 {this.props.editable ?
                     (<TextField
-                        variant="filled"
+                        variant={variant}
                         className="recipeEditHead__descriptionField"
                         multiline
                         fullWidth
@@ -40,7 +41,7 @@ export class RecipeEditHead extends Component<IProps, {}> {
                         onChange={event => this.props.setValue('description', event.target.value)}
                         error={!RecipeValidator.validateDescription(this.props.description)}
                         helperText={RecipeValidator.validateDescription(this.props.description) ? " " : StringResource.Messages.MaxDescriptionLength}
-                    />) : <></>}
+                    />) : <div></div>}
             </div>
         )
     }

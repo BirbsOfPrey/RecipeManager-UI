@@ -56,7 +56,7 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
                     inputProps={{ min: RecipeImportValidator.minImportAmount, max: RecipeImportValidator.maxImportAmount }}
                     label={StringResource.General.RecipeImportAmount}
                     value={this.state.importAmount}
-                    onChange={event => this.setState({ importAmount: parseInt(event.target.value, 10) })}
+                    onChange={event => this.setState({ importAmount: parseInt(event.target.value) })}
                     error={!RecipeImportValidator.validateImportAmount(this.state.importAmount)}
                     helperText={RecipeImportValidator.validateImportAmount(this.state.importAmount) ? " " : StringResource.Messages.InvalidImportAmount}
                 />
@@ -89,7 +89,7 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
                             </List>
                         ) : (
                             <EmptyListItem icon={<DinnerDining />} text={StringResource.Messages.NoRecipesImported} />
-                        ) }
+                        )}
                     </Paper>
                 ) : (
                     <Typography
@@ -100,7 +100,7 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
                         sx={{ mt: "20px" }}>
                         {this.state.error}
                     </Typography>
-                ) }
+                )}
             </div>
         )
     }

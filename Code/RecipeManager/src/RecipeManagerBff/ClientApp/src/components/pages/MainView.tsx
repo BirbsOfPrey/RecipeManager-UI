@@ -33,7 +33,7 @@ export class MainView extends Component<{}, IState> {
         } else {
             const scheduledRecipes: ScheduledRecipe[] = await response.json()
             mapIsoStringToDate(scheduledRecipes)
-            this.setState({ scheduledRecipes: scheduledRecipes })
+            this.setState({ error: "", scheduledRecipes: scheduledRecipes })
         }
     }
 

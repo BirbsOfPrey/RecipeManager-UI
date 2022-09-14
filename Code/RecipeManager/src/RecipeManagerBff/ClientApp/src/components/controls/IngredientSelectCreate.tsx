@@ -1,4 +1,4 @@
-import { TextField, Autocomplete, Switch, createFilterOptions } from "@mui/material"
+import { TextField, Autocomplete, Switch, createFilterOptions, Typography, Box } from "@mui/material"
 import { Component, ReactNode } from "react"
 import { Ingredient } from "../../models/Ingredient"
 import { IngredientValidator } from "../../models/IngredientValidator"
@@ -47,6 +47,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
         if (this.state.newIngredient) {
             field = (
                 <TextField
+                    sx={{ mt: "5px" }}
                     variant="filled"
                     className="ingredientSelectCreate__newIngredient"
                     required
@@ -60,12 +61,13 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
         } else {
             field = (
                 <Autocomplete
+                    sx={{ mt: "5px" }}
                     disablePortal
                     className="ingredientSelectCreate__ingredient"
                     options={this.state.ingredientNames}
                     filterOptions={createFilterOptions({
                         matchFrom: 'any',
-                        limit: 100,
+                        limit: 5
                     })}
                     value={this.props.ingredient.name}
                     onChange={(_, value) => this.props.setValue(value ? value : "")}
@@ -75,11 +77,23 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
 
         return (
             <div>
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center"
+                    }}>
+                    <Switch
+                        checked={this.state.newIngredient}
+                        onChange={this.changeMode}
+                    />
+                    <Typography
+                        variant="subtitle1"
+                        component="p"
+                        sx={{ ml: "5px", color: "rgba(0, 0, 0, 0.6)" }} >
+                        {StringResource.General.NewIngredient}
+                    </Typography>
+                </Box>
                 {field}
-                <Switch
-                    checked={this.state.newIngredient}
-                    onChange={this.changeMode}
-                />
             </div>
         )
     }

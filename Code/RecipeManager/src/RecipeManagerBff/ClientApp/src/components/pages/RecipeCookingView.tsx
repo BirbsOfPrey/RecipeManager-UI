@@ -175,7 +175,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
             this.setState({ error: StringResource.Messages.RecipeNotFound, loading: false })
         } else {
             const recipe: Recipe = await response.json()
-            this.setState({ loading: false, recipe: recipe })
+            this.setState({ error: "", loading: false, recipe: recipe })
         }
     }
 
@@ -192,7 +192,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ redirect: true })
+            this.setState({ error: "", redirect: true })
         }
 
         this.setState({ openDeleteConfirmDialog: false })
@@ -219,7 +219,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ saved: true })
+            this.setState({ error: "", saved: true })
         }
 
         this.setState({ saving: false })
@@ -234,7 +234,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
 
         return (
             <div className="recipeCreateAssistant__container">
-                {this.state.loading ? <LinearProgress /> : <></> /* TODO: Decide if this should be generally used to show data loading/API fetches */}
+                {this.state.loading ? <LinearProgress /> : <div></div>}
                 <Typography
                     className="recipeCreateAssistant__mainTitle"
                     variant="h6"
@@ -283,7 +283,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                                 onClick={this.requestToDeleteRecipe}>
                                 <DeleteIcon />
                             </IconButton>
-                        </>) : <></>
+                        </>) : <div></div>
                     }
                 </Box>
 

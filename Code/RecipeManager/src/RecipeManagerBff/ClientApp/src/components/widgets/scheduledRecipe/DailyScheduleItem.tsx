@@ -35,7 +35,7 @@ export class DailyScheduleItem extends Component<IProps, {}> {
                             <Add />
                         </IconButton>
                     ) : (
-                        <></>
+                        <div></div>
                     )}
                 </Box>
 

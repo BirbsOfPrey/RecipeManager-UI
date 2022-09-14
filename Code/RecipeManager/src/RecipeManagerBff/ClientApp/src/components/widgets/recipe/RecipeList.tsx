@@ -28,7 +28,7 @@ export class RecipeList extends Component<{}, IState> {
             this.setState({ error: StringResource.Messages.NoRecipesToDisplay, loading: false })
         } else {
             const recipes: Recipe[] = await response.json()
-            this.setState({ recipes: recipes, error: "", loading: false })
+            this.setState({ error: "", recipes: recipes, loading: false })
         }
     }
 

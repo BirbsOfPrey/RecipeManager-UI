@@ -77,7 +77,7 @@ export class RecipeEditIngredients extends Component<IProps, IState> {
                     <Add />
                 </ListItemAvatar>
                 <ListItemText primary={StringResource.General.AddAnotherIngredient} />
-            </ListItemButton>) : <></>
+            </ListItemButton>) : <div></div>
 
         const personAmount = this.props.editable ? this.props.personRefAmount : this.state.personAmount
 

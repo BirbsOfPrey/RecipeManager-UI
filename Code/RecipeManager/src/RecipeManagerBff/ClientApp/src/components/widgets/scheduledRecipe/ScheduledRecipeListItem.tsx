@@ -46,7 +46,7 @@ export class ScheduledRecipeListItem extends Component<IProps, {}> {
                             onClick={() => this.props.scheduledRecipeDeleted(this.props.scheduledRecipe.id)}>
                             <DeleteIcon />
                         </IconButton>
-                    ) : ( <></> )
+                    ) : ( <div></div> )
                     }
                 </ListItemSecondaryAction>
             </ListItem>

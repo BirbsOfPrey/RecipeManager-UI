@@ -78,7 +78,7 @@ export class StepListItem extends Component<IProps, IState> {
                                 onClick={() => this.props.stepDeleted(this.props.step)}>
                                 <DeleteIcon />
                             </IconButton>
-                        </>) : <></>}
+                        </>) : <div></div>}
                 </ListItemSecondaryAction>
             </ListItem>
         )

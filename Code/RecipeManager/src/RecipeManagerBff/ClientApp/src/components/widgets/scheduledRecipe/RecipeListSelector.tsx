@@ -32,7 +32,7 @@ export class RecipeListSelector extends Component<IProps, IState> {
             this.setState({ error: StringResource.Messages.GeneralError, loading: false })
         } else {
             const recipes = await response.json()
-            this.setState({ recipes: recipes, loading: false })
+            this.setState({ error: "", recipes: recipes, loading: false })
         }
     }
 

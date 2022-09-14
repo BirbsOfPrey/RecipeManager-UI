@@ -15,6 +15,7 @@ export class UserEdit extends Component<IProps, {}> {
 
     render() {
         const { user, editable, setValue } = this.props
+        const variant = editable ? "filled" : "outlined"
 
         return (
             <Paper
@@ -26,7 +27,7 @@ export class UserEdit extends Component<IProps, {}> {
             >
                 <Stack spacing={2}>
                     <TextField
-                        variant="filled"
+                        variant={variant}
                         className="userEdit__nameField"
                         required
                         fullWidth
@@ -44,7 +45,7 @@ export class UserEdit extends Component<IProps, {}> {
                         editable={editable}
                     />
                     <TextField
-                        variant="filled"
+                        variant={variant}
                         className="userEdit__firstNameField"
                         fullWidth
                         inputProps={{ readOnly: !editable, disabled: !editable }}
@@ -55,7 +56,7 @@ export class UserEdit extends Component<IProps, {}> {
                         helperText={" "}
                     />
                     <TextField
-                        variant="filled"
+                        variant={variant}
                         className="userEdit__familyNameField"
                         fullWidth
                         inputProps={{ readOnly: !editable, disabled: !editable }}
@@ -66,7 +67,7 @@ export class UserEdit extends Component<IProps, {}> {
                         helperText={" "}
                     />
                     <TextField
-                        variant="filled"
+                        variant={variant}
                         className="userEdit__emailField"
                         fullWidth
                         inputProps={{ readOnly: !editable, disabled: !editable }}
@@ -78,7 +79,7 @@ export class UserEdit extends Component<IProps, {}> {
                     />
                     {editable && user.id ?
                         <TextField
-                            variant="filled"
+                        variant={variant}
                             className="userEdit__oldPasswordField"
                             required={user.newPassword ? true : false}
                             fullWidth
@@ -88,11 +89,11 @@ export class UserEdit extends Component<IProps, {}> {
                             placeholder={StringResource.General.OldPassword}
                             onChange={event => setValue('oldPassword', event.target.value)}
                             helperText={user.newPassword ? StringResource.Messages.RequiredOldPassword : " "}
-                        /> : <></>
+                        /> : <div></div>
                     }
                     {editable ?
                         <TextField
-                            variant="filled"
+                            variant={variant}
                             className="userEdit__newPasswordField"
                             required={user.id ? false : true}
                             fullWidth
@@ -103,7 +104,7 @@ export class UserEdit extends Component<IProps, {}> {
                             onChange={event => setValue('newPassword', event.target.value)}
                             error={!UserValidator.validatePassword(user.newPassword)}
                             helperText={UserValidator.validatePassword(user.newPassword) ? " " : StringResource.Messages.RequiredUserName}
-                        /> : <></>
+                        /> : <div></div>
                     }
                 </Stack>
             </Paper>

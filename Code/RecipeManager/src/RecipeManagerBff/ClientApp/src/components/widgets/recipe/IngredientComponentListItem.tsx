@@ -49,7 +49,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                                 onClick={() => this.props.ingredientComponentDeleted(this.props.index, this.props.ingredientComponent)}>
                                 <DeleteIcon />
                             </IconButton>
-                        </>) : <></>}
+                        </>) : <div></div>}
                 </ListItemSecondaryAction>
             </ListItem>
         )

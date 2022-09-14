@@ -38,7 +38,7 @@ export class RecipeSteps extends Component<IProps, IState> {
         return (
             <div className="recipeSteps__container">
                 <TextField
-                    variant="filled"
+                    variant="outlined"
                     className="recipeEditHead__descriptionField"
                     multiline
                     fullWidth
@@ -49,7 +49,7 @@ export class RecipeSteps extends Component<IProps, IState> {
                     value={activeStep.stepNumber ? activeStep.instruction : StringResource.General.NoSteps}
                 />
                 <Pagination
-                    variant="outlined"
+                    variant="text"
                     count={this.props.steps?.length}
                     page={this.state.contentNr}
                     onChange={this.setContentNr}

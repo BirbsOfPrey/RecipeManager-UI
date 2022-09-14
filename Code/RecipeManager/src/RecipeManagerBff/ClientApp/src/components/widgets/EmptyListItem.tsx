@@ -12,7 +12,7 @@ export const EmptyListItem = (props: IProps) => {
             {props.icon ? (
                 <ListItemAvatar>
                     {props.icon}
-                </ListItemAvatar>) : <></>}
+                </ListItemAvatar>) : <div></div>}
             <ListItemText
                 primary={props.text}
             />

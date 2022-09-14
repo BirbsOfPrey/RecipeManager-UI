@@ -88,7 +88,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
         } else {
             const scheduledRecipes: ScheduledRecipe[] = await response.json()
             mapIsoStringToDate(scheduledRecipes)
-            this.setState({ scheduledRecipes: scheduledRecipes })
+            this.setState({ error: "", scheduledRecipes: scheduledRecipes })
         }
     }
 
@@ -106,7 +106,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ createScheduledRecipe: false })
+            this.setState({ error: "", createScheduledRecipe: false })
             await this.fetchScheduledRecipes()
         }
     }
@@ -130,7 +130,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
             this.setState({ error: StringResource.Messages.GeneralError, openDeleteConfirmDialog: false })
 
         } else {
-            this.setState({ openDeleteConfirmDialog: false })
+            this.setState({ error: "", openDeleteConfirmDialog: false })
             await this.fetchScheduledRecipes()
         }
     }

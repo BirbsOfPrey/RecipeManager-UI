@@ -27,7 +27,7 @@ export class UserList extends Component<{}, IState> {
             this.setState({ error: StringResource.Messages.NoUsersToDisplay, loading: false })
         } else {
             const users: User[] = await response.json()
-            this.setState({ users: users, error: "", loading: false })
+            this.setState({ error: "", users: users, loading: false })
         }
     }
 

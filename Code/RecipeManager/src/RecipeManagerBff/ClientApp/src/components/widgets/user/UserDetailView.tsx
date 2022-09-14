@@ -55,7 +55,7 @@ export class UserDetailView extends Component<IProps, IState> {
             this.setState({ error: StringResource.Messages.UserNotFound, loading: false })
         } else {
             const user: User = await response.json()
-            this.setState({ loading: false, user: user })
+            this.setState({ error: "", loading: false, user: user })
         }
     }
 
@@ -77,7 +77,7 @@ export class UserDetailView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ redirect: true })
+            this.setState({ error: "", redirect: true })
         }
 
         this.setState({ openDeleteConfirmDialog: false })
@@ -106,7 +106,7 @@ export class UserDetailView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ saved: true })
+            this.setState({ error: "", saved: true })
         }
 
         this.setState({ saving: false })
@@ -126,14 +126,14 @@ export class UserDetailView extends Component<IProps, IState> {
                 startIcon={<SaveIcon />}
                 disabled={this.state.saved}
                 onClick={this.save}>{StringResource.General.Save}
-            </LoadingButton>) : <></>
+            </LoadingButton>) : <div></div>
 
         const userRoute: string = `/${StringResource.Routes.UserManagement}/${StringResource.Routes.User}/${this.props.userId}`
         const { user, loading, error, openDeleteConfirmDialog } = this.state
 
         return (
             <div className="userDetailView__container">
-                {loading ? <LinearProgress /> : <></>}
+                {loading ? <LinearProgress /> : <div></div>}
                 <IconButton component={Link} to={`/${StringResource.Routes.UserManagement}`}>
                     <ArrowBackIcon />
                 </IconButton>

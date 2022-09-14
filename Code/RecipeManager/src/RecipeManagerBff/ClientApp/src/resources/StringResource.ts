@@ -73,6 +73,7 @@ namespace StringResource {
         export const CreateRecipe: string = 'Neues Rezept erstellen'
         export const AddIngredient: string = 'Zutat hinzufügen'
         export const AddAnotherIngredient: string = 'Weitere Zutat hinzufügen'
+        export const NewIngredient: string = 'Neue Zutat erfassen'
         export const NoIngredients: string = 'Keine Zutaten definiert'
         export const NoScheduledRecipes: string = 'Keine terminierten Rezepte vorhanden'
         export const NoRecipeName: string = 'Kein Name'

@@ -22,6 +22,6 @@ export const ProtectedRoute = (props: React.PropsWithChildren<IProps>): ReactJSX
     if (valid && loggedIn && props.children) {
         return props.children as ReactJSXElement
     } else {
-        return <></>
+        return <div></div>
     }
 }

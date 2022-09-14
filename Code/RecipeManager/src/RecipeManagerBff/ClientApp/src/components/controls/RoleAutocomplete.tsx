@@ -10,6 +10,7 @@ interface IProps {
 
 export const RoleAutocomplete = (props: IProps) => {
     const options: string[] = ["", Roles.Administrator, Roles.User]
+    const variant = props.editable ? "filled" : "outlined"
     return (
         <Autocomplete
             className="roleAutocomplete__role"
@@ -17,7 +18,7 @@ export const RoleAutocomplete = (props: IProps) => {
             options={options}
             value={props.role || ""}
             onChange={(_, value) => props.updateRole(value ? value : "")}
-            renderInput={(params) => <TextField {...params} label={StringResource.General.Role} variant="filled" />}
+            renderInput={(params) => <TextField {...params} label={StringResource.General.Role} variant={variant} />}
         />
     )
 }

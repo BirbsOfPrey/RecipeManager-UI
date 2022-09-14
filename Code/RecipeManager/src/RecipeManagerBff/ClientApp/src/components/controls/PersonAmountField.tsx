@@ -10,9 +10,10 @@ interface IProps {
 }
 
 export const PersonAmountField = (props: IProps) => {
+    const variant = props.editable ? "filled" : "outlined"
     return (
         <TextField
-            variant="filled"
+            variant={variant}
             className="personAmountField__refAmount"
             type="number"
             required
@@ -20,7 +21,7 @@ export const PersonAmountField = (props: IProps) => {
             inputProps={{ min: RecipeValidator.minPersonRefAmount, max: RecipeValidator.maxPersonRefAmount }}
             label={StringResource.General.RecipePerson}
             value={props.personAmount}
-            onChange={event => props.editable ? props.setValue('personRefAmount', event.target.value) : props.setViewValue(event.target.value as unknown as number)}
+            onChange={event => props.editable ? props.setValue('personRefAmount', event.target.value) : props.setViewValue(parseInt(event.target.value))}
             error={!RecipeValidator.validatePersonRefAmount(props.personAmount)}
             helperText={RecipeValidator.validatePersonRefAmount(props.personAmount) ? " " : StringResource.Messages.InvalidPersonAmount}
         />
