@@ -52,10 +52,7 @@ export class RecipeList extends Component<{}, IState> {
                 <Typography
                     variant="subtitle1"
                     component="p"
-                    color="error.main"
-                    sx={{
-                        fontWeight: "bold"
-                    }}>
+                    sx={{ fontWeight: "bold" }}>
                     {StringResource.Messages.NoRecipesToDisplay}
                 </Typography>
             )
@@ -67,9 +64,7 @@ export class RecipeList extends Component<{}, IState> {
                     className="recipeListContent__title"
                     variant="h6"
                     component="p"
-                    sx={{
-                        mb: "10px"
-                    }}>
+                    sx={{ mb: "10px" }}>
                     {StringResource.General.SelectRecipe}
                 </Typography>
                 <Paper className="recipeListContentSelector__container"

@@ -1,0 +1,32 @@
+    .userDetailView__container {
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "title title"
+            "handle edit"
+            "error error"
+            "content content";
+    }
+
+    .userDetailView__container .userDetailView__mainTitle {
+        grid-area: title;
+    }
+
+    .userDetailView__container .userDetailView__handleButtons {
+        grid-area: handle;
+        justify-self: start;
+    }
+
+    .userDetailView__container .userDetailView__editButtons {
+        grid-area: edit;
+        justify-self: end;
+    }
+
+    .userDetailView__container .userDetailView__errorField {
+        grid-area: error;
+    }
+
+    .userDetailView__container .userDetailView__editContent {
+        grid-area: content;
+    }

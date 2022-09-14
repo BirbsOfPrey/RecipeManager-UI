@@ -1,4 +1,4 @@
-import { LinearProgress, List, Paper } from '@mui/material'
+import { LinearProgress, List, Paper, Typography } from '@mui/material'
 import { Component } from 'react'
 import { User } from '../../../models/security/User'
 import { createDefaultHeader, UsersUrl } from '../../../resources/Api'
@@ -35,16 +35,38 @@ export class UserList extends Component<{}, IState> {
         const users = this.state.users
 
         if (this.state.error.length > 0) {
-            return <p className="userListContent__message">{this.state.error}</p>
+            return (
+                <Typography
+                    className="userListContent__message"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main">
+                    {this.state.error}
+                </Typography>
+            )
         } else if (this.state.loading) {
             return <LinearProgress />
         } else if (users.length <= 0) {
-            return <p>{StringResource.Messages.NoUsersToDisplay}</p>
+            return (
+                <Typography
+                    variant="subtitle1"
+                    component="p"
+                    sx={{ fontWeight: "bold" }}>
+                    {StringResource.Messages.NoUsersToDisplay}
+                </Typography>
+            )
         }
 
         return (
             <div className="userListContent__container">
-                <Paper className="recipeListContentSelector__container"
+                <Typography
+                    className="userListContent__title"
+                    variant="h6"
+                    component="p"
+                    sx={{ mb: "10px" }}>
+                    {StringResource.General.SelectUser}
+                </Typography>
+                <Paper className="userListContent__container"
                     sx={{ maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
                     <List disablePadding={true} className="userListContent__list">
                         {users.map(user => (

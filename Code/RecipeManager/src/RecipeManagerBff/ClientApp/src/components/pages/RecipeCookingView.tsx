@@ -19,7 +19,7 @@ import { RecipeValidator } from "../../models/RecipeValidator"
 import { createSteps, Step } from "../../models/Step"
 import { NO_INDEX } from "../../models/helper/ArrayHelper"
 import produce from "immer"
-import './RecipeCookingView.css'
+import "./RecipeCookingView.css"
 
 interface IProps {
     recipeId?: string
@@ -266,7 +266,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
 
                 <Box className="recipeCreateAssistant__editButtons">
                     {this.props.editable ? (
-                        <>
+                        <div>
                             <LoadingButton
                                 className="recipeCreateAssistant__saveButton"
                                 variant="outlined"
@@ -283,7 +283,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                                 onClick={this.requestToDeleteRecipe}>
                                 <DeleteIcon />
                             </IconButton>
-                        </>) : <div></div>
+                        </div>) : <div></div>
                     }
                 </Box>
 

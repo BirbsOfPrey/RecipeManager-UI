@@ -1,17 +1,18 @@
 import LoadingButton from "@mui/lab/LoadingButton"
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress, Paper, Typography } from "@mui/material"
 import SaveIcon from '@mui/icons-material/Save'
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import Edit from '@mui/icons-material/Edit'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { Component, ReactNode } from "react"
+import { Component } from "react"
 import { Link, NavigateFunction } from "react-router-dom"
 import { createUser, User } from "../../../models/security/User"
 import { createDefaultHeader, UsersUrl } from "../../../resources/Api"
 import StringResource from "../../../resources/StringResource"
 import { UserEdit } from "./UserEdit"
 import { UserValidator } from "../../../models/security/UserValidator"
+import "./UserDetailView.css"
 
 interface IProps {
     userId?: string
@@ -117,57 +118,82 @@ export class UserDetailView extends Component<IProps, IState> {
             this.props.navigate(`/${StringResource.Routes.UserManagement}`)
         }
 
-        const saveContent: ReactNode = this.props.editable ? (
-            <LoadingButton
-                className="userDetailView__saveButton"
-                variant="outlined"
-                loadingPosition="start"
-                loading={this.state.saving}
-                startIcon={<SaveIcon />}
-                disabled={this.state.saved}
-                onClick={this.save}>{StringResource.General.Save}
-            </LoadingButton>) : <div></div>
-
         const userRoute: string = `/${StringResource.Routes.UserManagement}/${StringResource.Routes.User}/${this.props.userId}`
         const { user, loading, error, openDeleteConfirmDialog } = this.state
 
         return (
             <div className="userDetailView__container">
                 {loading ? <LinearProgress /> : <div></div>}
-                <IconButton component={Link} to={`/${StringResource.Routes.UserManagement}`}>
-                    <ArrowBackIcon />
-                </IconButton>
-                {this.props.editable ? (
-                    <>
-                        <span className="userDetailView__mainTitle">{this.props.userId ? StringResource.General.EditUser : StringResource.General.CreateNewUser}</span>
+                <Typography
+                    className="userDetailView__mainTitle"
+                    variant="h6"
+                    component="p"
+                    sx={{ pb: "5px", mt: "30px" }}>
+                    {this.props.editable ? (this.props.userId ? StringResource.General.EditUser : StringResource.General.CreateNewUser) : StringResource.General.UserView}
+                </Typography>
+
+                <Box className="userDetailView__handleButtons">
+                    <IconButton component={Link} to={`/${StringResource.Routes.UserManagement}`}>
+                        <ArrowBackIcon />
+                    </IconButton>
+
+                    {this.props.editable ? (
                         <IconButton
                             aria-label="view"
                             className="userDetailView__viewButton"
                             component={Link} to={`${userRoute}`}>
                             <VisibilityIcon />
-                        </IconButton>
+                        </IconButton>) : (
                         <IconButton
-                            aria-label="delete"
-                            className="userDetailView__deleteButton"
-                            onClick={this.requestToDeleteUser}>
-                            <DeleteIcon />
-                        </IconButton>
-                    </>
-                ) : (
-                    <IconButton
-                        aria-label="edit"
-                        className="userDetailView__editButton"
-                        component={Link} to={`${userRoute}?${StringResource.Queries.EditOn}`}>
-                        <Edit />
-                    </IconButton>)
-                }
-                <UserEdit
-                    user={user}
-                    setValue={this.update}
-                    editable={this.props.editable}
-                />
-                <p className="userDetailView__errorField" >{error}</p>
-                {saveContent}
+                            aria-label="edit"
+                            className="userDetailView__editButton"
+                            component={Link} to={`${userRoute}?${StringResource.Queries.EditOn}`}>
+                            <Edit />
+                        </IconButton>)
+                    }
+                </Box>
+
+                <Box className="userDetailView__editButtons">
+                    {this.props.editable ? (
+                        <div>
+                            <LoadingButton
+                                className="userDetailView__saveButton"
+                                variant="outlined"
+                                loadingPosition="start"
+                                loading={this.state.saving}
+                                startIcon={<SaveIcon />}
+                                disabled={this.state.saved}
+                                onClick={this.save}>{StringResource.General.Save}
+                            </LoadingButton>
+                            <IconButton
+                                aria-label="delete"
+                                className="userDetailView__deleteButton"
+                                sx={{ alignSelf: "flex-end" }}
+                                onClick={this.requestToDeleteUser}>
+                                <DeleteIcon />
+                            </IconButton>
+                        </div>) : <div></div>
+                    }
+                </Box>
+
+                <Typography
+                    className="userDetailView__errorField"
+                    variant="subtitle1"
+                    component="p"
+                    color="error.main"
+                    sx={{ mt: "25px" }}>
+                    {error}
+                </Typography>
+
+                <Paper
+                    className="userDetailView__editContent"
+                    sx={{ p: "20px" }}>
+                    <UserEdit
+                        user={user}
+                        setValue={this.update}
+                        editable={this.props.editable}
+                    />
+                </Paper>
 
                 <Dialog
                     open={openDeleteConfirmDialog}

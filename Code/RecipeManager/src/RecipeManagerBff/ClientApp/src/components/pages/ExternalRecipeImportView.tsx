@@ -1,4 +1,4 @@
-import { Button, List, Paper, TextField, Typography } from "@mui/material"
+import { List, Paper, TextField, Typography } from "@mui/material"
 import { Component } from "react"
 import { Recipe } from "../../models/Recipe"
 import { RecipeImportValidator } from "../../models/RecipeImportValidator"
@@ -6,7 +6,6 @@ import { createDefaultHeader, recipeImportAmountQuery } from "../../resources/Ap
 import StringResource from "../../resources/StringResource"
 import { EmptyListItem } from "../widgets/EmptyListItem"
 import { RecipeListItem } from "../widgets/recipe/RecipeListItem"
-import { DinnerDining } from "@mui/icons-material"
 import LoadingButton from "@mui/lab/LoadingButton"
 
 interface IState {

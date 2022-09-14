@@ -163,7 +163,7 @@ const AppNavBar = () => {
                     {/* Logo and Title:    Small sizes */}
                     <DinnerDining sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
-                        variant="h5"
+                        variant="subtitle1"
                         noWrap
                         component="a"
                         href={StringResource.Routes.Root}
