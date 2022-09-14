@@ -1,6 +1,6 @@
 import { NO_INDEX } from "../../../models/helper/ArrayHelper"
 
-test('NO-INDEX returns -1', () => {
+test("NO-INDEX returns -1", () => {
     // Arrange
 
     // Act

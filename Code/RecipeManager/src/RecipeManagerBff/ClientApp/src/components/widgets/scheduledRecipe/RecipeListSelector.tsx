@@ -1,9 +1,9 @@
-import { Component } from 'react'
-import { Recipe } from '../../../models/Recipe'
-import { createDefaultHeader, RecipesUrl } from '../../../resources/Api'
-import StringResource from '../../../resources/StringResource'
-import { LinearProgress, List, Paper, Typography } from '@mui/material'
-import { RecipeListItemSelector } from './RecipeListItemSelector'
+import { Component } from "react"
+import { Recipe } from "../../../models/Recipe"
+import { createDefaultHeader, RecipesUrl } from "../../../resources/Api"
+import StringResource from "../../../resources/StringResource"
+import { LinearProgress, List, Paper, Typography } from "@mui/material"
+import { RecipeListItemSelector } from "./RecipeListItemSelector"
 
 interface IProps {
     selectRecipe: (recipe: Recipe) => void
@@ -20,7 +20,7 @@ export class RecipeListSelector extends Component<IProps, IState> {
     state: IState = {
         recipes: [],
         loading: true,
-        error: ''
+        error: ""
     }
 
     async componentDidMount() {

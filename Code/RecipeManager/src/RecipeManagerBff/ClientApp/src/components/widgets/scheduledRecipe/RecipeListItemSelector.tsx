@@ -1,5 +1,5 @@
 import { ListItemButton, ListItemAvatar, ListItemText } from "@mui/material"
-import DinnerDining from '@mui/icons-material/DinnerDining'
+import DinnerDining from "@mui/icons-material/DinnerDining"
 import { Recipe } from "../../../models/Recipe"
 import { Component } from "react"
 import StringResource from "../../../resources/StringResource"

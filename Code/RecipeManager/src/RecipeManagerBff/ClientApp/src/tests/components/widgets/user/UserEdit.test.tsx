@@ -1,8 +1,7 @@
-import { fireEvent, queryByDisplayValue, queryByText, render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { UserEdit } from '../../../../components/widgets/user/UserEdit'
-import { User } from '../../../../models/security/User'
-import StringResource from '../../../../resources/StringResource'
+import { fireEvent, queryByDisplayValue, queryByText, render, screen, waitFor } from "@testing-library/react"
+import { UserEdit } from "../../../../components/widgets/user/UserEdit"
+import { User } from "../../../../models/security/User"
+import StringResource from "../../../../resources/StringResource"
 
 const testUserId: string = "abc-def-ghi"
 const testUserName: string = "Franzi"
@@ -33,7 +32,7 @@ const testExistingUser: User = {
 
 const mockSetValue = jest.fn()
 
-test('renders fields of name, first name, family name, email and role when not editable', () => {
+test("renders fields of name, first name, family name, email and role when not editable", () => {
     // Arrange
 
     // Act
@@ -53,7 +52,7 @@ test('renders fields of name, first name, family name, email and role when not e
     expect(container.getElementsByClassName("userEdit__emailField").length).toBe(1)
 })
 
-test('renders fields of name, first name, family name, email and role when editable', () => {
+test("renders fields of name, first name, family name, email and role when editable", () => {
     // Arrange
 
     // Act
@@ -73,7 +72,7 @@ test('renders fields of name, first name, family name, email and role when edita
     expect(container.getElementsByClassName("userEdit__emailField").length).toBe(1)
 })
 
-test('does not render textfields of passwords when not editable', () => {
+test("does not render textfields of passwords when not editable", () => {
     // Arrange
 
     // Act
@@ -87,7 +86,7 @@ test('does not render textfields of passwords when not editable', () => {
     expect(container.getElementsByClassName("userEdit__newPasswordField").length).toBe(0)
 })
 
-test('renders password textfields but no visible passwords when existing user and editable', () => {
+test("renders password textfields but no visible passwords when existing user and editable", () => {
     // Arrange
 
     // Act
@@ -101,7 +100,7 @@ test('renders password textfields but no visible passwords when existing user an
     expect(container.getElementsByClassName("userEdit__newPasswordField").length).toBe(1)
 })
 
-test('renders only new password textfield but no visible password when new user and editable', () => {
+test("renders only new password textfield but no visible password when new user and editable", () => {
     // Arrange
 
     // Act
@@ -115,7 +114,7 @@ test('renders only new password textfield but no visible password when new user 
     expect(container.getElementsByClassName("userEdit__newPasswordField").length).toBe(1)
 })
 
-test('does not render helpertext if user name is valid', () => {
+test("does not render helpertext if user name is valid", () => {
     // Arrange
 
     // Act
@@ -125,7 +124,7 @@ test('does not render helpertext if user name is valid', () => {
     expect(queryByText(container, StringResource.Messages.RequiredUserName)).not.toBeInTheDocument
 })
 
-test('renders helpertext if user name not valid', () => {
+test("renders helpertext if user name not valid", () => {
     // Arrange
     const notValidUserName: string = ")Bobby("
     testUser.name = notValidUserName
@@ -136,7 +135,7 @@ test('renders helpertext if user name not valid', () => {
     expect(screen.getByText(StringResource.Messages.RequiredUserName)).toBeInTheDocument
 })
 
-test('renders helpertext if new password is set but old password is empty', () => {
+test("renders helpertext if new password is set but old password is empty", () => {
     // Arrange
     testExistingUser.oldPassword = ""
 
@@ -148,7 +147,7 @@ test('renders helpertext if new password is set but old password is empty', () =
     expect(queryByText(container, StringResource.Messages.RequiredPassword)).not.toBeInTheDocument
 })
 
-test('does not render helpertexts if new password is empty', () => {
+test("does not render helpertexts if new password is empty", () => {
     // Arrange
     testExistingUser.newPassword = ""
 
@@ -160,7 +159,7 @@ test('does not render helpertexts if new password is empty', () => {
     expect(queryByText(container, StringResource.Messages.RequiredPassword)).not.toBeInTheDocument
 })
 
-test('does not render helpertext if password of new user is valid', () => {
+test("does not render helpertext if password of new user is valid", () => {
     // Arrange
 
     // Act
@@ -170,7 +169,7 @@ test('does not render helpertext if password of new user is valid', () => {
     expect(queryByText(container, StringResource.Messages.RequiredPassword)).not.toBeInTheDocument
 })
 
-test('does not render helpertexts if password of existing user is valid and old password is set', () => {
+test("does not render helpertexts if password of existing user is valid and old password is set", () => {
     // Arrange
 
     // Act
@@ -181,7 +180,7 @@ test('does not render helpertexts if password of existing user is valid and old 
     expect(queryByText(container, StringResource.Messages.RequiredPassword)).not.toBeInTheDocument
 })
 
-test('calls set value correct after name input changes', async () => {
+test("calls set value correct after name input changes", async () => {
     // Arrange
     const { container } = render(<UserEdit user={testExistingUser} setValue={mockSetValue} editable={true} />)
 
@@ -193,7 +192,7 @@ test('calls set value correct after name input changes', async () => {
     await waitFor(() => { expect(mockSetValue).toBeCalledWith("name", "Gollum") })
 })
 
-test('calls set value correct after first name input changes', async () => {
+test("calls set value correct after first name input changes", async () => {
     // Arrange
     const { container } = render(<UserEdit user={testExistingUser} setValue={mockSetValue} editable={true} />)
 
@@ -205,7 +204,7 @@ test('calls set value correct after first name input changes', async () => {
     await waitFor(() => { expect(mockSetValue).toBeCalledWith("firstName", "Frodo") })
 })
 
-test('calls set value correct after family name input changes', async () => {
+test("calls set value correct after family name input changes", async () => {
     // Arrange
     const { container } = render(<UserEdit user={testExistingUser} setValue={mockSetValue} editable={true} />)
 
@@ -217,7 +216,7 @@ test('calls set value correct after family name input changes', async () => {
     await waitFor(() => { expect(mockSetValue).toBeCalledWith("familyName", "Lüscher") })
 })
 
-test('calls set value correct after email input changes', async () => {
+test("calls set value correct after email input changes", async () => {
     // Arrange
     const { container } = render(<UserEdit user={testExistingUser} setValue={mockSetValue} editable={true} />)
 
@@ -229,7 +228,7 @@ test('calls set value correct after email input changes', async () => {
     await waitFor(() => { expect(mockSetValue).toBeCalledWith("email", "abc@mail.com") })
 })
 
-test('calls set value correct after old password input changes', async () => {
+test("calls set value correct after old password input changes", async () => {
     // Arrange
     const { container } = render(<UserEdit user={testExistingUser} setValue={mockSetValue} editable={true} />)
 
@@ -241,7 +240,7 @@ test('calls set value correct after old password input changes', async () => {
     await waitFor(() => { expect(mockSetValue).toBeCalledWith("oldPassword", "bla7!34S") })
 })
 
-test('calls set value correct after new password input changes', async () => {
+test("calls set value correct after new password input changes", async () => {
     // Arrange
     const { container } = render(<UserEdit user={testExistingUser} setValue={mockSetValue} editable={true} />)
 

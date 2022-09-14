@@ -1,10 +1,10 @@
 import LoadingButton from "@mui/lab/LoadingButton"
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress, Paper, Typography } from "@mui/material"
-import SaveIcon from '@mui/icons-material/Save'
+import SaveIcon from "@mui/icons-material/Save"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
-import Edit from '@mui/icons-material/Edit'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import DeleteIcon from '@mui/icons-material/Delete'
+import Edit from "@mui/icons-material/Edit"
+import VisibilityIcon from "@mui/icons-material/Visibility"
+import DeleteIcon from "@mui/icons-material/Delete"
 import { Component } from "react"
 import { Link, NavigateFunction } from "react-router-dom"
 import { createUser, User } from "../../../models/security/User"
@@ -38,7 +38,7 @@ export class UserDetailView extends Component<IProps, IState> {
         loading: false,
         saving: false,
         openDeleteConfirmDialog: false,
-        error: ''
+        error: ""
     }
 
     async componentDidMount() {
@@ -71,7 +71,7 @@ export class UserDetailView extends Component<IProps, IState> {
 
     deleteUser = async () => {
         const response = await fetch(`${UsersUrl}/${this.props.userId}`, {
-            method: 'delete',
+            method: "delete",
             headers: createDefaultHeader()
         })
 
@@ -99,7 +99,7 @@ export class UserDetailView extends Component<IProps, IState> {
         const id = this.state.user.id
         const suffix = id ? "/" + id : ""
         const response = await fetch(`${UsersUrl}${suffix}`, {
-            method: this.state.user.id ? 'put' : 'post',
+            method: this.state.user.id ? "put" : "post",
             headers: createDefaultHeader(),
             body: JSON.stringify(this.state.user)
         })

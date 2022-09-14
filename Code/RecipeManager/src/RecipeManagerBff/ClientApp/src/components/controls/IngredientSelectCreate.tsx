@@ -66,7 +66,7 @@ export class IngredientSelectCreate extends Component<IProps, IState> {
                     className="ingredientSelectCreate__ingredient"
                     options={this.state.ingredientNames}
                     filterOptions={createFilterOptions({
-                        matchFrom: 'any',
+                        matchFrom: "any",
                         limit: 5
                     })}
                     value={this.props.ingredient.name}

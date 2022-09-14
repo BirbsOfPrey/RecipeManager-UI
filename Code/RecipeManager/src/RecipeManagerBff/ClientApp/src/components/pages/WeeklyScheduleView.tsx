@@ -1,23 +1,23 @@
 import { Box, IconButton, List, Paper, Typography } from "@mui/material"
-import { ArrowCircleLeft, ArrowCircleRight } from '@mui/icons-material'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon'
+import { ArrowCircleLeft, ArrowCircleRight } from "@mui/icons-material"
+import { DatePicker } from "@mui/x-date-pickers/DatePicker"
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
+import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon"
 import { Component } from "react"
 import { DailyScheduleItem } from "../widgets/scheduledRecipe/DailyScheduleItem"
 import { mapIsoStringToDate, ScheduledRecipe } from "../../models/ScheduledRecipe"
 import { createDefaultHeader, scheduledRecipeFromToQuery, ScheduledRecipesUrl } from "../../resources/Api"
 import StringResource from "../../resources/StringResource"
 import { DateHelper } from "../../models/helper/DateHelper"
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
+import Button from "@mui/material/Button"
+import Dialog from "@mui/material/Dialog"
+import DialogActions from "@mui/material/DialogActions"
+import DialogContent from "@mui/material/DialogContent"
+import DialogContentText from "@mui/material/DialogContentText"
+import DialogTitle from "@mui/material/DialogTitle"
 import { ScheduledRecipeCreate } from "../widgets/scheduledRecipe/ScheduledRecipeCreate"
 import TextField from "@mui/material/TextField"
-import './WeeklyScheduleView.css'
+import "./WeeklyScheduleView.css"
 
 interface IState {
     dateToShow: Date
@@ -98,7 +98,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
 
     addScheduledRecipe = async (scheduledRecipe: ScheduledRecipe) => {
         const response = await fetch(`${ScheduledRecipesUrl}`, {
-            method: 'post',
+            method: "post",
             headers: createDefaultHeader(),
             body: JSON.stringify(scheduledRecipe)
         })
@@ -121,7 +121,7 @@ export class WeeklyScheduleView extends Component<{}, IState> {
 
     deleteScheduledRecipe = async () => {
         const response = await fetch(`${ScheduledRecipesUrl}/${this.state.scheduledRecipeIdToDelete}`, {
-            method: 'delete',
+            method: "delete",
             headers: createDefaultHeader(),
             body: JSON.stringify(this.state.scheduledRecipeIdToDelete)
         })

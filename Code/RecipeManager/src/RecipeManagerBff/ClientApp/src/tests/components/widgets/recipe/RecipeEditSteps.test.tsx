@@ -1,11 +1,11 @@
-import { render } from '@testing-library/react'
-import { RecipeEditSteps } from '../../../../components/widgets/recipe/RecipeEditSteps'
+import { render } from "@testing-library/react"
+import { RecipeEditSteps } from "../../../../components/widgets/recipe/RecipeEditSteps"
 
 const mockUpdateStep = jest.fn()
 const mockChangeOrderStep = jest.fn()
 const mockDeleteStep = jest.fn()
 
-test('renders component recipe steps if not editable', () => {
+test("renders component recipe steps if not editable", () => {
     // Arrange
 
     // Act
@@ -16,7 +16,7 @@ test('renders component recipe steps if not editable', () => {
     expect(container.getElementsByClassName("recipeEditStepList__container").length).toBe(0)
 })
 
-test('renders component recipe edit step list if editable', () => {
+test("renders component recipe edit step list if editable", () => {
     // Arrange
 
     // Act

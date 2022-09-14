@@ -1,6 +1,6 @@
 import { DateHelper } from "../../../models/helper/DateHelper"
 
-test('Method getDayOfWeekAsNumbers returns correct number array', () => {
+test("Method getDayOfWeekAsNumbers returns correct number array", () => {
     // Arrange
     const weekAsNumbersReference: number[] = [1, 2, 3, 4, 5, 6, 7]
 
@@ -11,7 +11,7 @@ test('Method getDayOfWeekAsNumbers returns correct number array', () => {
     expect(weekAsNumbers).toEqual(weekAsNumbersReference)
 })
 
-describe('Method getNameOfCurrentDay returns ', () => {
+describe("Method getNameOfCurrentDay returns ", () => {
     it.each([
         ["", -1],
         ["Sonntag", 0],
@@ -22,12 +22,12 @@ describe('Method getNameOfCurrentDay returns ', () => {
         ["Freitag", 5],
         ["Samstag", 6],
         ["", 7]
-    ])('%s when invoked with %p', (result: string, day: number) => {
+    ])("%s when invoked with %p", (result: string, day: number) => {
         expect(DateHelper.getNameOfCurrentDay(day)).toEqual(result)
     })
 })
 
-test('Method getStringOfDate returns date in correct format', () => {
+test("Method getStringOfDate returns date in correct format", () => {
     // Arrange
     const testDate: Date = new Date("2022-03-08")
 

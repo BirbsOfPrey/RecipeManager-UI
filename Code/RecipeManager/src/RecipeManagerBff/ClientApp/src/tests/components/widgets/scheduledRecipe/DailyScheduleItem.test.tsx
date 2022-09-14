@@ -1,18 +1,18 @@
-import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { createRecipe, Recipe } from "../../../../models/Recipe"
 import { BrowserRouter } from "react-router-dom"
-import { DailyScheduleItem } from '../../../../components/widgets/scheduledRecipe/DailyScheduleItem'
-import { createScheduledRecipeWithDate, ScheduledRecipe } from '../../../../models/ScheduledRecipe'
+import { DailyScheduleItem } from "../../../../components/widgets/scheduledRecipe/DailyScheduleItem"
+import { createScheduledRecipeWithDate, ScheduledRecipe } from "../../../../models/ScheduledRecipe"
 
 const testDate: Date = new Date("2022-08-15")
 const mockDeleteScheduledRecipe = jest.fn()
 const mockAddScheduledRecipe = jest.fn()
 
 const testRecipe1Id: number = 54
-const testRecipe1Name: string = 'Testrezept'
+const testRecipe1Name: string = "Testrezept"
 const testRecipe2Id: number = 68
-const testRecipe2Name: string = 'Super gutes Rezept'
+const testRecipe2Name: string = "Super gutes Rezept"
 
 const testRecipe1: Recipe = createRecipe()
 testRecipe1.id = testRecipe1Id
@@ -28,7 +28,7 @@ testScheduledRecipe2.recipe = testRecipe2
 
 const testScheduledRecipes: ScheduledRecipe[] = [testScheduledRecipe1, testScheduledRecipe2]
 
-test('renders header with correct day and date', () => {
+test("renders header with correct day and date", () => {
     // Arrange
 
     // Act
@@ -39,7 +39,7 @@ test('renders header with correct day and date', () => {
     expect(element.textContent).toBe("Montag, 15.8.2022")
 })
 
-test('calls method addScheduledRecipe on click', async () => {
+test("calls method addScheduledRecipe on click", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><DailyScheduleItem editable={true} date={testDate} scheduledRecipes={testScheduledRecipes} deleteScheduledRecipe={mockDeleteScheduledRecipe} addScheduledRecipe={mockAddScheduledRecipe} /></BrowserRouter>)
 
@@ -51,7 +51,7 @@ test('calls method addScheduledRecipe on click', async () => {
     expect(mockAddScheduledRecipe).toHaveBeenCalledWith(testDate)
 })
 
-test('does not render add Button if not editable', () => {
+test("does not render add Button if not editable", () => {
     // Arrange
 
     // Act

@@ -4,7 +4,7 @@ import { ScheduledRecipe } from "../../../models/ScheduledRecipe"
 import { Add } from "@mui/icons-material"
 import { Box, IconButton, Paper, Typography } from "@mui/material"
 import { ScheduledRecipeList } from "./ScheduledRecipeList"
-import './DailyScheduleItem.css'
+import "./DailyScheduleItem.css"
 
 
 interface IProps {

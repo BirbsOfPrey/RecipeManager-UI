@@ -1,7 +1,7 @@
 import { IconButton, ListItemSecondaryAction, ListItem, TextField } from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete'
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import DeleteIcon from "@mui/icons-material/Delete"
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp"
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown"
 import { Component } from "react"
 import { Step } from "../../../models/Step"
 import StringResource from "../../../resources/StringResource"

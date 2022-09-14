@@ -1,6 +1,6 @@
-import { Container } from '@mui/material'
-import { Outlet } from 'react-router-dom'
-import AppNavBar from './AppNavBar'
+import { Container } from "@mui/material"
+import { Outlet } from "react-router-dom"
+import AppNavBar from "./AppNavBar"
 
 export const Layout = () => {
     return (

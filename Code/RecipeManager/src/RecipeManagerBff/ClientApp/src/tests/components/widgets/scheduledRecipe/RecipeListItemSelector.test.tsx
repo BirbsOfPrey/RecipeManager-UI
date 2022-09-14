@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { createRecipe, Recipe } from "../../../../models/Recipe"
 import StringResource from "../../../../resources/StringResource"
 import { RecipeListItemSelector } from "../../../../components/widgets/scheduledRecipe/RecipeListItemSelector"
@@ -11,7 +11,7 @@ testRecipe.name = testRecipeName
 testRecipe.description = testRecipeDescription
 const mockSelectRecipe = jest.fn()
 
-test('renders default text if recipe with emtpy name and description', () => {
+test("renders default text if recipe with emtpy name and description", () => {
     // Arrange
 
     // Act
@@ -24,7 +24,7 @@ test('renders default text if recipe with emtpy name and description', () => {
     expect(linkElementRecipeDescriptionDefault).toBeInTheDocument()
 })
 
-test('renders correct recipe name and description of recipe', () => {
+test("renders correct recipe name and description of recipe", () => {
     // Arrange
 
     // Act
@@ -42,7 +42,7 @@ test('renders correct recipe name and description of recipe', () => {
     expect(linkElementRecipeDescriptionDefault).not.toBeInTheDocument()
 })
 
-test('calls method selectRecipe on click with correct parameter', () => {
+test("calls method selectRecipe on click with correct parameter", () => {
     // Arrange
     render(<RecipeListItemSelector recipe={testRecipe} selectRecipe={mockSelectRecipe} />)
 

@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-import { UserListView } from '../../../components/pages/UserListView'
-import StringResource from '../../../resources/StringResource'
+import { render, screen } from "@testing-library/react"
+import { BrowserRouter } from "react-router-dom"
+import { UserListView } from "../../../components/pages/UserListView"
+import StringResource from "../../../resources/StringResource"
 
-test('renders text of CreateUser button correct', () => {
+test("renders text of CreateUser button correct", () => {
     // Arrange
 
     // Act

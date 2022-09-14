@@ -1,11 +1,11 @@
-import { Recipe } from '../../models/Recipe'
-import { createScheduledRecipe, createScheduledRecipeWithDate, ScheduledRecipe } from '../../models/ScheduledRecipe'
+import { Recipe } from "../../models/Recipe"
+import { createScheduledRecipe, createScheduledRecipeWithDate, ScheduledRecipe } from "../../models/ScheduledRecipe"
 
 const testScheduledRecipeId: number = 54
 const testRecipeName: string = "Testrezept"
 const testDate: Date = new Date("2022-08-01")
 
-test('ScheduledRecipes id is undefined by default', () => {
+test("ScheduledRecipes id is undefined by default", () => {
     // Arrange
     const scheduledRecipe: ScheduledRecipe = createScheduledRecipe()
 
@@ -15,7 +15,7 @@ test('ScheduledRecipes id is undefined by default', () => {
     expect(scheduledRecipe.id).toEqual(undefined)
 })
 
-test('ScheduledRecipes recipe is undefined by default', () => {
+test("ScheduledRecipes recipe is undefined by default", () => {
     // Arrange
     const scheduledRecipe: ScheduledRecipe = createScheduledRecipe()
 
@@ -25,7 +25,7 @@ test('ScheduledRecipes recipe is undefined by default', () => {
     expect(scheduledRecipe.recipe).toEqual(undefined)
 })
 
-test('ScheduledRecipes id is set correct', () => {
+test("ScheduledRecipes id is set correct", () => {
     // Arrange
     const scheduledRecipe: ScheduledRecipe = createScheduledRecipe()
 
@@ -36,7 +36,7 @@ test('ScheduledRecipes id is set correct', () => {
     expect(scheduledRecipe.id).toEqual(testScheduledRecipeId)
 })
 
-test('ScheduledRecipes recipe is set correct', () => {
+test("ScheduledRecipes recipe is set correct", () => {
     // Arrange
     
     const scheduledRecipe: ScheduledRecipe = createScheduledRecipe()
@@ -50,7 +50,7 @@ test('ScheduledRecipes recipe is set correct', () => {
     expect(scheduledRecipe.recipe.name).toEqual(testRecipeName)
 })
 
-test('ScheduledRecipes date is set correct', () => {
+test("ScheduledRecipes date is set correct", () => {
     // Arrange
     const scheduledRecipe: ScheduledRecipe = createScheduledRecipe()
 
@@ -61,7 +61,7 @@ test('ScheduledRecipes date is set correct', () => {
     expect(scheduledRecipe.date).toEqual(testDate)
 })
 
-test('Method createScheduledRecipeWithDate sets correct date', () => {
+test("Method createScheduledRecipeWithDate sets correct date", () => {
     // Arrange
 
     // Act

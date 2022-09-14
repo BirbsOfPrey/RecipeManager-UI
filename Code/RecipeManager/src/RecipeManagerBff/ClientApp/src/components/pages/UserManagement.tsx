@@ -1,7 +1,7 @@
-import { Routes, Route } from 'react-router-dom'
-import StringResource from '../../resources/StringResource'
-import { UserListView } from './UserListView'
-import { UserView } from './UserView'
+import { Routes, Route } from "react-router-dom"
+import StringResource from "../../resources/StringResource"
+import { UserListView } from "./UserListView"
+import { UserView } from "./UserView"
 import "./UserManagement.css"
 
 export const UserManagement = () => {

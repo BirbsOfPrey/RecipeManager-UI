@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen } from "@testing-library/react"
 import { createRecipe, Recipe } from "../../../models/Recipe"
 import StringResource from "../../../resources/StringResource"
-import { Copyright } from '../../../components/widgets/Copyright'
+import { Copyright } from "../../../components/widgets/Copyright"
 
 const testRecipe: Recipe = createRecipe()
 const testRecipeName: string = "Cookie"
@@ -9,7 +9,7 @@ const testRecipeDescription: string = "Mit feinster Schokolade"
 testRecipe.name = testRecipeName
 testRecipe.description = testRecipeDescription
 
-test('renders correct copyright text', () => {
+test("renders correct copyright text", () => {
     // Arrange
 
     // Act
@@ -20,7 +20,7 @@ test('renders correct copyright text', () => {
     expect(linkElementCopyright).toBeInTheDocument()
 })
 
-test('renders correct copyright header text', () => {
+test("renders correct copyright header text", () => {
     // Arrange
 
     // Act

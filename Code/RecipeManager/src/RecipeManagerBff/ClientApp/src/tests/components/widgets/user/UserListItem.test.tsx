@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen } from "@testing-library/react"
 import { createUser, User } from "../../../../models/security/User"
 import StringResource from "../../../../resources/StringResource"
 import { UserListItem } from "../../../../components/widgets/user/UserListItem"
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from "react-router-dom"
 
 const testUser: User = createUser()
 const testUserName: string = "Franziska"
@@ -10,7 +10,7 @@ const testUserRole: string = "User"
 testUser.name = testUserName
 testUser.role = testUserRole
 
-test('renders default text if user with emtpy name and role', () => {
+test("renders default text if user with emtpy name and role", () => {
     // Arrange
 
     // Act
@@ -21,7 +21,7 @@ test('renders default text if user with emtpy name and role', () => {
     expect(screen.getByText(StringResource.General.NoUserRole)).toBeInTheDocument
 })
 
-test('renders correct user name and role', () => {
+test("renders correct user name and role", () => {
     // Arrange
 
     // Act

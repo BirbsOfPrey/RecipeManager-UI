@@ -1,8 +1,8 @@
 import { ListItemButton, ListItemAvatar, ListItemText } from "@mui/material"
-import AccountCircle from '@mui/icons-material/AccountCircle'
+import AccountCircle from "@mui/icons-material/AccountCircle"
 import { User } from "../../../models/security/User"
 import { Component } from "react"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import StringResource from "../../../resources/StringResource"
 
 interface IProps {

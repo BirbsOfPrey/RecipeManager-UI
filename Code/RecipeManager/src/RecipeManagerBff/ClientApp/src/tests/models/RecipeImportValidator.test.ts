@@ -1,6 +1,6 @@
 import { RecipeImportValidator } from "../../models/RecipeImportValidator"
 
-describe('Method validatePersonRefAmount returns ', () => {
+describe("Method validatePersonRefAmount returns ", () => {
     it.each([
         [true, 1],
         [true, 10],
@@ -8,7 +8,7 @@ describe('Method validatePersonRefAmount returns ', () => {
         [false, 11],
         [false, 0],
         [false, undefined]
-    ])('%p when invoked with amount: %p', (result: boolean, value?: number) => {
+    ])("%p when invoked with amount: %p", (result: boolean, value?: number) => {
         expect(RecipeImportValidator.validateImportAmount(value)).toBe(result)
     })
 })

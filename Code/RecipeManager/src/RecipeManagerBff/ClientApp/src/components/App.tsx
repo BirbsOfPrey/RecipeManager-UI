@@ -1,28 +1,28 @@
-import { Routes, Route } from 'react-router-dom'
-import { MainView } from './pages/MainView'
-import { Layout } from './Layout'
-import { RecipeManagement } from './pages/RecipeManagement'
-import { WeeklyScheduleView } from './pages/WeeklyScheduleView'
-import { UserManagement } from './pages/UserManagement'
-import { AboutView } from './pages/AboutView'
-import { AuthProvider } from './AuthProvider'
-import { ProtectedRoute } from './ProtectedRoute'
-import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles'
-import StringResource from '../resources/StringResource'
-import './App.css'
-import { ExternalRecipeImportView } from './pages/ExternalRecipeImportView'
+import { Routes, Route } from "react-router-dom"
+import { MainView } from "./pages/MainView"
+import { Layout } from "./Layout"
+import { RecipeManagement } from "./pages/RecipeManagement"
+import { WeeklyScheduleView } from "./pages/WeeklyScheduleView"
+import { UserManagement } from "./pages/UserManagement"
+import { AboutView } from "./pages/AboutView"
+import { AuthProvider } from "./AuthProvider"
+import { ProtectedRoute } from "./ProtectedRoute"
+import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material/styles"
+import StringResource from "../resources/StringResource"
+import "./App.css"
+import { ExternalRecipeImportView } from "./pages/ExternalRecipeImportView"
 
 const themeOptions: ThemeOptions = {
     palette: {
-        mode: 'light',
+        mode: "light",
         primary: {
-            main: '#4caf50',
+            main: "#4caf50",
         },
         secondary: {
-            main: '#66bb6a',
+            main: "#66bb6a",
         },
         error: {
-            main: '#fb8c00',
+            main: "#fb8c00",
         },
     },
 }

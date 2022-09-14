@@ -1,12 +1,12 @@
-import { createIngredient, Ingredient } from '../../models/Ingredient'
-import { calculateIngredientAmount, createIngredientComponent, IngredientComponent } from '../../models/IngredientComponent'
+import { createIngredient, Ingredient } from "../../models/Ingredient"
+import { calculateIngredientAmount, createIngredientComponent, IngredientComponent } from "../../models/IngredientComponent"
 
 const ingredientComponentId: number = 87
 const ingredientComponentAmount: number = 15
 const ingredientComponentPhysicalQuantity: string = "g"
 const ingredientComponentIngredient: Ingredient = createIngredient()
 
-test('Ingredient component id is undefined by default', () => {
+test("Ingredient component id is undefined by default", () => {
     // Arrange
     const ingredientComponent: IngredientComponent = createIngredientComponent()
 
@@ -16,7 +16,7 @@ test('Ingredient component id is undefined by default', () => {
     expect(ingredientComponent.id).toEqual(undefined)
 })
 
-test('Ingredient component amount is undefined by default', () => {
+test("Ingredient component amount is undefined by default", () => {
     // Arrange
     const ingredientComponent: IngredientComponent = createIngredientComponent()
 
@@ -26,7 +26,7 @@ test('Ingredient component amount is undefined by default', () => {
     expect(ingredientComponent.amount).toEqual(undefined)
 })
 
-test('Ingredient component physical quantity is undefined by default', () => {
+test("Ingredient component physical quantity is undefined by default", () => {
     // Arrange
     const ingredientComponent: IngredientComponent = createIngredientComponent()
 
@@ -36,7 +36,7 @@ test('Ingredient component physical quantity is undefined by default', () => {
     expect(ingredientComponent.physicalQuantity).toEqual(undefined)
 })
 
-test('Ingredient component ingredient is not undefined', () => {
+test("Ingredient component ingredient is not undefined", () => {
     // Arrange
     const ingredientComponent: IngredientComponent = createIngredientComponent()
 
@@ -46,7 +46,7 @@ test('Ingredient component ingredient is not undefined', () => {
     expect(ingredientComponent.ingredient).not.toEqual(undefined)
 })
 
-test('Ingredient component amount is set correct', () => {
+test("Ingredient component amount is set correct", () => {
     // Arrange
     const ingredientComponent: IngredientComponent = createIngredientComponent()
 
@@ -57,7 +57,7 @@ test('Ingredient component amount is set correct', () => {
     expect(ingredientComponent.amount).toEqual(ingredientComponentAmount)
 })
 
-test('Ingredient component physical quantity is set correct', () => {
+test("Ingredient component physical quantity is set correct", () => {
     // Arrange
     const ingredientComponent: IngredientComponent = createIngredientComponent()
 
@@ -68,7 +68,7 @@ test('Ingredient component physical quantity is set correct', () => {
     expect(ingredientComponent.physicalQuantity).toEqual(ingredientComponentPhysicalQuantity)
 })
 
-test('Ingredient component ingredient is set correct', () => {
+test("Ingredient component ingredient is set correct", () => {
     // Arrange
     const ingredientComponent: IngredientComponent = createIngredientComponent()
 
@@ -79,7 +79,7 @@ test('Ingredient component ingredient is set correct', () => {
     expect(ingredientComponent.ingredient).toEqual(ingredientComponentIngredient)
 })
 
-test('Ingredient component id is set correct', () => {
+test("Ingredient component id is set correct", () => {
     // Arrange
     const ingredientComponent: IngredientComponent = createIngredientComponent()
 
@@ -90,13 +90,13 @@ test('Ingredient component id is set correct', () => {
     expect(ingredientComponent.id).toEqual(ingredientComponentId)
 })
 
-describe('Method calculateIngredientAmount returns ', () => {
+describe("Method calculateIngredientAmount returns ", () => {
     it.each([
         [7.5, 15, 4, 2],
         [0, 15, -1, 2],
         [0, 15, 4, -1],
         [30, 15, 2, 4]
-    ])('%p when invoked with amount: %p, personRefAmount: %p, personAmount: %p', (result: number, amount: number, personRefAmount: number, personAmount: number) => {
+    ])("%p when invoked with amount: %p, personRefAmount: %p, personAmount: %p", (result: number, amount: number, personRefAmount: number, personAmount: number) => {
         const ingredientComponent: IngredientComponent = createIngredientComponent()
         ingredientComponent.amount = amount
         expect(calculateIngredientAmount(ingredientComponent, personRefAmount, personAmount)).toEqual(result)

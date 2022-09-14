@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material'
-import StringResource from '../../resources/StringResource'
+import { Box, Typography } from "@mui/material"
+import StringResource from "../../resources/StringResource"
 
 export const Copyright = () => {
     return (

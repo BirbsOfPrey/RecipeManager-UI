@@ -6,12 +6,12 @@ import "./RecipeCookingView.css"
 import StringResource from "../../resources/StringResource"
 import { RecipeEditHead } from "../widgets/recipe/RecipeEditHead"
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, LinearProgress, Paper, Stack, Typography } from "@mui/material"
-import LoadingButton from '@mui/lab/LoadingButton'
-import SaveIcon from '@mui/icons-material/Save'
+import LoadingButton from "@mui/lab/LoadingButton"
+import SaveIcon from "@mui/icons-material/Save"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
-import Edit from '@mui/icons-material/Edit'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import DeleteIcon from '@mui/icons-material/Delete'
+import Edit from "@mui/icons-material/Edit"
+import VisibilityIcon from "@mui/icons-material/Visibility"
+import DeleteIcon from "@mui/icons-material/Delete"
 import { RecipeEditIngredients } from "../widgets/recipe/RecipeEditIngredients"
 import { RecipeEditSteps } from "../widgets/recipe/RecipeEditSteps"
 import { createIngredientComponents, IngredientComponent } from "../../models/IngredientComponent"
@@ -45,7 +45,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         loading: false,
         saving: false,
         openDeleteConfirmDialog: false,
-        error: ''
+        error: ""
     }
 
     async componentDidMount() {
@@ -185,7 +185,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
 
     deleteRecipe = async () => {
         const response = await fetch(`${RecipesUrl}/${this.props.recipeId}`, {
-            method: 'delete',
+            method: "delete",
             headers: createDefaultHeader()
         })
 
@@ -211,7 +211,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
         this.setState({ saving: true })
 
         const response = await fetch(`${RecipesUrl}`, {
-            method: this.state.recipe.id ? 'put' : 'post',
+            method: this.state.recipe.id ? "put" : "post",
             headers: createDefaultHeader(),
             body: JSON.stringify(this.state.recipe)
         })

@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react'
+import { render } from "@testing-library/react"
 import { AboutView } from "../../../components/pages/AboutView"
 
-test('renders copyright correct', () => {
+test("renders copyright correct", () => {
     // Arrange
 
     // Act

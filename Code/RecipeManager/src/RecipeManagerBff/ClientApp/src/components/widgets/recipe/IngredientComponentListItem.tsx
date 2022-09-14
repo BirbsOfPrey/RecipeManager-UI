@@ -1,9 +1,9 @@
 import { IconButton, ListItemAvatar, ListItemText, ListItemSecondaryAction, ListItem } from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete'
-import EggIcon from '@mui/icons-material/Egg'
+import DeleteIcon from "@mui/icons-material/Delete"
+import EggIcon from "@mui/icons-material/Egg"
 import { Component } from "react"
 import { calculateIngredientAmount, IngredientComponent } from "../../../models/IngredientComponent"
-import Edit from '@mui/icons-material/Edit'
+import Edit from "@mui/icons-material/Edit"
 
 interface IProps {
     ingredientComponent: IngredientComponent

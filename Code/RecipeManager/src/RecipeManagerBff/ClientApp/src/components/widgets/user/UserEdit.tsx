@@ -28,13 +28,13 @@ export class UserEdit extends Component<IProps, {}> {
                     label={StringResource.General.UserName}
                     value={user.name ? user.name : ""}
                     placeholder={StringResource.General.UserName}
-                    onChange={event => setValue('name', event.target.value)}
+                    onChange={event => setValue("name", event.target.value)}
                     error={editable && !UserValidator.validateName(user.name)}
                     helperText={editable && !UserValidator.validateName(user.name) ? StringResource.Messages.RequiredUserName : " "}
                 />
                 <RoleAutocomplete
                     role={user.role}
-                    updateRole={(role) => setValue('role', role)}
+                    updateRole={(role) => setValue("role", role)}
                     editable={editable}
                 />
                 <TextField
@@ -45,7 +45,7 @@ export class UserEdit extends Component<IProps, {}> {
                     label={StringResource.General.FirstName}
                     value={user.firstName ? user.firstName : ""}
                     placeholder={StringResource.General.FirstName}
-                    onChange={event => setValue('firstName', event.target.value)}
+                    onChange={event => setValue("firstName", event.target.value)}
                     helperText={" "}
                 />
                 <TextField
@@ -56,7 +56,7 @@ export class UserEdit extends Component<IProps, {}> {
                     label={StringResource.General.FamilyName}
                     value={user.familyName ? user.familyName : ""}
                     placeholder={StringResource.General.FamilyName}
-                    onChange={event => setValue('familyName', event.target.value)}
+                    onChange={event => setValue("familyName", event.target.value)}
                     helperText={" "}
                 />
                 <TextField
@@ -67,7 +67,7 @@ export class UserEdit extends Component<IProps, {}> {
                     label={StringResource.General.EMail}
                     value={user.email ? user.email : ""}
                     placeholder={StringResource.General.EMail}
-                    onChange={event => setValue('email', event.target.value)}
+                    onChange={event => setValue("email", event.target.value)}
                     helperText={" "}
                 />
                 {editable && user.id ?
@@ -80,7 +80,7 @@ export class UserEdit extends Component<IProps, {}> {
                         inputProps={{ readOnly: !editable, disabled: !editable }}
                         label={StringResource.General.OldPassword}
                         placeholder={StringResource.General.OldPassword}
-                        onChange={event => setValue('oldPassword', event.target.value)}
+                        onChange={event => setValue("oldPassword", event.target.value)}
                         helperText={user.newPassword ? StringResource.Messages.RequiredOldPassword : " "}
                     /> : <div></div>
                 }
@@ -94,7 +94,7 @@ export class UserEdit extends Component<IProps, {}> {
                         inputProps={{ readOnly: !editable, disabled: !editable }}
                         label={StringResource.General.NewPassword}
                         placeholder={StringResource.General.NewPassword}
-                        onChange={event => setValue('newPassword', event.target.value)}
+                        onChange={event => setValue("newPassword", event.target.value)}
                         error={!UserValidator.validatePassword(user.newPassword)}
                         helperText={UserValidator.validatePassword(user.newPassword) ? " " : StringResource.Messages.RequiredUserName}
                     /> : <div></div>

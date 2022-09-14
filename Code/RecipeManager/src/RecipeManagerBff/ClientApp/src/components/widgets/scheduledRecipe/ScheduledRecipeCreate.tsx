@@ -1,12 +1,12 @@
-import { DinnerDining } from '@mui/icons-material'
-import { Box, Button, Paper, Typography } from '@mui/material'
-import { Component } from 'react'
-import { DateHelper } from '../../../models/helper/DateHelper'
-import { Recipe } from '../../../models/Recipe'
-import { createScheduledRecipeWithDate, ScheduledRecipe } from '../../../models/ScheduledRecipe'
-import StringResource from '../../../resources/StringResource'
-import { RecipeListSelector } from './RecipeListSelector'
-import './ScheduledRecipeCreate.css'
+import { DinnerDining } from "@mui/icons-material"
+import { Box, Button, Paper, Typography } from "@mui/material"
+import { Component } from "react"
+import { DateHelper } from "../../../models/helper/DateHelper"
+import { Recipe } from "../../../models/Recipe"
+import { createScheduledRecipeWithDate, ScheduledRecipe } from "../../../models/ScheduledRecipe"
+import StringResource from "../../../resources/StringResource"
+import { RecipeListSelector } from "./RecipeListSelector"
+import "./ScheduledRecipeCreate.css"
 
 interface IProps {
     date: Date

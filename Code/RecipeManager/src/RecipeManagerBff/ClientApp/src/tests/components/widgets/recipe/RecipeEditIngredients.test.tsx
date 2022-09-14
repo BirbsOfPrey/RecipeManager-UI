@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react'
-import { RecipeEditIngredients } from '../../../../components/widgets/recipe/RecipeEditIngredients'
-import { createIngredientComponent, IngredientComponent } from '../../../../models/IngredientComponent'
-import StringResource from '../../../../resources/StringResource'
+import { render, screen } from "@testing-library/react"
+import { RecipeEditIngredients } from "../../../../components/widgets/recipe/RecipeEditIngredients"
+import { createIngredientComponent, IngredientComponent } from "../../../../models/IngredientComponent"
+import StringResource from "../../../../resources/StringResource"
 
 const ingredientComponent: IngredientComponent = createIngredientComponent()
 const amount: number = 5
@@ -13,7 +13,7 @@ const mockSetValue = jest.fn()
 const mockUpdateIngredientComponent = jest.fn()
 const mockDeleteIngredientComponent = jest.fn()
 
-test('renders PersonAmountField correct', () => {
+test("renders PersonAmountField correct", () => {
     // Arrange
 
     // Act
@@ -23,7 +23,7 @@ test('renders PersonAmountField correct', () => {
     expect(container.getElementsByClassName("personAmountField__refAmount").length).toBe(1)
 })
 
-test('renders no ingredients text if no ingredient components present', () => {
+test("renders no ingredients text if no ingredient components present", () => {
     // Arrange
 
     // Act
@@ -33,7 +33,7 @@ test('renders no ingredients text if no ingredient components present', () => {
     expect(screen.getByText(StringResource.General.NoIngredients)).toBeInTheDocument
 })
 
-test('does not render AddAnotherIngredient if not editable', () => {
+test("does not render AddAnotherIngredient if not editable", () => {
     // Arrange
 
     // Act
@@ -43,7 +43,7 @@ test('does not render AddAnotherIngredient if not editable', () => {
     expect(screen.queryByText(StringResource.General.AddAnotherIngredient)).not.toBeInTheDocument
 })
 
-test('does render AddAnotherIngredient if editable', () => {
+test("does render AddAnotherIngredient if editable", () => {
     // Arrange
 
     // Act
@@ -53,7 +53,7 @@ test('does render AddAnotherIngredient if editable', () => {
     expect(screen.getByText(StringResource.General.AddAnotherIngredient)).toBeInTheDocument
 })
 
-test('render as much list items as ingredient components are passed', () => {
+test("render as much list items as ingredient components are passed", () => {
     // Arrange
 
     // Act

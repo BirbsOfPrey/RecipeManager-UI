@@ -1,10 +1,10 @@
-import { Button, Typography } from '@mui/material'
-import { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { mapIsoStringToDate, ScheduledRecipe } from '../../models/ScheduledRecipe'
-import { createDefaultHeader, scheduledRecipeFromToQuery } from '../../resources/Api'
-import StringResource from '../../resources/StringResource'
-import { DailyScheduleItem } from '../widgets/scheduledRecipe/DailyScheduleItem'
+import { Button, Typography } from "@mui/material"
+import { Component } from "react"
+import { Link } from "react-router-dom"
+import { mapIsoStringToDate, ScheduledRecipe } from "../../models/ScheduledRecipe"
+import { createDefaultHeader, scheduledRecipeFromToQuery } from "../../resources/Api"
+import StringResource from "../../resources/StringResource"
+import { DailyScheduleItem } from "../widgets/scheduledRecipe/DailyScheduleItem"
 
 interface IState {
     dateToShow: Date

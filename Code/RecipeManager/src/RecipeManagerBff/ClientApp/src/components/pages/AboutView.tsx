@@ -1,4 +1,4 @@
-import { Copyright } from '../widgets/Copyright'
+import { Copyright } from "../widgets/Copyright"
 
 export const AboutView = () => {
     return (

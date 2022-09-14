@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen } from "@testing-library/react"
 import { createRecipe, Recipe } from "../../../../models/Recipe"
 import StringResource from "../../../../resources/StringResource"
 import { RecipeListItem } from "../../../../components/widgets/recipe/RecipeListItem"
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from "react-router-dom"
 
 const testRecipe: Recipe = createRecipe()
 const testRecipeName: string = "Cookie"
@@ -10,7 +10,7 @@ const testRecipeDescription: string = "Mit feinster Schokolade"
 testRecipe.name = testRecipeName
 testRecipe.description = testRecipeDescription
 
-test('renders default text if recipe with emtpy name and description', () => {
+test("renders default text if recipe with emtpy name and description", () => {
     // Arrange
 
     // Act
@@ -23,7 +23,7 @@ test('renders default text if recipe with emtpy name and description', () => {
     expect(linkElementRecipeDescriptionDefault).toBeInTheDocument()
 })
 
-test('renders correct recipe name and description of recipe', () => {
+test("renders correct recipe name and description of recipe", () => {
     // Arrange
 
     // Act

@@ -1,8 +1,8 @@
-import { render } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-import { RecipeView } from '../../../components/pages/RecipeView'
+import { render } from "@testing-library/react"
+import { BrowserRouter } from "react-router-dom"
+import { RecipeView } from "../../../components/pages/RecipeView"
 
-test('renders RecipeCookingView correct', () => {
+test("renders RecipeCookingView correct", () => {
     // Arrange
 
     // Act

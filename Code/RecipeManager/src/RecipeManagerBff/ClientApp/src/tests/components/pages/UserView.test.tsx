@@ -1,8 +1,8 @@
-import { render } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-import { UserView } from '../../../components/pages/UserView'
+import { render } from "@testing-library/react"
+import { BrowserRouter } from "react-router-dom"
+import { UserView } from "../../../components/pages/UserView"
 
-test('renders UserDetailView correct', () => {
+test("renders UserDetailView correct", () => {
     // Arrange
 
     // Act

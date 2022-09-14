@@ -1,8 +1,8 @@
 import { ScheduledRecipeListItem } from "../../../../components/widgets/scheduledRecipe/ScheduledRecipeListItem"
 import { createScheduledRecipeWithDate, ScheduledRecipe } from "../../../../models/ScheduledRecipe"
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { BrowserRouter } from 'react-router-dom'
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { BrowserRouter } from "react-router-dom"
 import { createRecipe, Recipe } from "../../../../models/Recipe"
 import StringResource from "../../../../resources/StringResource"
 
@@ -13,7 +13,7 @@ const testRecipeDescription: string = "Mit feinster Schokolade"
 const testScheduledRecipe: ScheduledRecipe = createScheduledRecipeWithDate(testDate)
 const mockDeleted = jest.fn()
 
-test('renders default text if no recipe in the scheduled recipe', () => {
+test("renders default text if no recipe in the scheduled recipe", () => {
     // Arrange
 
     // Act
@@ -26,7 +26,7 @@ test('renders default text if no recipe in the scheduled recipe', () => {
     expect(linkElementRecipeDescriptionDefault).toBeInTheDocument()
 })
 
-test('renders default text if recipe without name and description in the scheduled recipe', () => {
+test("renders default text if recipe without name and description in the scheduled recipe", () => {
     // Arrange
     testScheduledRecipe.recipe = testRecipe
     
@@ -40,7 +40,7 @@ test('renders default text if recipe without name and description in the schedul
     expect(linkElementRecipeDescriptionDefault).toBeInTheDocument()
 })
 
-test('renders correct name and description of the recipe in the scheduled recipe', () => {
+test("renders correct name and description of the recipe in the scheduled recipe", () => {
     // Arrange
     testRecipe.name = testRecipeName
     testRecipe.description = testRecipeDescription
@@ -61,7 +61,7 @@ test('renders correct name and description of the recipe in the scheduled recipe
     expect(linkElementRecipeDescriptionDefault).not.toBeInTheDocument()
 })
 
-test('calls method scheduledRecipeDeleted on click with correct parameter', () => {
+test("calls method scheduledRecipeDeleted on click with correct parameter", () => {
     // Arrange
     const testId = 66
     testScheduledRecipe.id = testId
@@ -75,7 +75,7 @@ test('calls method scheduledRecipeDeleted on click with correct parameter', () =
     expect(mockDeleted).toHaveBeenCalledWith(testId)
 })
 
-test('does not render delete Button if not editable', () => {
+test("does not render delete Button if not editable", () => {
     // Arrange
 
     // Act

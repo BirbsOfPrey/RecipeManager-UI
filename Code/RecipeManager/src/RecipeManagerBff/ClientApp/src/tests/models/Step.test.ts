@@ -1,10 +1,10 @@
-import { createStep, Step } from '../../models/Step'
+import { createStep, Step } from "../../models/Step"
 
 const stepId: number = 48
 const stepNumber: number = 1
 const stepInstruction: string = "Rühren"
 
-test('Step id is undefined by default', () => {
+test("Step id is undefined by default", () => {
     // Arrange
     const step: Step = createStep()
 
@@ -14,7 +14,7 @@ test('Step id is undefined by default', () => {
     expect(step.id).toEqual(undefined)
 })
 
-test('Step number is undefined by default', () => {
+test("Step number is undefined by default", () => {
     // Arrange
     const step: Step = createStep()
 
@@ -24,7 +24,7 @@ test('Step number is undefined by default', () => {
     expect(step.stepNumber).toBe(undefined)
 })
 
-test('Step instruction is empty by default', () => {
+test("Step instruction is empty by default", () => {
     // Arrange
     const step: Step = createStep()
 
@@ -34,7 +34,7 @@ test('Step instruction is empty by default', () => {
     expect(step.instruction).toBe("")
 })
 
-test('Step number is set correct', () => {
+test("Step number is set correct", () => {
     // Arrange
     const step: Step = createStep()
 
@@ -45,7 +45,7 @@ test('Step number is set correct', () => {
     expect(step.stepNumber).toEqual(stepNumber)
 })
 
-test('Step instruction is set correct', () => {
+test("Step instruction is set correct", () => {
     // Arrange
     const step: Step = createStep()
 
@@ -56,7 +56,7 @@ test('Step instruction is set correct', () => {
     expect(step.instruction).toEqual(stepInstruction)
 })
 
-test('Step id is set correct', () => {
+test("Step id is set correct", () => {
     // Arrange
     const step: Step = createStep()
 

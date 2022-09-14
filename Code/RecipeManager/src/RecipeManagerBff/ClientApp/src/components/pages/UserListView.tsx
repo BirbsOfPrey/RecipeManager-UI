@@ -1,7 +1,7 @@
-import { Button } from '@mui/material'
-import { Link } from 'react-router-dom'
-import StringResource from '../../resources/StringResource'
-import { UserList } from '../widgets/user/UserList'
+import { Button } from "@mui/material"
+import { Link } from "react-router-dom"
+import StringResource from "../../resources/StringResource"
+import { UserList } from "../widgets/user/UserList"
 
 export const UserListView = () => {
     return (

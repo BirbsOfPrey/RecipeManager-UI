@@ -1,9 +1,9 @@
-import { LinearProgress, List, Paper, Typography } from '@mui/material'
-import { Component } from 'react'
-import { User } from '../../../models/security/User'
-import { createDefaultHeader, UsersUrl } from '../../../resources/Api'
-import StringResource from '../../../resources/StringResource'
-import { UserListItem } from './UserListItem'
+import { LinearProgress, List, Paper, Typography } from "@mui/material"
+import { Component } from "react"
+import { User } from "../../../models/security/User"
+import { createDefaultHeader, UsersUrl } from "../../../resources/Api"
+import StringResource from "../../../resources/StringResource"
+import { UserListItem } from "./UserListItem"
 
 interface IState {
     loading: boolean

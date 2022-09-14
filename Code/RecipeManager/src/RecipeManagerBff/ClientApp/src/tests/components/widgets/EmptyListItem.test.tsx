@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import { EmptyListItem } from '../../../components/widgets/EmptyListItem'
+import { render, screen } from "@testing-library/react"
+import { EmptyListItem } from "../../../components/widgets/EmptyListItem"
 
 const emptyText: string = "Leerer Eintrag"
 
-test('renders empty text', () => {
+test("renders empty text", () => {
     // Arrange
 
     // Act

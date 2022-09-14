@@ -1,9 +1,9 @@
-import { Recipe } from '../../models/Recipe'
+import { Recipe } from "../../models/Recipe"
 
 const recipeId: number = 99
-const recipeName: string = 'Testrezept'
+const recipeName: string = "Testrezept"
 
-test('Recipe id is undefined by default', () => {
+test("Recipe id is undefined by default", () => {
     // Arrange
     const recipe: Recipe = new Recipe()
 
@@ -13,7 +13,7 @@ test('Recipe id is undefined by default', () => {
     expect(recipe.id).toEqual(undefined)
 })
 
-test('Recipe name is undefined by default', () => {
+test("Recipe name is undefined by default", () => {
     // Arrange
     const recipe: Recipe = new Recipe()
 
@@ -23,7 +23,7 @@ test('Recipe name is undefined by default', () => {
     expect(recipe.name).toEqual(undefined)
 })
 
-test('Recipe name is set correct', () => {
+test("Recipe name is set correct", () => {
     // Arrange
     const recipe: Recipe = new Recipe()
 
@@ -34,7 +34,7 @@ test('Recipe name is set correct', () => {
     expect(recipe.name).toEqual(recipeName)
 })
 
-test('Recipe id is set correct', () => {
+test("Recipe id is set correct", () => {
     // Arrange
     const recipe: Recipe = new Recipe()
 

@@ -28,7 +28,7 @@ export class ExternalRecipeImportView extends Component<{}, IState> {
     fetchRecipesFromExternalApi = async () => {
         this.setState({ loading: true })
         const response = await fetch(recipeImportAmountQuery(this.state.importAmount), {
-            method: 'post',
+            method: "post",
             headers: createDefaultHeader()
         })
         if (response.status >= 300) {

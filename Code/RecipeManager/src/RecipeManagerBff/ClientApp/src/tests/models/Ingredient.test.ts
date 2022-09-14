@@ -1,9 +1,9 @@
-import { createIngredient, Ingredient } from '../../models/Ingredient'
+import { createIngredient, Ingredient } from "../../models/Ingredient"
 
 const ingredientId: number = 37
-const ingredientName: string = 'Mehl'
+const ingredientName: string = "Mehl"
 
-test('Ingredient id is undefined by default', () => {
+test("Ingredient id is undefined by default", () => {
     // Arrange
     const ingredient: Ingredient = createIngredient()
 
@@ -13,7 +13,7 @@ test('Ingredient id is undefined by default', () => {
     expect(ingredient.id).toEqual(undefined)
 })
 
-test('Ingredient name is empty by default', () => {
+test("Ingredient name is empty by default", () => {
     // Arrange
     const ingredient: Ingredient = createIngredient()
 
@@ -23,7 +23,7 @@ test('Ingredient name is empty by default', () => {
     expect(ingredient.name).toBe("")
 })
 
-test('Ingredient name is set correct', () => {
+test("Ingredient name is set correct", () => {
     // Arrange
     const ingredient: Ingredient = createIngredient()
 
@@ -34,7 +34,7 @@ test('Ingredient name is set correct', () => {
     expect(ingredient.name).toEqual(ingredientName)
 })
 
-test('Ingredient id is set correct', () => {
+test("Ingredient id is set correct", () => {
     // Arrange
     const ingredient: Ingredient = createIngredient()
 

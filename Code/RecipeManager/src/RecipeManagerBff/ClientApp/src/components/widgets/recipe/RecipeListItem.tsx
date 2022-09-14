@@ -1,8 +1,8 @@
 import { ListItemButton, ListItemAvatar, ListItemText } from "@mui/material"
-import DinnerDining from '@mui/icons-material/DinnerDining'
+import DinnerDining from "@mui/icons-material/DinnerDining"
 import { Recipe } from "../../../models/Recipe"
 import { Component } from "react"
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
 import StringResource from "../../../resources/StringResource"
 
 interface IProps {

@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { RecipeEditStepList } from '../../../../components/widgets/recipe/RecipeEditStepList'
-import { createStep, Step } from '../../../../models/Step'
-import StringResource from '../../../../resources/StringResource'
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { RecipeEditStepList } from "../../../../components/widgets/recipe/RecipeEditStepList"
+import { createStep, Step } from "../../../../models/Step"
+import StringResource from "../../../../resources/StringResource"
 
 const step1: Step = createStep()
 const stepNumber1: number = 1
@@ -17,7 +17,7 @@ const mockUpdateStep = jest.fn()
 const mockChangeOrderStep = jest.fn()
 const mockDeleteStep = jest.fn()
 
-test('renders no steps if no step present', () => {
+test("renders no steps if no step present", () => {
     // Arrange
 
     // Act
@@ -27,7 +27,7 @@ test('renders no steps if no step present', () => {
     expect(screen.getByText(StringResource.General.NoSteps)).toBeInTheDocument()
 })
 
-test('renders as much step items as steps are passed', () => {
+test("renders as much step items as steps are passed", () => {
     // Arrange
 
     // Act
@@ -37,7 +37,7 @@ test('renders as much step items as steps are passed', () => {
     expect(container.getElementsByClassName("stepListItem__container").length).toBe(2)
 })
 
-test('renders add step list item', () => {
+test("renders add step list item", () => {
     // Arrange
 
     // Act
@@ -47,7 +47,7 @@ test('renders add step list item', () => {
     expect(screen.getByText(StringResource.General.AddStep)).toBeInTheDocument()
 })
 
-test('calls method addStep on click with correct parameter', () => {
+test("calls method addStep on click with correct parameter", () => {
     // Arrange
     const step3: Step = createStep()
     const stepNumber3: number = 3

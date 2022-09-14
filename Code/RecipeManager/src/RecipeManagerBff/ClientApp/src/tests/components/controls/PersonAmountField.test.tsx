@@ -1,10 +1,10 @@
-import { render, screen } from '@testing-library/react'
-import { PersonAmountField } from '../../../components/controls/PersonAmountField'
+import { render, screen } from "@testing-library/react"
+import { PersonAmountField } from "../../../components/controls/PersonAmountField"
 
 const mockSetValue = jest.fn()
 const mockSetViewValue = jest.fn()
 
-test('renders textfield of person amount correct', () => {
+test("renders textfield of person amount correct", () => {
     // Arrange
     const personAmount: number = 4
 

@@ -1,6 +1,6 @@
 import { List, ListItemAvatar, ListItemButton, ListItemText, Typography } from "@mui/material"
-import Add from '@mui/icons-material/Add'
-import EggIcon from '@mui/icons-material/Egg'
+import Add from "@mui/icons-material/Add"
+import EggIcon from "@mui/icons-material/Egg"
 import { Component, ReactNode } from "react"
 import { IngredientComponentListItem } from "./IngredientComponentListItem"
 import { createIngredientComponent, IngredientComponent } from "../../../models/IngredientComponent"

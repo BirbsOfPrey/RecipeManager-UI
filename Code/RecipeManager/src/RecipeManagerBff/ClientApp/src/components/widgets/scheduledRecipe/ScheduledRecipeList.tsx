@@ -1,5 +1,5 @@
 import { List } from "@mui/material"
-import EventIcon from '@mui/icons-material/Event'
+import EventIcon from "@mui/icons-material/Event"
 import { Component } from "react"
 import { EmptyListItem } from "../EmptyListItem"
 import StringResource from "../../../resources/StringResource"

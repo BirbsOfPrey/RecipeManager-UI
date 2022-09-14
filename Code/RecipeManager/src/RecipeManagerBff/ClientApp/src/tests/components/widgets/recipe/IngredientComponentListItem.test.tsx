@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import { createIngredientComponent, IngredientComponent } from "../../../../models/IngredientComponent"
 import { createIngredient, Ingredient } from "../../../../models/Ingredient"
 import { IngredientComponentListItem } from "../../../../components/widgets/recipe/IngredientComponentListItem"
@@ -13,7 +13,7 @@ const index: number = 1
 const mockIngredientComponentSelected = jest.fn()
 const mockIngredientComponentDeleted = jest.fn()
 
-test('renders ingredient component properties correct', () => {
+test("renders ingredient component properties correct", () => {
     // Arrange
     ingredientComponent.amount = 15
     ingredientComponent.physicalQuantity = "g"
@@ -28,7 +28,7 @@ test('renders ingredient component properties correct', () => {
     expect(linkElementAmount).toBeInTheDocument()
 })
 
-test('renders ingredient component properties correct when amount is 0', () => {
+test("renders ingredient component properties correct when amount is 0", () => {
     // Arrange
     ingredientComponent.amount = 0
     ingredientComponent.physicalQuantity = "Stück"
@@ -43,7 +43,7 @@ test('renders ingredient component properties correct when amount is 0', () => {
     expect(linkElementAmount).toBeInTheDocument()
 })
 
-test('renders no button when item is not editable', () => {
+test("renders no button when item is not editable", () => {
     // Arrange
     ingredientComponent.amount = 0
     ingredientComponent.physicalQuantity = "Stück"
@@ -56,7 +56,7 @@ test('renders no button when item is not editable', () => {
     expect(buttons.length).toBe(0)
 })
 
-test('calls method scheduledRecipeDeleted on click with correct parameter', () => {
+test("calls method scheduledRecipeDeleted on click with correct parameter", () => {
     // Arrange
     const { container } = render(<IngredientComponentListItem ingredientComponent={ingredientComponent} index={index} editable={true} personRefAmount={4} personAmount={2} ingredientComponentSelected={mockIngredientComponentSelected} ingredientComponentDeleted={mockIngredientComponentDeleted} />)
 
@@ -68,7 +68,7 @@ test('calls method scheduledRecipeDeleted on click with correct parameter', () =
     expect(mockIngredientComponentSelected).toHaveBeenCalledWith(index, ingredientComponent)
 })
 
-test('calls method scheduledRecipeDeleted on click with correct parameter', () => {
+test("calls method scheduledRecipeDeleted on click with correct parameter", () => {
     // Arrange
     const { container } = render(<IngredientComponentListItem ingredientComponent={ingredientComponent} index={index} editable={true} personRefAmount={4} personAmount={2} ingredientComponentSelected={mockIngredientComponentSelected} ingredientComponentDeleted={mockIngredientComponentDeleted} />)
 

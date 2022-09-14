@@ -1,14 +1,14 @@
-import { queryAllByDisplayValue, queryByText, render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { BrowserRouter } from 'react-router-dom'
-import { UserDetailView } from '../../../../components/widgets/user/UserDetailView'
-import StringResource from '../../../../resources/StringResource'
+import { queryAllByDisplayValue, queryByText, render, screen, waitFor } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { BrowserRouter } from "react-router-dom"
+import { UserDetailView } from "../../../../components/widgets/user/UserDetailView"
+import StringResource from "../../../../resources/StringResource"
 
 const testUserId: string = "abc-def"
 
 const mockNavigate = jest.fn()
 
-test('does not render title if not in edit', () => {
+test("does not render title if not in edit", () => {
     // Arrange
 
     // Act
@@ -19,7 +19,7 @@ test('does not render title if not in edit', () => {
     expect(queryByText(container, StringResource.General.EditUser)).not.toBeInTheDocument
 })
 
-test('renders main title correct for new user', () => {
+test("renders main title correct for new user", () => {
     // Arrange
 
     // Act
@@ -29,7 +29,7 @@ test('renders main title correct for new user', () => {
     expect(screen.getByText(StringResource.General.CreateNewUser)).toBeInTheDocument
 })
 
-test('renders main title correct for existing user', () => {
+test("renders main title correct for existing user", () => {
     // Arrange
 
     // Act
@@ -39,7 +39,7 @@ test('renders main title correct for existing user', () => {
     expect(screen.getByText(StringResource.General.EditUser)).toBeInTheDocument
 })
 
-test('renders editButton if not editable', () => {
+test("renders editButton if not editable", () => {
     // Arrange
 
     // Act
@@ -51,7 +51,7 @@ test('renders editButton if not editable', () => {
     expect(container.getElementsByClassName("userDetailView__deleteButton").length).toBe(0)
 })
 
-test('renders view and delete button if editable', () => {
+test("renders view and delete button if editable", () => {
     // Arrange
 
     // Act
@@ -63,7 +63,7 @@ test('renders view and delete button if editable', () => {
     expect(container.getElementsByClassName("userDetailView__deleteButton").length).toBe(1)
 })
 
-test('renders saveButton if editable', () => {
+test("renders saveButton if editable", () => {
     // Arrange
 
     // Act
@@ -73,7 +73,7 @@ test('renders saveButton if editable', () => {
     expect(container.getElementsByClassName("userDetailView__saveButton").length).toBe(1)
 })
 
-test('does not render saveButton if not editable', () => {
+test("does not render saveButton if not editable", () => {
     // Arrange
 
     // Act
@@ -83,7 +83,7 @@ test('does not render saveButton if not editable', () => {
     expect(container.getElementsByClassName("userDetailView__saveButton").length).toBe(0)
 })
 
-test('renders UserDetailView correct', () => {
+test("renders UserDetailView correct", () => {
     // Arrange
 
     // Act
@@ -93,7 +93,7 @@ test('renders UserDetailView correct', () => {
     expect(container.getElementsByClassName("userDetailView__container").length).toBe(1)
 })
 
-test('renders UserEdit correct', () => {
+test("renders UserEdit correct", () => {
     // Arrange
 
     // Act
@@ -103,7 +103,7 @@ test('renders UserEdit correct', () => {
     expect(container.getElementsByClassName("userEdit__container").length).toBe(1)
 })
 
-test('initially does not render dialog', () => {
+test("initially does not render dialog", () => {
     // Arrange
 
     // Act
@@ -114,7 +114,7 @@ test('initially does not render dialog', () => {
     expect(screen.queryByText(StringResource.Messages.DeleteUserQuestion)).not.toBeInTheDocument
 })
 
-test('renders dialog with correct title on click on delete button', async () => {
+test("renders dialog with correct title on click on delete button", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
@@ -125,7 +125,7 @@ test('renders dialog with correct title on click on delete button', async () => 
     await waitFor(() => { expect(screen.getByText(StringResource.Messages.DeleteUserQuestion)).toBeInTheDocument })
 })
 
-test('renders dialog with correct description on click on delete button', async () => {
+test("renders dialog with correct description on click on delete button", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
@@ -136,7 +136,7 @@ test('renders dialog with correct description on click on delete button', async 
     await waitFor(() => { expect(screen.getByText(StringResource.Messages.DeleteUserContent)).toBeInTheDocument })
 })
 
-test('renders dialog with correct cancel button on click on delete button', async () => {
+test("renders dialog with correct cancel button on click on delete button", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
@@ -147,7 +147,7 @@ test('renders dialog with correct cancel button on click on delete button', asyn
     await waitFor(() => { expect(screen.getByText(StringResource.General.Cancel)).toBeInTheDocument })
 })
 
-test('renders dialog with correct delete button on click on delete button', async () => {
+test("renders dialog with correct delete button on click on delete button", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
@@ -158,7 +158,7 @@ test('renders dialog with correct delete button on click on delete button', asyn
     await waitFor(() => { expect(screen.getByText(StringResource.General.Delete)).toBeInTheDocument })
 })
 
-test('returns to DetailView after click on cancel button in the dialog', async () => {
+test("returns to DetailView after click on cancel button in the dialog", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
     userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0])
@@ -174,7 +174,7 @@ test('returns to DetailView after click on cancel button in the dialog', async (
     })
 })
 
-test('returns to DetailView after click on delete button in the dialog', async () => {
+test("returns to DetailView after click on delete button in the dialog", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
     userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0])

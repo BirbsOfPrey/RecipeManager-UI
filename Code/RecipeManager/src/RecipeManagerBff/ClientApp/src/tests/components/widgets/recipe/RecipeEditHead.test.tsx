@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react'
-import { RecipeEditHead } from '../../../../components/widgets/recipe/RecipeEditHead'
-import StringResource from '../../../../resources/StringResource'
+import { render, screen } from "@testing-library/react"
+import { RecipeEditHead } from "../../../../components/widgets/recipe/RecipeEditHead"
+import StringResource from "../../../../resources/StringResource"
 
 const recipeName: string = "Kn"
 const recipeDescription: string = "überbacken"
 
 const mockSetValue = jest.fn()
 
-test('renders textfield of name', () => {
+test("renders textfield of name", () => {
     // Arrange
 
     // Act
@@ -19,7 +19,7 @@ test('renders textfield of name', () => {
     expect(container.getElementsByClassName("recipeEditHead__nameField").length).toBe(1)
 })
 
-test('does not render textfield of description if not editable', () => {
+test("does not render textfield of description if not editable", () => {
     // Arrange
 
     // Act
@@ -29,7 +29,7 @@ test('does not render textfield of description if not editable', () => {
     expect(container.getElementsByClassName("recipeEditHead__descriptionField").length).toBe(0)
 })
 
-test('renders textfield of description if editable', () => {
+test("renders textfield of description if editable", () => {
     // Arrange
 
     // Act
@@ -41,7 +41,7 @@ test('renders textfield of description if editable', () => {
     expect(container.getElementsByClassName("recipeEditHead__descriptionField").length).toBe(1)
 })
 
-test('renders helpertext if recipe name not valid', () => {
+test("renders helpertext if recipe name not valid", () => {
     // Arrange
     const notValidRecipeName: string = "Kn"
 
@@ -52,7 +52,7 @@ test('renders helpertext if recipe name not valid', () => {
     expect(screen.getByText(StringResource.Messages.RequiredRecipeName)).toBeInTheDocument()
 })
 
-test('renders helpertext if recipe description not valid', () => {
+test("renders helpertext if recipe description not valid", () => {
     // Arrange
     const notValidRecipeDescription: string = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores "
 

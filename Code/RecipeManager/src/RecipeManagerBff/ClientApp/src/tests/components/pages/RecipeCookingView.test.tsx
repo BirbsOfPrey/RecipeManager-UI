@@ -1,12 +1,12 @@
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { BrowserRouter } from 'react-router-dom'
-import { RecipeCookingView } from '../../../components/pages/RecipeCookingView'
-import StringResource from '../../../resources/StringResource'
+import { render, screen, waitFor } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { BrowserRouter } from "react-router-dom"
+import { RecipeCookingView } from "../../../components/pages/RecipeCookingView"
+import StringResource from "../../../resources/StringResource"
 
 const mockNavigate = jest.fn()
 
-test('renders main title correct if editable', () => {
+test("renders main title correct if editable", () => {
     // Arrange
 
     // Act
@@ -16,7 +16,7 @@ test('renders main title correct if editable', () => {
     expect(screen.getByText(StringResource.General.EditRecipe)).toBeInTheDocument
 })
 
-test('renders main title correct if not editable', () => {
+test("renders main title correct if not editable", () => {
     // Arrange
 
     // Act
@@ -26,7 +26,7 @@ test('renders main title correct if not editable', () => {
     expect(screen.getByText(StringResource.General.RecipeView)).toBeInTheDocument
 })
 
-test('renders editButton if not editable', () => {
+test("renders editButton if not editable", () => {
     // Arrange
 
     // Act
@@ -38,7 +38,7 @@ test('renders editButton if not editable', () => {
     expect(container.getElementsByClassName("recipeCreateAssistant__deleteButton").length).toBe(0)
 })
 
-test('renders view and delete button if editable', () => {
+test("renders view and delete button if editable", () => {
     // Arrange
 
     // Act
@@ -50,7 +50,7 @@ test('renders view and delete button if editable', () => {
     expect(container.getElementsByClassName("recipeCreateAssistant__deleteButton").length).toBe(1)
 })
 
-test('renders saveButton if editable', () => {
+test("renders saveButton if editable", () => {
     // Arrange
 
     // Act
@@ -60,7 +60,7 @@ test('renders saveButton if editable', () => {
     expect(container.getElementsByClassName("recipeCreateAssistant__saveButton").length).toBe(1)
 })
 
-test('does not render saveButton if not editable', () => {
+test("does not render saveButton if not editable", () => {
     // Arrange
 
     // Act
@@ -70,7 +70,7 @@ test('does not render saveButton if not editable', () => {
     expect(container.getElementsByClassName("recipeCreateAssistant__saveButton").length).toBe(0)
 })
 
-test('renders RecipeEditHead correct', () => {
+test("renders RecipeEditHead correct", () => {
     // Arrange
 
     // Act
@@ -80,7 +80,7 @@ test('renders RecipeEditHead correct', () => {
     expect(container.getElementsByClassName("recipeEditHead__container").length).toBe(1)
 })
 
-test('renders RecipeEditSteps correct', () => {
+test("renders RecipeEditSteps correct", () => {
     // Arrange
 
     // Act
@@ -90,7 +90,7 @@ test('renders RecipeEditSteps correct', () => {
     expect(container.getElementsByClassName("recipeSteps__container").length).toBe(1)
 })
 
-test('renders RecipeEditIngredients correct', () => {
+test("renders RecipeEditIngredients correct", () => {
     // Arrange
 
     // Act
@@ -100,7 +100,7 @@ test('renders RecipeEditIngredients correct', () => {
     expect(container.getElementsByClassName("recipeEditIngredients__container").length).toBe(1)
 })
 
-test('initially does not render dialog', () => {
+test("initially does not render dialog", () => {
     // Arrange
 
     // Act
@@ -110,7 +110,7 @@ test('initially does not render dialog', () => {
     expect(screen.queryByText(StringResource.Messages.DeleteRecipeQuestion)).not.toBeInTheDocument()
 })
 
-test('renders dialog with correct title on click on delete button', async () => {
+test("renders dialog with correct title on click on delete button", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
@@ -121,7 +121,7 @@ test('renders dialog with correct title on click on delete button', async () => 
     await waitFor(() => { expect(screen.getByText(StringResource.Messages.DeleteRecipeQuestion)).toBeInTheDocument() })
 })
 
-test('renders dialog with correct description on click on delete button', async () => {
+test("renders dialog with correct description on click on delete button", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
@@ -132,7 +132,7 @@ test('renders dialog with correct description on click on delete button', async 
     await waitFor(() => { expect(screen.getByText(StringResource.Messages.DeleteRecipeContent)).toBeInTheDocument() })
 })
 
-test('renders dialog with correct cancel button on click on delete button', async () => {
+test("renders dialog with correct cancel button on click on delete button", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
@@ -143,7 +143,7 @@ test('renders dialog with correct cancel button on click on delete button', asyn
     await waitFor(() => { expect(screen.getByText(StringResource.General.Cancel)).toBeInTheDocument() })
 })
 
-test('renders dialog with correct delete button on click on delete button', async () => {
+test("renders dialog with correct delete button on click on delete button", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
@@ -154,7 +154,7 @@ test('renders dialog with correct delete button on click on delete button', asyn
     await waitFor(() => { expect(screen.getByText(StringResource.General.Delete)).toBeInTheDocument() })
 })
 
-test('returns to CookingView after click on cancel button in the dialog', async () => {
+test("returns to CookingView after click on cancel button in the dialog", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
     userEvent.click(container.getElementsByClassName("recipeCreateAssistant__deleteButton")[0])
@@ -167,7 +167,7 @@ test('returns to CookingView after click on cancel button in the dialog', async 
     await waitFor(() => { expect(screen.getByText(StringResource.General.EditRecipe)).toBeInTheDocument })
 })
 
-test('returns to CookingView after click on delete button in the dialog', async () => {
+test("returns to CookingView after click on delete button in the dialog", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><RecipeCookingView recipeId={"1"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
     userEvent.click(container.getElementsByClassName("recipeCreateAssistant__deleteButton")[0])

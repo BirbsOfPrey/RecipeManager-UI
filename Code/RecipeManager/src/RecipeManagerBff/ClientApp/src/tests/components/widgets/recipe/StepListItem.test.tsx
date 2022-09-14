@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { StepListItem } from '../../../../components/widgets/recipe/StepListItem'
-import { createStep, Step } from '../../../../models/Step'
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { StepListItem } from "../../../../components/widgets/recipe/StepListItem"
+import { createStep, Step } from "../../../../models/Step"
 
 const step: Step = createStep()
 const stepNumber: number = 3
@@ -13,7 +13,7 @@ const mockUpdateStep = jest.fn()
 const mockChangeOrderStep = jest.fn()
 const mockStepDeleted = jest.fn()
 
-test('renders textfield of instruction correct', () => {
+test("renders textfield of instruction correct", () => {
     // Arrange
 
     // Act
@@ -25,7 +25,7 @@ test('renders textfield of instruction correct', () => {
     expect(container.getElementsByClassName("stepListItem__instructionField").length).toBe(1)
 })
 
-test('renders no button if not editable', () => {
+test("renders no button if not editable", () => {
     // Arrange
 
     // Act
@@ -35,7 +35,7 @@ test('renders no button if not editable', () => {
     expect(screen.queryAllByRole("button").length).toBe(0)
 })
 
-test('renders all buttons if editable', () => {
+test("renders all buttons if editable", () => {
     // Arrange
 
     // Act
@@ -45,7 +45,7 @@ test('renders all buttons if editable', () => {
     expect(screen.queryAllByRole("button").length).toBe(3)
 })
 
-test('calls method changeOrderStep on click with correct parameter to move up', () => {
+test("calls method changeOrderStep on click with correct parameter to move up", () => {
     // Arrange
     const { container } = render(<StepListItem step={step} length={5} editable={true} updateStep={mockUpdateStep} changeStepOrder={mockChangeOrderStep} stepDeleted={mockStepDeleted} />)
 
@@ -57,7 +57,7 @@ test('calls method changeOrderStep on click with correct parameter to move up', 
     expect(mockChangeOrderStep).toBeCalledWith(false, step)
 })
 
-test('calls method changeOrderStep on click with correct parameter to move down', () => {
+test("calls method changeOrderStep on click with correct parameter to move down", () => {
     // Arrange
     const { container } = render(<StepListItem step={step} length={5} editable={true} updateStep={mockUpdateStep} changeStepOrder={mockChangeOrderStep} stepDeleted={mockStepDeleted} />)
 
@@ -69,7 +69,7 @@ test('calls method changeOrderStep on click with correct parameter to move down'
     expect(mockChangeOrderStep).toBeCalledWith(true, step)
 })
 
-test('does not call method changeOrderStep on click to move up when step is first in order', () => {
+test("does not call method changeOrderStep on click to move up when step is first in order", () => {
     // Arrange
     const firstStep: Step = createStep()
     firstStep.stepNumber = 1
@@ -82,7 +82,7 @@ test('does not call method changeOrderStep on click to move up when step is firs
     expect(mockChangeOrderStep).not.toHaveBeenCalled()
 })
 
-test('does not call method changeOrderStep on click to move down when step is last in order', () => {
+test("does not call method changeOrderStep on click to move down when step is last in order", () => {
     // Arrange
     const lastStep: Step = createStep()
     lastStep.stepNumber = 5
@@ -95,7 +95,7 @@ test('does not call method changeOrderStep on click to move down when step is la
     expect(mockChangeOrderStep).not.toHaveBeenCalled()
 })
 
-test('calls method stepDeleted on click with correct parameter', () => {
+test("calls method stepDeleted on click with correct parameter", () => {
     // Arrange
     const { container } = render(<StepListItem step={step} length={5} editable={true} updateStep={mockUpdateStep} changeStepOrder={mockChangeOrderStep} stepDeleted={mockStepDeleted} />)
 

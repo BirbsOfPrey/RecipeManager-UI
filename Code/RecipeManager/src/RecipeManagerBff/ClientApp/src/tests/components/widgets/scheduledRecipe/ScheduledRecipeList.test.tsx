@@ -1,14 +1,14 @@
 import { createScheduledRecipe, ScheduledRecipe } from "../../../../models/ScheduledRecipe"
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import { BrowserRouter } from 'react-router-dom'
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
+import { BrowserRouter } from "react-router-dom"
 import StringResource from "../../../../resources/StringResource"
 import { ScheduledRecipeList } from "../../../../components/widgets/scheduledRecipe/ScheduledRecipeList"
 
 const testScheduledRecipe: ScheduledRecipe = createScheduledRecipe()
 const mockDelete = jest.fn()
 
-test('renders default text if no scheduled recipes in the list', () => {
+test("renders default text if no scheduled recipes in the list", () => {
     // Arrange
 
     // Act
@@ -19,7 +19,7 @@ test('renders default text if no scheduled recipes in the list', () => {
     expect(linkElementNoScheduledRecipesDefault).toBeInTheDocument()
 })
 
-test('does not render default text if any scheduled recipe is in the list', () => {
+test("does not render default text if any scheduled recipe is in the list", () => {
     // Arrange
 
     // Act
@@ -30,7 +30,7 @@ test('does not render default text if any scheduled recipe is in the list', () =
     expect(linkElementNoScheduledRecipes).not.toBeInTheDocument()
 })
 
-test('render as much list items as scheduled recipes are passed', () => {
+test("render as much list items as scheduled recipes are passed", () => {
     // Arrange
 
     // Act
@@ -40,7 +40,7 @@ test('render as much list items as scheduled recipes are passed', () => {
     expect(container.getElementsByClassName("scheduledRecipeListItem__container").length).toBe(2)
 })
 
-test('calls method deleteScheduledRecipe on click in ScheduledRecipeListItem with correct parameter', () => {
+test("calls method deleteScheduledRecipe on click in ScheduledRecipeListItem with correct parameter", () => {
     // Arrange
     const testId = 66
     testScheduledRecipe.id = testId

@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
-import { RecipeSteps } from '../../../../components/widgets/recipe/RecipeSteps'
-import { createStep, Step } from '../../../../models/Step'
-import StringResource from '../../../../resources/StringResource'
+import { render, screen } from "@testing-library/react"
+import { RecipeSteps } from "../../../../components/widgets/recipe/RecipeSteps"
+import { createStep, Step } from "../../../../models/Step"
+import StringResource from "../../../../resources/StringResource"
 
-test('renders textfield of instruction', () => {
+test("renders textfield of instruction", () => {
     // Arrange
     const step: Step = createStep()
     const stepNumber: number = 1
@@ -20,7 +20,7 @@ test('renders textfield of instruction', () => {
     expect(container.getElementsByClassName("recipeEditHead__descriptionField").length).toBe(1)
 })
 
-test('renders no steps text if no step present', () => {
+test("renders no steps text if no step present", () => {
     // Arrange
 
     // Act
