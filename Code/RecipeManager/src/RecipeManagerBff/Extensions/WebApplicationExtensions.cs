@@ -68,6 +68,7 @@ namespace RecipeManagerBff.Extensions
           options.Scope.Add("profile");
           options.Scope.Add(apiSettings.ApiScopeName);
           options.Scope.Add("IdentityServerApi");
+          options.Scope.Add("offline_access");
 
           options.SaveTokens = true;
           options.GetClaimsFromUserInfoEndpoint = true;
