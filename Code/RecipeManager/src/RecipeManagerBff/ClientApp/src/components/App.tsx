@@ -11,6 +11,7 @@ import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material/styles"
 import StringResource from "../resources/StringResource"
 import "./App.css"
 import { ExternalRecipeImportView } from "./pages/ExternalRecipeImportView"
+import { IngredientManagement } from "./pages/IngredientManagement"
 
 const themeOptions: ThemeOptions = {
     palette: {
@@ -40,6 +41,7 @@ export const App = () => {
                                 element={<MainView />}
                             />
                             <Route path={`${StringResource.Routes.RecipeManagement}/*`} element={<ProtectedRoute><RecipeManagement /></ProtectedRoute>} />
+                            <Route path={`${StringResource.Routes.IngredientManagement}/*`} element={<ProtectedRoute><IngredientManagement /></ProtectedRoute>} />
                             <Route path={`${StringResource.Routes.WeeklySchedule}/*`} element={<ProtectedRoute><WeeklyScheduleView /></ProtectedRoute>} />
                             <Route path={`${StringResource.Routes.RecipeImport}/*`} element={<ProtectedRoute requireAdmin><ExternalRecipeImportView /></ProtectedRoute>} />
                             <Route path={`${StringResource.Routes.UserManagement}/*`} element={<ProtectedRoute requireAdmin><UserManagement /></ProtectedRoute>} />

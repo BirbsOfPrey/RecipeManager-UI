@@ -1,0 +1,11 @@
+@media (min-width: 650px) {
+    .ingredientManagement__container {
+        display: grid;
+        grid-template-columns: 1fr 600px 1fr;
+        grid-template-areas: ". content .";
+    }
+
+    .ingredientManagement__container .ingredientManagement__content {
+        grid-area: content;
+    }
+}
