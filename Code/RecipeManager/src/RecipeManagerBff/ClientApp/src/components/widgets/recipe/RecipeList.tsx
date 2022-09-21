@@ -8,8 +8,8 @@ import { SearchField } from "../../controls/SearchField"
 
 interface IState {
     loading: boolean
-    error: string,
-    search: string,
+    error: string
+    search: string
     recipes: Recipe[]
 }
 
