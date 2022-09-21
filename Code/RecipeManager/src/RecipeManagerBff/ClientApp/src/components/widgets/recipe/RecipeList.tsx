@@ -29,7 +29,7 @@ export class RecipeList extends Component<{}, IState> {
     async fetchRecipes(search?: string) {
         this.setState({ loading: true })
 
-        var query = search ? "?name=" + search : ""
+        var query = search ? `?${StringResource.Queries.SearchName}${search}` : ""
         const response = await fetch(`${RecipesUrl}${query}`, {
             headers: createDefaultHeader()
         })

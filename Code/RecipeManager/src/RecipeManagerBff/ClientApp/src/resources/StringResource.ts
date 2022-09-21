@@ -26,6 +26,7 @@ namespace StringResource {
         export const Edit: string = "edit"
         export const EditOnValue: string = "1"
         export const EditOn: string = `${Edit}=${EditOnValue}`
+        export const SearchName: string = "name="
     }
     export namespace Messages {
         export const GeneralError: string = "Es ist ein Fehler aufgetreten!"
