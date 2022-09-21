@@ -2,29 +2,39 @@ import { Component } from "react"
 import { Recipe } from "../../../models/Recipe"
 import { createDefaultHeader, RecipesUrl } from "../../../resources/Api"
 import StringResource from "../../../resources/StringResource"
-import { LinearProgress, List, Paper, Typography } from "@mui/material"
+import { Box, LinearProgress, List, Paper, Typography } from "@mui/material"
 import { RecipeListItemSelector } from "./RecipeListItemSelector"
+import { SearchField } from "../../controls/SearchField"
 
 interface IProps {
     selectRecipe: (recipe: Recipe) => void
 }
 
 interface IState {
-    recipes: Recipe[]
     loading: boolean
     error: string
+    search: string
+    recipes: Recipe[]
 }
 
 export class RecipeListSelector extends Component<IProps, IState> {
 
     state: IState = {
-        recipes: [],
-        loading: true,
-        error: ""
+        loading: false,
+        error: "",
+        search: "",
+        recipes: []
     }
 
     async componentDidMount() {
-        const response = await fetch(`${RecipesUrl}`, {
+        await this.fetchRecipes()
+    }
+
+    async fetchRecipes(search?: string) {
+        this.setState({ loading: true })
+
+        var query = search ? "?name=" + search : ""
+        const response = await fetch(`${RecipesUrl}${query}`, {
             headers: createDefaultHeader()
         })
 
@@ -36,25 +46,15 @@ export class RecipeListSelector extends Component<IProps, IState> {
         }
     }
 
+    searchRecipe(search: string) {
+        this.fetchRecipes(search)
+        this.setState({ search })
+    }
+
     render() {
         const recipes = this.state.recipes
 
-        if (recipes.length !== 0) {
-            return (
-                <Paper className="recipeListContentSelector__container"
-                    sx={{ maxHeight: "50vh", overflow: "auto" }}>
-                    <List className="recipeListContentSelector__list"
-                        disablePadding={true}>
-                        {recipes.map(recipe => (
-                            <RecipeListItemSelector
-                                key={recipe.id}
-                                recipe={recipe}
-                                selectRecipe={this.props.selectRecipe} />
-                        ))}
-                    </List>
-                </Paper>
-            )
-        } else if (this.state.loading === true) {
+        if (this.state.loading === true) {
             return (
                 <LinearProgress
                     className="recipeListContentSelector__progress" />
@@ -75,17 +75,36 @@ export class RecipeListSelector extends Component<IProps, IState> {
             )
         } else {
             return (
-                <Typography
-                    className="recipeListContentSelector__message"
-                    variant="subtitle1"
-                    component="p"
-                    color="error.main"
-                    sx={{
-                        mt: "20px",
-                        mb: "20px"
-                    }}>
-                    {StringResource.Messages.NoRecipesToDisplay}
-                </Typography>
+                <Box className="recipeListContentSelector__container">
+                    <SearchField
+                        value={this.state.search}
+                        onSearch={value => this.searchRecipe(value)}
+                    />
+                    {recipes.length === 0 ?
+                        <Typography
+                            className="recipeListContentSelector__message"
+                            variant="subtitle1"
+                            component="p"
+                            color="error.main"
+                            sx={{
+                                mt: "20px",
+                                mb: "20px"
+                            }}>
+                            {StringResource.Messages.NoRecipesToDisplay}
+                        </Typography> : <div></div>
+                    }
+                    <Paper sx={{ maxHeight: "50vh", overflow: "auto" }}>
+                        <List className="recipeListContentSelector__list"
+                            disablePadding={true}>
+                            {recipes.map(recipe => (
+                                <RecipeListItemSelector
+                                    key={recipe.id}
+                                    recipe={recipe}
+                                    selectRecipe={this.props.selectRecipe} />
+                            ))}
+                        </List>
+                    </Paper>
+                </Box>
             )
         }
     }

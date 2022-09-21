@@ -133,6 +133,7 @@ namespace StringResource {
         export const NoIngredientName: string = "Kein Zutatenname"
         export const IngredientView: string = "Zutatenansicht"
         export const IngredientManagement: string = "Zutaten"
+        export const Search: string = "Suche"
     }
     export const CopyrightHeader: string = "MAS SE 2020-22: Masterarbeit RecipeManager"
     export const Copyright: string = "\u00A9 2022 - Adrian Zigerlig, Silvan Wirz"
