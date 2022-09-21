@@ -89,6 +89,18 @@ test("render as much list items as recipes are passed", async () => {
     await waitFor(() => { expect(container.getElementsByClassName("recipeListItem__container").length).toBe(2) })
 })
 
+test("renders search field correct", async () => {
+    // Arrange
+    server = setupServer(...handlers)
+    server.listen()
+
+    // Act
+    const { container } = render(<BrowserRouter><RecipeList /></BrowserRouter>)
+    
+    // Assert
+    await waitFor(() => { expect(container.getElementsByClassName("searchField__container").length).toBeInTheDocument })
+})
+
 test("renders no recipes text correct", async () => {
     // Arrange
     server = setupServer(...emptyHandlers)
