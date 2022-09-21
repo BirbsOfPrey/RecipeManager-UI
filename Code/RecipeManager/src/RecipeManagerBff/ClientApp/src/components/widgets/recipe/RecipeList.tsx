@@ -4,10 +4,12 @@ import { createDefaultHeader, RecipesUrl } from "../../../resources/Api"
 import StringResource from "../../../resources/StringResource"
 import { LinearProgress, List, Paper, Typography } from "@mui/material"
 import { RecipeListItem } from "./RecipeListItem"
+import { SearchField } from "../../controls/SearchField"
 
 interface IState {
     loading: boolean
-    error: string
+    error: string,
+    search: string,
     recipes: Recipe[]
 }
 
@@ -16,12 +18,19 @@ export class RecipeList extends Component<{}, IState> {
     state: IState = {
         loading: false,
         error: "",
+        search: "",
         recipes: []
     }
 
     async componentDidMount() {
+        await this.fetchRecipes()
+    }
+
+    async fetchRecipes(search?: string) {
         this.setState({ loading: true })
-        const response = await fetch(`${RecipesUrl}`, {
+
+        var query = search ? "?name=" + search : ""
+        const response = await fetch(`${RecipesUrl}${query}`, {
             headers: createDefaultHeader()
         })
         if (response.status >= 300) {
@@ -30,6 +39,11 @@ export class RecipeList extends Component<{}, IState> {
             const recipes: Recipe[] = await response.json()
             this.setState({ error: "", recipes: recipes, loading: false })
         }
+    }
+
+    searchRecipe(search: string) {
+        this.fetchRecipes(search)
+        this.setState({ search })
     }
 
     render() {
@@ -47,15 +61,6 @@ export class RecipeList extends Component<{}, IState> {
             )
         } else if (this.state.loading) {
             return <LinearProgress />
-        } else if (recipes.length <= 0) {
-            return (
-                <Typography
-                    variant="subtitle1"
-                    component="p"
-                    sx={{ fontWeight: "bold" }}>
-                    {StringResource.Messages.NoRecipesToDisplay}
-                </Typography>
-            )
         }
 
         return (
@@ -67,6 +72,20 @@ export class RecipeList extends Component<{}, IState> {
                     sx={{ mb: "10px" }}>
                     {StringResource.General.SelectRecipe}
                 </Typography>
+                <SearchField
+                    value={this.state.search}
+                    onSearch={value => this.searchRecipe(value)}
+                />
+                {recipes.length <= 0 ?
+                    (
+                        <Typography
+                            variant="subtitle1"
+                            component="p"
+                            sx={{ fontWeight: "bold" }}>
+                            {StringResource.Messages.NoRecipesToDisplay}
+                        </Typography>
+                    ) : <div></div>
+                }
                 <Paper className="recipeListContentSelector__container"
                     sx={{ maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
                     <List disablePadding={true} className="recipeListContent__list">
