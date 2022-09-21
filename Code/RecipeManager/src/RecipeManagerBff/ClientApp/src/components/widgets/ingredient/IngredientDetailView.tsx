@@ -114,12 +114,13 @@ export class IngredientDetailView extends Component<IProps, IState> {
     }
 
     render() {
-        if (this.state.redirect) {
+        const { redirect, ingredient, loading, saving, saved, error, openDeleteConfirmDialog } = this.state
+
+        if (redirect) {
             this.props.navigate(`/${StringResource.Routes.IngredientManagement}`)
         }
 
         const ingredientRoute: string = `/${StringResource.Routes.IngredientManagement}/${StringResource.Routes.Ingredient}/${this.props.ingredientId}`
-        const { ingredient, loading, error, openDeleteConfirmDialog } = this.state
 
         return (
             <div className="ingredientDetailView__container">
@@ -160,9 +161,9 @@ export class IngredientDetailView extends Component<IProps, IState> {
                                 className="ingredientDetailView__saveButton"
                                 variant="outlined"
                                 loadingPosition="start"
-                                loading={this.state.saving}
+                                loading={saving}
                                 startIcon={<SaveIcon />}
-                                disabled={this.state.saved}
+                                disabled={saved}
                                 onClick={this.save}>{StringResource.General.Save}
                             </LoadingButton>
                             <IconButton

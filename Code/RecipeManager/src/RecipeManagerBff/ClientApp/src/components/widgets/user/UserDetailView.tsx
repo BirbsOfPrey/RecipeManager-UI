@@ -114,12 +114,13 @@ export class UserDetailView extends Component<IProps, IState> {
     }
 
     render() {
-        if (this.state.redirect) {
+        const { redirect, user, loading, saving, saved, error, openDeleteConfirmDialog } = this.state
+        
+        if (redirect) {
             this.props.navigate(`/${StringResource.Routes.UserManagement}`)
         }
 
         const userRoute: string = `/${StringResource.Routes.UserManagement}/${StringResource.Routes.User}/${this.props.userId}`
-        const { user, loading, error, openDeleteConfirmDialog } = this.state
 
         return (
             <div className="userDetailView__container">
@@ -160,9 +161,9 @@ export class UserDetailView extends Component<IProps, IState> {
                                 className="userDetailView__saveButton"
                                 variant="outlined"
                                 loadingPosition="start"
-                                loading={this.state.saving}
+                                loading={saving}
                                 startIcon={<SaveIcon />}
-                                disabled={this.state.saved}
+                                disabled={saved}
                                 onClick={this.save}>{StringResource.General.Save}
                             </LoadingButton>
                             <IconButton
