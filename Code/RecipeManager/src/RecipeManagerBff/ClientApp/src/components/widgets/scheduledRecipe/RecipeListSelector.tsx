@@ -54,27 +54,7 @@ export class RecipeListSelector extends Component<IProps, IState> {
     render() {
         const recipes = this.state.recipes
 
-        if (recipes.length !== 0) {
-            return (
-                <Box className="recipeListContentSelector__container">
-                    <SearchField
-                        value={this.state.search}
-                        onSearch={value => this.searchRecipe(value)}
-                    />
-                    <Paper sx={{ maxHeight: "50vh", overflow: "auto" }}>
-                        <List className="recipeListContentSelector__list"
-                            disablePadding={true}>
-                            {recipes.map(recipe => (
-                                <RecipeListItemSelector
-                                    key={recipe.id}
-                                    recipe={recipe}
-                                    selectRecipe={this.props.selectRecipe} />
-                            ))}
-                        </List>
-                    </Paper>
-                </Box>
-            )
-        } else if (this.state.loading === true) {
+        if (this.state.loading === true) {
             return (
                 <LinearProgress
                     className="recipeListContentSelector__progress" />
@@ -95,17 +75,36 @@ export class RecipeListSelector extends Component<IProps, IState> {
             )
         } else {
             return (
-                <Typography
-                    className="recipeListContentSelector__message"
-                    variant="subtitle1"
-                    component="p"
-                    color="error.main"
-                    sx={{
-                        mt: "20px",
-                        mb: "20px"
-                    }}>
-                    {StringResource.Messages.NoRecipesToDisplay}
-                </Typography>
+                <Box className="recipeListContentSelector__container">
+                    <SearchField
+                        value={this.state.search}
+                        onSearch={value => this.searchRecipe(value)}
+                    />
+                    {recipes.length === 0 ?
+                        <Typography
+                            className="recipeListContentSelector__message"
+                            variant="subtitle1"
+                            component="p"
+                            color="error.main"
+                            sx={{
+                                mt: "20px",
+                                mb: "20px"
+                            }}>
+                            {StringResource.Messages.NoRecipesToDisplay}
+                        </Typography> : <div></div>
+                    }
+                    <Paper sx={{ maxHeight: "50vh", overflow: "auto" }}>
+                        <List className="recipeListContentSelector__list"
+                            disablePadding={true}>
+                            {recipes.map(recipe => (
+                                <RecipeListItemSelector
+                                    key={recipe.id}
+                                    recipe={recipe}
+                                    selectRecipe={this.props.selectRecipe} />
+                            ))}
+                        </List>
+                    </Paper>
+                </Box>
             )
         }
     }

@@ -87,7 +87,7 @@ export class RecipeList extends Component<{}, IState> {
                     ) : <div></div>
                 }
                 <Paper className="recipeListContentSelector__container"
-                    sx={{ maxHeight: { xs: "60vh", md: "70vh", xl: "75vh" }, overflow: "auto" }}>
+                    sx={{ maxHeight: { xs: "60vh", md: "65vh", xl: "70vh" }, overflow: "auto" }}>
                     <List disablePadding={true} className="recipeListContent__list">
                         {recipes.map(recipe => (
                             <RecipeListItem
