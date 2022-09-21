@@ -1,4 +1,4 @@
-import { queryAllByDisplayValue, queryByText, render, screen, waitFor } from "@testing-library/react"
+import { queryByText, render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { BrowserRouter } from "react-router-dom"
 import { UserDetailView } from "../../../../components/widgets/user/UserDetailView"
@@ -33,7 +33,7 @@ test("renders main title correct for existing user", () => {
     // Arrange
 
     // Act
-    render(<BrowserRouter><UserDetailView userId={"abc-def"} editable={true} navigate={mockNavigate} /></BrowserRouter>)
+    render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Assert
     expect(screen.getByText(StringResource.General.EditUser)).toBeInTheDocument

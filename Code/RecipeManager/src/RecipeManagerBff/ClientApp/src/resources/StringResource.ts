@@ -8,6 +8,9 @@ namespace StringResource {
         export const RecipeManagement: string = "recipemanagement"
         export const Recipe: string = "recipe"
         export const RecipeId: string = ":recipeId"
+        export const IngredientManagement: string = "ingredientmanagement"
+        export const Ingredient: string = "ingredient"
+        export const IngredientId: string = ":ingredientId"
         export const WeeklySchedule: string = "weeklyschedule"
         export const RecipeImport: string = "recipeimport"
         export const UserManagement: string = "usermanagement"
@@ -52,6 +55,12 @@ namespace StringResource {
         export const InvalidImportAmount: string = `Anzahl muss im Bereich ${RecipeImportValidator.minImportAmount} - ${RecipeImportValidator.maxImportAmount} liegen`
         export const NoRecipesImported: string = "Es wurden keine Rezepte importiert. (Ursache: Die gefundenen Rezepte sind bereits vorhanden oder deren Format war nicht passend)"
         export const RecipeImportError: string = "Import fehlgeschlagen oder Berechtigung fehlt."
+        export const NoIngredientsToDisplay: string = "Es wurden keine Zutaten gefunden."
+        export const IngredientNotFound: string = "Zutat nicht gefunden."
+        export const DeleteIngredientQuestion: string = "Zutat löschen?"
+        export const DeleteIngredientContent: string = "Die Zutat wird gelöscht, falls diese in keinem Rezept verwendet wird."
+        export const InvalidIngredientFields: string = "Die Zutat enthält ungültige Werte und kann daher nicht gespeichert werden."
+        export const DeleteIngredientError: string = "Die Zutat konnte nicht gelöscht werden, da sie noch verwendet wird."
     }
     export namespace General {
         export const AppTitle: string = "RECIPE MANAGER"
@@ -116,6 +125,14 @@ namespace StringResource {
         export const RecipeImportAmount: string = "Anzahl Rezepte"
         export const ScheduledRecipesToday: string = "Tagesplan"
         export const AdditionalRecipes: string = "Weitere Rezepte"
+        export const CreateIngredient: string = "Zutat erstellen"
+        export const CreateNewIngredient: string = "Neue Zutat erstellen"
+        export const EditIngredient: string = "Zutat bearbeiten"
+        export const SelectIngredient: string = "Wählen Sie eine Zutat"
+        export const IngredientName: string = "Zutatenname"
+        export const NoIngredientName: string = "Kein Zutatenname"
+        export const IngredientView: string = "Zutatenansicht"
+        export const IngredientManagement: string = "Zutaten"
         export const Search: string = "Suche"
     }
     export const CopyrightHeader: string = "MAS SE 2020-22: Masterarbeit RecipeManager"

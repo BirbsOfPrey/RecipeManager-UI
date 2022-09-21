@@ -1,0 +1,32 @@
+    .ingredientDetailView__container {
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "title title"
+            "handle edit"
+            "error error"
+            "content content";
+    }
+
+    .ingredientDetailView__container .ingredientDetailView__mainTitle {
+        grid-area: title;
+    }
+
+    .ingredientDetailView__container .ingredientDetailView__handleButtons {
+        grid-area: handle;
+        justify-self: start;
+    }
+
+    .ingredientDetailView__container .ingredientDetailView__editButtons {
+        grid-area: edit;
+        justify-self: end;
+    }
+
+    .ingredientDetailView__container .ingredientDetailView__errorField {
+        grid-area: error;
+    }
+
+    .ingredientDetailView__container .ingredientDetailView__editContent {
+        grid-area: content;
+    }

@@ -6,7 +6,7 @@ import StringResource from "../resources/StringResource"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "./AuthProvider"
 
-const pages = [StringResource.General.RecipeManagement, StringResource.General.WeeklySchedule]
+const pages = [StringResource.General.RecipeManagement, StringResource.General.IngredientManagement, StringResource.General.WeeklySchedule]
 const adminPages = [StringResource.General.RecipeImport, StringResource.General.UserManagement]
 const settings = [StringResource.General.About]
 
@@ -40,6 +40,9 @@ const AppNavBar = () => {
         switch (page) {
             case StringResource.General.RecipeManagement:
                 navigate(StringResource.Routes.RecipeManagement)
+                break
+            case StringResource.General.IngredientManagement:
+                navigate(StringResource.Routes.IngredientManagement)
                 break
             case StringResource.General.WeeklySchedule:
                 navigate(StringResource.Routes.WeeklySchedule)
