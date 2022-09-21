@@ -128,6 +128,7 @@ test("renders helpertext if user name not valid", () => {
     // Arrange
     const notValidUserName: string = ")Bobby("
     testUser.name = notValidUserName
+    
     // Act
     render(<UserEdit user={testUser} setValue={mockSetValue} editable={true} />)
 
