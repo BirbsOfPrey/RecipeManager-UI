@@ -60,6 +60,7 @@ namespace StringResource {
         export const DeleteIngredientQuestion: string = "Zutat löschen?"
         export const DeleteIngredientContent: string = "Die Zutat wird gelöscht, falls diese in keinem Rezept verwendet wird."
         export const InvalidIngredientFields: string = "Die Zutat enthält ungültige Werte und kann daher nicht gespeichert werden."
+        export const DeleteIngredientError: string = "Die Zutat konnte nicht gelöscht werden, da sie noch verwendet wird."
     }
     export namespace General {
         export const AppTitle: string = "RECIPE MANAGER"

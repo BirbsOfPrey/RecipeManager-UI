@@ -75,7 +75,9 @@ export class IngredientDetailView extends Component<IProps, IState> {
             headers: createDefaultHeader()
         })
 
-        if (response.status >= 300) {
+        if (response.status === 409) {
+            this.setState({ error: StringResource.Messages.DeleteIngredientError })
+        } else if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
             this.setState({ error: "", redirect: true })
