@@ -32,6 +32,7 @@ export class SearchField extends Component<IProps, IState> {
         return (
             <Box className="searchField__container" sx={{ mb: "10px" }}>
                 <TextField
+                    className="searchField__textField"
                     variant="outlined"
                     size="small"
                     type="search"
@@ -43,6 +44,7 @@ export class SearchField extends Component<IProps, IState> {
                     onKeyDown={this.triggerKeyDown.bind(this)}
                 />
                 <IconButton
+                    className="searchField__button"
                     onClick={() => this.props.onSearch(this.state.search)}
                     sx={{ justifySelf: "center" }}
                 >
