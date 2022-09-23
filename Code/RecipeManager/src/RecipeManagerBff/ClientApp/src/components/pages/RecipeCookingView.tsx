@@ -184,7 +184,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
     }
 
     deleteRecipe = async () => {
-        const response = await fetch(`${RecipesUrl}/${this.props.recipeId}`, {
+        const response = await fetch(`${RecipesUrl}/${this.state.recipe.id}`, {
             method: "delete",
             headers: createDefaultHeader()
         })
@@ -219,7 +219,8 @@ export class RecipeCookingView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ error: "", saved: true })
+            const recipe: Recipe = await response.json()
+            this.setState({ error: "", saved: true, recipe: recipe })
         }
 
         this.setState({ saving: false })
@@ -230,7 +231,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
             this.props.navigate(`/${StringResource.Routes.RecipeManagement}`)
         }
 
-        const recipeRoute: string = `/${StringResource.Routes.RecipeManagement}/${StringResource.Routes.Recipe}/${this.props.recipeId}`
+        const recipeRoute: string = `/${StringResource.Routes.RecipeManagement}/${StringResource.Routes.Recipe}/${this.state.recipe.id}`
 
         return (
             <div className="recipeCreateAssistant__container">
@@ -240,7 +241,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                     variant="h6"
                     component="p"
                     sx={{ pb: "5px", mt: "30px" }}>
-                    {this.props.editable ? (this.props.recipeId ? StringResource.General.EditRecipe : StringResource.General.CreateRecipe) : StringResource.General.RecipeView}
+                    {this.props.editable ? (this.state.recipe.id ? StringResource.General.EditRecipe : StringResource.General.CreateRecipe) : StringResource.General.RecipeView}
                 </Typography>
 
                 <Box className="recipeCreateAssistant__handleButtons">
@@ -279,6 +280,7 @@ export class RecipeCookingView extends Component<IProps, IState> {
                             <IconButton
                                 aria-label="delete"
                                 className="recipeCreateAssistant__deleteButton"
+                                disabled={!this.state.recipe.id}
                                 sx={{ alignSelf: "flex-end" }}
                                 onClick={this.requestToDeleteRecipe}>
                                 <DeleteIcon />
