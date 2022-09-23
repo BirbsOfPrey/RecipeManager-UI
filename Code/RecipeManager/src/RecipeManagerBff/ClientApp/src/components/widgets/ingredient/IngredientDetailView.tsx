@@ -70,7 +70,7 @@ export class IngredientDetailView extends Component<IProps, IState> {
     }
 
     deleteIngredient = async () => {
-        const response = await fetch(`${IngredientsUrl}/${this.props.ingredientId}`, {
+        const response = await fetch(`${IngredientsUrl}/${this.state.ingredient.id}`, {
             method: "delete",
             headers: createDefaultHeader()
         })
@@ -107,7 +107,8 @@ export class IngredientDetailView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ error: "", saved: true })
+            const ingredient: Ingredient = await response.json()
+            this.setState({ error: "", saved: true, ingredient: ingredient })
         }
 
         this.setState({ saving: false })
@@ -118,7 +119,7 @@ export class IngredientDetailView extends Component<IProps, IState> {
             this.props.navigate(`/${StringResource.Routes.IngredientManagement}`)
         }
 
-        const ingredientRoute: string = `/${StringResource.Routes.IngredientManagement}/${StringResource.Routes.Ingredient}/${this.props.ingredientId}`
+        const ingredientRoute: string = `/${StringResource.Routes.IngredientManagement}/${StringResource.Routes.Ingredient}/${this.state.ingredient.id}`
         const { ingredient, loading, error, openDeleteConfirmDialog } = this.state
 
         return (
@@ -129,7 +130,7 @@ export class IngredientDetailView extends Component<IProps, IState> {
                     variant="h6"
                     component="p"
                     sx={{ pb: "5px", mt: "30px" }}>
-                    {this.props.editable ? (this.props.ingredientId ? StringResource.General.EditIngredient : StringResource.General.CreateNewIngredient) : StringResource.General.IngredientView}
+                    {this.props.editable ? (this.state.ingredient.id ? StringResource.General.EditIngredient : StringResource.General.CreateNewIngredient) : StringResource.General.IngredientView}
                 </Typography>
 
                 <Box className="ingredientDetailView__handleButtons">
@@ -168,6 +169,7 @@ export class IngredientDetailView extends Component<IProps, IState> {
                             <IconButton
                                 aria-label="delete"
                                 className="ingredientDetailView__deleteButton"
+                                disabled={!this.state.ingredient.id}
                                 sx={{ alignSelf: "flex-end" }}
                                 onClick={this.requestToDeleteIngredient}>
                                 <DeleteIcon />

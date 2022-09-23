@@ -1,10 +1,37 @@
 import { queryByText, render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { immerable } from "immer"
+import { rest } from "msw"
+import { SetupServerApi, setupServer } from "msw/node"
 import { BrowserRouter } from "react-router-dom"
 import { IngredientDetailView } from "../../../../components/widgets/ingredient/IngredientDetailView"
+import { Ingredient } from "../../../../models/Ingredient"
+import { IngredientsUrl } from "../../../../resources/Api"
 import StringResource from "../../../../resources/StringResource"
 
 const testIngredientId: string = "25"
+const testIngredientName: string = "Mehl"
+
+let handlers = [
+	rest.get(`${IngredientsUrl}/${testIngredientId}`, (_: any, res: (arg0: any) => any, ctx: { json: (arg0: Ingredient) => any }) => {
+		return res(
+			ctx.json(
+				{ [immerable]: true, id: parseInt(testIngredientId), name: testIngredientName }
+            )
+		)
+	}),
+    rest.delete(`${IngredientsUrl}/${testIngredientId}`, (_: any, res: (arg0: any) => any, ctx: { json: (arg0: any) => any }) => {
+		return res(
+			ctx.json([])
+		)
+	})
+]
+
+const server: SetupServerApi = setupServer(...handlers)
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
 
 const mockNavigate = jest.fn()
 
@@ -29,14 +56,14 @@ test("renders main title correct for new ingredient", () => {
     expect(screen.getByText(StringResource.General.CreateNewIngredient)).toBeInTheDocument
 })
 
-test("renders main title correct for existing ingredient", () => {
+test("renders main title correct for existing ingredient", async () => {
     // Arrange
 
     // Act
     render(<BrowserRouter><IngredientDetailView ingredientId={testIngredientId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Assert
-    expect(screen.getByText(StringResource.General.EditIngredient)).toBeInTheDocument
+    await waitFor(() => { expect(screen.getByText(StringResource.General.EditIngredient)).toBeInTheDocument })
 })
 
 test("renders editButton if not editable", () => {
@@ -119,7 +146,7 @@ test("renders dialog with correct title on click on delete button", async () => 
     const { container } = render(<BrowserRouter><IngredientDetailView ingredientId={testIngredientId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0]) })
 
     // Assert
     await waitFor(() => { expect(screen.getByText(StringResource.Messages.DeleteIngredientQuestion)).toBeInTheDocument })
@@ -130,10 +157,20 @@ test("renders dialog with correct description on click on delete button", async 
     const { container } = render(<BrowserRouter><IngredientDetailView ingredientId={testIngredientId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0]) })
 
     // Assert
     await waitFor(() => { expect(screen.getByText(StringResource.Messages.DeleteIngredientContent)).toBeInTheDocument })
+})
+
+test("does not render dialog on click on delete button when it is initially disabled", async () => {
+    // Arrange
+    const { container } = render(<BrowserRouter><IngredientDetailView editable={true} navigate={mockNavigate} /></BrowserRouter>)
+
+    // Act
+    expect(container.getElementsByClassName("ingredientDetailView__deleteButton")[0]).toBeDisabled
+
+    // Assert
 })
 
 test("renders dialog with correct cancel button on click on delete button", async () => {
@@ -141,7 +178,7 @@ test("renders dialog with correct cancel button on click on delete button", asyn
     const { container } = render(<BrowserRouter><IngredientDetailView ingredientId={testIngredientId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0]) })
 
     // Assert
     await waitFor(() => { expect(screen.getByText(StringResource.General.Cancel)).toBeInTheDocument })
@@ -152,7 +189,7 @@ test("renders dialog with correct delete button on click on delete button", asyn
     const { container } = render(<BrowserRouter><IngredientDetailView ingredientId={testIngredientId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0]) })
 
     // Assert
     await waitFor(() => { expect(screen.getByText(StringResource.General.Delete)).toBeInTheDocument })
@@ -161,7 +198,7 @@ test("renders dialog with correct delete button on click on delete button", asyn
 test("returns to DetailView after click on cancel button in the dialog", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><IngredientDetailView ingredientId={testIngredientId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
-    userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0]) })
     await waitFor(() => { expect(screen.getByText(StringResource.General.Cancel)).toBeInTheDocument })
 
     // Act
@@ -177,7 +214,7 @@ test("returns to DetailView after click on cancel button in the dialog", async (
 test("returns to DetailView after click on delete button in the dialog", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><IngredientDetailView ingredientId={testIngredientId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
-    userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("ingredientDetailView__deleteButton")[0]) })
     await waitFor(() => { expect(screen.getByText(StringResource.General.Cancel)).toBeInTheDocument })
 
     // Act
