@@ -115,12 +115,13 @@ export class IngredientDetailView extends Component<IProps, IState> {
     }
 
     render() {
-        if (this.state.redirect) {
+        const { redirect, ingredient, loading, saving, saved, error, openDeleteConfirmDialog } = this.state
+
+        if (redirect) {
             this.props.navigate(`/${StringResource.Routes.IngredientManagement}`)
         }
 
-        const ingredientRoute: string = `/${StringResource.Routes.IngredientManagement}/${StringResource.Routes.Ingredient}/${this.state.ingredient.id}`
-        const { ingredient, loading, error, openDeleteConfirmDialog } = this.state
+        const ingredientRoute: string = `/${StringResource.Routes.IngredientManagement}/${StringResource.Routes.Ingredient}/${ingredient.id}`
 
         return (
             <div className="ingredientDetailView__container">
@@ -130,7 +131,7 @@ export class IngredientDetailView extends Component<IProps, IState> {
                     variant="h6"
                     component="p"
                     sx={{ pb: "5px", mt: "30px" }}>
-                    {this.props.editable ? (this.state.ingredient.id ? StringResource.General.EditIngredient : StringResource.General.CreateNewIngredient) : StringResource.General.IngredientView}
+                    {this.props.editable ? (ingredient.id ? StringResource.General.EditIngredient : StringResource.General.CreateNewIngredient) : StringResource.General.IngredientView}
                 </Typography>
 
                 <Box className="ingredientDetailView__handleButtons">
@@ -161,15 +162,15 @@ export class IngredientDetailView extends Component<IProps, IState> {
                                 className="ingredientDetailView__saveButton"
                                 variant="outlined"
                                 loadingPosition="start"
-                                loading={this.state.saving}
+                                loading={saving}
                                 startIcon={<SaveIcon />}
-                                disabled={this.state.saved}
+                                disabled={saved}
                                 onClick={this.save}>{StringResource.General.Save}
                             </LoadingButton>
                             <IconButton
                                 aria-label="delete"
                                 className="ingredientDetailView__deleteButton"
-                                disabled={!this.state.ingredient.id}
+                                disabled={!ingredient.id}
                                 sx={{ alignSelf: "flex-end" }}
                                 onClick={this.requestToDeleteIngredient}>
                                 <DeleteIcon />

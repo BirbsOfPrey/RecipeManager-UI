@@ -115,12 +115,13 @@ export class UserDetailView extends Component<IProps, IState> {
     }
 
     render() {
-        if (this.state.redirect) {
+        const { redirect, user, loading, saving, saved, error, openDeleteConfirmDialog } = this.state
+        
+        if (redirect) {
             this.props.navigate(`/${StringResource.Routes.UserManagement}`)
         }
 
-        const userRoute: string = `/${StringResource.Routes.UserManagement}/${StringResource.Routes.User}/${this.state.user.id}`
-        const { user, loading, error, openDeleteConfirmDialog } = this.state
+        const userRoute: string = `/${StringResource.Routes.UserManagement}/${StringResource.Routes.User}/${user.id}`
 
         return (
             <div className="userDetailView__container">
@@ -130,7 +131,7 @@ export class UserDetailView extends Component<IProps, IState> {
                     variant="h6"
                     component="p"
                     sx={{ pb: "5px", mt: "30px" }}>
-                    {this.props.editable ? (this.state.user.id ? StringResource.General.EditUser : StringResource.General.CreateNewUser) : StringResource.General.UserView}
+                    {this.props.editable ? (user.id ? StringResource.General.EditUser : StringResource.General.CreateNewUser) : StringResource.General.UserView}
                 </Typography>
 
                 <Box className="userDetailView__handleButtons">
@@ -161,15 +162,15 @@ export class UserDetailView extends Component<IProps, IState> {
                                 className="userDetailView__saveButton"
                                 variant="outlined"
                                 loadingPosition="start"
-                                loading={this.state.saving}
+                                loading={saving}
                                 startIcon={<SaveIcon />}
-                                disabled={this.state.saved}
+                                disabled={saved}
                                 onClick={this.save}>{StringResource.General.Save}
                             </LoadingButton>
                             <IconButton
                                 aria-label="delete"
                                 className="userDetailView__deleteButton"
-                                disabled={!this.state.user.id}
+                                disabled={!user.id}
                                 sx={{ alignSelf: "flex-end" }}
                                 onClick={this.requestToDeleteUser}>
                                 <DeleteIcon />
