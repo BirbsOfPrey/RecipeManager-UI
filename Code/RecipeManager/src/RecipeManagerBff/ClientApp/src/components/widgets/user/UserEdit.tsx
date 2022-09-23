@@ -96,7 +96,7 @@ export class UserEdit extends Component<IProps, {}> {
                         placeholder={StringResource.General.NewPassword}
                         onChange={event => setValue("newPassword", event.target.value)}
                         error={!UserValidator.validatePassword(user.newPassword)}
-                        helperText={UserValidator.validatePassword(user.newPassword) ? " " : StringResource.Messages.RequiredUserName}
+                        helperText={UserValidator.validatePassword(user.newPassword) ? " " : StringResource.Messages.RequiredPassword}
                     /> : <div></div>
                 }
             </Stack>
