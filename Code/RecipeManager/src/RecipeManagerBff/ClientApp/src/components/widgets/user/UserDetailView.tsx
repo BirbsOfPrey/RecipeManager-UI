@@ -70,7 +70,7 @@ export class UserDetailView extends Component<IProps, IState> {
     }
 
     deleteUser = async () => {
-        const response = await fetch(`${UsersUrl}/${this.props.userId}`, {
+        const response = await fetch(`${UsersUrl}/${this.state.user.id}`, {
             method: "delete",
             headers: createDefaultHeader()
         })
@@ -107,7 +107,8 @@ export class UserDetailView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            this.setState({ error: "", saved: true })
+            const user: User = await response.json()
+            this.setState({ error: "", saved: true, user: user })
         }
 
         this.setState({ saving: false })
@@ -118,7 +119,7 @@ export class UserDetailView extends Component<IProps, IState> {
             this.props.navigate(`/${StringResource.Routes.UserManagement}`)
         }
 
-        const userRoute: string = `/${StringResource.Routes.UserManagement}/${StringResource.Routes.User}/${this.props.userId}`
+        const userRoute: string = `/${StringResource.Routes.UserManagement}/${StringResource.Routes.User}/${this.state.user.id}`
         const { user, loading, error, openDeleteConfirmDialog } = this.state
 
         return (
@@ -129,7 +130,7 @@ export class UserDetailView extends Component<IProps, IState> {
                     variant="h6"
                     component="p"
                     sx={{ pb: "5px", mt: "30px" }}>
-                    {this.props.editable ? (this.props.userId ? StringResource.General.EditUser : StringResource.General.CreateNewUser) : StringResource.General.UserView}
+                    {this.props.editable ? (this.state.user.id ? StringResource.General.EditUser : StringResource.General.CreateNewUser) : StringResource.General.UserView}
                 </Typography>
 
                 <Box className="userDetailView__handleButtons">
@@ -168,6 +169,7 @@ export class UserDetailView extends Component<IProps, IState> {
                             <IconButton
                                 aria-label="delete"
                                 className="userDetailView__deleteButton"
+                                disabled={!this.state.user.id}
                                 sx={{ alignSelf: "flex-end" }}
                                 onClick={this.requestToDeleteUser}>
                                 <DeleteIcon />

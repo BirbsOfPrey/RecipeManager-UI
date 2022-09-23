@@ -1,10 +1,36 @@
 import { queryByText, render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { rest } from "msw"
+import { SetupServerApi, setupServer } from "msw/node"
 import { BrowserRouter } from "react-router-dom"
 import { UserDetailView } from "../../../../components/widgets/user/UserDetailView"
+import { User } from "../../../../models/security/User"
+import { UsersUrl } from "../../../../resources/Api"
 import StringResource from "../../../../resources/StringResource"
 
-const testUserId: string = "abc-def"
+const testUserId: string = "abc-efg"
+const testUserName: string = "Karli"
+
+let handlers = [
+	rest.get(`${UsersUrl}/${testUserId}`, (_: any, res: (arg0: any) => any, ctx: { json: (arg0: User) => any }) => {
+		return res(
+			ctx.json(
+				{ id: testUserId, name: testUserName }
+            )
+		)
+	}),
+    rest.delete(`${UsersUrl}/${testUserId}`, (_: any, res: (arg0: any) => any, ctx: { json: (arg0: any) => any }) => {
+		return res(
+			ctx.json([])
+		)
+	})
+]
+
+const server: SetupServerApi = setupServer(...handlers)
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
 
 const mockNavigate = jest.fn()
 
@@ -29,14 +55,14 @@ test("renders main title correct for new user", () => {
     expect(screen.getByText(StringResource.General.CreateNewUser)).toBeInTheDocument
 })
 
-test("renders main title correct for existing user", () => {
+test("renders main title correct for existing user", async () => {
     // Arrange
 
     // Act
     render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Assert
-    expect(screen.getByText(StringResource.General.EditUser)).toBeInTheDocument
+    await waitFor(() => { expect(screen.getByText(StringResource.General.EditUser)).toBeInTheDocument })
 })
 
 test("renders editButton if not editable", () => {
@@ -119,7 +145,7 @@ test("renders dialog with correct title on click on delete button", async () => 
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0]) })
 
     // Assert
     await waitFor(() => { expect(screen.getByText(StringResource.Messages.DeleteUserQuestion)).toBeInTheDocument })
@@ -130,10 +156,21 @@ test("renders dialog with correct description on click on delete button", async 
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0]) })
 
     // Assert
     await waitFor(() => { expect(screen.getByText(StringResource.Messages.DeleteUserContent)).toBeInTheDocument })
+})
+
+
+test("does not render dialog on click on delete button when it is initially disabled", async () => {
+    // Arrange
+    const { container } = render(<BrowserRouter><UserDetailView editable={true} navigate={mockNavigate} /></BrowserRouter>)
+
+    // Act
+    expect(container.getElementsByClassName("userDetailView__deleteButton")[0]).toBeDisabled
+
+    // Assert
 })
 
 test("renders dialog with correct cancel button on click on delete button", async () => {
@@ -141,7 +178,7 @@ test("renders dialog with correct cancel button on click on delete button", asyn
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0]) })
 
     // Assert
     await waitFor(() => { expect(screen.getByText(StringResource.General.Cancel)).toBeInTheDocument })
@@ -152,7 +189,7 @@ test("renders dialog with correct delete button on click on delete button", asyn
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
 
     // Act
-    userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0]) })
 
     // Assert
     await waitFor(() => { expect(screen.getByText(StringResource.General.Delete)).toBeInTheDocument })
@@ -161,7 +198,7 @@ test("renders dialog with correct delete button on click on delete button", asyn
 test("returns to DetailView after click on cancel button in the dialog", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
-    userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0]) })
     await waitFor(() => { expect(screen.getByText(StringResource.General.Cancel)).toBeInTheDocument })
 
     // Act
@@ -177,7 +214,7 @@ test("returns to DetailView after click on cancel button in the dialog", async (
 test("returns to DetailView after click on delete button in the dialog", async () => {
     // Arrange
     const { container } = render(<BrowserRouter><UserDetailView userId={testUserId} editable={true} navigate={mockNavigate} /></BrowserRouter>)
-    userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0])
+    await waitFor(() => { userEvent.click(container.getElementsByClassName("userDetailView__deleteButton")[0]) })
     await waitFor(() => { expect(screen.getByText(StringResource.General.Delete)).toBeInTheDocument })
 
     // Act
