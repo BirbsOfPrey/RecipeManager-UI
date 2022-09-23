@@ -1,9 +1,10 @@
 import { immerable } from "immer"
+import { precisionRound } from "./helper/MathHelper"
 import { createIngredient, Ingredient } from "./Ingredient"
 
 export class IngredientComponent {
     [immerable]: boolean = true
-    
+
     id?: number
     amount?: number
     physicalQuantity?: string
@@ -24,7 +25,7 @@ export function createIngredientComponent() {
 
 export function calculateIngredientAmount(ingredientComponent: IngredientComponent, personRefAmount: number, personAmount: number): number {
     if (ingredientComponent.amount && personRefAmount > 0 && personAmount > 0) {
-        return ingredientComponent.amount / personRefAmount * personAmount
+        return precisionRound(ingredientComponent.amount / personRefAmount * personAmount, 2)
     } else {
         return 0
     }

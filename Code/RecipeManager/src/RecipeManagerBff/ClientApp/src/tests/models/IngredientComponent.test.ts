@@ -95,7 +95,8 @@ describe("Method calculateIngredientAmount returns ", () => {
         [7.5, 15, 4, 2],
         [0, 15, -1, 2],
         [0, 15, 4, -1],
-        [30, 15, 2, 4]
+        [30, 15, 2, 4],
+        [0.33, 1, 3, 1]
     ])("%p when invoked with amount: %p, personRefAmount: %p, personAmount: %p", (result: number, amount: number, personRefAmount: number, personAmount: number) => {
         const ingredientComponent: IngredientComponent = createIngredientComponent()
         ingredientComponent.amount = amount
