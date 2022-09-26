@@ -32,6 +32,13 @@
             "request": "attach"
         },
         {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "https://localhost:13511",
+            "webRoot": "${workspaceFolder}/src/RecipeManagerBff/ClientApp/"
+        },
+        {
             "name": "Launch Firefox",
             "type": "firefox",
             "request": "launch",
