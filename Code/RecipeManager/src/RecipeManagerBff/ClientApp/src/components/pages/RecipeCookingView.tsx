@@ -219,8 +219,11 @@ export class RecipeCookingView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            const recipe: Recipe = await response.json()
-            this.setState({ error: "", saved: true, recipe: recipe })
+            if (response.status === 201) {
+                const recipe: Recipe = await response.json()
+                this.setState({ recipe: recipe })
+            }
+            this.setState({ error: "", saved: true })
         }
 
         this.setState({ saving: false })

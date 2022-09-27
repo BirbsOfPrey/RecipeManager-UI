@@ -107,8 +107,11 @@ export class IngredientDetailView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            const ingredient: Ingredient = await response.json()
-            this.setState({ error: "", saved: true, ingredient: ingredient })
+            if (response.status === 201) {
+                const ingredient: Ingredient = await response.json()
+                this.setState({ ingredient: ingredient })
+            }
+            this.setState({ error: "", saved: true })
         }
 
         this.setState({ saving: false })

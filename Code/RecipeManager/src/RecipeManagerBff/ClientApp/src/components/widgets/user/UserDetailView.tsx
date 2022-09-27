@@ -107,8 +107,11 @@ export class UserDetailView extends Component<IProps, IState> {
         if (response.status >= 300) {
             this.setState({ error: StringResource.Messages.GeneralError })
         } else {
-            const user: User = await response.json()
-            this.setState({ error: "", saved: true, user: user })
+            if (response.status === 201) {
+                const user: User = await response.json()
+                this.setState({ user: user })
+            }
+            this.setState({ error: "", saved: true })
         }
 
         this.setState({ saving: false })
