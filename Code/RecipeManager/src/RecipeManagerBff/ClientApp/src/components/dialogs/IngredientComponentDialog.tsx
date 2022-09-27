@@ -61,6 +61,8 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
     }
 
     render() {
+        const { ingredientComponent } = this.state
+        
         return (
             <div>
                 <Dialog open={this.props.open} onClose={this.props.handleCancel}>
@@ -69,7 +71,7 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                         <DialogContentText>{StringResource.General.DefineIngredientComponent}</DialogContentText>
                         <IngredientSelectCreate
                             setValue={this.updateIngredient}
-                            ingredient={this.state.ingredientComponent.ingredient}
+                            ingredient={ingredientComponent.ingredient}
                         />
                         <TextField
                             variant="filled"
@@ -78,25 +80,25 @@ export class IngredientComponentDialog extends Component<IProps, IState> {
                             label="Menge"
                             type="number"
                             sx={{ mr: { sm: "15px", md: "15px" } }}
-                            defaultValue={this.state.ingredientComponent.amount || IngredientComponentValidator.minAmount}
+                            defaultValue={ingredientComponent.amount || IngredientComponentValidator.minAmount}
                             inputProps={{ min: IngredientComponentValidator.minAmount }}
                             onChange={event => this.updateIngredientComponent("amount", event.target.value)}
-                            error={!IngredientComponentValidator.validateAmount(this.state.ingredientComponent.amount)}
-                            helperText={IngredientComponentValidator.validateAmount(this.state.ingredientComponent.amount) ? " " : StringResource.Messages.RequiredIngredientComponentAmount}
+                            error={!IngredientComponentValidator.validateAmount(ingredientComponent.amount)}
+                            helperText={IngredientComponentValidator.validateAmount(ingredientComponent.amount) ? " " : StringResource.Messages.RequiredIngredientComponentAmount}
                         />
                         <TextField
                             variant="filled"
                             margin="dense"
                             id="unit"
                             label="Einheit"
-                            value={this.state.ingredientComponent.physicalQuantity}
+                            value={ingredientComponent.physicalQuantity}
                             onChange={event => this.updateIngredientComponent("physicalQuantity", event.target.value)}
-                            helperText=""
+                            helperText=" "
                         />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.props.handleCancel}>{StringResource.General.Cancel}</Button>
-                        <Button onClick={() => this.props.handleOk(this.props.reference, this.state.ingredientComponent)}>
+                        <Button onClick={() => this.props.handleOk(this.props.reference, ingredientComponent)}>
                             {this.props.reference > NO_INDEX ? StringResource.General.Change : StringResource.General.Add}
                         </Button>
                     </DialogActions>

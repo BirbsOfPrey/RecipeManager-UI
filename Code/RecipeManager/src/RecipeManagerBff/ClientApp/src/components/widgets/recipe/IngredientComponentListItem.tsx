@@ -29,7 +29,7 @@ export class IngredientComponentListItem extends Component<IProps, {}> {
                 </ListItemAvatar>
                 <ListItemText
                     primary={this.props.ingredientComponent.ingredient.name}
-                    secondary={(amount > 0 ? amount : "") + " " + this.props.ingredientComponent.physicalQuantity}
+                    secondary={(amount > 0 ? amount : "") + " " + (this.props.ingredientComponent.physicalQuantity ?? "") }
                 />
                 <ListItemSecondaryAction>
                     {this.props.editable ?
