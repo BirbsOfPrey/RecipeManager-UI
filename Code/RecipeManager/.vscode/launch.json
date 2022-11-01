@@ -35,14 +35,14 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "https://localhost:13511",
+            "url": "http://192.168.107.27:13511",
             "webRoot": "${workspaceFolder}/src/RecipeManagerBff/ClientApp/"
         },
         {
             "name": "Launch Firefox",
             "type": "firefox",
             "request": "launch",
-            "url": "https://localhost:13511",
+            "url": "http://192.168.107.27:13511",
             "pathMappings": [
                 {
                     "url": "webpack://recipe_manager/",

@@ -72,6 +72,8 @@ namespace RecipeManagerBff.Extensions
 
           options.SaveTokens = true;
           options.GetClaimsFromUserInfoEndpoint = true;
+
+          options.RequireHttpsMetadata = false;
         });
 
       builder.Services.AddControllers();
@@ -82,12 +84,12 @@ namespace RecipeManagerBff.Extensions
 
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
-      app.Use((context, next) =>
-      {
-        //Required, as it is hosted behind reverse proxy (forwarded headers middleware didn't work)
-        context.Request.Scheme = "https";
-        return next();
-      });
+      // app.Use((context, next) =>
+      // {
+      //   //Required, as it is hosted behind reverse proxy (forwarded headers middleware didn't work)
+      //   context.Request.Scheme = "https";
+      //   return next();
+      // });
 
       if (app.Environment.IsDevelopment())
       {
