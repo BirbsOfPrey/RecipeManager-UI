@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  recipemanagerbff:
+    image: ${DOCKER_REGISTRY-}recipemanagerbff
+    container_name: recipemanagerbff
+    build:
+      context: ./
+      dockerfile: src/RecipeManagerBff/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - 13511:80
